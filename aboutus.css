@@ -10,7 +10,7 @@ body {
   top: 19vw;
   padding-left: 3vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .pic{
 	position: relative;
