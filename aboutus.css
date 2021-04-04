@@ -3,4 +3,16 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
 }
-
+.container{
+	position: absolute;
+  width: 94vw;
+  height: auto;
+  top: 23vw;
+  padding: 3vw;
+  display: flex;
+  justify-content: space-between;
+}
+.pic{
+	position: relative;
+	width: 14vw;
+}
