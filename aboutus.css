@@ -4,7 +4,7 @@ body {
   overflow-y: hidden;
 }
 .container{
-	position: absolute;
+  position: absolute;
   width: 94vw;
   height: auto;
   top: 20vw;
@@ -13,7 +13,7 @@ body {
   justify-content: space-evenly;
 }
 .pic{
-	position: relative;
-	width: 14vw;
+  position: relative;
+  width: 14vw;
   height: 14vw;
 }
