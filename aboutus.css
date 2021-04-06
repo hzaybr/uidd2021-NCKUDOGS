@@ -3,12 +3,22 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
 }
+.bar {
+  position: absolute;
+  width: 100vw;
+  height: 5vw;
+}
+.bar-btn {
+  padding: 1.7vw; 
+  height: 1.6vw;
+  position: absolute;
+}
 .container {
   position: absolute;
   width: 94vw;
-  height: 50vw;
+  height: 46vw;
   padding: 3vw;
-  top: 3vw;
+  top: 5vw;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -16,8 +26,8 @@ body {
 .blur {
   position: absolute;
   width: 100vw;
-  height: 56vw;
-  top: 3vw;
+  height: 52vw;
+  top: 5vw;
   background-color: #00000073;
   display: none;
 }
@@ -28,14 +38,14 @@ body {
 }
 #dog {
   width: 90vw;
-  position: relative;
-  top: 8vw;
-  left: -90vw;
+  position: absolute;
+  top: 1.3vw;
+  left: -100vw;
 }
 .big {
-  position: relative;
+  position: absolute;
   width: 30vw;
-  top: -33vw;
-  left: 5vw;
+  top: 12vw;
+  left: 6vw;
   display: none;
 }
