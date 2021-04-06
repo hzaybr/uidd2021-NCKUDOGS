@@ -13,6 +13,12 @@ body {
   height: 1.6vw;
   position: absolute;
 }
+.bar-btn:hover {
+  padding: 1.7vw; 
+  height: 1.6vw;
+  position: absolute;
+  opacity: 0.5;
+}
 .container {
   position: absolute;
   width: 94vw;
