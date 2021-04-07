@@ -65,36 +65,3 @@ body {
   font-size: 1.2vw;
 }
 
-.topmenu {
-  position: fixed;
-  overflow: hidden;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #0000004D;
-  opacity: 1;
-}
-
-.topmenu a {
-  float: right;
-  display: block;
-  margin: auto;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font: normal normal normal 14px/19px Segoe UI;
-  letter-spacing: 0px;
-  color: #000000DE;
-  opacity: 1;
-}
-
-.topmenu input{
-  position: absolute;
-  left: 40%;
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-}
-
