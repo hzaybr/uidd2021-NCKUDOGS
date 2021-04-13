@@ -1,4 +1,4 @@
-###Download
+### Download
 - download file
 ```
 git clone https://github.com/hzaybr/uidd2020.git
@@ -6,7 +6,7 @@ git clone https://github.com/hzaybr/uidd2020.git
 ```
 cd uidd2020/preprocessor
 ```
-###Install
+### Install
 - install npm
 ```
 npm i
@@ -24,7 +24,7 @@ npm i node-sass
 npm install --save-dev @babel/core @babel/cli
 ```
 
-###Compile
+### Compile
 - compile pug to html
 ```
 npx pug ./aboutus.pug -o ./dist/
@@ -37,7 +37,7 @@ npx sass ./aboutus.sass ./dist/aboutus.css
 ```
 ./node_modules/.bin/babel ./exercise.ts --out-dir ./dist/ --extensions ".ts"
 ```
-###Result
+### Result
 - The aboutus.html, aboutus.css and exercise.js are in the dist file
   https://hzaybr.github.io/uidd2020/preprocessor/dist/aboutus.html
 
