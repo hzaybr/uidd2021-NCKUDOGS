@@ -1,7 +1,7 @@
 $('.pic').on('click',function() {
     $('#dog').animate({'left':'0vw'}, 500);
-    let pic: string = '#b'+$(this).attr('id');
-    let intro: string = '#w'+$(this).attr('id');
+    let pic = '#b'+$(this).attr('id');
+    let intro = '#w'+$(this).attr('id');
     console.log(pic)
     $('.blur').fadeIn(500);
     $(pic).fadeIn(2000);
