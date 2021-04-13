@@ -51,7 +51,7 @@ body {
   width: 100vw;
   height: 52vw;
   top: 5vw;
-  background-color: #00000073;
+  background-color: rgba(0, 0, 0, 0.45);
   display: none;
 }
 
