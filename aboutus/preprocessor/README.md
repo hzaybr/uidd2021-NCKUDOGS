@@ -40,7 +40,7 @@ npx sass ./aboutus.sass ./dist/aboutus.css
 ```
 ### Result
 - The aboutus.html, aboutus.css and exercise.js are in the dist file
-  https://hzaybr.github.io/uidd2020/preprocessor/dist/aboutus.html
+  https://hzaybr.github.io/uidd2020/aboutus/preprocessor/dist/aboutus.html
 
 
 
