@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+}
+.grid-container {
+  position: absolute;
+  width: 100vw;
+  height: 170vw;
+  padding-top: 20vw;
+  display: grid;
+  grid-template-columns: 42vw 42vw;
+  grid-template-rows: auto;
+  justify-content: space-evenly;
+  align-content: space-between;
+}
+.grid-font {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  top: -4vw;
+  margin: 0;
+  font-size: 3vw;
+}
+.blur {
+  position: absolute;
+  width: 100vw;
+  height: 216.5vw;
+  background-color: #000000e0;
+  display: none;
+}
+.big {
+  position: absolute;
+  width: 63vw;
+  left: 50vw;
+  transform: translateX(-50%);
+  top: 40vw;
+  display: none;
+}
+.font {
+  position: absolute;
+  font-size: 4vw;
+  width: 80vw;
+  text-align: center;
+  margin: 0;
+  padding: 10vw;
+  top: 93vw;
+  color: white;
+  display: none;
+}
