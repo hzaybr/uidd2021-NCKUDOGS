@@ -9,11 +9,11 @@ body {
   background-color: #fff9ea;
 } 
 .backicon {
-	width: 15vw;
+	width: 10vw;
 	position: absolute;
 	left: 1vw;
 	top: 1vw;  
-  z-index: 8;
+  z-index: 1;
 }
 .grid-container {
   width: 100vw;
@@ -44,6 +44,7 @@ body {
   top: 0vw;
   background-color: #000000e0;
   display: none;
+  z-index: 2;
 }
 .big {
   position: absolute;
