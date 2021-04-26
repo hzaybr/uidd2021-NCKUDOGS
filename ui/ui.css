@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+}
+
+#map {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
+#list-icon {
+  width: 10vw;
+  left: 1vw;
+  top: 1vw;
+  position: absolute;
+}
+
+#messenger-icon {
+  width: 10vw;
+  right: 1vw;
+  top: 1vw;
+  position: absolute;
+}
+
+#search-icon {
+  width: 10vw;
+  left: 1vw;
+  bottom: 1vw;
+  position: absolute;
+}
+
+.list-grid {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  left: -61vw;
+  top: 13vw;
+  background-image: url(./image/dog_div_list);
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: grid;
+  grid-template-columns: 25vw 25vw;
+  grid-template-rows: 25vw 25vw;
+  justify-content: space-evenly;
+  align-content: space-evenly;
+} 
+
+.list-grid img{
+  position: absolute;
+  width: 25vw;
+}
+
+.search {
+  position: absolute;
+  display: block;
+  width: 100vw;
+  height: 110vw;
+  left: -100vw;
+  bottom: 0vw;
+  background-color: pink; 
+}
+
+.search-grid {
+  position: absolute;
+  width: 100vw;
+  height: 50vw;
+  left: 0vw;
+  bottom: 40vw;
+  background-color: pink;
+  display: grid;
+  grid-template-columns: 20vw 20vw 20vw 20vw;
+  grid-template-rows: 20vw 20vw;
+  justify-content: space-evenly;
+  align-content: space-between;
+}
+
+.search-grid img{
+  position: absolute;
+  width: 20vw;
+}
