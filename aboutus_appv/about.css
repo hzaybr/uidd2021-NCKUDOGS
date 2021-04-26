@@ -22,7 +22,7 @@ body {
   grid-template-rows: auto;
   justify-content: space-evenly;
   align-content: center;
-  overflow: scroll;
+	overflow: auto;
 }
 .grid-font {
   position: relative;

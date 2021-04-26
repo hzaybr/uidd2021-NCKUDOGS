@@ -37,17 +37,30 @@ function searchClick(){
   searchDisplay = !searchDisplay;
 }
 
-
 $('#list-icon').click(function(){
     listClick();
-  }
-)
+})
 $('#search-icon').click(function(){
     searchClick();
-  }
-)
+})
 
 $('#map').click(function(){
     displayCheck();
-  }
-)
+})
+
+$('#about-dog').click(function(){
+  window.location.assign('./aboutus_appv/aboutdog.html')
+})
+
+$('#about-us').click(function(){
+  window.location.assign('./aboutus_appv/aboutus.html')
+})
+
+$('#messenger-icon').click(function(){
+  window.location.assign("https://www.facebook.com/ncku.vdogs")  
+})
+
+
+
+
+

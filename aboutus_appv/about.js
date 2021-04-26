@@ -15,3 +15,7 @@ $('.blur').click(function() {
   $(intro).fadeOut(500);
 })
 
+$('.backicon').click(function(){
+	window.location.assign('../ui/ui.html')
+})
+

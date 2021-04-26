@@ -1,17 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="map_all.css" type="text/css">
-    <title>map_test</title>
-</head>
-<body>
-    <div id="map"></div>
-    <button>111</button>
+<html>
+  <head>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./ui/ui.css" rel="stylesheet" type="text/css">
+    <title>NCKUDOGS</title>
+  </head>
+  <body>
+				<div id="map"></div>
+        <img src="./ui/image/dog_icon_list.png"  id="list-icon" title="功能列">
+        <div class="list-grid">
+          <div>
+            <img src="./ui/image/dog_icon_about_dog.png" id="about-dog" title"關於狗狗"> 
+          </div>
+          <div>
+            <img src="./ui/image/dog_icon_about_us.png" id="about-us" title="關於團隊">
+          </div>
+          <div>            
+            <img src="./ui/image/dog_icon_adopt.png" id="adopt">
+          </div>
+          <div>
+            <img src="./ui/image/dog_icon_vote.png" id="vote">
+          </div>
+        </div> 
+        <img src="./ui/image/dog_icon_messenger.png" id="messenger-icon" title="聯絡志工隊">
+        <div class="search">
+          <div class="search-grid">
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog1">
+            </div>
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog2">
+            </div>
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog3">
+            </div>
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog4">
+            </div>
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog5">
+            </div>
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog6">
+            </div>
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog7">
+            </div>
+            <div>
+              <img src="./ui/image/dog_app_icon_i_guess.png" id="dog8">
+            </div>
+          </div>
+        </div>
+        <img src="./ui/image/dog_icon_search.png" id="search-icon" title="搜尋狗狗">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnroImRbilgj-vcxJR47R4wrh6suZw0D4&callback=initMap" async defer></script>
-    <script src="map_js.js"></script>
-</body>
+    <script src="./map/map_js.js"></script>
+    <script src="./ui/ui.js"></script>
+  </body>
 </html>
- 
+
