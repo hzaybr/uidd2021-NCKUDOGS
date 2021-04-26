@@ -35,7 +35,7 @@ body {
   height: 60vw;
   left: -61vw;
   top: 13vw;
-  background-image: url(./image/dog_div_list);
+  background-image: url('./image/dog_div_list.png');
   background-repeat: no-repeat;
   background-size: contain;
   display: grid;
