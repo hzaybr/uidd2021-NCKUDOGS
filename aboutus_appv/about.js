@@ -16,6 +16,6 @@ $('.blur').click(function() {
 })
 
 $('.backicon').click(function(){
-	window.location.assign('../ui/ui.html')
+	window.location.assign('../index.html')
 })
 
