@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="./about.css" rel="stylesheet" type="text/css"> 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.7/jquery.fullPage.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.7/vendors/jquery.easings.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.7/jquery.fullPage.js"></script>
+
     <title>about us</title>
   </head>
 
@@ -11,40 +20,46 @@
 		<div class="background">
 				<img src="./image/bg_top.png" style="width: 100%; position: absolute; top: -1.5vw;">
 				<img src="./image/bg_btm.png" style="width: 100%; position: absolute; bottom: -0.5vw;">
-				<img src="./image/dog_button_arrow.png" class="backicon">
+				<img src="./image/dog_button_back.png" class="backicon">
 		</div>
 
-    <div class="grid-container" style="position: absolute; padding-top: 10vh;">
-      <div>
-        <img src="./image/big12.png" class="avatar" id="p1" width=100%">
-        <b class="grid-font" style="font-size: 4vw;">黃子芸</b>
-        <p class="grid-font">工程師</p>
-      </div>     
-      <div>
-        <img src="./image/big17.png" class="avatar" id="p2" width=100%>
-        <b class="grid-font" style="font-size: 4vw;">林孟萱</b>
-        <p class="grid-font">工程師</p>
-      </div>     
-      <div>
-        <img src="./image/big14.png" class="avatar" id="p3" width=100%>
-        <b class="grid-font" style="font-size: 4vw;">陳彥勳</b>
-        <p class="grid-font">工程師</p>
-      </div>     
-      <div>
-        <img src="./image/big13.png" class="avatar" id="p4" width=100%>
-        <b class="grid-font" style="font-size: 4vw;">方柏翔</b>
-        <p class="grid-font">工程師</p>
-      </div>     
-      <div> 
-        <img src="./image/big15.png" class="avatar" id="p5" width=100%>
-        <b class="grid-font" style="font-size: 4vw;">楊善淞</b>
-        <p class="grid-font">設計師</p>
-      </div> 
-      <div>
-        <img src="./image/big16.png" class="avatar" id="p6" width=100%>  
-        <b class="grid-font" style="font-size: 4vw;">陳加軒</b>
-        <p class="grid-font">設計師</p>
-      </div>     
+    <div class="fullpage">
+      <div class="section">
+
+        <div class="grid-container">
+          <div>
+            <img src="./image/big12.png" class="avatar" id="p1" width=100%">
+            <b class="grid-font" style="font-size: 4vw;">黃子芸</b>
+            <p class="grid-font">工程師</p>
+          </div>     
+          <div>
+            <img src="./image/big17.png" class="avatar" id="p2" width=100%>
+            <b class="grid-font" style="font-size: 4vw;">林孟萱</b>
+            <p class="grid-font">工程師</p>
+          </div>     
+          <div>
+            <img src="./image/big14.png" class="avatar" id="p3" width=100%>
+            <b class="grid-font" style="font-size: 4vw;">陳彥勳</b>
+            <p class="grid-font">工程師</p>
+          </div>     
+          <div>
+            <img src="./image/big13.png" class="avatar" id="p4" width=100%>
+            <b class="grid-font" style="font-size: 4vw;">方柏翔</b>
+            <p class="grid-font">工程師</p>
+          </div>     
+          <div> 
+            <img src="./image/big15.png" class="avatar" id="p5" width=100%>
+            <b class="grid-font" style="font-size: 4vw;">楊善淞</b>
+            <p class="grid-font">設計師</p>
+          </div> 
+          <div>
+            <img src="./image/big16.png" class="avatar" id="p6" width=100%>  
+            <b class="grid-font" style="font-size: 4vw;">陳加軒</b>
+            <p class="grid-font">設計師</p>
+          </div>     
+        </div>
+
+      </div>
     </div>
 
     <div class='blur'>
@@ -80,13 +95,19 @@
       </div>
    </div>
 		
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <script>
       $(document).click(() => { 
         console.log("Event triggered!")
         })
+    </script>
+    <script>
+      $(document).ready(function(){
+          $('#fullpage').fullpage({
+            slidesNavigation: true,
+            controlArrows: false,
+            loopHorizontal: false,
+          });
+      })
     </script>
     <script src='./about.js'></script>
  
