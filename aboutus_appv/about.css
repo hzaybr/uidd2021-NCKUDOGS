@@ -1,6 +1,6 @@
 body {
-	margin: 0;
-	overflow: auto;
+  margin: 0;
+  overflow: auto;
 }
 .background {
   width: 100%;
@@ -8,11 +8,16 @@ body {
   position: absolute;
   background-color: #fff9ea;
 } 
+.bg-bar {
+  width: 100%;
+  position: absolute;
+  height: 6%;
+}
 .backicon {
-	width: 10vw;
-	position: absolute;
-	left: 1vw;
-	top: 1vw;  
+  width: 10vw;
+  position: absolute;
+  left: 1vw;
+  top: 1vw;  
   z-index: 1;
 }
 .grid-container {
@@ -29,13 +34,9 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  top: -4vw;
+  top: -3vw;
   margin: 0;
   font-size: 3vw;
-}
-.grid-pic {
-  width: 34vw;
-  padding: 1vw;
 }
 .blur {
   position: absolute;
@@ -55,15 +56,15 @@ body {
   display: none;
 }
 .font {
-	color: white;
-	width: 68vw;
-	position: absolute;
-	left: 50vw;
-	transform: translateX(-50%);
-	text-align: center;
-	top: 75vw;
-	font-size: 4vw;
-	display: none;
+  color: white;
+  width: 68vw;
+  position: absolute;
+  left: 50vw;
+  transform: translateX(-50%);
+  text-align: center;
+  top: 75vw;
+  font-size: 4vw;
+  display: none;
 }
 .intro {
   width: 60%;
