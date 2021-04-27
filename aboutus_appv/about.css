@@ -17,7 +17,7 @@ body {
 }
 .grid-container {
   width: 100vw;
-  height: 80vh;
+  height: 78vh;
   display: grid;
   grid-template-columns: 36vw 36vw;
   grid-template-rows: 25vh 25vh 25vh;
