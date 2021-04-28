@@ -13,7 +13,8 @@ function initMap() {
       streetViewControl: false,
       mapTypeControl: false,
       fullscreenControl: false,
-      zoomControl: false
+      zoomControl: false,
+      mapId: '892f444c9eaa9e2'
     });
     map.addListener('click', function(event){
         addMarker(event.latLng);
@@ -58,12 +59,6 @@ function addMarker(icon_path,location) {
     infowindow.open(map, marker);
   });
   Markers.push(marker);
-    // marker = new google.maps.Marker({
-    // draggable: true,
-    // animation: google.maps.Animation.DROP,
-    // position: location,
-    // map: map
-    // });
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{
