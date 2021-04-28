@@ -29,6 +29,13 @@ body {
   position: absolute;
 }
 
+#mark-icon {
+  width: 10vw;
+  right: 1vw;
+  bottom: 1vw;
+  position: absolute;
+}
+
 .list-grid {
   position: absolute;
   width: 60vw;
