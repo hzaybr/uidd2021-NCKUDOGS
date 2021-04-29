@@ -1,10 +1,11 @@
 var map;
 var ownermarker;
 var owner_uluru = {lat: 23, lng: 120.2};
-var infowincontent = '<div style="width:200px">CONTENT</div>';
+var infowincontent = '<div style="width:200px">CONTENT <button onclick="route()">路徑</button><button onclick="camera()">拍照</button><button onclick="more()">更多</button></div>';
 var Markers=[];
 var count = -1;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','麵線'];
+var currentInfoWindow = '';
 const MAP_BOUNDS = {
   north: 23.00441,
   south: 22.99035,
@@ -38,14 +39,6 @@ function initMap() {
     //dog's mark 
     addMarker("./map/mark_icon/Group 189@3x.png",{lat: 22.997873, lng: 120.2155521})
     addMarker("./map/mark_icon/Group 189@3x.png",{lat: 22.997340, lng: 120.2175155})
-    // var infowindow0 = new google.maps.InfoWindow({
-    //   content: infowincontent.replace('CONTENT',
-    //     'library'
-    //   )
-    // });
-    // marker_old.addListener('click', function() {
-    //     infowindow0.open(map, marker_old);
-    // });
     
 }
 function addMarker(icon_path,location) {
@@ -66,7 +59,14 @@ function addMarker(icon_path,location) {
     )
   });
   marker.addListener('click', function() {
-    infowindow.open(map, marker);
+    // currentInfoWindow.close();
+    if(currentInfoWindow != '')   
+    {    
+      currentInfoWindow.close();   
+      currentInfoWindow = '';   
+    }   
+    infowindow.open(map, marker);   
+    currentInfoWindow = infowindow; 
   });
   Markers.push(marker);
 }
@@ -98,3 +98,12 @@ $( "#dog2" ).click(function() {
   map.setCenter(uluru);
   map.setZoom(17);
 });
+function route(){
+  // add route funtion
+}
+function camera(){
+  // add camera function
+}
+function more(){
+  window.location.assign("https://luffy.ee.ncku.edu.tw/~hzaybr/uidd2020/dogprofile/mianxian.html")
+}
