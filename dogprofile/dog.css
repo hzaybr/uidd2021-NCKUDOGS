@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+}
+p {
+  margin: 1vw;
+}
+.top-pic {
+  width: 100%;
+  height: 33%;
+	background-size: cover;
+	background-position: center;
+  display: inline-block;
+}
+.profile {
+  width: 90%; 
+  height: auto;
+  display: inline-block;
+  padding-top: 1vw;
+  padding-bottom: 2vw;
+  padding-left: 5%;
+  padding-right: 5%;
+	border-bottom-color: #bdbdbd;
+	border-bottom-style: solid;
+	border-bottom-width: 0.3vw;
+}
+.grid {
+	display: grid;
+	width: 100%;
+	height: auto;
+	grid-template-columns: repeat(4,20%);
+}
+.pic-grid {
+  display: grid;
+  width: 97%;
+	height: 99%;
+  padding: 1vw;
+	grid-template-columns: 50% 50%;
+  grid-gap: 1vw;
+}
+.com-grid {
+  display: grid;
+  width: 97%;
+	height: 99%;
+  padding: 1vw;
+	grid-template-rows: 10% 90%;
+  grid-gap: 1vw;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPEE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./dog.css" rel="stylesheet" type="text/css"> 
+      
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.7/jquery.fullPage.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.7/vendors/jquery.easings.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.7/jquery.fullPage.js"></script>
+
+    <title>麵線</title>
+
+  </head>
+ 
+  <body>
+    <div class="top-pic" style="background-image: url(./image/mian.jpg);">
+    </div>
+
+    <div class="profile">
+      <p style="font-size: 4vw;">麵線</p>
+      <p style="font-size: 3vw; color: gray;">5.0</p>
+      <div class="grid">
+				<img src="./image/dog_button_profile.png" width=80%>
+				<img src="./image/dog_button_picture.png" width=80%>
+				<img src="./image/dog_button_comment.png" width=80%>
+				<img src="./image/dog_button_report.png" width=80%>
+			</div>
+    </div>
+
+		<div id="fullpage">
+			<div class="section">
+
+				<div class="slide">
+          <div class="intro">
+            <p style="position:absolute; top:0;">介紹</p>
+					</div>
+				</div>
+
+				<div class="slide">
+          <div class="pic pic-grid">
+            <img src="./image/mian1.jpg" width=100%>
+            <img src="./image/mian2.jpg" width=100%>
+					</div>
+				</div>
+
+				<div class="slide">
+          <div class="com-grid">
+            <div>
+              <p>評論</p>
+              <p>評論</p>
+            </div>  
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+    <div>
+    </div>
+
+    <script>
+      $(document).click(() => { 
+        console.log("Event triggered")
+      })
+    </script>
+    <script>
+      $(document).ready(function(){
+          $('#fullpage').fullpage({
+            slidesNavigation: true,
+            controlArrows: false,
+            loopHorizontal: false,
+          });
+      })
+    </script>
+    <script src='./js'></script>
+
+  </body>
+</html>
