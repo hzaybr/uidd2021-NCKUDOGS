@@ -38,18 +38,22 @@ function searchClick(){
 }
 
 $('#list-icon').click(function(){
-    listClick();
+  listClick();
 })
 $('#search-icon').click(function(){
-    searchClick();
+  searchClick();
 })
 
 $('#map').click(function(){
-    displayCheck();
+  displayCheck();
+})
+
+$('#mark-icon').click(function(){
+  displayCheck();
 })
 
 $('.search-grid img').click(function(){
-    searchClick();
+  searchClick();
 })
 
 $('#about-dog').click(function(){
@@ -65,11 +69,11 @@ $('#messenger-icon').click(function(){
 })
 
 $('#observ').click(function(){
-    $('#s2').fadeIn(0);
+  $('#s2').fadeIn(0);
 })
 
 $('#manage').click(function(){
-    $('#s2').fadeOut(0);
+  $('#s2').fadeOut(0);
 })
 
 
