@@ -36,8 +36,8 @@ function initMap() {
       map: map
     });
     //dog's mark 
-    addMarker("./aboutus_appv/image/Group 327@3x.png",{lat: 22.997873, lng: 120.2155521})
-    addMarker("./aboutus_appv/image/Group 326@3x.png",{lat: 22.997340, lng: 120.2175155})
+    addMarker("./map/mark_icon/Group 189@3x.png",{lat: 22.997873, lng: 120.2155521})
+    addMarker("./map/mark_icon/Group 189@3x.png",{lat: 22.997340, lng: 120.2175155})
     // var infowindow0 = new google.maps.InfoWindow({
     //   content: infowincontent.replace('CONTENT',
     //     'library'
@@ -57,7 +57,7 @@ function addMarker(icon_path,location) {
     map: map,
     icon:{
       url:icon_path,
-      scaledSize: new google.maps.Size(80, 80)
+      scaledSize: new google.maps.Size(53, 73)
     } 
     });
   var infowindow = new google.maps.InfoWindow({
