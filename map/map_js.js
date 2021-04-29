@@ -5,11 +5,21 @@ var infowincontent = '<div style="width:200px">CONTENT</div>';
 var Markers=[];
 var count = -1;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','麵線'];
+const MAP_BOUNDS = {
+  north: 23.00441,
+  south: 22.99035,
+  west: 120.21060,
+  east: 120.22808,
+};
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       center: uluru,
+      restriction: {
+        latLngBounds: MAP_BOUNDS,
+        strictBounds: false,
+      },
       streetViewControl: false,
       mapTypeControl: false,
       fullscreenControl: false,
@@ -41,7 +51,7 @@ function initMap() {
 function addMarker(icon_path,location) {
   count = count + 1;
   var marker = new google.maps.Marker({
-    draggable: true,
+    draggable: false,
     animation: google.maps.Animation.DROP,
     position: location,
     map: map,
