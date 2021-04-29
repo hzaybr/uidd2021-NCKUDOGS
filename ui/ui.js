@@ -13,11 +13,11 @@ function displayCheck(){
 function listClick(){
   $('.list-grid').stop();
   if (listDisplay){
-    $('.list-grid').animate({'left':'-61vw'},500);
+    $('.list-grid').animate({'left':'-65vw'},500);
   }
   else{
     displayCheck();
-    $('.list-grid').animate({'left':'1vw'},500);
+    $('.list-grid').animate({'left':'5vw'},500);
   }
   listDisplay = !listDisplay;
 }
@@ -26,13 +26,13 @@ function searchClick(){
   $('#search-icon').stop();
   $('.search').stop();
   if (searchDisplay){
-    $('#search-icon').animate({'left':'1vw','width':'10vw'},500);
-    $('.search').animate({'left':'-100vw'},500);
+    $('#search-icon').animate({'left':'5vw','width':'20vw'},500);
+    $('.search').animate({'left':'-92vw'},500);
   }
   else{
     displayCheck();
-	  $('#search-icon').animate({'left':'42vw','width':'16vw'},500);
-    $('.search').animate({'left':'0vw'},500);
+	  $('#search-icon').animate({'left':'37vw','width':'26vw'},500);
+    $('.search').animate({'left': '4vw'},500);
   }
   searchDisplay = !searchDisplay;
 }
@@ -58,6 +58,14 @@ $('#about-us').click(function(){
 
 $('#messenger-icon').click(function(){
   window.location.assign("https://www.facebook.com/ncku.vdogs")  
+})
+
+$('#observ').click(function(){
+    $('#s2').fadeIn(0);
+})
+
+$('#manage').click(function(){
+    $('#s2').fadeOut(0);
 })
 
 
