@@ -48,6 +48,10 @@ $('#map').click(function(){
     displayCheck();
 })
 
+$('.search-grid img').click(function(){
+    searchClick();
+})
+
 $('#about-dog').click(function(){
   window.location.assign('./aboutus_appv/aboutdog.html')
 })
