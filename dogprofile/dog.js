@@ -24,21 +24,24 @@ $('.start-button').click(function() {
 })
 
 $('.button').click(function() {
-  $(this).css('color','black');
   from = $(this).attr('id')[0];
   to = $(this).attr('id')[1];
-  hide = container_list[from];
-  show = container_list[to];
-  console.log(`hide ${hide}, show ${show}`);
-  yellow = `#${to+to}`;
-  console.log(yellow);
 
-  $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
-  setTimeout(function() {
-    $(yellow).css('color','#ffbc00'); }, 100 
-    );
-  $(hide).hide();
-  $(show).show();
+  if(from!=to){
+    $(this).css('color','black');
+    hide = container_list[from];
+    show = container_list[to];
+    console.log(`hide ${hide}, show ${show}`);
+    yellow = `#${to+to}`;
+    console.log(yellow);
+
+    $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
+    setTimeout(function() {
+      $(yellow).css('color','#ffbc00'); }, 100 
+      );
+    $(hide).hide();
+    $(show).show();
+  };
 })
 
 $('.arrow').click(function() {
