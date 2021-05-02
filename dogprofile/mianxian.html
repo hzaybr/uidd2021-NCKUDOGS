@@ -35,27 +35,34 @@
 		<div id="fullpage">
 			<div class="section">
 
+
 				<div class="slide">
           <div class="intro">
             <p style="position:absolute; top:0;">介紹</p>
 					</div>
 				</div>
-
-				<div class="slide">
+        
+        <div class="slide">
           <div class="pic pic-grid">
-            <img src="./image/mian1.jpg" width=100%>
-            <img src="./image/mian2.jpg" width=100%>
+            <input type="file" name="file" id="fl_file" />
+              <div id = "imgs">
+                <!-- load images from json -->
+              </div>
 					</div>
 				</div>
 
-				<div class="slide">
+        <div class="slide">
           <div class="com-grid">
-            <div>
-              <p>評論</p>
-              <p>評論</p>
-            </div>  
+            <section>
+              <textarea class="commentBox" placeholder="Place your comments here" type="textarea"></textarea>
+              <button id="post comment">評論</button>
+              <ul class="clearfix comments" id="comment_box">
+                <!-- load comments from json -->
+              </ul>
+          </section> 
 					</div>
 				</div>
+        
 
 			</div>
 		</div>
@@ -79,5 +86,6 @@
     </script>
     <script src='./js'></script>
 
+    <script src="./system.js"></script>
   </body>
 </html>
