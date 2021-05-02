@@ -1,6 +1,6 @@
 var hide_class
-var container_list = ['.intro-container', '.pic-container', '.comment-container', '.report-container']
-var scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
+const container_list = ['.intro-container', '.pic-container', '.comment-container', '.report-container']
+const scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
 
 //id: from, to
 $('.start-button').click(function() {
@@ -10,16 +10,17 @@ $('.start-button').click(function() {
   console.log(`show ${show}`);
   yellow = `#${to+to}`;
 
-  $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
-  setTimeout(function() {
-    $(yellow).css('color','#ffbc00'); }, 100
-    );
   $('.start').hide();
   $(show).show();
-  $(show).animate({'top':'0'}, 200);
-  container_list.forEach(function(item, i) {
-    $(item).css({'top':'0'});
-  });
+  $(show).animate({'top':'0'}, 150);
+
+  $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
+  setTimeout(function() {
+    $(yellow).css('color','#ffbc00'); 
+    container_list.forEach(function(item, i) {
+      $(item).css({'top':'0'});
+    });
+  }, 150);
 })
 
 $('.button').click(function() {
@@ -42,7 +43,7 @@ $('.button').click(function() {
 
 $('.arrow').click(function() {
   now = $(this).attr('id')[1];
-  $(container_list[now]).animate({'top':'60vw'}, 150);
+  $(container_list[now]).animate({'top':'65vw'}, 150);
   $('.scroll-bar').animate({'left': '10vw'}, 150);
 
   setTimeout(function() {
@@ -50,7 +51,7 @@ $('.arrow').click(function() {
     $('.start').show(); 
     $('#s0').css('color','#ffbc00'); 
     container_list.forEach(function(item, i) {
-      $(item).css({'top':'60vw'});
+      $(item).css({'top':'65vw'});
       $(item).hide();
     });
   }, 150);
@@ -69,6 +70,4 @@ $('.heart').click(function() {
     $(hid).attr('src','./image/heart.png');
     }
   };
-
-
 });
