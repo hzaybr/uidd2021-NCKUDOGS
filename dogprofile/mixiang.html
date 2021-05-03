@@ -36,18 +36,21 @@
       </div>
       <div class="scroll-bar"></div>
 
-      <div class="place-grid">
-        <div><img style="width: 4vw; margin: 2vw;" src="./image/place.png"></div>
-        <div><p>自強校區</p></div>
-      </div>
-      <div class="intro-grid">
-        <div><img style="width: 5vw; margin: 2vw;" src="./image/info.png"></div>
-        <div>
-          <p>胸前的一片短短白毛與大大的耳朵是牠的特色。食量彷彿無底洞，其他狗狗吃不完的飼料，總由米香解決。</p>
-          <p>米香和麵線是 2013 年冬天出生於成杏校區的犬隻，現多活動於自強校區大學路兩側及草皮。</p>
-          <p>他們對狗具有強烈驅趕能力，但對人都非常和善溫順，叫名字便會開心地跑過來撒嬌，甚至翻肚。</p>
+      <div style="height: 80vw; overflow-y: auto;">
+        <div class="place-grid">
+          <div><img style="width: 4vw; margin: 2vw;" src="./image/place.png"></div>
+          <div><p>自強校區</p></div>
+        </div>
+        <div class="intro-grid">
+          <div><img style="width: 5vw; margin: 2vw;" src="./image/info.png"></div>
+          <div>
+            <p>胸前的一片短短白毛與大大的耳朵是牠的特色。食量彷彿無底洞，其他狗狗吃不完的飼料，總由米香解決。</p>
+            <p>米香和麵線是 2013 年冬天出生於成杏校區的犬隻，現多活動於自強校區大學路兩側及草皮。</p>
+            <p>他們對狗具有強烈驅趕能力，但對人都非常和善溫順，叫名字便會開心地跑過來撒嬌，甚至翻肚。</p>
+          </div>
         </div>
       </div>
+
     </div>
 
     <div class="intro-container">
@@ -62,7 +65,7 @@
         <div class ="button" id="03"><p><b>回報</b></p></div>
       </div>
       <div class="scroll-bar"></div>
-    <div>
+    <div style="height: 145vw; overflow-y: auto;">
       <div class="place-grid">
         <div><img style="width: 4vw; margin: 2vw;" src="./image/place.png"></div>
         <div><p>自強校區</p></div>
@@ -90,11 +93,18 @@
         <div class ="button" id="13"><p><b>回報</b></p></div>
       </div>
       <div class="scroll-bar"></div>
-            <input type="file" name="file" id="fl_file" />
-              <div id = "imgs">
-                <!-- load images from json -->
-              </div>
-      <div class="pic-grid">
+
+      <div style="height: 145vw; overflow-y: auto; margin-top: 2vw;">
+        <div class="pic-border">
+          <div class="add-pic">
+            <img style="height: 4vw;" src="./image/camera.png">
+            <b style="font-size: 3.8vw;">新增照片</b>
+          </div>
+        </div>
+
+
+        <div class="pic-grid">
+        </div>
       </div>
     </div>
 
@@ -112,19 +122,21 @@
       <div class="scroll-bar"></div>
       <div class="com-top-bar">
 				<div>
-					<p style="font-size: 10vw; margin-left: 6vw; margin-bottom: 1vw;">4.2</p>
+					<p style="font-size: 10vw; margin-left: 6vw; margin-bottom: 1vw; margin-top: 0;">4.2</p>
 					<div class="score">
 						<img style="width:80%" src="./image/gray_heart.png">
 						<img style="width:80%" src="./image/gray_heart.png">
 						<img style="width:80%" src="./image/gray_heart.png">
 						<img style="width:80%" src="./image/gray_heart.png">
 						<img style="width:80%" src="./image/gray_heart.png">
-				</div>
+					</div>
+					<p style="font-size: 3.8vw; margin-left: 10vw; margin-bottom: 1vw; margin-top: 1vw;">(170)</p>
         </div>
       </div>
-      <div>
-				<p style="font-size: 4vw; padding: 2vw; padding-left: 5vw; margin:0;">評分和評論</p>
-				<p style="font-size: 3.5vw; padding-left: 5vw; margin:0;">分享你的經驗以協助他人</p>
+
+      <div class="com-border">
+				<p style="font-size: 4.2vw; margin: 2vw; margin-left: 5vw;">評分和評論</p>
+				<p style="font-size: 3.7vw; margin-left: 5vw;;">分享你的經驗以協助他人</p>
 
         <div class="heart-grid">
           <img class="avatar" src="image/Ellipse 303.png">
@@ -134,21 +146,52 @@
           <img class="heart" id="h4" src="image/heart.png">
           <img class="heart" id="h5" src="image/heart.png">
         </div>
-      </div>
-      
-			<p style="font-size: 4vw; padding: 2vw; padding-left: 5vw; margin:0;"><b>評論</b></p>
 
-            <section>
-              <textarea class="commentBox" placeholder="Place your comments here" type="textarea"></textarea>
-              <button id="post comment">評論</button>
-              <ul class="clearfix comments" id="comment_box">
-                <!-- load comments from json -->
-              </ul>
-          </section> 
+        <div class="pop-com">
+          <p style="font-size: 3.7vw; margin-left: 5vw; display: inline-block;">進一步分享你的經驗</p>
+          <div class="write-com">
+            <b style="font-size: 3.7vw; color: #1a73e8; margin: 2vw; display: inline-block;">撰寫評論</b>
+            <img style="height: 3.7vw;" src="./image/com-arrow.png">
+          </div>
+          <div class="post-grid">
+						<div class="c-p-button" id="cancel-btn"><p>取消</p></div>
+						<div class="c-p-button" id="post-btn"><p>發布</p></div>
+          </div>
 
-      <div class="com-grid">
+        </div>
+
       </div>
+			<p style="font-size: 4.2vw; padding: 2vw; padding-left: 5vw; margin:0;"><b>評論</b></p>
+
 		</div>
+
+    <div class="writing-container" style="top: 0;">
+      <div>
+        <p class="top-name">米香</p>
+				<div class="c-p-button" id="writing-cancel-btn"><p>取消</p></div>
+				<div class="c-p-button" id="writing-post-btn"><p>發布</p></div>
+      </div>
+      <div class="w-user-bar">
+				<img class="avatar" src="image/Ellipse 303.png">
+
+      </div>
+			<div class="w-heart-grid">
+				<img class="w-heart" id="wh1" src="image/heart.png">
+				<img class="w-heart" id="wh2" src="image/heart.png">
+				<img class="w-heart" id="wh3" src="image/heart.png">
+				<img class="w-heart" id="wh4" src="image/heart.png">
+				<img class="w-heart" id="wh5" src="image/heart.png">
+			</div>
+			<p style="font-size: 3.7vw; margin-left: 6vw; display: inline-block;"><b>進一步分享你的經驗</b></p>
+      <div class="comment-box"></div>
+      <div class="pic-border" style="margin: 8vw; margin-left: 13vw; width: 74vw; height: 9vw;">
+        <div class="add-pic">
+          <img style="height: 4vw;" src="./image/camera.png">
+          <b style="font-size: 3.8vw;">新增照片</b>
+        </div>
+      </div>
+   
+    </div>
 
 		<div class="report-container">
       <div>
@@ -164,12 +207,13 @@
       <div class="scroll-bar"></div>
 
       <div>
-        <div class="report-info">警衛室與勝利服委室書面申訴管道</div>
-        <div class="report-info">總務處網頁流浪動物處理及通報</div>
-        <div class="report-info">校園犬隻傷害線上申訴單</div>
+        <p class="report-info">警衛室與勝利服委室書面申訴管道</p>
+        <p class="report-info">總務處網頁流浪動物處理及通報</p>
+        <p class="report-info">校園犬隻傷害線上申訴單</p>
+        <p class="report-info">成大流浪動物志工粉絲專頁</p>
       </div>
-      <div>
-        <img class="mesng-icon"src="./image/dog_icon_messenger.png">
+      <div style="font-size: 5vw; width: 80%; padding: 10%; color: #757575;">
+        <p>遇到什麼問題了嗎? 趕快通知志工隊們!</p>
       </div>
 
 		</div>

@@ -61,10 +61,46 @@ $('.arrow').click(function() {
 });
 
 $('.heart').click(function() {
+  $('.pop-com').fadeIn();
+
   score = $(this).attr('id')[1];
   console.log(score);
   for (i=1; i<=5; i++){
     hid = `.heart:nth-child(${i+1})`;
+    if(i<=score){
+    console.log($(hid).attr('id'));
+    $(hid).attr('src','./image/red_heart.png');
+    }
+    else {
+    $(hid).attr('src','./image/heart.png');
+    }
+  };
+});
+
+$('#cancel-btn').click(function() {
+  $('.pop-com').hide();
+  $('.heart').attr('src','./image/heart.png');
+});
+
+$('.write-com').click(function() {
+  $('.comment-container').hide();
+  $('.writing-container').show();
+
+});
+
+$('#writing-cancel-btn').click(function() {
+  $('.comment-container').fadeIn();
+  $('.writing-container').hide();
+  $('.w-heart').attr('src','./image/heart.png');
+  $('.heart').attr('src','./image/heart.png');
+  $('.pop-com').hide();
+});
+
+$('.w-heart').click(function() {
+  score = $(this).attr('id')[2];
+  console.log(score);
+  for (i=1; i<=5; i++){
+    hid = `.w-heart:nth-child(${i})`;
     if(i<=score){
     console.log($(hid).attr('id'));
     $(hid).attr('src','./image/red_heart.png');
