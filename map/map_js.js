@@ -192,5 +192,5 @@ function camera(){
   // add camera function
 }
 function more(){
-  window.location.assign("https://luffy.ee.ncku.edu.tw/~hzaybr/uidd2020/dogprofile/mianxian.html")
+  window.location.assign("../dogprofile/mixiang.html")
 }
