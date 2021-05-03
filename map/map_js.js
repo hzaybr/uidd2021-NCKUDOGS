@@ -192,5 +192,5 @@ function camera(){
   // add camera function
 }
 function more(){
-  window.location.assign("../dogprofile/mixiang.html")
+  window.location.assign("./dogprofile/mixiang.html")
 }
