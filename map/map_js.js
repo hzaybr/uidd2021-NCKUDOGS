@@ -7,7 +7,7 @@ var count = -1;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','麵線'];
 var currentInfoWindow = '';
 const MAP_BOUNDS = {
-  north: 23.00441,
+  north: 22.95441,
   south: 22.99035,
   west: 120.21060,
   east: 120.22808,
@@ -35,6 +35,7 @@ function initMap() {
     ownermarker = new google.maps.Marker({
       position: owner_uluru,
       map: map
+      
     });
     //dog's mark 
     addMarker("./map/mark_icon/Group 189@3x.png",{lat: 22.997873, lng: 120.2155521})
@@ -82,7 +83,12 @@ function findposition(target_marker){
   });
 }
 $( "#mark-icon" ).click(function() {
-  findposition(ownermarker);
+  if(markDisplay){
+    
+  }else{
+    findposition(ownermarker);
+  }
+  
 });
 $( "#dog1" ).click(function() {
   lat=Markers[0].getPosition().lat();

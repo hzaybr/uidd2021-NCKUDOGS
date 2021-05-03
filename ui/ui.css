@@ -31,6 +31,7 @@ body {
 #mark-icon {
   right: 5vw;
   bottom: 5vw;
+  z-index: 3;
 }
 
 .list-grid {
@@ -66,6 +67,18 @@ body {
   background-size: contain;
 }
 
+.mark {
+  position: absolute;
+  display: block;
+  width: 92vw;
+  height: 90vw;
+  /* left: 4vw; */
+  right: -92vw;
+  bottom: 27vw;
+  background-image: url('./image/dog_div_research.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 .button-grid {
   position: absolute;
@@ -111,6 +124,32 @@ body {
   margin: 0;
 }
 
+.mark-grid {
+  position: absolute;
+  width: 100%;
+  height: 60vw;
+  top: 20vw;
+  display: grid;
+  grid-template-columns: 20vw 20vw 20vw 20vw;
+  grid-row-gap: 2vw;
+  justify-content: space-evenly;
+  align-content: flex-start;
+  overflow-y: auto;
+}
+
+.mark-grid img{
+  position: relative;
+  width: 20vw;
+}
+
+.mark-grid p{
+  position: relative;
+  font-size: 4vw;
+  top: -1vh;
+  text-align: center;
+  margin: 0;
+}
+
 #sg1 {
   grid-template-rows: 25vw 25vw 25vw;
 }
@@ -122,3 +161,26 @@ body {
   display: none;
 }
 
+#mg1 {
+  grid-template-rows: 25vw 25vw 25vw;
+}
+
+/* #mg2 {
+  grid-template-rows: 25vw 25vw;
+}
+#m2 {
+  display: none;
+} */
+
+.mark_tip{
+  position: relative;
+  font-size: 10vw;
+  font-weight: bold;
+  top: -130vh;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  padding-top: 30vw;
+  background-color: #b8b7b79f;
+  z-index: 2;
+}

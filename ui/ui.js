@@ -1,5 +1,7 @@
 var listDisplay = false;
 var searchDisplay = false;
+var markDisplay = false;
+var markmode = false;
 
 function displayCheck(){
   if(listDisplay){
@@ -7,6 +9,19 @@ function displayCheck(){
   }
   if(searchDisplay){
     searchClick();
+  }
+  // if(markDisplay){
+  //   markClick();
+  // }
+  if(markDisplay){
+    if(!markmode){
+      markClick();
+    }
+  }
+  if(markmode){
+    $('.mark_tip').animate({'top':'-130vh'},10);
+    $('.mark').animate({'right': '4vw'},500);
+    markmode = !markmode;
   }
 }
 
@@ -37,6 +52,23 @@ function searchClick(){
   searchDisplay = !searchDisplay;
 }
 
+function markClick(){
+  $('#mark-icon').stop();
+  $('.mark_tip').stop();
+  if (markDisplay){
+    $('#mark-icon').animate({'right':'5vw','width':'20vw'},500);
+    $('.mark_tip').animate({'top':'-130vh'},10);
+    $('.mark').animate({'right': '-92vw'},500);
+  }
+  else{
+    displayCheck();
+	  $('#mark-icon').animate({'right':'37vw','width':'26vw'},500);
+    $('.mark_tip').animate({'top':'0vh'},10);
+  }
+  markDisplay = !markDisplay;
+  markmode = markDisplay;
+}
+
 $('#list-icon').click(function(){
   listClick();
 })
@@ -48,8 +80,13 @@ $('#map').click(function(){
   displayCheck();
 })
 
-$('#mark-icon').click(function(){
+$('.mark_tip').click(function(){
   displayCheck();
+})
+
+$('#mark-icon').click(function(){
+  markClick();
+  // displayCheck();
 })
 
 $('.search-grid img').click(function(){
