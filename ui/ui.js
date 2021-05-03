@@ -10,9 +10,6 @@ function displayCheck(){
   if(searchDisplay){
     searchClick();
   }
-  // if(markDisplay){
-  //   markClick();
-  // }
   if(markDisplay){
     if(!markmode){
       markClick();
@@ -86,7 +83,6 @@ $('.mark_tip').click(function(){
 
 $('#mark-icon').click(function(){
   markClick();
-  // displayCheck();
 })
 
 $('.search-grid img').click(function(){

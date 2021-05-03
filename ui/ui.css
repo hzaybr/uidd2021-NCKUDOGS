@@ -72,7 +72,6 @@ body {
   display: block;
   width: 92vw;
   height: 90vw;
-  /* left: 4vw; */
   right: -92vw;
   bottom: 27vw;
   background-image: url('./image/dog_div_research.png');
@@ -164,13 +163,6 @@ body {
 #mg1 {
   grid-template-rows: 25vw 25vw 25vw;
 }
-
-/* #mg2 {
-  grid-template-rows: 25vw 25vw;
-}
-#m2 {
-  display: none;
-} */
 
 .mark_tip{
   position: relative;
