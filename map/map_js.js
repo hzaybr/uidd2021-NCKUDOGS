@@ -108,7 +108,6 @@ function initMap() {
     map.addListener('click', function(event){
         addMarker(event.latLng);
     });
-    // var infowincontent = '<div style="width:200px">CONTENT</div>';
     //user mark
     ownermarker = new google.maps.Marker({
       position: owner_uluru,
@@ -192,6 +191,29 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   currentInfoWindow = infowindow;
   
 });
+
+$( "#mg1 img" ).click(function() {
+  var id_str = $(this).attr('id');
+  var choose_num = parseInt(id_str.slice(4,id_str.length))-1;
+  uluru = {lat: lat, lng: lng};
+  Markers[choose_num].setPosition(uluru);
+  map.setCenter(uluru);
+  map.setZoom(17);
+  var infowindow = new google.maps.InfoWindow({
+    content: infowincontent.replace('CONTENT',
+      dog_name[choose_num]
+    )
+  });  
+  if(currentInfoWindow != '')   
+    {    
+      currentInfoWindow.close();   
+      currentInfoWindow = '';   
+    }   
+  infowindow.open(map, Markers[choose_num]);   
+  currentInfoWindow = infowindow;
+  markClick();
+});
+
 function route(){
   // add route funtion
 }
