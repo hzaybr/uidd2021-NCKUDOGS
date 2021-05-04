@@ -1,46 +1,54 @@
 let cmt_cnt = 0;
 let img_cnt = 0;
 
+function concatComment(user, comment) {
+	$(`<div class=\"com-border\" id=${user}>`).prependTo('.comments');
+	let txt = "<div class=\"heart-grid\">";
+	txt += "<img class=\"avatar\" src=\"image/Ellipse 303.png\"></img>";
+	txt += `<p>${user}</p>`;
+	txt += "</div>";
+	txt += `<p>${comment}</p>`;
+	$(`#${user}`).html(txt);
+}
+
 $(function(){
 
     $.post("./load_comments", (cmt_json) => {
         $.each(JSON.parse(cmt_json), function(index, val) {
             ++cmt_cnt;
-            $('<li>').text(val).prependTo('.comments');
+			concatComment(index, val);
         });
 	});
 
     $.post("./load_images", (img_json) => {
         $.each(JSON.parse(img_json), function(index, val) {
             ++img_cnt;
-			$(`<img src=\"\" id=${index} width=100%/>`).prependTo("#imgs");
+			$(`<img src=\"\" id=${index} width=100%/>`).prependTo(".pic-grid");
             document.getElementById(index.toString()).src = val;
         });
     });
 
-	$('button').click(function() {
+	$('.c-p-button').click(function() {
+
+		if ($('.commentBox').val().length == 0)
+			return;
+
 		var comment = $('.commentBox').val();
-		$('<li>').text(comment).prependTo('.comments');
-		$('button').attr('disabled', 'true');
-		$('.counter').text('140');
+		concatComment(`user${++cmt_cnt}`, comment);
 		$('.commentBox').val('');
 
 		$.post('./post_comment', {
-			id: ++cmt_cnt,
+			id: `user${cmt_cnt}`,
 			content: comment,
 		}, () => {});
+
+		$('.comment-container').fadeIn();
+		$('.writing-container').hide();
+		$('.w-heart').attr('src','./image/heart.png');
+		$('.heart').attr('src','./image/heart.png');
+		$('.pop-com').hide();
 	});
-	
-	$('.commentBox').keyup(function() {		
-		if ($(this).val().length == 0) {
-			$('button').attr('disabled', 'true');
-		}
-		else {
-			$('button').removeAttr('disabled', 'true');
-		}
-	});
-	
-	$('button').attr('disabled', 'true');
+
 });
 
 /* convert image to base 64 */
@@ -52,7 +60,7 @@ function readFile() {
         
         FR.addEventListener("load", function(e) {
 			++img_cnt;
-			$(`<img src=\"\" id=${img_cnt} width=100%/>`).prependTo("#imgs");
+			$(`<img src=\"\" id=${img_cnt} width=100%/>`).prependTo(".pic-grid");
             document.getElementById(img_cnt.toString()).src = e.target.result;
 
             $.post("./upload_image", {

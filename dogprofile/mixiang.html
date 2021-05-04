@@ -98,7 +98,16 @@
         <div class="pic-border">
           <div class="add-pic">
             <img style="height: 4vw;" src="./image/camera.png">
-            <b style="font-size: 3.8vw;">新增照片</b>
+            <input type="file" name="file" id="fl_file" accept="image/*" hidden/>
+            <label for="fl_file">上傳</label>
+          </div>
+        </div>
+
+        <div class="pic-border">
+          <div class="add-pic">
+            <img style="height: 4vw;" src="./image/camera.png">
+            <input type="file" name="file" id="fl_file" accept="image/*" capture="camera" hidden/>
+            <label for="fl_file">拍照</label>
           </div>
         </div>
 
@@ -167,6 +176,9 @@
 
       </div>
       <p style="font-size: 4.2vw; padding: 2vw; padding-left: 5vw; margin:0;"><b>評論</b></p>
+      <ul class="clearfix comments" id="comment_box">
+        <!-- load comments from json -->
+      </ul>
 		</div>
 
     <div class="writing-container" style="top: 0;">
@@ -193,8 +205,8 @@
 
       <p style="font-size: 3.7vw; margin-left: 6vw; display: inline-block;"><b>進一步分享你的經驗</b></p>
 
-      <!--comment-->
-      <div class="comment-box"></div>
+      <!-- Comment Box -->
+      <textarea class="commentBox" placeholder="詳細說明您在這個地點的親身經驗" type="textarea"></textarea>
 
       <div class="pic-border" style="margin: 8vw; margin-left: 13vw; width: 74vw; height: 9vw;">
         <div class="add-pic">
