@@ -167,6 +167,13 @@ body {
 #m1{
   display: none;
 }
+
+.mark-title{
+  margin-left: 15px;
+  padding-top: 5px;
+  font-size: 5vw;
+}
+
 .mark_tip{
   position: relative;
   font-size: 10vw;
