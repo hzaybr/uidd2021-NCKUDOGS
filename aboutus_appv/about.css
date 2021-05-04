@@ -83,4 +83,33 @@ body {
   text-align: center;
   font-size: 4vw;
 }
-
+.adopt-container {
+	margin: 5vw;
+	width: 92vw;
+	height: 97vw;
+	background-color: white;
+	box-shadow: 0 0.2vw 2vw #8080807a;
+	position: absolute;
+	top: 20vw;
+	border-radius: 6.9vw;
+}
+.adopt-grid {
+  display: grid;
+	padding-left: 5%;
+	width: 90%;
+	grid-gap: 3%;
+  grid-template-columns: 9% 87%;
+  grid-template-rows: repeat(5 ,auto);
+  justify-content: space-evenly;
+  align-content: space-around;
+  align-items: start;
+}
+.btm-info {
+	position: absolute;
+	left: 50vw;
+	transform: translateX(-50%);
+}
+#mes-icon {
+  top: 134vw;
+  width: 15vw;
+}
