@@ -16,7 +16,7 @@ function displayCheck(){
     }
   }
   if(markmode){
-    $('.mark_tip').animate({'top':'-130vh'},10);
+    $('.mark_tip').animate({'top':'-100vh'},10);
     $('.mark').animate({'right': '4vw'},500);
     document.getElementById('m1').style.display="block";
     markmode = !markmode;
@@ -55,7 +55,7 @@ function markClick(){
   $('.mark_tip').stop();
   if (markDisplay){
     $('#mark-icon').animate({'right':'5vw','width':'20vw'},500);
-    $('.mark_tip').animate({'top':'-130vh'},10);
+    $('.mark_tip').animate({'top':'-100vh'},10);
     $('.mark').animate({'right': '-92vw'},500);
     document.getElementById('m1').style.display="none";
   }

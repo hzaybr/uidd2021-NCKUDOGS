@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  /* overflow: hidden; */
 }
 
 #map {
@@ -175,14 +176,17 @@ body {
 }
 
 .mark_tip{
-  position: relative;
-  font-size: 10vw;
-  font-weight: bold;
-  top: -130vh;
+  position: absolute;
+  top: -100vh;
   height: 100vh;
-  text-align: center;
-  color: white;
-  padding-top: 30vw;
+  width: 100vw;
   background-color: #b8b7b79f;
   z-index: 2;
+}
+.mark_tip p{
+  font-size: 10vw;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 30vw;
 }
