@@ -100,6 +100,10 @@ $('#about-us').click(function(){
   window.location.assign('./aboutus_appv/aboutus.html')
 })
 
+$('#adopt').click(function(){
+  window.location.assign('./aboutus_appv/adopt.html')
+})
+
 $('#messenger-icon').click(function(){
   window.location.assign("https://www.facebook.com/ncku.vdogs")  
 })
