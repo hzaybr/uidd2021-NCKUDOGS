@@ -74,6 +74,7 @@ body {
   height: 90vw;
   right: -92vw;
   bottom: 27vw;
+  
   background-image: url('./image/dog_div_research.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -162,6 +163,15 @@ body {
 
 #mg1 {
   grid-template-rows: 25vw 25vw 25vw;
+}
+#m1{
+  display: none;
+}
+
+.mark-title{
+  margin-left: 15px;
+  padding-top: 5px;
+  font-size: 5vw;
 }
 
 .mark_tip{
