@@ -119,9 +119,6 @@ function initMap() {
     for(i=1;i<20;i++){
       addMarker("./map/mark_icon/Group 189@3x.png",{lat: position[i].lat, lng: position[i].lng})
     }
-    
-    // addMarker("./map/mark_icon/Group 189@3x.png",{lat: 22.997340, lng: 120.2175155})
-    
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -171,23 +168,29 @@ $( "#mark-icon" ).click(function() {
   }
   
 });
-$( "#dog1" ).click(function() {
-  // Markers[0].click();
-  $(Markers[0]).click();
-  lat=Markers[0].getPosition().lat();
-  lng=Markers[0].getPosition().lng();
-  uluru = {lat: lat, lng: lng};
-  map.setCenter(uluru);
-  map.setZoom(17);
+$( "#sg1 img,#sg2 img" ).click(function() {
   
-});
-$( "#dog2" ).click(function() {
-  lat=Markers[1].getPosition().lat();
-  lng=Markers[1].getPosition().lng();
+  var id_str = $(this).attr('id');
+  var choose_num = parseInt(id_str.slice(3,id_str.length))-1;
+  // console.log(choose_num)
+  lat=Markers[choose_num].getPosition().lat();
+  lng=Markers[choose_num].getPosition().lng();
   uluru = {lat: lat, lng: lng};
   map.setCenter(uluru);
   map.setZoom(17);
-  Markers[1].click();
+  var infowindow = new google.maps.InfoWindow({
+    content: infowincontent.replace('CONTENT',
+      dog_name[choose_num]
+    )
+  });  
+  if(currentInfoWindow != '')   
+    {    
+      currentInfoWindow.close();   
+      currentInfoWindow = '';   
+    }   
+  infowindow.open(map, Markers[choose_num]);   
+  currentInfoWindow = infowindow;
+  
 });
 function route(){
   // add route funtion
