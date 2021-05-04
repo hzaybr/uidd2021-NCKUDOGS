@@ -172,11 +172,14 @@ $( "#mark-icon" ).click(function() {
   
 });
 $( "#dog1" ).click(function() {
+  // Markers[0].click();
+  $(Markers[0]).click();
   lat=Markers[0].getPosition().lat();
   lng=Markers[0].getPosition().lng();
   uluru = {lat: lat, lng: lng};
   map.setCenter(uluru);
   map.setZoom(17);
+  
 });
 $( "#dog2" ).click(function() {
   lat=Markers[1].getPosition().lat();
@@ -184,6 +187,7 @@ $( "#dog2" ).click(function() {
   uluru = {lat: lat, lng: lng};
   map.setCenter(uluru);
   map.setZoom(17);
+  Markers[1].click();
 });
 function route(){
   // add route funtion

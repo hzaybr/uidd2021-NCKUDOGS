@@ -18,6 +18,7 @@ function displayCheck(){
   if(markmode){
     $('.mark_tip').animate({'top':'-130vh'},10);
     $('.mark').animate({'right': '4vw'},500);
+    document.getElementById('m1').style.display="block";
     markmode = !markmode;
   }
 }
@@ -56,11 +57,13 @@ function markClick(){
     $('#mark-icon').animate({'right':'5vw','width':'20vw'},500);
     $('.mark_tip').animate({'top':'-130vh'},10);
     $('.mark').animate({'right': '-92vw'},500);
+    document.getElementById('m1').style.display="none";
   }
   else{
     displayCheck();
 	  $('#mark-icon').animate({'right':'37vw','width':'26vw'},500);
     $('.mark_tip').animate({'top':'0vh'},10);
+    
   }
   markDisplay = !markDisplay;
   markmode = markDisplay;
