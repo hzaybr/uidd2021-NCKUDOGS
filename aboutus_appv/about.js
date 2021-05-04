@@ -19,3 +19,7 @@ $('.backicon').click(function(){
 	window.location.assign('../index.html')
 })
 
+$('#mes-icon').click(function() {
+  console.log('direct')
+	window.open('https://www.facebook.com/ncku.vdogs')
+})
