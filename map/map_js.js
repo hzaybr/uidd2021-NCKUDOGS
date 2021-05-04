@@ -1,8 +1,14 @@
 var map;
+var directionsService;
+var directionsDisplay;
+var routemode = false;
+var current_lat = 23;
+var current_lng = 120.2;
 var ownermarker;
-var owner_uluru = {lat: 23, lng: 120.2};
-var infowincontent = '<div style="width:200px">CONTENT <button onclick="route()">路徑</button><button onclick="camera()">拍照</button><button onclick="more()">更多</button></div>';
+var owner_uluru = {lat: current_lat, lng: current_lng};
+var infowincontent = '<div style="width:200px" id="infowindow">CONTENT <button onclick="route(this.id)" id="route_btn">路徑</button><button onclick="camera()" id="camera_btn">拍照</button><button onclick="more()" id="more_btn">更多</button></div>';
 var Markers=[];
+var Infowincontents=[];
 var count = -1;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
 var position = {
@@ -92,6 +98,8 @@ const MAP_BOUNDS = {
 };
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       center: uluru,
@@ -118,6 +126,7 @@ function initMap() {
     for(i=1;i<20;i++){
       addMarker("./map/mark_icon/Group 189@3x.png",{lat: position[i].lat, lng: position[i].lng})
     }
+    findposition(ownermarker);
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -131,29 +140,35 @@ function addMarker(icon_path,location) {
       scaledSize: new google.maps.Size(53, 73)
     } 
     });
+  var new_infowincontent = infowincontent.replace('id="infowindow"','id="'+count+'"');
+  new_infowincontent = new_infowincontent.replace('id="route_btn"','id="'+'route_'+count+'"');
+  new_infowincontent = new_infowincontent.replace('id="camera_btn"','id="'+'camera_'+count+'"');
+  new_infowincontent = new_infowincontent.replace('id="more_btn"','id="'+'more_'+count+'"');
+  // console.log(infowincontent)
   var infowindow = new google.maps.InfoWindow({
-    content: infowincontent.replace('CONTENT',
-      dog_name[count]
-    )
+    content: new_infowincontent.replace('CONTENT',dog_name[count])
   });
+  
   marker.addListener('click', function() {
     // currentInfoWindow.close();
-    if(currentInfoWindow != '')   
+    if(currentInfoWindow != '') 
     {    
       currentInfoWindow.close();   
       currentInfoWindow = '';   
     }   
-    infowindow.open(map, marker);   
+    infowindow.open(map, marker);
     currentInfoWindow = infowindow; 
   });
   Markers.push(marker);
+  Infowincontents.push(infowindow);
+  // Infowincontents[count].content.css('class',"1223")
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{
     console.log(position.coords);
-    lat=position.coords.latitude;
-    lng=position.coords.longitude;
-    uluru = {lat: lat, lng: lng};
+    current_lat=position.coords.latitude;
+    current_lng=position.coords.longitude;
+    uluru = {lat: current_lat, lng: current_lng};
     target_marker.setPosition(uluru);
     map.setCenter(uluru);
     map.setZoom(17);
@@ -177,16 +192,12 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   uluru = {lat: lat, lng: lng};
   map.setCenter(uluru);
   map.setZoom(17);
-  var infowindow = new google.maps.InfoWindow({
-    content: infowincontent.replace('CONTENT',
-      dog_name[choose_num]
-    )
-  });  
+  var infowindow = Infowincontents[choose_num];
   if(currentInfoWindow != '')   
-    {    
-      currentInfoWindow.close();   
-      currentInfoWindow = '';   
-    }   
+  {    
+    currentInfoWindow.close();   
+    currentInfoWindow = '';   
+  }   
   infowindow.open(map, Markers[choose_num]);   
   currentInfoWindow = infowindow;
   
@@ -195,30 +206,52 @@ $( "#sg1 img,#sg2 img" ).click(function() {
 $( "#mg1 img" ).click(function() {
   var id_str = $(this).attr('id');
   var choose_num = parseInt(id_str.slice(4,id_str.length))-1;
-  uluru = {lat: lat, lng: lng};
+  uluru = {lat: current_lat, lng: current_lng};
+  console.log(current_lat);
+  console.log(current_lng);
   Markers[choose_num].setPosition(uluru);
   map.setCenter(uluru);
   map.setZoom(17);
-  var infowindow = new google.maps.InfoWindow({
-    content: infowincontent.replace('CONTENT',
-      dog_name[choose_num]
-    )
-  });  
+  var infowindow = Infowincontents[choose_num];
   if(currentInfoWindow != '')   
-    {    
+  {    
       currentInfoWindow.close();   
       currentInfoWindow = '';   
-    }   
+  }   
   infowindow.open(map, Markers[choose_num]);   
   currentInfoWindow = infowindow;
   markClick();
 });
 
-function route(){
-  // add route funtion
+function route(id_str){
+  if(routemode){
+    directionsDisplay.setDirections({routes: []});
+  }else{
+    // add route funtion
+    directionsDisplay.setMap(map);
+    var choose_num = parseInt(id_str.slice(6,id_str.length));
+    console.log(choose_num)
+    var target_lat = Markers[choose_num].getPosition().lat();;
+    var target_lng = Markers[choose_num].getPosition().lng();;
+    var request = {
+      origin: { lat: current_lat, lng: current_lng },
+      destination: { lat: target_lat, lng: target_lng },
+      travelMode: 'WALKING'
+    };
+    directionsService.route(request, function (result, status) {
+      if (status == 'OK') {
+          console.log(result.routes[0].legs[0].steps);
+          directionsDisplay.setDirections(result);
+      } else {
+          console.log(status);
+      }
+    });
+  }
+  routemode = !routemode;
 }
 function camera(){
   // add camera function
+  
 }
 function more(){
   window.location.assign("./dogprofile/mixiang.html")
