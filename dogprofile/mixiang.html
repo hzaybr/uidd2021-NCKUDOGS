@@ -8,10 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
 
     <title>米香</title>
-
   </head>
  
   <body>
+    <div class="username"></div>
+    <!--user_name = $('.username').attr('id') -->
     <div class="start">
       <div class="top-pic" style="background-image: url('./image/mi.jpg');"> </div>
 
@@ -210,10 +211,11 @@
       <!-- Comment Box -->
       <textarea class="commentBox" placeholder="詳細說明您在這個地點的親身經驗" type="textarea"></textarea>
 
-      <div class="pic-border" style="margin: 8vw; margin-left: 13vw; width: 74vw; height: 9vw;">
+      <div class="pic-border" style="width: 74%; margin-left: 13%;">
         <div class="add-pic">
-          <img style="height: 4vw;" src="./image/camera.png">
-          <b style="font-size: 3.8vw;">新增照片</b>
+          <img style="height: 4vw;" src="./image/gallery.png">
+          <input type="file" name="file" id="fl_file" accept="image/*" capture="camera" hidden/>
+          <label for="fl_file"><b>新增照片</b></label>
         </div>
       </div>
    
@@ -246,6 +248,7 @@
 
     <script src='./dog.js'></script>
     <script src="./system.js"></script>
+    <script src="./user.js"></script>
 
   </body>
 </html>

@@ -253,5 +253,7 @@ function camera(){
   // add camera function
 }
 function more(){
-  window.location.assign("./dogprofile/mixiang.html")
+  var user_name = $('.username').attr('id')
+  console.log(`map name: ${user_name}`)
+  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}`)
 }
