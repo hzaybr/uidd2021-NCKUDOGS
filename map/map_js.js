@@ -123,8 +123,9 @@ function initMap() {
       
     });
     //dog's mark 
-    for(i=1;i<20;i++){
-      addMarker("./map/mark_icon/Group 189@3x.png",{lat: position[i].lat, lng: position[i].lng})
+    for(i=1;i<19;i++){
+      var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
+      addMarker(marker_path,{lat: position[i].lat, lng: position[i].lng})
     }
     findposition(ownermarker);
 }
@@ -161,7 +162,6 @@ function addMarker(icon_path,location) {
   });
   Markers.push(marker);
   Infowincontents.push(infowindow);
-  // Infowincontents[count].content.css('class',"1223")
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{
@@ -251,7 +251,6 @@ function route(id_str){
 }
 function camera(){
   // add camera function
-  
 }
 function more(){
   window.location.assign("./dogprofile/mixiang.html")
