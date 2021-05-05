@@ -16,7 +16,7 @@ $('.start-button').click(function() {
 
   $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
   setTimeout(function() {
-    $(yellow).css('color','#ffbc00'); 
+    $(yellow).css('color','#ff8b2c'); 
     container_list.forEach(function(item, i) {
       $(item).css({'top':'0'});
     });
@@ -37,7 +37,7 @@ $('.button').click(function() {
 
     $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
     setTimeout(function() {
-      $(yellow).css('color','#ffbc00'); }, 100 
+      $(yellow).css('color','#ff8b2c'); }, 100 
       );
     $(hide).hide();
     $(show).show();
@@ -52,7 +52,7 @@ $('.arrow').click(function() {
   setTimeout(function() {
     $(container_list[now]).hide();
     $('.start').show(); 
-    $('#s0').css('color','#ffbc00'); 
+    $('#s0').css('color','#ff8b2c'); 
     container_list.forEach(function(item, i) {
       $(item).css({'top':'65vw'});
       $(item).hide();
