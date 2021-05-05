@@ -103,7 +103,7 @@ body {
   }
   .add-pic-grid {
     display: grid;
-    grid-template-columns: 42vw 42vw;
+    grid-template-columns: 40vw 40vw;
     width: 100vw;
     justify-content: space-evenly;
   }
