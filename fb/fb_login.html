@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook Login Demo</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+  </head>
+  <body>
+    <script src="id.js"></script>
+    <script>
+
+      // This is called with the results from from FB.getLoginStatus().
+      function statusChangeCallback(response) {
+        console.log('statusChangeCallback')
+        console.log(response)
+
+        // Step 4
+      if (response.status === 'connected') {
+        // Logged into your app and Facebook.
+        testAPI()
+      } else if (response.status === 'not_authorized') {
+        // The person is logged into Facebook, but not your app.
+        document.getElementById('status').innerHTML = 'Please log into this app.'
+      } else {
+        // The person is not logged into Facebook, so we're not sure if
+        // they are logged into this app or not.
+        document.getElementById('status').innerHTML = 'Please log into Facebook.'
+      }
+
+      }
+
+      // Step 3
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response)
+        })
+      }
+
+
+      //Step 2
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId  : myAppId,
+          cookie : true,    // enable cookies to allow the server to access the session
+          version: 'v10.0', // use graph api version v10.0
+          xfbml  : true,    // parse social plugins on this page
+        })
+        FB.AppEvents.logPageView()
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response)
+        })
+      }
+
+      // Load the SDK dynamically
+      ;(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0]
+        if (d.getElementById(id)) return
+        js = d.createElement(s)
+        js.id = id
+        js.src = '//connect.facebook.net/en_US/sdk.js'
+        fjs.parentNode.insertBefore(js, fjs)
+      }(document, 'script', 'facebook-jssdk'))
+
+
+
+      // Here we run a very simple test of the Graph API after login is
+      // successful.  See statusChangeCallback() for when this call is made.
+      function testAPI() {
+        console.log('Welcome!  Fetching your information.... ')
+        FB.api('/me', function(response) {
+          console.log(`Successful login for: ${response.name}`)
+          var user=response.name
+          console.log(response)
+          document.getElementById('status').innerHTML = `Thanks for logging in, ${user}!`
+
+          setTimeout(function() {
+                    window.location.assign(`../?username=${user}`);
+          },2000);
+        
+        })
+      }
+    </script>
+
+    <div>
+      <!-- Step 1 -->
+      <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+
+      <div id="status"></div>
+    </div>
+
+  </body>
+</html>
+<!--
+vi:et:ts=2
+-->
