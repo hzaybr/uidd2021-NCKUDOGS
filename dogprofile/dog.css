@@ -299,7 +299,6 @@ body {
   
   .comments {
 	  padding: 0%;
-	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 	height: 300px;
   }
