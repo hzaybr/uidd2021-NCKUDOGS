@@ -85,6 +85,11 @@ $('#cancel-btn').click(function() {
 $('.write-com').click(function() {
   $('.comment-container').hide();
   $('.writing-container').show();
+  user_name = $('.username').attr('id');
+  console.log(user_name);
+//  $('.username').html(username);
+//  $('.username').show();
+  
 
 });
 
