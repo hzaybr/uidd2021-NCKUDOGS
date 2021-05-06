@@ -305,6 +305,7 @@ body {
   
   .clearfix {
 	  clear: both;
+    margin: 0;
   }
   
   label {
