@@ -60,15 +60,16 @@ $('.arrow').click(function() {
   }, 150);
 });
 
+var score
 $('.heart').click(function() {
   $('.pop-com').fadeIn();
 
   score = $(this).attr('id')[1];
-  console.log(score);
+  console.log(`score: ${score}`);
   for (i=1; i<=5; i++){
+    //heart in comment
     hid = `.heart:nth-child(${i+1})`;
     if(i<=score){
-    console.log($(hid).attr('id'));
     $(hid).attr('src','./image/red_heart.png');
     }
     else {
@@ -85,12 +86,18 @@ $('#cancel-btn').click(function() {
 $('.write-com').click(function() {
   $('.comment-container').hide();
   $('.writing-container').show();
-  user_name = $('.username').attr('id');
-  console.log(user_name);
-//  $('.username').html(username);
-//  $('.username').show();
   
-
+  console.log(`score: ${score}`);
+  for (i=1; i<=5; i++){
+    //heart in writing
+    hid = `.w-heart:nth-child(${i})`;
+    if(i<=score){
+    $(hid).attr('src','./image/red_heart.png');
+    }
+    else {
+    $(hid).attr('src','./image/heart.png');
+    }
+  };
 });
 
 $('#writing-cancel-btn').click(function() {
@@ -103,11 +110,10 @@ $('#writing-cancel-btn').click(function() {
 
 $('.w-heart').click(function() {
   score = $(this).attr('id')[2];
-  console.log(score);
+  console.log(`score: ${score}`);
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
     if(i<=score){
-    console.log($(hid).attr('id'));
     $(hid).attr('src','./image/red_heart.png');
     }
     else {
