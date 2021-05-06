@@ -6,7 +6,7 @@ name = decodeURI(name)
 console.log(`user name: ${name}`)
 
 //get user profile photo (address to download)
-let pic_address = address.match(/pic=(\W|\w|\z)*/)[0].slice(4,-1)
+let pic_address = address.match(/pic=(\W|\w|\z)*/)[0].slice(4,)
 pic_address_base64 = decodeURI(pic_address)
 pic_address_http = atob(pic_address)
 console.log(`pic address: ${pic_address_http}`)
