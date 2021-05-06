@@ -254,6 +254,7 @@ function camera(){
 }
 function more(){
   var user_name = $('.username').attr('id')
+  var address_base64 = $('.address_base64').attr('id')
   console.log(`map name: ${user_name}`)
-  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}`)
+  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`)
 }
