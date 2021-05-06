@@ -33,12 +33,15 @@ body {
   .info {
 	width: 90%; 
 	height: auto;
-	display: inline-block;
+	display: grid;
 	padding-top: 3vw;
 	padding-bottom: 3vw;
 	padding-left: 5%;
 	padding-right: 5%;
+  grid-template-columns: 75vw auto;
+  align-items: center;
   }
+  .navig { width: 12vw;}
   .info-score {
 	width: 100%;
 	display: grid;

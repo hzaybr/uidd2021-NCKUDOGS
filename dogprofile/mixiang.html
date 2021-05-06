@@ -11,21 +11,24 @@
   </head>
  
   <body>
-    <!--start page -->
+    <!-- start page -->
     <div class="start">
       <div class="top-pic" style="background-image: url('./image/mi.jpg');"> </div>
 
       <div class="info">
-        <p style="font-size: 5vw; margin: 0;"><b>米香</b></p>
-        <div class="info-score">
-          <p style="font-size: 4vw; margin: 0; display: inherit;">5.0</p>
-          <img style="width:80%" src="./image/gray_heart.png">
-          <img style="width:80%" src="./image/gray_heart.png">
-          <img style="width:80%" src="./image/gray_heart.png">
-          <img style="width:80%" src="./image/gray_heart.png">
-          <img style="width:80%" src="./image/gray_heart.png">
+        <div>
+          <p style="font-size: 5vw; margin: 0;"><b>米香</b></p>
+          <div class="info-score">
+            <p style="font-size: 4vw; margin: 0; display: inherit;">5.0</p>
+            <img style="width:80%" src="./image/gray_heart.png">
+            <img style="width:80%" src="./image/gray_heart.png">
+            <img style="width:80%" src="./image/gray_heart.png">
+            <img style="width:80%" src="./image/gray_heart.png">
+            <img style="width:80%" src="./image/gray_heart.png">
+          </div>
+          <p style="font-size: 3.8vw; margin: 0;">自強三傻</p>
         </div>
-        <p style="font-size: 3.8vw; margin: 0;">自強三傻</p>
+        <img class="navig" id="5" src="./image/dog_icon_navigation.png">
       </div>
 
       <div class="topbar-grid">
@@ -202,8 +205,6 @@
         <img class="avatar" src="image/Ellipse 303.png">
         <div class="username"></div>
         <!--user_name = $('.username').attr('id') -->
-        <div class="address_base64"></div>
-        <!--address = $('.address_base64').attr('id') -->
       </div>
 
       <div class="w-heart-grid">
@@ -256,7 +257,8 @@
 
     <script src='./dog.js'></script>
     <script src="./system.js"></script>
-    <script src="../ui/user.js"></script>
+    <script src="./user.js"></script>
+    <script src="../map/map_js.js"></script>
     <script>
       $(document).ready(function() {
         var user_name = $('.username').attr('id');

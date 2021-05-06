@@ -60,24 +60,19 @@ $('.arrow').click(function() {
   }, 150);
 });
 
-//press heart to pop out comment session
 $('.heart').click(function() {
   $('.pop-com').fadeIn();
 
   score = $(this).attr('id')[1];
-  console.log(`score: ${score}`);
+  console.log(score);
   for (i=1; i<=5; i++){
-    //heart in comment page
-    c-hid = `.heart:nth-child(${i+1})`;
-    //heart in writing page
-    w-hid = `.heart:nth-child(${i})`;
+    hid = `.heart:nth-child(${i+1})`;
     if(i<=score){
-    $(c-hid).attr('src','./image/red_heart.png');
-    $(w-hid).attr('src','./image/red_heart.png');
+    console.log($(hid).attr('id'));
+    $(hid).attr('src','./image/red_heart.png');
     }
     else {
-    $(c-hid).attr('src','./image/heart.png');
-    $(w-hid).attr('src','./image/heart.png');
+    $(hid).attr('src','./image/heart.png');
     }
   };
 });
@@ -85,15 +80,17 @@ $('.heart').click(function() {
 $('#cancel-btn').click(function() {
   $('.pop-com').hide();
   $('.heart').attr('src','./image/heart.png');
-  $('.w-heart').attr('src','./image/heart.png');
 });
 
-//writing comments
 $('.write-com').click(function() {
   $('.comment-container').hide();
   $('.writing-container').show();
   user_name = $('.username').attr('id');
   console.log(user_name);
+//  $('.username').html(username);
+//  $('.username').show();
+  
+
 });
 
 $('#writing-cancel-btn').click(function() {
@@ -104,23 +101,17 @@ $('#writing-cancel-btn').click(function() {
   $('.pop-com').hide();
 });
 
-//heart in writing session
 $('.w-heart').click(function() {
   score = $(this).attr('id')[2];
-  console.log(`score: ${score}`);
+  console.log(score);
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
     if(i<=score){
+    console.log($(hid).attr('id'));
     $(hid).attr('src','./image/red_heart.png');
     }
     else {
     $(hid).attr('src','./image/heart.png');
     }
   };
-});
-
-$('.navig').click(function() {
-  dogId = $('this').attr('id');
-  console.log(`dogId: ${dogId}`);
-  window.location.assign(`../?dogid=${dogId}`);
 });
