@@ -16,7 +16,11 @@ $('.blur').click(function() {
 })
 
 $('.backicon').click(function(){
-	window.location.assign('../index.html')
+  console.log($(this).attr('id'));
+  page = `.${$(this).attr('id')}-page`;
+  console.log(`hide ${page}`);
+  $(page).hide();
+  $('.home-page').show();
 })
 
 $('#mes-icon').click(function() {

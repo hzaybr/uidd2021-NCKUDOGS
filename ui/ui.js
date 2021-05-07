@@ -1,7 +1,6 @@
 var listDisplay = false;
 var searchDisplay = false;
 var markDisplay = false;
-var profileDisplay = false;
 var markmode = false;
 
 function displayCheck(){
@@ -15,9 +14,6 @@ function displayCheck(){
     if(!markmode){
       markClick();
     }
-  }
-  if(profileDisplay){
-    profileClick();
   }
   if(markmode){
     $('.mark_tip').animate({'top':'-100vh'},10);
@@ -37,19 +33,6 @@ function listClick(){
     $('.list-grid').animate({'left':'5vw'},500);
   }
   listDisplay = !listDisplay;
-}
-
-function profileClick(){
-  $('.profile').stop();
-  if (profileDisplay){
-    $('.profile').animate({'left':'105vw'},500);
-  }
-  else{
-    displayCheck();
-    $('.profile').animate({'left':'3.73vw'},500);
-  }
-  profileDisplay = !profileDisplay;
-
 }
 
 function searchClick(){
@@ -89,11 +72,6 @@ function markClick(){
 $('#list-icon').click(function(){
   listClick();
 })
-
-$('#profile-icon').click(function(){
-  profileClick();
-})
-
 $('#search-icon').click(function(){
   searchClick();
 })
@@ -115,11 +93,13 @@ $('.search-grid img').click(function(){
 })
 
 $('#about-dog').click(function(){
-  window.location.assign('./aboutus_appv/aboutdog.html')
+  $('.aboutdog-page').show();
+  $('.home-page').hide();
 })
 
 $('#about-us').click(function(){
-  window.location.assign('./aboutus_appv/aboutus.html')
+  $('.aboutus-page').show();
+  $('.home-page').hide();
 })
 
 $('#adopt').click(function(){
