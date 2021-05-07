@@ -1,4 +1,5 @@
 body {
+  margin: 0;
 }
 .aboutus-page, .aboutdog-page {
   overflow: hidden;
