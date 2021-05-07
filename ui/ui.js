@@ -39,6 +39,19 @@ function listClick(){
   listDisplay = !listDisplay;
 }
 
+function profileClick(){
+  $('.profile').stop();
+  if (profileDisplay){
+    $('.profile').animate({'left':'105vw'},500);
+  }
+  else{
+    displayCheck();
+    $('.profile').animate({'left':'3.73vw'},500);
+  }
+  profileDisplay = !profileDisplay;
+
+}
+
 function searchClick(){
   $('#search-icon').stop();
   $('.search').stop();
@@ -73,14 +86,14 @@ function markClick(){
   markmode = markDisplay;
 }
 
-function profileClick(){
-
-}
-
-
 $('#list-icon').click(function(){
   listClick();
 })
+
+$('#profile-icon').click(function(){
+  profileClick();
+})
+
 $('#search-icon').click(function(){
   searchClick();
 })
