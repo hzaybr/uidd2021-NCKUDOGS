@@ -103,7 +103,8 @@ $('#about-us').click(function(){
 })
 
 $('#adopt').click(function(){
-  window.location.assign('./aboutus_appv/adopt.html')
+  $('.Adopt-page').show();
+  $('.home-page').hide();
 })
 
 $('#messenger-icon').click(function(){

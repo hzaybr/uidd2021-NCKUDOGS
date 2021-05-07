@@ -1,7 +1,7 @@
 body {
   margin: 0;
 }
-.aboutus-page, .aboutdog-page {
+.aboutus-page, .aboutdog-page, .Adopt-page {
   overflow: hidden;
   display: none;
 }
