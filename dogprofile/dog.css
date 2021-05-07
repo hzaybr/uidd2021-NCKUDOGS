@@ -5,7 +5,7 @@ body {
 	margin: 2vw;
 	  font-family: "Segoe UI","微軟正黑體",sans-serif;
   }
-  .username {display: none;}
+  .username {display: none; font-weight: bold;}
   .start {
 	overflow: hidden;
 	position: absolute;
@@ -33,12 +33,15 @@ body {
   .info {
 	width: 90%; 
 	height: auto;
-	display: inline-block;
+	display: grid;
 	padding-top: 3vw;
 	padding-bottom: 3vw;
 	padding-left: 5%;
 	padding-right: 5%;
+  grid-template-columns: 75vw auto;
+  align-items: center;
   }
+  .navig { width: 12vw;}
   .info-score {
 	width: 100%;
 	display: grid;
@@ -211,8 +214,10 @@ body {
 	  width: 90%;
 	  height: 12vw;
 	  padding: 6vw;
+    grid-gap: 5vw;
 	  display: grid;
 	  grid-template-columns: 10vw auto;
+    align-items: center;
   }
   .w-heart-grid {
 	display: grid;
@@ -297,13 +302,13 @@ body {
   
   .comments {
 	  padding: 0%;
-	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 	height: 300px;
   }
   
   .clearfix {
 	  clear: both;
+    margin: 0;
   }
   
   label {

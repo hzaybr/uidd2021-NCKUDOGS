@@ -123,7 +123,7 @@ function initMap() {
       
     });
     //dog's mark 
-    for(i=1;i<19;i++){
+    for(i=1;i<20;i++){
       var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
       addMarker(marker_path,{lat: position[i].lat, lng: position[i].lng})
     }
@@ -254,6 +254,7 @@ function camera(){
 }
 function more(){
   var user_name = $('.username').attr('id')
+  var address_base64 = $('.address_base64').attr('id')
   console.log(`map name: ${user_name}`)
-  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}`)
+  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`)
 }
