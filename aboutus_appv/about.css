@@ -98,7 +98,7 @@ body {
 	background-color: white;
 	box-shadow: 0 0.2vw 2vw #8080807a;
 	position: absolute;
-	top: 20vw;
+	top: 10%;
 	border-radius: 6.9vw;
 }
 .adopt-grid {
@@ -118,6 +118,7 @@ body {
 	transform: translateX(-50%);
 }
 #mes-icon {
-  top: 134vw;
-  width: 15vw;
+  top: 72%;
+  width: 19vw;
 }
+.fp-slidesNav { transform: translateX(-50%);}
