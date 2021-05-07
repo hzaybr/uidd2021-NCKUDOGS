@@ -1,6 +1,7 @@
 var listDisplay = false;
 var searchDisplay = false;
 var markDisplay = false;
+var profileDisplay = false;
 var markmode = false;
 
 function displayCheck(){
@@ -14,6 +15,9 @@ function displayCheck(){
     if(!markmode){
       markClick();
     }
+  }
+  if(profileDisplay){
+    profileClick();
   }
   if(markmode){
     $('.mark_tip').animate({'top':'-100vh'},10);
@@ -68,6 +72,11 @@ function markClick(){
   markDisplay = !markDisplay;
   markmode = markDisplay;
 }
+
+function profileClick(){
+
+}
+
 
 $('#list-icon').click(function(){
   listClick();

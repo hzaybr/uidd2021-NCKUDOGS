@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  /* overflow: hidden; */
 }
 
 #map {
@@ -10,50 +9,211 @@ body {
 }
 
 .icon {
-  width: 20vw;
+  width: 21.33vw;
   position: absolute;
 }
 
 #list-icon {
-  left: 5vw;
-  top: 5vw;
+  left: 1.33vw;
+  top: 1.33vw;
 }
 
-#messenger-icon {
-  right: 5vw;
-  top: 5vw;
+#profile-icon {
+  right: 1.33vw;
+  top: 1.33vw;
 }
 
 #search-icon {
-  left: 5vw;
-  bottom: 5vw;
+  left: 1.33vw;
+  bottom: 1.33vw;
 }
 
 #mark-icon {
-  right: 5vw;
-  bottom: 5vw;
+  right: 1.33vw;
+  bottom: 1.33vw;
   z-index: 3;
 }
 
 .list-grid {
   position: absolute;
-  width: 65vw;
-  height: 65vw;
+  width: 58.13vw;
+  height: 64.53vw;
   left: -65vw;
-  top: 22vw;
+  top: 10.71vh;
   background-image: url('./image/dog_div_list.png');
   background-repeat: no-repeat;
   background-size: contain;
   display: grid;
-  grid-template-columns: 25vw 25vw;
+  grid-template-columns: 21.33vw 21.33vw;
   grid-template-rows: 25vw 25vw;
   justify-content: space-evenly;
   align-content: space-evenly;
 } 
 
 .list-grid img{
+  position: relative;
+  width: 21.33vw;
+}
+
+.list-grid p {
+	position: relative;
+	top: -1vw;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 900;
+	font-size: 1.1vh;
+	line-height: 1.35vh;
+
+	text-align: center;
+
+	color: #9A9A9A;
+}
+
+.profile {
   position: absolute;
-  width: 25vw;
+  width: 92.53vw;
+  height: 111.2vw;
+  left: 3.73vw;
+  top: 21.6vw;
+  background: #FFFFFF;
+  border-radius: 36px;
+ /*
+  background-image: url('./image/dog_div_list.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  */
+}
+
+#user-picture {
+  position: absolute;
+  width: 31.73vw;
+  top: 9.86vw;
+  left: 30.4vw;
+}
+
+#user-name {
+  display: block;
+  position: absolute;
+  width: 9.6vw;
+  height: 6.93vw;
+  top: 42.66vw;
+  left: 41.33vw;
+  margin: 0;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 4.8vw;
+  line-height: 6.93vw;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #000000;
+/*  left: 30.4vw;*/
+}
+
+#user-title {
+  display: block;
+  position: absolute;
+  width: 14.4vw;
+  height: 4vw;
+  top: 50.13vw;
+  left: 38.93vw;
+  background: #9441FF;
+  border-radius: 26.5px;
+}
+
+#user-title p {
+  margin: 0;
+  font-family: Noto Sans Telugu;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 1.86vw;
+  line-height: 4vw;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+#dog-3rd {
+  position: absolute;
+  width: 11.73vw;
+  top: 62.66vw;
+  left: 52.26vw;
+}
+#dog-2nd {
+  position: absolute;
+  width: 11.73vw;
+  top: 62.66vw;
+  right: 52.26vw;
+}
+#dog-1st {
+  position: absolute;
+  width: 16vw;
+  top: 60vw;
+  left: 38.13vw;
+}
+#icon-3rd {
+  position: absolute;
+  width: 3.46vw;
+  height: 4vw;
+  top: 76.26vw;
+  left: 56vw;
+}
+#icon-2nd {
+  position: absolute;
+  width: 3.46vw;
+  height: 4vw;
+  top: 76.26vw;
+  right: 56vw;
+}
+#icon-1st {
+  position: absolute;
+  width: 8vw;
+  height: 6.93vw;
+  top: 76.26vw;
+  left: 42.13vw;
+}
+
+#user-contribution-grid {
+  position: absolute;
+  width: 57.6vw;
+  height: 14.4vw;
+  top: 88vw;
+  left: 17.33vw;
+  display: grid;
+  grid-template-columns: 6.93vw 6.93vw 6.93vw;
+  grid-template-rows: 5.06vw 9.33vw;
+  justify-content: space-between;
+  align-content: space-evenly;
+}
+
+.contr-title {
+  margin: 0;
+  font-family: Noto Sans TC;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 3.46vw;
+  line-height: 5.06vw;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #000000;
+}
+
+.contr-num {
+  margin: 0;
+  font-family: Noto Sans TC;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 6.4vw;
+  line-height: 9.33vw;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #000000;
 }
 
 .search {
