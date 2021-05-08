@@ -30,7 +30,7 @@ body {
   height: 85%;
   display: grid;
   grid-template-columns: 36% 36%;
-  grid-template-rows: auto;
+  grid-template-rows: repeat(3,32%);
   justify-content: space-evenly;
   align-content: center;
 }
