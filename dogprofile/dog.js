@@ -23,6 +23,18 @@ $('.start-button').click(function() {
   }, 150);
 })
 
+$('.d-all').click(function() {
+  $('.start').hide();
+  $('.intro-container').show();
+  $('.intro-container').animate({'top':'0'}, 150);
+
+  setTimeout(function() {
+    $('#00').css('color','#ff8b2c'); 
+    container_list.forEach(function(item, i) {
+      $(item).css({'top':'0'});
+    });
+  }, 150);
+})
 $('.button').click(function() {
   from = $(this).attr('id')[0];
   to = $(this).attr('id')[1];
@@ -59,6 +71,9 @@ $('.arrow').click(function() {
     });
   }, 150);
 });
+$('.XXicon').click(function() {
+  window.location.assign('../');
+})
 
 var score
 $('.heart').click(function() {
