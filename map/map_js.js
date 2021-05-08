@@ -252,9 +252,38 @@ function route(id_str){
 function camera(){
   // add camera function
 }
+
 function more(){
   var user_name = $('.username').attr('id')
   var address_base64 = $('.address_base64').attr('id')
-  console.log(`map name: ${user_name}`)
-  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`)
+  console.log(`map name: ${user_name}`);
+  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`);
 }
+
+var user_name
+var address_base64
+var now_address
+
+$('.navig').click(function() {
+  var dog_page_route = `route_${$(this).attr('id')}`;
+  console.log(dog_page_route);
+  window.location.assign(`../?navig=${dog_page_route}&user=${user_name}&pic=${address_base64}`);
+});
+
+//navigate from dogprofile page
+$(document).ready(function() {
+  user_name = $('.username').attr('id')
+  address_base64 = $('.address_base64').attr('id')
+  now_address = location.href
+  //find if navig is in address or not
+  var navig = address.search(/navig/)
+  console.log(navig);
+  if (navig!=-1){
+    setTimeout(function() {
+      var route_id = address.match(/route_([1-9])/)[0];
+      console.log(route_id);
+      route(route_id);
+     }, 300);
+
+   };
+});
