@@ -7,7 +7,7 @@ p {
 }
 .bg-top {
 	width: 100%;
-  height: 7%;
+  height: 5%;
 	position: absolute;
 	bottom: -1vw;
 	z-index: 1;
@@ -46,7 +46,7 @@ p {
 }
 .top-pic {
   width: 100%;
-  height: 33%;
+  height: 30%;
   background-size: cover;
   background-position: center;
   display: inline-block;
@@ -96,14 +96,16 @@ p {
   position: relative;
   left: 10vw;
 }
-.intro-grid, .place-grid {
+.intro-grid, .place-grid, .health-grid {
   display: grid;
   width: 90vw;
-  padding: 5vw; 
+  padding: 2vw; 
+  padding-left: 5vw; 
+  padding-right: 5vw; 
   grid-template-columns: 12vw 76vw;
   font-size: 4.2vw;
 }
-.place-grid {
+.place-grid , .health-grid{
   border-bottom-color: #bdbdbdc2;
   border-bottom-style: solid;
   border-bottom-width: 0.3vw;
