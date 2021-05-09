@@ -182,11 +182,16 @@ p {
 	grid-template-rows: repeat(5, 4vw);
 	align-items: center;
 }
-.score-bar {
+.score-bar, .score-bar-count {
+  position: relative;
 	background-color: #EFEFEF;
 	width: 100%;
 	height: 1.1vw;
 	border-radius: 26vw;
+}
+.score-bar-count {
+  top: -1vw;
+  background-color: #FF8B2C;
 }
 .com-border .user-comment{
   padding: 1vw;
