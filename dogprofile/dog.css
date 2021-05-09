@@ -192,6 +192,7 @@ p {
 .score-bar-count {
   top: -1vw;
   background-color: #FF8B2C;
+  width: 100%;
 }
 .com-border .user-comment{
   padding: 1vw;

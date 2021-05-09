@@ -11,34 +11,7 @@ $(function(){
 		score:		""
 	}, () => {});
 
-	/* Load in user data first */
-	$.post("./load_users", (user_json) => {
-		user_data = JSON.parse(user_json);
-
-		/* Sum of score */
-		let sum = 0;
-		$.each(user_data, function(index, val) {
-			sum += val.score;
-		});
-		
-		/* Total users */
-		let user_len = Object.keys(user_data).length;
-		document.getElementById("review-count").innerHTML = `(${user_len})`;
-
-		/* Average score */
-		let avg_score = Math.round(10 *　sum / user_len) / 10;
-		let obj = document.getElementsByClassName("average-score");
-		for (let i = 0; i < obj.length; ++i) {
-  			obj[i].innerHTML = avg_score;
-		}
-
-		/* Hearts */
-		for (let i = 0; i < avg_score; ++i) {
-			heart = `.info-heart:nth-child(${i+1})`;
-			$(heart).attr('src','./image/red_heart.png');
-		}
-		
-	});
+	load_user(); // Load in user data first
 
 	/* 
 	 * The 1 sec delay is essential for high success rate
@@ -190,5 +163,43 @@ function load_image() {
 			image_id = parseInt(index, 10);
 			concat_image(image_id, pic, val.photo);
 		});
+	});
+}
+
+function load_user() {
+	$.post("./load_users", (user_json) => {
+		user_data = JSON.parse(user_json);
+
+		/* Sum of score */
+		let sum = 0;
+		let score = [0,0,0,0,0,0];
+		$.each(user_data, function(index, val) {
+			sum += val.score;
+			++score[val.score];
+		});
+
+		/* Score bars */
+		let obj = document.getElementsByClassName("score-bar-count");
+		for (let i = 1; i <= obj.length; ++i) {
+			obj[obj.length-i].style.width = `${score[i] * 100 / Math.max(...score)}%`;
+		}
+		
+		/* Total users */
+		let user_len = Object.keys(user_data).length - score[0];
+		document.getElementById("review-count").innerHTML = `(${user_len})`;
+
+		/* Average score */
+		let avg_score = Math.round(10 *　sum / user_len) / 10;
+		obj = document.getElementsByClassName("average-score");
+		for (let i = 0; i < obj.length; ++i) {
+  			obj[i].innerHTML = avg_score;
+		}
+
+		/* Hearts */
+		for (let i = 0; i < avg_score; ++i) {
+			heart = `.info-heart:nth-child(${i+1}), .review-heart:nth-child(${i})`;
+			$(heart).attr('src','./image/red_heart.png');
+		}
+		
 	});
 }

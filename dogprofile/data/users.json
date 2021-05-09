@@ -2,11 +2,46 @@
     "00000000": {
         "name": "user000",
         "profile": "image/Ellipse_303.png",
-        "score": 3
+        "score": 4
     },
     "2056833377791449": {
         "name": "陳彥勳",
         "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2056833377791449&height=50&width=50&ext=1623114253&hash=AeR3otGFIVu1FxMODfc",
         "score": 5
+    },
+    "001": {
+        "name": "user001",
+        "profile": "image/Ellipse_303.png",
+        "score": 4
+    },
+    "002": {
+        "name": "user002",
+        "profile": "image/Ellipse_303.png",
+        "score": 5
+    },
+    "003": {
+        "name": "user003",
+        "profile": "image/Ellipse_303.png",
+        "score": 5
+    },
+    "004": {
+        "name": "user004",
+        "profile": "image/Ellipse_303.png",
+        "score": 5
+    },
+    "005": {
+        "name": "user005",
+        "profile": "image/Ellipse_303.png",
+        "score": 5
+    },
+    "006": {
+        "name": "user006",
+        "profile": "image/Ellipse_303.png",
+        "score": 3
+    },
+    "007": {
+        "name": "user007",
+        "profile": "image/Ellipse_303.png",
+        "score": 1
     }
 }
