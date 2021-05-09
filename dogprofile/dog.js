@@ -1,6 +1,7 @@
 var hide_class
 const container_list = ['.intro-container', '.pic-container', '.comment-container', '.report-container']
 const scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
+var SCORE = 0;
 
 //id: from, to
 $('.start-button').click(function() {
@@ -75,16 +76,15 @@ $('.XXicon').click(function() {
   window.location.assign('../');
 })
 
-var score
 $('.heart').click(function() {
   $('.pop-com').fadeIn();
 
-  score = $(this).attr('id')[1];
-  console.log(`score: ${score}`);
+  SCORE = $(this).attr('id')[1];
+  console.log(`score: ${SCORE}`);
   for (i=1; i<=5; i++){
     //heart in comment
     hid = `.heart:nth-child(${i+1})`;
-    if(i<=score){
+    if(i<=SCORE){
     $(hid).attr('src','./image/red_heart.png');
     }
     else {
@@ -102,17 +102,16 @@ $('.write-com').click(function() {
   $('.comment-container').hide();
   $('.writing-container').show();
   
-  console.log(`score: ${score}`);
   for (i=1; i<=5; i++){
-    //heart in writing
     hid = `.w-heart:nth-child(${i})`;
-    if(i<=score){
-    $(hid).attr('src','./image/red_heart.png');
+    if(i<=SCORE){
+      // console.log($(hid).attr('id'));
+      $(hid).attr('src','./image/red_heart.png');
     }
     else {
-    $(hid).attr('src','./image/heart.png');
+      $(hid).attr('src','./image/heart.png');
     }
-  };
+  }
 });
 
 $('#writing-cancel-btn').click(function() {
@@ -124,11 +123,11 @@ $('#writing-cancel-btn').click(function() {
 });
 
 $('.w-heart').click(function() {
-  score = $(this).attr('id')[2];
-  console.log(`score: ${score}`);
+  SCORE = $(this).attr('id')[2];
+  console.log(`score: ${SCORE}`);
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
-    if(i<=score){
+    if(i<=SCORE){
     $(hid).attr('src','./image/red_heart.png');
     }
     else {

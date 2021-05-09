@@ -68,14 +68,15 @@
       function testAPI() {
         console.log('Welcome!  Fetching your information.... ')
         FB.api('/me', "GET", { fields: 'name, picture' }, function(response) {
-          console.log(`Successful login for: ${response["name"]}`)
-          let user = response["name"]
-          let pic = btoa(response["picture"]["data"]["url"])
+          console.log(`Successful login for: ${response.name}`)
+          let id = response.id;
+          let user = response.name
+          let pic = btoa(response.picture.data.url)
           console.log(response)
           document.getElementById('status').innerHTML = `Thanks for logging in, ${user}!`
 
           setTimeout(function() {
-            window.location.assign(`https://hzaybr.github.io/uidd2020/?user=${user}&pic=${pic}`);
+            window.location.assign(`https://hzaybr.github.io/uidd2020/?id=${id}&user=${user}&pic=${pic}`);
           },2000);
         
         })

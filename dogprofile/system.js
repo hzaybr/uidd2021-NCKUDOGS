@@ -1,52 +1,84 @@
-let cmt_cnt = 0;
-let img_cnt = 0;
-
-function concatComment(user, comment) {
-	$(`<div class=\"com-border\" id=${user}>`).prependTo('.comments');
-	let txt = "<div class=\"heart-grid\">";
-	txt += "<img class=\"avatar\" src=\"image/Ellipse 303.png\"></img>";
-	txt += `<p>${user}</p>`;
-	txt += "</div>";
-	txt += `<p>${comment}</p>`;
-	$(`#${user}`).html(txt);
-}
+let comment_id = 0;
+let image_id = 0;
+let user_data = "";
 
 $(function(){
 
-    $.post("./load_comments", (cmt_json) => {
-        $.each(JSON.parse(cmt_json), function(index, val) {
-            ++cmt_cnt;
-			concatComment(index, val);
-        });
+	$.post('./update_users', {
+		id: 		USER_ID,
+		name:		USER_NAME,
+		profile:	PROFILE_PIC,
+		score:		""
+	}, () => {});
+
+	/* Load in user data first */
+	$.post("./load_users", (user_json) => {
+		user_data = JSON.parse(user_json);
+
+		/* Sum of score */
+		let sum = 0;
+		$.each(user_data, function(index, val) {
+			sum += val.score;
+		});
+		
+		/* Total users */
+		let user_len = Object.keys(user_data).length;
+		document.getElementById("review-count").innerHTML = `(${user_len})`;
+
+		/* Average score */
+		let avg_score = Math.round(10 *　sum / user_len) / 10;
+		let obj = document.getElementsByClassName("average-score");
+		for (let i = 0; i < obj.length; ++i) {
+  			obj[i].innerHTML = avg_score;
+		}
+
+		/* Hearts */
+		for (let i = 0; i < avg_score; ++i) {
+			heart = `.info-heart:nth-child(${i+1})`;
+			$(heart).attr('src','./image/red_heart.png');
+		}
+		
 	});
 
-    $.post("./load_images", (img_json) => {
-        $.each(JSON.parse(img_json), function(index, val) {
-            ++img_cnt;
-			$(`<img src=\"\" id=${index} width=100%/>`).prependTo(".pic-grid");
-            document.getElementById(index.toString()).src = val;
-        });
-    });
+	/* 
+	 * The 1 sec delay is essential for high success rate
+	 * of comment being loaded correctly.
+	 * I tried using Promise to ensure executing order but doesn't work.
+	 */
+	setTimeout(load_comment, 1000);
+	setTimeout(load_image, 1000);
 
-	$('.c-p-button').click(function() {
 
-		if ($('.commentBox').val().length == 0)
-			return;
+	$('#post-btn, #writing-post-btn').click(function() {
 
-		var comment = $('.commentBox').val();
-		concatComment(`user${++cmt_cnt}`, comment);
-		$('.commentBox').val('');
+		// if ($('.commentBox').val().length == 0)
+		// 	return;
+		
+		user_data[USER_ID].score = SCORE;
+		concat_comment(++comment_id, USER_ID, $('.commentBox').val(), "");
 
-		$.post('./post_comment', {
-			id: `user${cmt_cnt}`,
-			content: comment,
+		$.post('./update_users', {
+			id: 		USER_ID,
+			name:		USER_NAME,
+			profile:	PROFILE_PIC,
+			score:		SCORE
 		}, () => {});
 
+		$.post('./post_comment', {
+			comment_id: comment_id,
+			user_id:	USER_ID,
+			comment:	$('.commentBox').val(),
+			photo:		null
+		}, () => {});
+
+		$('.commentBox').val('');
 		$('.comment-container').fadeIn();
 		$('.writing-container').hide();
 		$('.w-heart').attr('src','./image/heart.png');
 		$('.heart').attr('src','./image/heart.png');
 		$('.pop-com').hide();
+
+		reload_comment();
 	});
 
 });
@@ -59,13 +91,12 @@ function readFile() {
         var FR = new FileReader();
         
         FR.addEventListener("load", function(e) {
-			++img_cnt;
-			$(`<img src=\"\" id=${img_cnt} width=100%/>`).prependTo(".pic-grid");
-            document.getElementById(img_cnt.toString()).src = e.target.result;
+			concat_image(++image_id, PROFILE_PIC, e.target.result);
 
             $.post("./upload_image", {
-                id: img_cnt,
-                image: e.target.result
+                image_id: image_id,
+				user_id: USER_ID,
+                photo: e.target.result
             }, () => {});
         });
     
@@ -74,3 +105,90 @@ function readFile() {
 }
     
 document.getElementById("fl_file").addEventListener("change", readFile);
+
+function concat_comment(comment_id, user_id, comment, photo) {
+
+	let id = "comment_" + comment_id;
+	let user = user_data[user_id];
+
+	$(`<div class=\"user-comment\" id=${id}>`).prependTo('.comments');
+	let txt = "";
+
+	/* User name and profile pic */
+	txt += 	"<div class=\"w-user-bar\">";
+	txt += 		`<img class=\"avatar\" src=${user.profile}>`;
+	txt += 		`<div class=\"username\" style=\"display: block;\">${user.name}</div>`;
+	txt += 	"</div>";
+
+	/* User score */
+	txt += 	"<div class=\"comment-score\">"
+	let i;
+	for (i = 0; i < user.score; ++i) {
+		txt += "<img style=\"width:5%\" src=\"./image/red_heart.png\">"
+	}
+	for(; i < 5; ++i) {
+		txt +=  "<img style=\"width:5%\" src=\"./image/gray_heart.png\">"
+	}
+    txt +=	"</div>"
+
+	/* User comment */
+	txt +=	`<div class=\"comment\">${comment}</div>`;
+	
+	$(`#${id}`).html(txt);
+}
+
+function load_comment() {
+	$.post("./load_comments", (cmt_json) => {
+		
+		/* load the scores without review */
+		// let score_only = 0;
+		// $.each(user_data, function(index, val) {
+		// 	if (val.hasOwnProperty("score_only")) {
+		// 		concat_comment(score_only++, index, "", "");
+		// 	}
+		// });
+
+		/*
+		 * To ensure all [comment_id] are unique,
+		 * the newer comment will always have the bigger [comment_id].
+		 */
+		$.each(JSON.parse(cmt_json), function(index, val) {
+			// comment_id = parseInt(index, 10) + score_only;
+			comment_id = parseInt(index, 10);
+			concat_comment(comment_id, val.user, val.comment, val.photo);
+		});
+		
+	});
+}
+
+function reload_comment() {
+	var x = document.getElementsByClassName("user-comment");
+	for(var i = x.length - 1; i >= 0; i--) {
+		x[i].parentNode.removeChild(x[i]);
+	}
+
+	load_comment();
+}
+
+function concat_image(image_id, user_pic, photo) {
+	let id = "image_" + image_id;
+	$(`<span id=${id}>`).prependTo(".pic-grid");
+
+	let txt = "";
+	txt += 	"<div class=\"user-pic-for-image\">";
+	txt += 		`<img class=\"avatar\" src=${user_pic} width=100%>`;
+	txt += 	"</div>";
+	txt += 	`<img src=${photo} width=100%>`;
+
+	$(`#${id}`).html(txt);
+}
+
+function load_image() {
+	$.post("./load_images", (img_json) => {
+		$.each(JSON.parse(img_json), function(index, val) {
+			let pic = user_data[val.user].profile;
+			image_id = parseInt(index, 10);
+			concat_image(image_id, pic, val.photo);
+		});
+	});
+}

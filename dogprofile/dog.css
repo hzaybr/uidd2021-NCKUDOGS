@@ -131,6 +131,9 @@ p {
   width: 100vw;
   justify-content: space-evenly;
 }
+.user-pic-for-image {
+	position: absolute;
+  }
 .pic-border {
   margin-top: 5vw;
   width: 100%;
@@ -185,7 +188,7 @@ p {
 	height: 1.1vw;
 	border-radius: 26vw;
 }
-.com-border {
+.com-border .user-comment{
   padding: 1vw;
   border-bottom-color: #bdbdbdc2;
   border-bottom-style: solid;
@@ -203,6 +206,9 @@ p {
 }
 .heart, .avatar, .w-heart {
   width: 100%;
+}
+.avatar {
+	border-radius: 50%;
 }
 .pop-com {
   width: 100%;
@@ -340,6 +346,15 @@ section button:disabled {
   -webkit-overflow-scrolling: touch;
   height: 300px;
 }
+.comment-score {
+	width: 50%;
+	display: inline;
+	padding-left: 6vw;
+  }
+  .comment {
+	padding-left: 6vw;
+	padding-right: 6vw;
+  }
 
 .clearfix {
   clear: both;

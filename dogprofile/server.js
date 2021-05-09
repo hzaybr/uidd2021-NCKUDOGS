@@ -31,8 +31,14 @@ function readJSON(path){
     })
 }
 
-let cmt_file = "./data/comments.json";
-let img_file = "./data/images.json";
+let cmt_file  = "./data/comments.json";
+let img_file  = "./data/images.json";
+let user_file = "./data/users.json";
+
+/* Send user data json files to other scripts */
+app.post("/load_users", async (req, resp) => {
+    resp.send(await readJSON(user_file));
+});
 
 /* Load comments when entering site */
 app.post("/load_comments", async (req, resp) => {
@@ -44,13 +50,46 @@ app.post("/load_images", async (req, resp) => {
     resp.send(await readJSON(img_file));
 });
 
+/* Update user data */
+app.post("/update_users", async (req, resp) => {
+    const jsonObj = JSON.parse(await readJSON(user_file));
+
+    let score = 0;
+    if (req.body.score != "") {
+        score = parseInt(req.body.score, 10);
+    }
+    else if (jsonObj[req.body.id] != undefined) {
+        score = jsonObj[req.body.id].score;
+    }
+
+    jsonObj[req.body.id] = {
+        "name":     req.body.name,
+        "profile":  req.body.profile,
+        "score":    score
+    };
+    
+    /* Write back to JSON */
+    fs.writeFile(user_file, JSON.stringify(jsonObj, null, 4), (err) => {
+        if(err){
+            console.log("Write file failed: " + err);
+        }
+    });
+
+    resp.send(await readJSON(user_file));
+});
+
 /* Show the new comment and store it in JSON */
 app.post("/post_comment", async (req, resp) => {
-    const obj = JSON.parse(await readJSON(cmt_file));
-    obj[req.body.id] = req.body.content;
+    const jsonObj = JSON.parse(await readJSON(cmt_file));
+
+    jsonObj[req.body.comment_id] = {
+        "user":     req.body.user_id,
+        "comment":  req.body.comment,
+        "photo":    req.body.photo
+    };
 
     /* Write back to JSON */
-    fs.writeFile(cmt_file, JSON.stringify(obj, null, 4), (err) => {
+    fs.writeFile(cmt_file, JSON.stringify(jsonObj, null, 4), (err) => {
         if(err){
             console.log("Write file failed: " + err);
         }
@@ -59,11 +98,14 @@ app.post("/post_comment", async (req, resp) => {
 
 /* Show the new image and store it in JSON */
 app.post("/upload_image", async (req, resp) => {
-    const obj = JSON.parse(await readJSON(img_file));
-    obj[req.body.id] = req.body.image;
+    const jsonObj = JSON.parse(await readJSON(img_file));
+    jsonObj[req.body.image_id] = {
+        "user": req.body.user_id,
+        "photo": req.body.photo
+    }
 
     /* Write back to JSON */
-    fs.writeFile(img_file, JSON.stringify(obj, null, 4), (err) => {
+    fs.writeFile(img_file, JSON.stringify(jsonObj, null, 4), (err) => {
         if(err){
             console.log("Write file failed: " + err);
         }
