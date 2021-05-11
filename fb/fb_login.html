@@ -82,6 +82,7 @@
             result += characters.charAt(Math.floor(Math.random() * characters.length));
           }
           result += window.btoa(encodeURIComponent(`id=${id}&user=${user}&pic=${pic}`));
+          result += "&";
 
           setTimeout(function() {
             window.location.assign(`https://hzaybr.github.io/uidd2020/index.html?${result}`);
