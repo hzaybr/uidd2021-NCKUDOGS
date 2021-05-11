@@ -12,10 +12,12 @@ var route_marker;
 var route_uluru = {lat: current_lat, lng: current_lng};
 var more_marker;
 var more_uluru = {lat: current_lat, lng: current_lng};
-var infowincontent = '<div style="width:200px" id="infowindow">CONTENT <button onclick="route(this.id)" id="route_btn">路徑</button><button onclick="camera()" id="camera_btn">拍照</button><button onclick="more()" id="more_btn">更多</button></div>';
+// var infowincontent = '<div style="width:200px" id="infowindow">CONTENT <button onclick="route(this.id)" id="route_btn">路徑</button><button onclick="camera()" id="camera_btn">拍照</button><button onclick="more()" id="more_btn">更多</button></div>';
+var infowincontent = '<div style="width:200px" id="infowindow">CONTENT</div>';
 var Markers=[];
 var Infowincontents=[];
 var count = -1;
+var target_num;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
 var position = {
   "1":{
@@ -158,6 +160,41 @@ function initMap() {
         scaledSize: new google.maps.Size(38, 38)
       }
     });
+    route_marker.addListener('click',function(){
+      if(routemode){
+        directionsDisplay.setDirections({routes: []});
+      }else{
+        // add route funtion
+        directionsDisplay.setMap(map);
+        var choose_num = target_num;
+        console.log(choose_num)
+        var target_lat = Markers[choose_num].getPosition().lat();;
+        var target_lng = Markers[choose_num].getPosition().lng();;
+        var request = {
+          origin: { lat: current_lat, lng: current_lng },
+          destination: { lat: target_lat, lng: target_lng },
+          travelMode: 'WALKING'
+        };
+        directionsService.route(request, function (result, status) {
+          if (status == 'OK') {
+              console.log(result.routes[0].legs[0].steps);
+              directionsDisplay.setDirections(result);
+          } else {
+              console.log(status);
+          }
+        });
+      }
+      routemode = !routemode;
+    });
+    camera_marker.addListener('click',function(){
+      //add camera function
+    });
+    more_marker.addListener('click',function(){
+      var user_name = $('.username').attr('id')
+      var address_base64 = $('.address_base64').attr('id')
+      console.log(`map name: ${user_name}`);
+      window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`);
+    });
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -165,19 +202,20 @@ function addMarker(icon_path,location) {
     draggable: false,
     animation: google.maps.Animation.DROP,
     position: location,
+    title: ''+count,
     map: map,
     icon:{
       url:icon_path,
       scaledSize: new google.maps.Size(62, 77)
     } 
     });
-  var new_infowincontent = infowincontent.replace('id="infowindow"','id="'+count+'"');
-  new_infowincontent = new_infowincontent.replace('id="route_btn"','id="'+'route_'+count+'"');
-  new_infowincontent = new_infowincontent.replace('id="camera_btn"','id="'+'camera_'+count+'"');
-  new_infowincontent = new_infowincontent.replace('id="more_btn"','id="'+'more_'+count+'"');
+  // var new_infowincontent = infowincontent.replace('id="infowindow"','id="'+count+'"');
+  // new_infowincontent = new_infowincontent.replace('id="route_btn"','id="'+'route_'+count+'"');
+  // new_infowincontent = new_infowincontent.replace('id="camera_btn"','id="'+'camera_'+count+'"');
+  // new_infowincontent = new_infowincontent.replace('id="more_btn"','id="'+'more_'+count+'"');
   // console.log(infowincontent)
   var infowindow = new google.maps.InfoWindow({
-    content: new_infowincontent.replace('CONTENT',dog_name[count])
+    content: infowincontent.replace('CONTENT',dog_name[count])
   });
   
   marker.addListener('click', function() {
@@ -187,6 +225,8 @@ function addMarker(icon_path,location) {
     camera_marker.setPosition(camera_uluru);
     more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
     more_marker.setPosition(more_uluru);
+    target_num = parseInt(marker.getTitle());
+    console.log(target_num)
     if(currentInfoWindow != '') 
     {    
       currentInfoWindow.close();   
@@ -258,42 +298,42 @@ $( "#mg1 img" ).click(function() {
   markClick();
 });
 
-function route(id_str){
-  if(routemode){
-    directionsDisplay.setDirections({routes: []});
-  }else{
-    // add route funtion
-    directionsDisplay.setMap(map);
-    var choose_num = parseInt(id_str.slice(6,id_str.length));
-    console.log(choose_num)
-    var target_lat = Markers[choose_num].getPosition().lat();;
-    var target_lng = Markers[choose_num].getPosition().lng();;
-    var request = {
-      origin: { lat: current_lat, lng: current_lng },
-      destination: { lat: target_lat, lng: target_lng },
-      travelMode: 'WALKING'
-    };
-    directionsService.route(request, function (result, status) {
-      if (status == 'OK') {
-          console.log(result.routes[0].legs[0].steps);
-          directionsDisplay.setDirections(result);
-      } else {
-          console.log(status);
-      }
-    });
-  }
-  routemode = !routemode;
-}
-function camera(){
-  // add camera function
-}
+// function route(id_str){
+//   if(routemode){
+//     directionsDisplay.setDirections({routes: []});
+//   }else{
+//     // add route funtion
+//     directionsDisplay.setMap(map);
+//     var choose_num = parseInt(id_str.slice(6,id_str.length));
+//     console.log(choose_num)
+//     var target_lat = Markers[choose_num].getPosition().lat();;
+//     var target_lng = Markers[choose_num].getPosition().lng();;
+//     var request = {
+//       origin: { lat: current_lat, lng: current_lng },
+//       destination: { lat: target_lat, lng: target_lng },
+//       travelMode: 'WALKING'
+//     };
+//     directionsService.route(request, function (result, status) {
+//       if (status == 'OK') {
+//           console.log(result.routes[0].legs[0].steps);
+//           directionsDisplay.setDirections(result);
+//       } else {
+//           console.log(status);
+//       }
+//     });
+//   }
+//   routemode = !routemode;
+// }
+// function camera(){
+//   // add camera function
+// }
 
-function more(){
-  var user_name = $('.username').attr('id')
-  var address_base64 = $('.address_base64').attr('id')
-  console.log(`map name: ${user_name}`);
-  window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`);
-}
+// function more(){
+//   var user_name = $('.username').attr('id')
+//   var address_base64 = $('.address_base64').attr('id')
+//   console.log(`map name: ${user_name}`);
+//   window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`);
+// }
 
 var user_name
 var address_base64
