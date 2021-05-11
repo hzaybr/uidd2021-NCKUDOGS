@@ -1,3 +1,7 @@
+/*
+$('.address_base64').attr('src','data:image/png;base64,' + this.attr('id'));
+*/
+
 var listDisplay = false;
 var searchDisplay = false;
 var markDisplay = false;
