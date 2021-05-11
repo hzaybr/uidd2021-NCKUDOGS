@@ -417,6 +417,7 @@ $('.navig').click(function() {
 });
 
 //navigate from dogprofile page
+/*
 $(document).ready(function() {
   user_name = $('.username').attr('id')
   address_base64 = $('.address_base64').attr('id')
@@ -434,4 +435,5 @@ $(document).ready(function() {
      }, 300);
 
    };
-});
+ });
+ */
