@@ -19,7 +19,7 @@ var Markers=[];
 var Infowincontents=[];
 var count = -1;
 var target_num;
-var redir_url = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(6).slice(0,-1);
+var redir_url = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(6).slice(0,-1);;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
 var position = {
   "1":{
@@ -412,11 +412,11 @@ var now_address
 
 $('.navig').click(function() {
   var dog_page_route = `route_${$(this).attr('id')}`;
-  window.location.assign("https://hzaybr.github.io/uidd2020/index.html"+redir_url+"&navig="+dog_page_route);
+  window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url+"&navig="+dog_page_route);
 });
 
 $('.XXicon').click(function() {
-  window.location.assign("https://hzaybr.github.io/uidd2020/index.html"+redir_url+"&");
+  window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url+"&");
 });
 
 //navigate from dogprofile page

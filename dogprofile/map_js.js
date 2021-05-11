@@ -412,11 +412,11 @@ var now_address
 
 $('.navig').click(function() {
   var dog_page_route = `route_${$(this).attr('id')}`;
-  window.location.assign("https://hzaybr.github.io/uidd2020/index.html"+redir_url+"&navig="+dog_page_route);
+  window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url+"&navig="+dog_page_route);
 });
 
 $('.XXicon').click(function() {
-  window.location.assign("https://hzaybr.github.io/uidd2020/index.html"+redir_url+"&");
+  window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url+"&");
 });
 
 //navigate from dogprofile page
