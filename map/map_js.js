@@ -14,7 +14,7 @@ var route_uluru = {lat: current_lat, lng: current_lng};
 var more_marker;
 var more_uluru = {lat: current_lat, lng: current_lng};
 // var infowincontent = '<div style="width:200px" id="infowindow">CONTENT <button onclick="route(this.id)" id="route_btn">路徑</button><button onclick="camera()" id="camera_btn">拍照</button><button onclick="more()" id="more_btn">更多</button></div>';
-var infowincontent = '<div style="width:200px" id="infowindow">CONTENT</div>';
+var infowincontent = '<div style="width:30vw" id="infowindow"><p style="text-align:center; margin:0px;width : 30vw;">CONTENT</p><img src="./map/love_icon/Group 420@3x.png" style="width : 30vw;"></div>';
 var Markers=[];
 var Infowincontents=[];
 var count = -1;
