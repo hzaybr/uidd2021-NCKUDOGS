@@ -84,7 +84,7 @@ body {
   */
 }
 
-#profile-avatar {
+.profile-avatar {
   position: absolute;
   width: 31.73vw;
   top: 9.86vw;
