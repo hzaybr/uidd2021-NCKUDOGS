@@ -73,8 +73,7 @@ $('.arrow').click(function() {
   }, 150);
 });
 $('.XXicon').click(function() {
-  window.location.assign('../');
-})
+  window.history.back();
 
 $('.heart').click(function() {
   $('.pop-com').fadeIn();
