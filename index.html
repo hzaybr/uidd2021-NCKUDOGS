@@ -26,10 +26,11 @@
   <!-- home page(map) -->
   <div class="home-page">
     <div class="username"></div>
+    <!--div class="username"></div-->
     <!--user_name = $('.username').attr('id') -->
-    <div class="address_base64"></div>
+    <!--div class="address_base64"></div-->
     <!--address = $('.address_base64').attr('id') -->
-
+    
 				<div id="map"></div>
         <img src="./ui/image/dog_icon_list.png" class="icon" id="list-icon" title="More">
         <div class="list-grid">
@@ -51,9 +52,10 @@
           </div>
         </div>
         <img src="./ui/image/dog_icon_profile.png" class="icon" id="profile-icon" title="profile">
-				<div class="profile">
-					<img id="user-picture" src="./aboutus_appv/image/Group 326@3x.png"></img>
-					<p id="user-name">汪汪</p>
+        <div class="profile">
+          <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
+          <div class="username" id="汪汪"></div>
+
           <div id="user-title">
             <p>狗狗好朋友</p>
           </div>
@@ -67,7 +69,7 @@
 						<div>
               <p class="contr-title">評論</p>
             </div>
-						<div>
+            <div>
               <p class="contr-title">照片</p>
             </div>
  						<div>
@@ -658,6 +660,13 @@
     <script src="./ui/ui.js"></script>
     <script src="./ui/user.js"></script>
     <script src="./aboutus_appv/about.js"></script>
+		<script>
+      $(document).ready(function() {
+        var user_name = $('.username').attr('id');
+        $('.username').html(user_name).show();
+        console.log(`show name ${user_name}`);
+      })
+    </script>
   </body>
 </html>
 

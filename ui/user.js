@@ -13,12 +13,13 @@ var USER_NAME = address.match(/&user=(\W|\w|\z)*&pic=/)[0].slice(6).slice(0,-5);
 USER_NAME = decodeURI(USER_NAME);
 console.log(`User name: ${USER_NAME}`);
 $('.username').attr('id',USER_NAME);
+// $('.username').html(this.atrr('id')).show();
 
 /* Get user profile pic through url */
 var PROFILE_PIC = atob(address.match(/&pic=(\W|\w|\z)*/)[0].slice(5));
 PROFILE_PIC = decodeURI(PROFILE_PIC);
 console.log(`Profile pic url: ${PROFILE_PIC}`);
-let avatars = document.getElementsByClassName('avatar');
+let avatars = document.getElementsByClassName('profile-avatar');
 for (let i = 0; i < avatars.length; ++i) {
   avatars[i].src = PROFILE_PIC;
 }
