@@ -198,6 +198,7 @@ function initMap() {
       var user_name = $('.username').attr('id')
       var address_base64 = $('.address_base64').attr('id')
       console.log(`map name: ${user_name}`);
+      console.log(redir_url);
       window.location.assign(`http://luffy.ee.ncku.edu.tw:15038/mixiang.html?${redir_url}`);
     });
     route_marker.setVisible(false);
