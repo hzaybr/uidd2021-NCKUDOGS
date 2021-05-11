@@ -2,6 +2,7 @@ var map;
 var directionsService;
 var directionsDisplay;
 var routemode = false;
+var btnshow = false;
 var current_lat = 23;
 var current_lng = 120.2;
 var ownermarker;
@@ -195,6 +196,10 @@ function initMap() {
       console.log(`map name: ${user_name}`);
       window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`);
     });
+    route_marker.setVisible(false);
+    camera_marker.setVisible(false);
+    more_marker.setVisible(false);
+    btnshow = false;
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -207,7 +212,8 @@ function addMarker(icon_path,location) {
     icon:{
       url:icon_path,
       scaledSize: new google.maps.Size(62, 77)
-    } 
+    },
+    zIndex:1
     });
   // var new_infowincontent = infowincontent.replace('id="infowindow"','id="'+count+'"');
   // new_infowincontent = new_infowincontent.replace('id="route_btn"','id="'+'route_'+count+'"');
@@ -219,21 +225,53 @@ function addMarker(icon_path,location) {
   });
   
   marker.addListener('click', function() {
-    route_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()-0.0007};
-    route_marker.setPosition(route_uluru);
-    camera_uluru = {lat: marker.getPosition().lat()-0.0005, lng: marker.getPosition().lng()};
-    camera_marker.setPosition(camera_uluru);
-    more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
-    more_marker.setPosition(more_uluru);
-    target_num = parseInt(marker.getTitle());
-    console.log(target_num)
-    if(currentInfoWindow != '') 
-    {    
+    if(currentInfoWindow != ''){
       currentInfoWindow.close();   
-      currentInfoWindow = '';   
-    }   
-    infowindow.open(map, marker);
-    currentInfoWindow = infowindow; 
+      currentInfoWindow = '';
+      route_marker.setVisible(false);
+      camera_marker.setVisible(false);
+      more_marker.setVisible(false);
+      // btnshow = false;
+    }
+    // if(!btnshow){
+    //   route_marker.setVisible(true);
+    //   camera_marker.setVisible(true);
+    //   more_marker.setVisible(true);
+    //   route_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()-0.0007};
+    //   route_marker.setPosition(route_uluru);
+    //   camera_uluru = {lat: marker.getPosition().lat()-0.0005, lng: marker.getPosition().lng()};
+    //   camera_marker.setPosition(camera_uluru);
+    //   more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
+    //   more_marker.setPosition(more_uluru);
+    //   target_num = parseInt(marker.getTitle());
+    //   console.log(target_num)
+    //   infowindow.open(map, marker);   
+    //   currentInfoWindow = infowindow;
+    //   btnshow = true;
+    // }else{
+    //   if(parseInt(marker.getTitle())!=)
+    //   btnshow = false;
+    // }
+    if(btnshow&&parseInt(marker.getTitle())==target_num){
+      btnshow = false;
+    }else{
+      route_marker.setVisible(true);
+      camera_marker.setVisible(true);
+      more_marker.setVisible(true);
+      route_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()-0.0007};
+      route_marker.setPosition(route_uluru);
+      camera_uluru = {lat: marker.getPosition().lat()-0.0005, lng: marker.getPosition().lng()};
+      camera_marker.setPosition(camera_uluru);
+      more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
+      more_marker.setPosition(more_uluru);
+      target_num = parseInt(marker.getTitle());
+      console.log(target_num)
+      infowindow.open(map, marker);   
+      currentInfoWindow = infowindow;
+      btnshow = true;
+    }
+    
+    
   });
   Markers.push(marker);
   Infowincontents.push(infowindow);
@@ -268,6 +306,16 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   map.setCenter(uluru);
   map.setZoom(17);
   var infowindow = Infowincontents[choose_num];
+  route_marker.setVisible(true);
+  camera_marker.setVisible(true);
+  more_marker.setVisible(true);
+  route_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0002, lng: Markers[choose_num].getPosition().lng()-0.0007};
+  route_marker.setPosition(route_uluru);
+  camera_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0005, lng: Markers[choose_num].getPosition().lng()};
+  camera_marker.setPosition(camera_uluru);
+  more_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0002, lng: Markers[choose_num].getPosition().lng()+0.0007};
+  more_marker.setPosition(more_uluru);
+  target_num = parseInt(Markers[choose_num].getTitle());
   if(currentInfoWindow != '')   
   {    
     currentInfoWindow.close();   
@@ -275,7 +323,7 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   }   
   infowindow.open(map, Markers[choose_num]);   
   currentInfoWindow = infowindow;
-  
+  // btnshow = true;
 });
 
 $( "#mg1 img" ).click(function() {
@@ -298,6 +346,15 @@ $( "#mg1 img" ).click(function() {
   markClick();
 });
 
+// $('#map').click(function(){
+//   if(currentInfoWindow != ''){
+//     currentInfoWindow.close();   
+//     currentInfoWindow = '';
+//     route_marker.setVisible(false);
+//     camera_marker.setVisible(false);
+//     more_marker.setVisible(false);
+//   }
+// })
 // function route(id_str){
 //   if(routemode){
 //     directionsDisplay.setDirections({routes: []});
