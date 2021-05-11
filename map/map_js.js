@@ -6,6 +6,12 @@ var current_lat = 23;
 var current_lng = 120.2;
 var ownermarker;
 var owner_uluru = {lat: current_lat, lng: current_lng};
+var camera_marker;
+var camera_uluru = {lat: current_lat, lng: current_lng};
+var route_marker;
+var route_uluru = {lat: current_lat, lng: current_lng};
+var more_marker;
+var more_uluru = {lat: current_lat, lng: current_lng};
 var infowincontent = '<div style="width:200px" id="infowindow">CONTENT <button onclick="route(this.id)" id="route_btn">路徑</button><button onclick="camera()" id="camera_btn">拍照</button><button onclick="more()" id="more_btn">更多</button></div>';
 var Markers=[];
 var Infowincontents=[];
@@ -128,6 +134,30 @@ function initMap() {
       addMarker(marker_path,{lat: position[i].lat, lng: position[i].lng})
     }
     findposition(ownermarker);
+    route_marker = new google.maps.Marker({
+      position: route_uluru,
+      map: map,
+      icon:{
+        url:'./map/button_icon/dog_icon_route.png',
+        scaledSize: new google.maps.Size(38, 38)
+      }
+    });
+    camera_marker = new google.maps.Marker({
+      position: camera_uluru,
+      map: map,
+      icon:{
+        url:'./map/button_icon/dog_icon_camera.png',
+        scaledSize: new google.maps.Size(38, 38)
+      }
+    });
+    more_marker = new google.maps.Marker({
+      position: more_uluru,
+      map: map,
+      icon:{
+        url:'./map/button_icon/dog_icon_more.png',
+        scaledSize: new google.maps.Size(38, 38)
+      }
+    });
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -138,7 +168,7 @@ function addMarker(icon_path,location) {
     map: map,
     icon:{
       url:icon_path,
-      scaledSize: new google.maps.Size(53, 73)
+      scaledSize: new google.maps.Size(62, 77)
     } 
     });
   var new_infowincontent = infowincontent.replace('id="infowindow"','id="'+count+'"');
@@ -151,7 +181,12 @@ function addMarker(icon_path,location) {
   });
   
   marker.addListener('click', function() {
-    // currentInfoWindow.close();
+    route_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()-0.0007};
+    route_marker.setPosition(route_uluru);
+    camera_uluru = {lat: marker.getPosition().lat()-0.0005, lng: marker.getPosition().lng()};
+    camera_marker.setPosition(camera_uluru);
+    more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
+    more_marker.setPosition(more_uluru);
     if(currentInfoWindow != '') 
     {    
       currentInfoWindow.close();   
