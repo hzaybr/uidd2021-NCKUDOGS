@@ -133,6 +133,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 	for(; i < 5; ++i) {
 		txt +=  "<img style=\"width:5%\" src=\"./image/gray_heart.png\">"
 	}
+	
 	if (user_id == USER_ID) {
 		txt += `<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
 		txt += `<button class=\"cmt-edit-btn\" id=${btn_edit_id}>編輯</button>`;
