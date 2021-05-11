@@ -413,27 +413,25 @@ var now_address
 $('.navig').click(function() {
   var dog_page_route = `route_${$(this).attr('id')}`;
   console.log(dog_page_route);
-  window.location.assign(`../?navig=${dog_page_route}&user=${user_name}&pic=${address_base64}`);
+  window.location.assign(`../index.html?navig=${dog_page_route}&user=${user_name}&pic=${address_base64}`);
 });
 
 //navigate from dogprofile page
-/*
 $(document).ready(function() {
   user_name = $('.username').attr('id')
   address_base64 = $('.address_base64').attr('id')
   now_address = location.href
   //find if navig is in address or not
-  var navig = address.search(/navig/)
+  var navig = now_address.search(/navig/)
   console.log(navig);
   if (navig!=-1){
     setTimeout(function() {
-      var route_id = address.match(/route_([1-9])/)[0];
-      //target_num = parseInt(Markers[route_id].getTitle());
+      var route_id = now_address.match(/route_([1-9])/)[0].slice(6);
       console.log(route_id);
-      //route();
+      target_num = parseInt(Markers[route_id].getTitle());
+      route();
       // route(route_id);
      }, 300);
 
    };
  });
- */
