@@ -109,7 +109,7 @@ const MAP_BOUNDS = {
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
     directionsService = new google.maps.DirectionsService();
-    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       center: uluru,
