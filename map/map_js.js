@@ -413,7 +413,7 @@ var now_address
 $('.navig').click(function() {
   var dog_page_route = `route_${$(this).attr('id')}`;
   console.log(dog_page_route);
-  window.location.assign(`../index.html?navig=${dog_page_route}&user=${user_name}&pic=${address_base64}`);
+  window.location.assign(`https://hzaybr.github.io/uidd2020/index.html?navig=${dog_page_route}&user=${user_name}&pic=${address_base64}`);
 });
 
 //navigate from dogprofile page
