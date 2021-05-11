@@ -19,6 +19,7 @@ var Markers=[];
 var Infowincontents=[];
 var count = -1;
 var target_num;
+var redir_url = location.href.match(/.html(\W|\w|\z)*/)[0].slice(19);
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
 var position = {
   "1":{
@@ -197,7 +198,7 @@ function initMap() {
       var user_name = $('.username').attr('id')
       var address_base64 = $('.address_base64').attr('id')
       console.log(`map name: ${user_name}`);
-      window.location.assign(`./dogprofile/mixiang.html?user=${user_name}&pic=${address_base64}`);
+      window.location.assign(`http://luffy.ee.ncku.edu.tw:15038/mixiang.html?${redir_url}`);
     });
     route_marker.setVisible(false);
     camera_marker.setVisible(false);
