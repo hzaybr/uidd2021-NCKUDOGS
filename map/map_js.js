@@ -415,6 +415,10 @@ $('.navig').click(function() {
   window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url+"&navig="+dog_page_route);
 });
 
+$('.XXicon').click(function() {
+  window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url);
+});
+
 //navigate from dogprofile page
 $(document).ready(function() {
   user_name = $('.username').attr('id')

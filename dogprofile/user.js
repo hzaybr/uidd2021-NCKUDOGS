@@ -21,6 +21,3 @@ for (let i = 0; i < avatars.length; ++i) {
   avatars[i].src = PROFILE_PIC;
 }
 
-$('.XXicon').click(function() {
-  window.location.assign(`https://hzaybr.github.io/uidd2020/index.html`);
-});
