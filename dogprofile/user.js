@@ -1,7 +1,7 @@
 // https://luffy.ee.ncku.edu.tw/~IzsKon/sns/fb_login.html
 
 /* Decode url */
-var info = location.href.match(/.html(\W|\w|\z)*/)[0].slice(19);
+var info = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(19).slice(0,-1);
 info = decodeURIComponent(window.atob(info));
 
 /* Get user ID through url */
