@@ -21,8 +21,6 @@ for (let i = 0; i < avatars.length; ++i) {
   avatars[i].src = PROFILE_PIC;
 }
 
-var jsonfile = require('jsonfile');
-for (i=0; i <11 ; i++){
-  console.log('write')
-     jsonfile.writeFile('loop.json', "id :" + i + " square :" + i*i);
-   }
+$('.XXicon').click(function() {
+  window.location.assign(`https://hzaybr.github.io/uidd2020/index.html`);
+});

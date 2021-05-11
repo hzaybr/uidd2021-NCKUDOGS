@@ -72,8 +72,6 @@ $('.arrow').click(function() {
     });
   }, 150);
 });
-$('.XXicon').click(function() {
-  window.history.back();
 
 $('.heart').click(function() {
   $('.pop-com').fadeIn();

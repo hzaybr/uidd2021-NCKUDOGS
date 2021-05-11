@@ -19,7 +19,7 @@ var Markers=[];
 var Infowincontents=[];
 var count = -1;
 var target_num;
-var redir_url = location.href.match(/.html(\W|\w|\z)*/)[0].slice(5);
+var redir_url = location.href.match(/.html(\W|\w|\z)*/)[0].slice(6);
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
 var position = {
   "1":{
@@ -412,8 +412,7 @@ var now_address
 
 $('.navig').click(function() {
   var dog_page_route = `route_${$(this).attr('id')}`;
-  console.log(dog_page_route);
-  window.location.assign(`https://hzaybr.github.io/uidd2020/index.html?navig=${dog_page_route}&user=${user_name}&pic=${address_base64}`);
+  console.log(dwindow.location.assign(`https://hzaybr.github.io/uidd2020/index.html?${redir_url}&navig=${dog_page_route}`);
 });
 
 //navigate from dogprofile page
@@ -430,6 +429,7 @@ $(document).ready(function() {
       console.log(route_id);
       target_num = parseInt(Markers[route_id].getTitle());
       route();
+      Markers[target_num].click();
       // route(route_id);
      }, 300);
 
