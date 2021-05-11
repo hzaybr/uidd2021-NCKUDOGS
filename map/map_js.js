@@ -344,32 +344,56 @@ $( "#mg1 img" ).click(function() {
 //     more_marker.setVisible(false);
 //   }
 // })
-// function route(id_str){
-//   if(routemode){
-//     directionsDisplay.setDirections({routes: []});
-//   }else{
-//     // add route funtion
-//     directionsDisplay.setMap(map);
-//     var choose_num = parseInt(id_str.slice(6,id_str.length));
-//     console.log(choose_num)
-//     var target_lat = Markers[choose_num].getPosition().lat();;
-//     var target_lng = Markers[choose_num].getPosition().lng();;
-//     var request = {
-//       origin: { lat: current_lat, lng: current_lng },
-//       destination: { lat: target_lat, lng: target_lng },
-//       travelMode: 'WALKING'
-//     };
-//     directionsService.route(request, function (result, status) {
-//       if (status == 'OK') {
-//           console.log(result.routes[0].legs[0].steps);
-//           directionsDisplay.setDirections(result);
-//       } else {
-//           console.log(status);
-//       }
-//     });
-//   }
-//   routemode = !routemode;
-// }
+function route(){
+  if(routemode){
+    directionsDisplay.setDirections({routes: []});
+  }else{
+    // add route funtion
+    directionsDisplay.setMap(map);
+    var choose_num = target_num;
+    console.log(choose_num)
+    var target_lat = Markers[choose_num].getPosition().lat();;
+    var target_lng = Markers[choose_num].getPosition().lng();;
+    var request = {
+      origin: { lat: current_lat, lng: current_lng },
+      destination: { lat: target_lat, lng: target_lng },
+      travelMode: 'WALKING'
+    };
+    directionsService.route(request, function (result, status) {
+      if (status == 'OK') {
+          console.log(result.routes[0].legs[0].steps);
+          directionsDisplay.setDirections(result);
+      } else {
+          console.log(status);
+      }
+    });
+  }
+  routemode = !routemode;
+  // if(routemode){
+  //   directionsDisplay.setDirections({routes: []});
+  // }else{
+  //   // add route funtion
+  //   directionsDisplay.setMap(map);
+  //   var choose_num = parseInt(id_str.slice(6,id_str.length));
+  //   console.log(choose_num)
+  //   var target_lat = Markers[choose_num].getPosition().lat();;
+  //   var target_lng = Markers[choose_num].getPosition().lng();;
+  //   var request = {
+  //     origin: { lat: current_lat, lng: current_lng },
+  //     destination: { lat: target_lat, lng: target_lng },
+  //     travelMode: 'WALKING'
+  //   };
+  //   directionsService.route(request, function (result, status) {
+  //     if (status == 'OK') {
+  //         console.log(result.routes[0].legs[0].steps);
+  //         directionsDisplay.setDirections(result);
+  //     } else {
+  //         console.log(status);
+  //     }
+  //   });
+  // }
+  // routemode = !routemode;
+}
 // function camera(){
 //   // add camera function
 // }
@@ -402,8 +426,10 @@ $(document).ready(function() {
   if (navig!=-1){
     setTimeout(function() {
       var route_id = address.match(/route_([1-9])/)[0];
+      target_num = parseInt(Markers[route_id].getTitle());
       console.log(route_id);
-      route(route_id);
+      route();
+      // route(route_id);
      }, 300);
 
    };
