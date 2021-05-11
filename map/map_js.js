@@ -143,7 +143,8 @@ function initMap() {
       icon:{
         url:'./map/button_icon/dog_icon_route.png',
         scaledSize: new google.maps.Size(38, 38)
-      }
+      },
+      zIndex:3
     });
     camera_marker = new google.maps.Marker({
       position: camera_uluru,
@@ -151,7 +152,8 @@ function initMap() {
       icon:{
         url:'./map/button_icon/dog_icon_camera.png',
         scaledSize: new google.maps.Size(38, 38)
-      }
+      },
+      zIndex:3
     });
     more_marker = new google.maps.Marker({
       position: more_uluru,
@@ -159,7 +161,8 @@ function initMap() {
       icon:{
         url:'./map/button_icon/dog_icon_more.png',
         scaledSize: new google.maps.Size(38, 38)
-      }
+      },
+      zIndex:3
     });
     route_marker.addListener('click',function(){
       if(routemode){
@@ -225,33 +228,17 @@ function addMarker(icon_path,location) {
   });
   
   marker.addListener('click', function() {
+    for(i=0;i<=count;i++){
+      Markers[i].setZIndex(1);
+    }
+    marker.setZIndex(3);
     if(currentInfoWindow != ''){
       currentInfoWindow.close();   
       currentInfoWindow = '';
       route_marker.setVisible(false);
       camera_marker.setVisible(false);
       more_marker.setVisible(false);
-      // btnshow = false;
     }
-    // if(!btnshow){
-    //   route_marker.setVisible(true);
-    //   camera_marker.setVisible(true);
-    //   more_marker.setVisible(true);
-    //   route_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()-0.0007};
-    //   route_marker.setPosition(route_uluru);
-    //   camera_uluru = {lat: marker.getPosition().lat()-0.0005, lng: marker.getPosition().lng()};
-    //   camera_marker.setPosition(camera_uluru);
-    //   more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
-    //   more_marker.setPosition(more_uluru);
-    //   target_num = parseInt(marker.getTitle());
-    //   console.log(target_num)
-    //   infowindow.open(map, marker);   
-    //   currentInfoWindow = infowindow;
-    //   btnshow = true;
-    // }else{
-    //   if(parseInt(marker.getTitle())!=)
-    //   btnshow = false;
-    // }
     if(btnshow&&parseInt(marker.getTitle())==target_num){
       btnshow = false;
     }else{
@@ -270,8 +257,6 @@ function addMarker(icon_path,location) {
       currentInfoWindow = infowindow;
       btnshow = true;
     }
-    
-    
   });
   Markers.push(marker);
   Infowincontents.push(infowindow);
@@ -306,6 +291,10 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   map.setCenter(uluru);
   map.setZoom(17);
   var infowindow = Infowincontents[choose_num];
+  for(i=0;i<=count;i++){
+    Markers[i].setZIndex(1);
+  }
+  Markers[choose_num].setZIndex(3);
   route_marker.setVisible(true);
   camera_marker.setVisible(true);
   more_marker.setVisible(true);
@@ -323,7 +312,7 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   }   
   infowindow.open(map, Markers[choose_num]);   
   currentInfoWindow = infowindow;
-  // btnshow = true;
+  btnshow = true;
 });
 
 $( "#mg1 img" ).click(function() {
