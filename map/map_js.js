@@ -417,21 +417,21 @@ $('.navig').click(function() {
 });
 
 //navigate from dogprofile page
-// $(document).ready(function() {
-//   user_name = $('.username').attr('id')
-//   address_base64 = $('.address_base64').attr('id')
-//   now_address = location.href
-//   //find if navig is in address or not
-//   var navig = address.search(/navig/)
-//   console.log(navig);
-//   if (navig!=-1){
-//     setTimeout(function() {
-//       var route_id = address.match(/route_([1-9])/)[0];
-//       target_num = parseInt(Markers[route_id].getTitle());
-//       console.log(route_id);
-//       route();
-//       // route(route_id);
-//      }, 300);
+$(document).ready(function() {
+  user_name = $('.username').attr('id')
+  address_base64 = $('.address_base64').attr('id')
+  now_address = location.href
+  //find if navig is in address or not
+  var navig = address.search(/navig/)
+  console.log(navig);
+  if (navig!=-1){
+    setTimeout(function() {
+      var route_id = address.match(/route_([1-9])/)[0];
+      //target_num = parseInt(Markers[route_id].getTitle());
+      console.log(route_id);
+      //route();
+      // route(route_id);
+     }, 300);
 
-//    };
-// });
+   };
+});
