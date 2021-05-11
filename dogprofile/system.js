@@ -142,7 +142,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 
 	/* User comment */
 	txt +=	`<div class=\"comment\" id=${content_id}>${comment}</div>`;
-	txt +=  `<img class=\"comment-pic\" id=${cmtpic_id} src=${photo}></img>`
+	txt +=  `<img class=\"comment-pic\" id=${cmtpic_id} src=${photo}></img>`;
 	
 	$(`#${cmt_id}`).html(txt);
 
