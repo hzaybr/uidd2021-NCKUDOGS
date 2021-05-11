@@ -69,14 +69,22 @@
         console.log('Welcome!  Fetching your information.... ')
         FB.api('/me', "GET", { fields: 'name, picture' }, function(response) {
           console.log(`Successful login for: ${response.name}`)
+
           let id = response.id;
           let user = response.name
-          let pic = btoa(response.picture.data.url)
-          console.log(response)
+          let pic = response.picture.data.url
+
           document.getElementById('status').innerHTML = `Thanks for logging in, ${user}!`
 
+          let result = "";
+          let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+          for (let i = 0; i < 13; ++i) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+          }
+          result += window.btoa(encodeURIComponent(`id=${id}&user=${user}&pic=${pic}`));
+
           setTimeout(function() {
-            window.location.assign(`https://hzaybr.github.io/uidd2020/?id=${id}&user=${user}&pic=${pic}`);
+            window.location.assign(`https://hzaybr.github.io/uidd2020/?${result}`);
           },2000);
         
         })

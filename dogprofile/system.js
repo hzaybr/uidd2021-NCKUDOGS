@@ -269,7 +269,7 @@ function load_user() {
 		}
 
 		/* Hearts */
-		for (let i = 0; i < avg_score; ++i) {
+		for (let i = 0; i <= avg_score; ++i) {
 			heart = `.info-heart:nth-child(${i+1}), .review-heart:nth-child(${i})`;
 			$(heart).attr('src','./image/red_heart.png');
 		}
