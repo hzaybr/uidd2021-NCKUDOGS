@@ -136,7 +136,13 @@ p {
 }
 .user-pic-for-image {
 	position: absolute;
-  }
+}
+.preview-pic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 30vh;
+}
 .pic-border {
   margin-top: 5vw;
   width: 100%;
@@ -359,11 +365,14 @@ section button:disabled {
 	width: 50%;
 	display: inline;
 	padding-left: 6vw;
-  }
-  .comment {
+}
+.comment {
 	padding-left: 6vw;
 	padding-right: 6vw;
-  }
+}
+.comment-pic {
+  max-width:100%;
+}
 
 .clearfix {
   clear: both;
@@ -376,4 +385,8 @@ label {
   text-align: center; */
   cursor: pointer;
   font-size: 3.8vw;
+}
+
+.comment-score div:last-child {
+  float: right;
 }

@@ -47,7 +47,7 @@
         <div><p>自強校區</p></div>
       </div>
       <div class="health-grid">
-        <div><img style="width: 4vw; margin: 2vw;" src="./image/health.jpg"></div>
+        <div><img style="width: 4vw; margin: 2vw;" src="./image/health.png"></div>
         <div>
           <p>健康狀況：良好，幾年前曾驗出心絲蟲，但經過這幾年的治療與回診，已沒有再檢驗出心絲蟲的跡象。</p>
         </div>
@@ -83,7 +83,7 @@
           <div><p>自強校區</p></div>
         </div>
         <div class="health-grid">
-          <div><img style="width: 4vw; margin: 2vw;" src="./image/health.jpg"></div>
+          <div><img style="width: 4vw; margin: 2vw;" src="./image/health.png"></div>
           <div>
             <p>健康狀況：良好，幾年前曾驗出心絲蟲，但經過這幾年的治療與回診，已沒有再檢驗出心絲蟲的跡象。</p>
           </div>
@@ -240,7 +240,7 @@
           Below is an example of what a comment should look like:
           (Comment start)
           -->
-          <div class="com-border" id="0">
+          <div class="com-border" id="comment_developer">
 
             <div class="w-user-bar">
               <img class="avatar" src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2056833377791449&height=50&width=50&ext=1622896800&hash=AeR_zZHe_bE22BUKc0U">
@@ -253,9 +253,11 @@
               <img style="width:5%" src="./image/red_heart.png">
               <img style="width:5%" src="./image/red_heart.png">
               <img style="width:5%" src="./image/red_heart.png">
+              <button>刪除</button>
             </div>
 
             <div class="comment">lol</div>
+            <img class="comment-pic" id="cmtpic_000" src="">
             
           </div>
           <!-- (Comment end) -->
@@ -294,11 +296,13 @@
       <!-- Comment Box -->
       <textarea class="commentBox" placeholder="說明你和狗狗的親身互動體驗" type="textarea"></textarea>
 
+      <img class="preview-pic" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png">
+
       <div class="pic-border" style="width: 74%; margin-left: 13%;">
         <div class="add-pic">
           <img style="height: 4vw;" src="./image/gallery.png">
-          <input type="file" name="file" id="fl_file" accept="image/*" capture="camera" hidden/>
-          <label for="fl_file"><b>拍攝照片</b></label>
+          <input type="file" name="file" id="post-pic-in-comment" accept="image/*" capture="camera" hidden/>
+          <label for="post-pic-in-comment"><b>拍攝照片</b></label>
         </div>
       </div>
    
