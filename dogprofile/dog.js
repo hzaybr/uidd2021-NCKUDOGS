@@ -115,6 +115,8 @@ $('.write-com').click(function() {
 });
 
 $('#writing-cancel-btn').click(function() {
+  IS_EDITING = false;
+  $('.commentBox').val('');
   $('.comment-container').fadeIn();
   $('.writing-container').hide();
   $('.w-heart').attr('src','./image/heart.png');

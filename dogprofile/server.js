@@ -35,19 +35,12 @@ let cmt_file  = "./data/comments.json";
 let img_file  = "./data/images.json";
 let user_file = "./data/users.json";
 
+/**********************************************************/
+/* Users */
+
 /* Send user data json files to other scripts */
 app.post("/load_users", async (req, resp) => {
     resp.send(await readJSON(user_file));
-});
-
-/* Load comments when entering site */
-app.post("/load_comments", async (req, resp) => {
-    resp.send(await readJSON(cmt_file));
-});
-
-/* Load images when entering site */
-app.post("/load_images", async (req, resp) => {
-    resp.send(await readJSON(img_file));
 });
 
 /* Update user data */
@@ -78,6 +71,14 @@ app.post("/update_users", async (req, resp) => {
     resp.send(await readJSON(user_file));
 });
 
+/**********************************************************/
+/* Comments */
+
+/* Load comments when entering site */
+app.post("/load_comments", async (req, resp) => {
+    resp.send(await readJSON(cmt_file));
+});
+
 /* Show the new comment and store it in JSON */
 app.post("/post_comment", async (req, resp) => {
     const jsonObj = JSON.parse(await readJSON(cmt_file));
@@ -94,6 +95,30 @@ app.post("/post_comment", async (req, resp) => {
             console.log("Write file failed: " + err);
         }
     });
+
+    resp.send(JSON.stringify(jsonObj));
+});
+
+/* Delete comment */
+app.post("/delete_comment", async (req, resp) => {
+    const jsonObj = JSON.parse(await readJSON(cmt_file));
+    delete jsonObj[req.body.id];
+
+    fs.writeFile(cmt_file, JSON.stringify(jsonObj, null, 4), (err) => {
+        if(err){
+            console.log("Write file failed: " + err);
+        }
+    })
+
+    resp.send(JSON.stringify(jsonObj));
+});
+
+/**********************************************************/
+/* Photos */
+
+/* Load images when entering site */
+app.post("/load_images", async (req, resp) => {
+    resp.send(await readJSON(img_file));
 });
 
 /* Show the new image and store it in JSON */
