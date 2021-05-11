@@ -16,10 +16,10 @@ $('.username').attr('id',USER_NAME);
 /* Get user profile pic through url */
 var PROFILE_PIC = info.match(/&pic=(\W|\w|\z)*/)[0].slice(5);
 console.log(`Profile pic url: ${PROFILE_PIC}`);
-// let avatars = document.getElementsByClassName('avatar');
-// for (let i = 0; i < avatars.length; ++i) {
-//   avatars[i].src = PROFILE_PIC;
-// }
+let avatars = document.getElementsByClassName('profile-avatar');
+for (let i = 0; i < avatars.length; ++i) {
+  avatars[i].src = PROFILE_PIC;
+}
 
 var jsonfile = require('jsonfile');
 for (i=0; i <11 ; i++){
