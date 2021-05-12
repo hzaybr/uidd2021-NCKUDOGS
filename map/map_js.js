@@ -3,7 +3,7 @@ var directionsService;
 var directionsDisplay;
 var routemode = false;
 var btnshow = false;
-var current_lat = 22.996923587079912; 
+var current_lat = 22.996923587079912, 
 var current_lng = 120.22256354362793;
 var ownermarker;
 var owner_uluru = {lat: current_lat, lng: current_lng};
@@ -133,7 +133,8 @@ function initMap() {
     //user mark
     ownermarker = new google.maps.Marker({
       position: owner_uluru,
-      map: map
+      map: map,
+      zIndex:1
     });
     //dog's mark 
     $.get(position_file,function(json){
@@ -204,7 +205,7 @@ function addMarker(icon_path,location) {
       url:icon_path,
       scaledSize: new google.maps.Size(62, 77)
     },
-    zIndex:1
+    zIndex:2
     });
   marker.addListener('click', function() {
     dogMarker_click(marker);
@@ -214,7 +215,7 @@ function addMarker(icon_path,location) {
 function dogMarker_click(target_marker){
   //reset all markers' zindex
   for(i=0;i<=count;i++){
-    Markers[i].setZIndex(1);
+    Markers[i].setZIndex(2);
   }
   target_marker.setZIndex(3);
   //reset map
