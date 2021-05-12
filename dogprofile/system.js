@@ -112,6 +112,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 	let content_id = "content_" + comment_id;
 	let btn_dlt_id = "btn_dlt_" + comment_id;
 	let btn_edit_id = "btn_edit_id" + comment_id;
+	let option_id = "cmt_option_" + comment_id;
 	let user = user_data[user_id];
 
 	$(`<div class=\"user-comment\" id=${cmt_id}>`).prependTo('.comments');
@@ -132,11 +133,29 @@ function concat_comment(comment_id, user_id, comment, photo) {
 	for(; i < 5; ++i) {
 		txt +=  "<img style=\"width:5%\" src=\"./image/gray_heart.png\">"
 	}
+
+
+	// <div class="cmt-btn" onclick="myFunction()">Button
+	// 	<span class="cmt-option" id="cmt-option_000">
+	// 		<button class="cmt-edit-btn" id="btn_edit_000">編輯評論</button>
+	// 		<hr class="cmt-btn-ln">
+	// 		<button class="cmt-dlt-btn" id="btn_dlt_000">刪除</button>
+	// 	</span>
+	// </div>
+
+
 	
 	if (user_id == USER_ID) {
-		txt += `<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
-		txt += `<button class=\"cmt-edit-btn\" id=${btn_edit_id}>編輯</button>`;
+		console.log("edit");
+		txt += 	`<div class=\"cmt-btn\" onclick=\'(function(){document.getElementById(\"${option_id}\").classList.toggle(\"show\");})();'>Button`;
+		txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
+		txt += 			`<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
+		txt += 			"<hr class=\"cmt-btn-ln\">";
+		txt += 			`<button class=\"cmt-edit-btn\" id=${btn_edit_id}>編輯</button>`;
+		txt += 		"</span>";
+		txt += 	"</div>";
 	}
+
     txt +=	"</div>"
 
 	/* User comment */
