@@ -130,6 +130,9 @@ p {
   width: 100vw;
   justify-content: space-evenly;
 }
+.image-image {
+  position: sticky;
+}
 .user-pic-for-image {
 	position: absolute;
 }

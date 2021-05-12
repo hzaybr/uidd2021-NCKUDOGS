@@ -237,7 +237,7 @@ function reload_comment() {
 
 function concat_image(image_id, user_pic, photo) {
 	let id = "image_" + image_id;
-	$(`<span id=${id}>`).prependTo(".pic-grid");
+	$(`<span class=\"image-image\" id=${id}>`).prependTo(".pic-grid");
 
 	let txt = "";
 	txt += 	"<div class=\"user-pic-for-image\">";
