@@ -29,7 +29,7 @@ p {
 }
 .username {display: none; font-weight: bold;}
 .start {
-  overflow: hidden;
+  overflow: auto;
   position: absolute;
   top: 0;
   width: 100%;
@@ -110,10 +110,6 @@ p {
   border-bottom-color: #bdbdbdc2;
   border-bottom-style: solid;
   border-bottom-width: 0.3vw;
-}
-.intro-grid { 
-  padding-top: 5vw; 
-  height: auto;
 }
 .top-name {
   font-weight: 900;
@@ -203,7 +199,7 @@ p {
   background-color: #FF8B2C;
   width: 100%;
 }
-.com-border .user-comment{
+.com-border, .user-comment{
   padding: 1vw;
   border-bottom-color: #bdbdbdc2;
   border-bottom-style: solid;
