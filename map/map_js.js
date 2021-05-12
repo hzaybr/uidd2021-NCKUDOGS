@@ -18,8 +18,9 @@ var infowincontent = '<div style="width:30vw" id="infowindow"><p style="text-ali
 var Markers=[];
 var Infowincontents=[];
 var count = -1;
-var target_num;
-var redir_url = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(6).slice(0,-1);;
+var target_num = 0;
+var previous_num;
+// var redir_url = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(6).slice(0,-1);;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
 var position = {
   "1":{
@@ -125,6 +126,9 @@ function initMap() {
     });
     map.addListener('click', function(event){
         addMarker(event.latLng);
+    });
+    map.addListener('zoom_changed',()=>{
+      console.log('zoom'+map.getZoom());
     });
     //user mark
     ownermarker = new google.maps.Marker({
@@ -242,6 +246,11 @@ function addMarker(icon_path,location) {
     }
     if(btnshow&&parseInt(marker.getTitle())==target_num){
       btnshow = false;
+      var old_icon = {
+        url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
+        scaledSize: new google.maps.Size(62,77)
+      }
+      marker.setIcon(old_icon);
     }else{
       route_marker.setVisible(true);
       camera_marker.setVisible(true);
@@ -252,8 +261,19 @@ function addMarker(icon_path,location) {
       camera_marker.setPosition(camera_uluru);
       more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
       more_marker.setPosition(more_uluru);
+      var old_icon = {
+        url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
+        scaledSize: new google.maps.Size(62,77)
+      }
+      Markers[target_num].setIcon(old_icon);
+      // console.log(target_num)
       target_num = parseInt(marker.getTitle());
-      console.log(target_num)
+      // console.log(target_num)
+      var new_icon = {
+        url: './map/mark_icon_big/dog_marker_big_'+(target_num+1)+'.png',
+        scaledSize: new google.maps.Size(80,80)
+      }
+      marker.setIcon(new_icon);
       infowindow.open(map, marker);   
       currentInfoWindow = infowindow;
       btnshow = true;
@@ -305,7 +325,17 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   camera_marker.setPosition(camera_uluru);
   more_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0002, lng: Markers[choose_num].getPosition().lng()+0.0007};
   more_marker.setPosition(more_uluru);
+  var old_icon = {
+    url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
+    scaledSize: new google.maps.Size(62,77)
+  }
+  Markers[target_num].setIcon(old_icon);
   target_num = parseInt(Markers[choose_num].getTitle());
+  var new_icon = {
+    url: './map/mark_icon_big/dog_marker_big_'+(target_num+1)+'.png',
+    scaledSize: new google.maps.Size(80,80)
+  }
+  Markers[target_num].setIcon(new_icon);
   if(currentInfoWindow != '')   
   {    
     currentInfoWindow.close();   
@@ -433,7 +463,7 @@ $(document).ready(function() {
       console.log(route_id);
       target_num = parseInt(Markers[route_id].getTitle());
       route();
-      Markers[target_num].click();
+      // Markers[target_num].click();
       // route(route_id);
      }, 300);
 
