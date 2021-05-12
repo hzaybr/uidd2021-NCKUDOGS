@@ -95,8 +95,9 @@ body {
 #user-title {
 	background: #9441FF;
 	border-radius: 26.5px;
-	width: 26%;
-	margin-left: 37%;
+	margin-left: 40%;
+	margin-right: 40%;
+	margin-top:1%;
 }
 .username {
   margin: 1%;
