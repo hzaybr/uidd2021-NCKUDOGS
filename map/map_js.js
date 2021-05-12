@@ -133,8 +133,7 @@ function initMap() {
     //user mark
     ownermarker = new google.maps.Marker({
       position: owner_uluru,
-      map: map,
-      zIndex:1
+      map: map
     });
     //dog's mark 
     $.get(position_file,function(json){
@@ -205,7 +204,7 @@ function addMarker(icon_path,location) {
       url:icon_path,
       scaledSize: new google.maps.Size(62, 77)
     },
-    zIndex:2
+    zIndex:1
     });
   marker.addListener('click', function() {
     dogMarker_click(marker);
@@ -215,7 +214,7 @@ function addMarker(icon_path,location) {
 function dogMarker_click(target_marker){
   //reset all markers' zindex
   for(i=0;i<=count;i++){
-    Markers[i].setZIndex(2);
+    Markers[i].setZIndex(1);
   }
   target_marker.setZIndex(3);
   //reset map
