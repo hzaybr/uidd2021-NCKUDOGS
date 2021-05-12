@@ -147,7 +147,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 	
 	if (user_id == USER_ID) {
 		console.log("edit");
-		txt += 	`<div class=\"cmt-btn\" onclick=\'(function(){document.getElementById(\"${option_id}\").classList.toggle(\"show\");})();'>Button`;
+		txt += 	`<div class=\"cmt-btn\" onclick=\'(function(){document.getElementById(\"${option_id}\").classList.toggle(\"show\");})();'>AA`;
 		txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
 		txt += 			`<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
 		txt += 			"<hr class=\"cmt-btn-ln\">";

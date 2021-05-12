@@ -374,6 +374,11 @@ section button:disabled {
   -ms-user-select: none;
   user-select: none;
   margin-right: 5vw;
+  background-image: url("../image/dot.jpg");
+  background-size: cover;
+  background-repeat: false;
+  color:rgba(0, 0, 0, 0);
+  height: 7vw;
 }
 .cmt-option {
   visibility: hidden;
