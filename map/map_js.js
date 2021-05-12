@@ -125,6 +125,9 @@ function initMap() {
       mapId: '892f444c9eaa9e2'
     });
     map.addListener('zoom_changed',()=>{
+      if(map.getZoom()!=19&&currentInfoWindow != ''){
+        dogMarker_click(Markers[target_num]);
+      }
       console.log('zoom'+map.getZoom());
     });
     //user mark
@@ -167,30 +170,6 @@ function initMap() {
     });
     route_marker.addListener('click',function(){
       route();
-      // if(routemode){
-      //   directionsDisplay.setDirections({routes: []});
-      // }else{
-      //   // add route funtion
-      //   directionsDisplay.setMap(map);
-      //   var choose_num = target_num;
-      //   console.log(choose_num)
-      //   var target_lat = Markers[choose_num].getPosition().lat();;
-      //   var target_lng = Markers[choose_num].getPosition().lng();;
-      //   var request = {
-      //     origin: { lat: current_lat, lng: current_lng },
-      //     destination: { lat: target_lat, lng: target_lng },
-      //     travelMode: 'WALKING'
-      //   };
-      //   directionsService.route(request, function (result, status) {
-      //     if (status == 'OK') {
-      //         console.log(result.routes[0].legs[0].steps);
-      //         directionsDisplay.setDirections(result);
-      //     } else {
-      //         console.log(status);
-      //     }
-      //   });
-      // }
-      // routemode = !routemode;
     });
     camera_marker.addListener('click',function(){
       //add camera function
