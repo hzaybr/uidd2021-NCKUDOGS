@@ -147,7 +147,7 @@ function initMap() {
       map: map,
       icon:{
         url:'./map/button_icon/dog_icon_route.png',
-        scaledSize: new google.maps.Size(38, 38)
+        scaledSize: new google.maps.Size(60, 60)
       },
       zIndex:3
     });
@@ -156,7 +156,7 @@ function initMap() {
       map: map,
       icon:{
         url:'./map/button_icon/dog_icon_camera.png',
-        scaledSize: new google.maps.Size(38, 38)
+        scaledSize: new google.maps.Size(60, 60)
       },
       zIndex:3
     });
@@ -165,7 +165,7 @@ function initMap() {
       map: map,
       icon:{
         url:'./map/button_icon/dog_icon_more.png',
-        scaledSize: new google.maps.Size(38, 38)
+        scaledSize: new google.maps.Size(60, 60)
       },
       zIndex:3
     });
@@ -255,11 +255,11 @@ function addMarker(icon_path,location) {
       route_marker.setVisible(true);
       camera_marker.setVisible(true);
       more_marker.setVisible(true);
-      route_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()-0.0007};
+      route_uluru = {lat: marker.getPosition().lat()-0.00015, lng: marker.getPosition().lng()-0.00025};
       route_marker.setPosition(route_uluru);
-      camera_uluru = {lat: marker.getPosition().lat()-0.0005, lng: marker.getPosition().lng()};
+      camera_uluru = {lat: marker.getPosition().lat()-0.0003, lng: marker.getPosition().lng()};
       camera_marker.setPosition(camera_uluru);
-      more_uluru = {lat: marker.getPosition().lat()-0.0002, lng: marker.getPosition().lng()+0.0007};
+      more_uluru = {lat: marker.getPosition().lat()-0.00015, lng: marker.getPosition().lng()+0.00025};
       more_marker.setPosition(more_uluru);
       var old_icon = {
         url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
@@ -271,11 +271,16 @@ function addMarker(icon_path,location) {
       // console.log(target_num)
       var new_icon = {
         url: './map/mark_icon_big/dog_marker_big_'+(target_num+1)+'.png',
-        scaledSize: new google.maps.Size(80,80)
+        scaledSize: new google.maps.Size(130,130)
       }
       marker.setIcon(new_icon);
       infowindow.open(map, marker);   
       currentInfoWindow = infowindow;
+      lat=marker.getPosition().lat();
+      lng=marker.getPosition().lng();
+      uluru = {lat: lat, lng: lng};
+      map.setCenter(uluru);
+      map.setZoom(19);
       btnshow = true;
     }
   });
@@ -310,7 +315,7 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   lng=Markers[choose_num].getPosition().lng();
   uluru = {lat: lat, lng: lng};
   map.setCenter(uluru);
-  map.setZoom(17);
+  map.setZoom(19);
   var infowindow = Infowincontents[choose_num];
   for(i=0;i<=count;i++){
     Markers[i].setZIndex(1);
@@ -319,11 +324,11 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   route_marker.setVisible(true);
   camera_marker.setVisible(true);
   more_marker.setVisible(true);
-  route_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0002, lng: Markers[choose_num].getPosition().lng()-0.0007};
+  route_uluru = {lat: Markers[choose_num].getPosition().lat()-0.00015, lng: Markers[choose_num].getPosition().lng()-0.00025};
   route_marker.setPosition(route_uluru);
-  camera_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0005, lng: Markers[choose_num].getPosition().lng()};
+  camera_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0003, lng: Markers[choose_num].getPosition().lng()};
   camera_marker.setPosition(camera_uluru);
-  more_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0002, lng: Markers[choose_num].getPosition().lng()+0.0007};
+  more_uluru = {lat: Markers[choose_num].getPosition().lat()-0.00015, lng: Markers[choose_num].getPosition().lng()+0.00025};
   more_marker.setPosition(more_uluru);
   var old_icon = {
     url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
@@ -333,7 +338,7 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   target_num = parseInt(Markers[choose_num].getTitle());
   var new_icon = {
     url: './map/mark_icon_big/dog_marker_big_'+(target_num+1)+'.png',
-    scaledSize: new google.maps.Size(80,80)
+    scaledSize: new google.maps.Size(130,130)
   }
   Markers[target_num].setIcon(new_icon);
   if(currentInfoWindow != '')   
@@ -354,7 +359,31 @@ $( "#mg1 img" ).click(function() {
   console.log(current_lng);
   Markers[choose_num].setPosition(uluru);
   map.setCenter(uluru);
-  map.setZoom(17);
+  map.setZoom(19);
+  for(i=0;i<=count;i++){
+    Markers[i].setZIndex(1);
+  }
+  Markers[choose_num].setZIndex(3);
+  route_marker.setVisible(true);
+  camera_marker.setVisible(true);
+  more_marker.setVisible(true);
+  route_uluru = {lat: Markers[choose_num].getPosition().lat()-0.00015, lng: Markers[choose_num].getPosition().lng()-0.00025};
+  route_marker.setPosition(route_uluru);
+  camera_uluru = {lat: Markers[choose_num].getPosition().lat()-0.0003, lng: Markers[choose_num].getPosition().lng()};
+  camera_marker.setPosition(camera_uluru);
+  more_uluru = {lat: Markers[choose_num].getPosition().lat()-0.00015, lng: Markers[choose_num].getPosition().lng()+0.00025};
+  more_marker.setPosition(more_uluru);
+  var old_icon = {
+    url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
+    scaledSize: new google.maps.Size(62,77)
+  }
+  Markers[target_num].setIcon(old_icon);
+  target_num = parseInt(Markers[choose_num].getTitle());
+  var new_icon = {
+    url: './map/mark_icon_big/dog_marker_big_'+(target_num+1)+'.png',
+    scaledSize: new google.maps.Size(130,130)
+  }
+  Markers[target_num].setIcon(new_icon);
   var infowindow = Infowincontents[choose_num];
   if(currentInfoWindow != '')   
   {    
@@ -364,6 +393,7 @@ $( "#mg1 img" ).click(function() {
   infowindow.open(map, Markers[choose_num]);   
   currentInfoWindow = infowindow;
   markClick();
+  btnshow = true;
 });
 
 // $('#map').click(function(){
