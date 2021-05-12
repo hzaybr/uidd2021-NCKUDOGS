@@ -99,6 +99,7 @@ var position = {
     "lng":120.219805
   }
 }
+var position_file="./map/position.json"
 var currentInfoWindow = '';
 const MAP_BOUNDS = {
   north: 22.95441,
@@ -135,6 +136,12 @@ function initMap() {
       map: map
     });
     //dog's mark 
+    //$.get(position_file,function(json){
+		//	for(i=1;i<20;i++){
+    //  	var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
+    //    addMarker(marker_path,{lat: json[i].lat, lng: json[i].lng})
+    //  }	 
+    //})
     for(i=1;i<20;i++){
       var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
       addMarker(marker_path,{lat: position[i].lat, lng: position[i].lng})
@@ -303,6 +310,11 @@ $( "#mg1 img" ).click(function() {
   btnshow = false;
   dogMarker_click(Markers[choose_num]);
   markClick();
+  $.post('./update_position', {
+    dogID:  choose_num+1,
+    lat: 		current_lat,
+		lng:		current_lng
+	}, () => {});
 });
 
 function route(){
