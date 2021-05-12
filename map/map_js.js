@@ -3,8 +3,8 @@ var directionsService;
 var directionsDisplay;
 var routemode = false;
 var btnshow = false;
-var current_lat = 23;
-var current_lng = 120.2;
+var current_lat = 22.996923587079912, 
+var current_lng = 120.22256354362793;
 var ownermarker;
 var owner_uluru = {lat: current_lat, lng: current_lng};
 var camera_marker;
