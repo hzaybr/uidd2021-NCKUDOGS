@@ -36,7 +36,6 @@ $('#post-btn, #writing-post-btn').click(function() {
 
 	if (!IS_EDITING) { // write a new comment
 		concat_comment(++comment_id, USER_ID, $('.commentBox').val(), $('.preview-pic')[0].src);
-		console.log($('.preview-pic')[0].src);
 	}
 	
 	$.post('./update_users', {
