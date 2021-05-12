@@ -24,6 +24,7 @@ $('.backicon').click(function(){
 })
 
 $('#mes-icon').click(function() {
-  console.log('direct')
-	window.open('https://www.facebook.com/ncku.vdogs')
+  console.log('direct');
+	//window.open('https://www.facebook.com/ncku.vdogs');
+	window.open('https://m.me/ncku.vdogs');
 })

@@ -134,3 +134,7 @@ $('.w-heart').click(function() {
     }
   };
 });
+$('.mesng-icon').click(function() {
+	//window.open('https://www.facebook.com/ncku.vdogs');
+	window.open('https://m.me/ncku.vdogs');
+});
