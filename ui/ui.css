@@ -119,7 +119,6 @@ body {
 #user-title {
   display: block;
   position: absolute;
-  width: 14.4vw;
   height: 4vw;
   top: 50.13vw;
   left: 38.93vw;
@@ -185,7 +184,7 @@ body {
   top: 88vw;
   left: 17.33vw;
   display: grid;
-  grid-template-columns: 6.93vw 6.93vw 6.93vw;
+  grid-template-columns: repeat(3,auto);
   grid-template-rows: 5.06vw 9.33vw;
   justify-content: space-between;
   align-content: space-evenly;
