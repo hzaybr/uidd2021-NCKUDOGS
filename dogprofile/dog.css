@@ -165,6 +165,7 @@ p {
 .com-top-bar {
   width: 94vw;
   height: 25vw;
+  align-items: center;
   border-bottom-color: #bdbdbdc2;
   border-bottom-style: solid;
   border-bottom-width: 0.3vw;
