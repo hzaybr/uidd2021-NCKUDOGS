@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const https = require('https')
+const config = require('./config.js')
 
 /* Enable json parsing */
 app.use(express.urlencoded({extended: false, limit: "100mb"}));
@@ -14,7 +16,14 @@ app.use("/", express.static(__dirname));
 /* Any number from the IANA ephemeral port range (49152-65535) */
 const port = 15038;
 
-app.listen(port, () => {
+const sslOptions = {
+  key: fs.readFileSync(config.key_path),
+  ca: fs.readFileSync(config.ca_path),
+  cert: fs.readFileSync(config.cert_path)
+}
+
+const server = https.createServer(sslOptions, app)
+server.listen(port, () => {
     console.log(`Listening on port: ${port}`);
 });
 
