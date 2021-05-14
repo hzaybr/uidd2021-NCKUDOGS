@@ -48,14 +48,13 @@ img.connected {
 	top: 87.73vw; 
 }
 
-
 #status {
-	position: absolute;
-	width: 28vw;
+  position: absolute;
+	width: 19.2vw;
 	height: 10.26vw;
-	left: 36vw;
-	top: 90.13vw;
-
+	left: 40.4vw;
+	top: 89.13vw;
+	
 	font-family: Noto Sans Tamil UI;
 	font-style: normal;
 	font-weight: bold;

@@ -5,9 +5,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="./fb_login.css" rel="stylesheet" type="text/css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
-    <script src="id.js"></script>
+    <!--script src="id.js"></script-->
+    <script src="../../../sns/id.js"></script>    
     <script>
 
       // This is called with the results from from FB.getLoginStatus().
@@ -26,8 +29,8 @@
         var connected = document.getElementsByClassName('connected');
 				for (i = 0; i < connected.length; i++) {
     			connected[i].style.display = 'block'
-				}
-        } else if (response.status === 'not_authorized') {
+        }
+			} else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = ''
       } else {
@@ -83,7 +86,23 @@
           let user = response.name
           let pic = response.picture.data.url
 
-          document.getElementById('status').innerHTML = `${user}`
+          let fitName = document.getElementById("status");
+          fitName.innerHTML = `${user}`;
+          
+        //dynamically change font size
+          function isOverflow(element) {
+            return element.scrollHeight > element.clientHeight ||  element.scrollWidth > element.clientWidth;    
+          }
+       		let styleFontSize = window.getComputedStyle(fitName,null).getPropertyValue('font-size');
+          let fontSize = parseFloat(styleFontSize);
+          while (isOverflow(fitName)) {
+            fontSize--;
+            fitName.style.fontSize = fontSize + "px";
+          }
+
+          console.log(`font-size:${fitName.style.fontSize}`);
+        //
+
 
           let result = "";
           let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
