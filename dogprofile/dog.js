@@ -3,6 +3,16 @@ const container_list = ['.intro-container', '.pic-container', '.comment-containe
 const scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
 var SCORE = 0;
 
+$('html').click(function(e) {
+  if(!$(e.target).hasClass('cmt-btn'))
+  {
+    let elements = document.getElementsByClassName("cmt-option");
+    for (let i = 0; i < elements.length; ++i) {
+      elements[i].classList.remove("show");
+    }
+  }
+});
+
 //id: from, to
 $('.start-button').click(function() {
   $(this).css('color','black');

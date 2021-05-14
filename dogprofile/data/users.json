@@ -1,65 +1,27 @@
 {
-    "00000000": {
-        "name": "user000",
-        "profile": "image/Ellipse_303.png",
-        "score": 4
-    },
-    "2056833377791449": {
+    "2062265037248283": {
         "name": "陳彥勳",
-        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2056833377791449&height=50&width=50&ext=1623345966&hash=AeTIQUxWyVJIQe09upw",
+        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2062265037248283&height=50&width=50&ext=1623424201&hash=AeSq1hI1SqEJPrgP970",
         "score": 4
-    },
-    "001": {
-        "name": "user001",
-        "profile": "image/Ellipse_303.png",
-        "score": 4
-    },
-    "002": {
-        "name": "user002",
-        "profile": "image/Ellipse_303.png",
-        "score": 5
-    },
-    "003": {
-        "name": "user003",
-        "profile": "image/Ellipse_303.png",
-        "score": 5
-    },
-    "004": {
-        "name": "user004",
-        "profile": "image/Ellipse_303.png",
-        "score": 5
-    },
-    "005": {
-        "name": "user005",
-        "profile": "image/Ellipse_303.png",
-        "score": 5
-    },
-    "006": {
-        "name": "user006",
-        "profile": "image/Ellipse_303.png",
-        "score": 3
-    },
-    "007": {
-        "name": "user007",
-        "profile": "image/Ellipse_303.png",
-        "score": 1
-    },
-    "undefined": {
-        "score": 5
     },
     "5406050806136837": {
         "name": "黃子芸",
-        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=5406050806136837&height=50&width=50&ext=1623351525&hash=AeQagf8HLPaJirTFkq8",
+        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=5406050806136837&height=50&width=50&ext=1623434076&hash=AeQt2Ko0F7Q3b0SML74",
         "score": 5
     },
     "4451830958177835": {
         "name": "林孟萱",
-        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=4451830958177835&height=50&width=50&ext=1623351087&hash=AeT6hBw1WaUM4z3Y33o",
-        "score": 0
+        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=4451830958177835&height=50&width=50&ext=1623433293&hash=AeS53tvrROfsFb_vE1Q",
+        "score": 4
     },
-    "2062265037248283": {
-        "name": "陳彥勳",
-        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2062265037248283&height=50&width=50&ext=1623351516&hash=AeSpbTbJ2PvwTVX2-FY",
-        "score": 0
+    "4300490119985661": {
+        "name": "方柏翔",
+        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=4300490119985661&height=50&width=50&ext=1623435047&hash=AeToFW4ham3hhCtk8Uk",
+        "score": 5
+    },
+    "3516339838465915": {
+        "name": "楊善淞",
+        "profile": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=3516339838465915&height=50&width=50&ext=1623432411&hash=AeQOxHvQvtMt7Lm5P1k",
+        "score": 3
     }
 }
