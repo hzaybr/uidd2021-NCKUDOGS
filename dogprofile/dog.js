@@ -439,6 +439,7 @@ function load_user() {
 		for (let i = 0; i < obj.length; ++i) {
   			obj[i].innerHTML = avg_score;
 		}
+		localStorage.setItem("avg_score", avg_score);
 
 		/* Hearts */
 		for (let i = 0; i <= avg_score; ++i) {
