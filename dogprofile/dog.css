@@ -219,10 +219,10 @@ p {
   grid-template-columns: repeat(6,7vw);
   justify-content: space-between;
 }
-.heart, .avatar, .w-heart {
+.heart, .profile-avatar, .w-heart {
   width: 100%;
 }
-.avatar {
+.profile-avatar {
 	border-radius: 50%;
 }
 .pop-com {

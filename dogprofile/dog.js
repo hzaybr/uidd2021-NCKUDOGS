@@ -280,7 +280,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 
 	/* User name and profile pic */
 	txt += 	"<div class=\"w-user-bar\">";
-	txt += 		`<img class=\"avatar\" src=${user.profile}>`;
+	txt += 		`<img class=\"profile-avatar\" src=${user.profile}>`;
 	txt += 		`<div class=\"username\" style=\"display: block;\">${user.name}</div>`;
 	txt += 	"</div>";
 
@@ -381,7 +381,7 @@ function concat_image(image_id, user_pic, photo) {
 
 	let txt = "";
 	txt += 	"<div class=\"user-pic-for-image\">";
-	txt += 		`<img class=\"avatar\" src=${user_pic} width=100%>`;
+	txt += 		`<img class=\"profile-avatar\" src=${user_pic} width=100%>`;
 	txt += 	"</div>";
 	txt += 	`<img src=${photo} width=100%>`;
 
