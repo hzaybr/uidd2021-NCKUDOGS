@@ -275,7 +275,7 @@ var navig = "./map/navig.json"
 $(document).ready(function() {
   $.get(navig, function(json) {
     var dogID = json["dogID"];
-    console.log(`map dogID: ${dogID}`);
+    console.log(`navig dogID: ${dogID}`);
   if (dogID<20) {
     setTimeout(function() {
       target_num = parseInt(Markers[dogID].getTitle());
