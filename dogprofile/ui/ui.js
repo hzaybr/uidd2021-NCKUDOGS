@@ -50,8 +50,8 @@ function profileClick(){
   }
   else{
     displayCheck();
-    $('.profile').css('display','block');
     $('.profile').animate({'left':'3.73vw'},500);
+    $('.profile').css('display','block');
   }
   profileDisplay = !profileDisplay;
 
