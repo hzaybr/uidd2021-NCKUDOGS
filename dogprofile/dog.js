@@ -347,6 +347,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 			}
 
 			$('.commentBox').val($(`#${content_id}`)[0].innerHTML);
+      $('.preview-pic')[0].src = photo;
 		});
 
 	}
