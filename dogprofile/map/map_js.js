@@ -56,7 +56,10 @@ function initMap() {
     ownermarker = new google.maps.Marker({
       position: owner_uluru,
       map: map,
-      icon: PROFILE_PIC
+      icon: {
+        url:PROFILE_PIC,
+        scaledSize: new google.maps.Size(60, 60)
+      }
     });
     //dog's mark 
     $.get(position_file,function(json){
