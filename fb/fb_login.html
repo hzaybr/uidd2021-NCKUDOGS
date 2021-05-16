@@ -97,6 +97,9 @@
           let fontSize = parseFloat(styleFontSize);
           while (isOverflow(fitName)) {
             fontSize--;
+            if (fontSize == 1){
+              break;
+            }
             fitName.style.fontSize = fontSize + "px";
           }
 
@@ -112,7 +115,7 @@
           result += window.btoa(encodeURIComponent(`id=${id}&user=${user}&pic=${pic}`));
           result += "&";
           setTimeout(function() {
-            window.location.assign(`http://luffy.ee.ncku.edu.tw:2123/index.html?${result}`);
+            //window.location.assign(`http://luffy.ee.ncku.edu.tw:2123/index.html?${result}`);
           },2000);
         })
       }
