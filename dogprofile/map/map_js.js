@@ -19,7 +19,7 @@ var Infowincontents=[];
 var count = -1;
 var target_num = 0;
 var previous_num;
-var redir_url = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(6).slice(0,-1);;
+// var redir_url = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(6).slice(0,-1);;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
 var position_file="./map/position.json"
 var currentInfoWindow = '';
@@ -107,7 +107,7 @@ function initMap() {
       var user_name = $('.username').attr('id')
       var address_base64 = $('.address_base64').attr('id')
       console.log(`map name: ${user_name}`);
-      window.location.assign(`https://luffy.ee.ncku.edu.tw:15038/mixiang.html?${redir_url}&`);
+      window.location.assign("mixiang.html");
     });
     route_marker.setVisible(false);
     camera_marker.setVisible(false);

@@ -82,12 +82,8 @@
         FB.api('/me', "GET", { fields: 'name, picture.height(1600).width(1600)' }, function(response) {
           console.log(`Successful login for: ${response.name}`)
 
-          let id = response.id;
-          let user = response.name
-          let pic = response.picture.data.url
-
           let fitName = document.getElementById("status");
-          fitName.innerHTML = `${user}`;
+          fitName.innerHTML = `${response.name}`;
           
         //dynamically change font size
           function isOverflow(element) {
@@ -106,17 +102,12 @@
           console.log(`font-size:${fitName.style.fontSize}`);
         //
 
-
-          let result = "";
-          let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-          for (let i = 0; i < 13; ++i) {
-            result += characters.charAt(Math.floor(Math.random() * characters.length));
-          }
-          result += window.btoa(encodeURIComponent(`id=${id}&user=${user}&pic=${pic}`));
-          result += "&";
+          localStorage.setItem("user", JSON.stringify(response));
+ 
           setTimeout(function() {
-            window.location.assign(`https://luffy.ee.ncku.edu.tw:15038/index.html?${result}`);
+            window.location.assign("index.html");
           },2000);
+
         })
       }
     </script>
