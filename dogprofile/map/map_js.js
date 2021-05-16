@@ -55,7 +55,8 @@ function initMap() {
     //user mark
     ownermarker = new google.maps.Marker({
       position: owner_uluru,
-      map: map
+      map: map,
+      icon: PROFILE_PIC
     });
     //dog's mark 
     $.get(position_file,function(json){
