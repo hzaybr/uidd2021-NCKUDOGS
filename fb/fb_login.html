@@ -9,10 +9,10 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
+
     <script src="id.js"></script>
     <!--script src="../../../sns/id.js"></script-->    
     <script>
-
       // This is called with the results from from FB.getLoginStatus().
       function statusChangeCallback(response) {
         console.log('statusChangeCallback')
@@ -79,7 +79,7 @@
       // successful.  See statusChangeCallback() for when this call is made.
       function testAPI() {
         console.log('Welcome!  Fetching your information.... ')
-        FB.api('/me', "GET", { fields: 'name, picture' }, function(response) {
+        FB.api('/me', "GET", { fields: 'name, picture.height(1600).width(1600)' }, function(response) {
           console.log(`Successful login for: ${response.name}`)
 
           let id = response.id;
@@ -124,13 +124,18 @@
     <div>
       <!-- Step 1 -->
       <img class="unconnected" src="./image/dog_div_login_first.png">
-      <fb:login-button class="unconnected" scope="public_profile,email" onlogin="checkLoginState();" data-size="large" id="fb-login-button">              
-        LoginWithFB
-      </fb:login-button>
+      <img class="unconnected" src="./image/dog_button_login_fb.png" id="fb-login-button">
       <img class="connected" src="./image/dog_div_already_logged_in.png" style="display:none">
       <div class="connected" id="status" style="display:none"></div>
       <img class="app-icon" src="./image/dog_icon_wong_wong.png">
     </div>
+
+		<script>
+			document.getElementById('fb-login-button').onclick = function() {
+    		//do the login
+    		FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});
+			}
+    </script>
   </body>
 </html>
 <!--
