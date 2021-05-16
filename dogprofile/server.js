@@ -170,7 +170,7 @@ let navig = "./map/navig.json";
 
 app.post("/navig", async (req, resp) => {
   var dogID = req.body.dogID;
-  console.log(`dogID: ${dogId}`);
+  console.log(`dogID: ${dogID}`);
 
   const jsonObj = JSON.parse(await readJSON(navig));
   jsonObj["dogID"] = dogID; 

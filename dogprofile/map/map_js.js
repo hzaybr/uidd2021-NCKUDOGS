@@ -270,19 +270,6 @@ function camera(){
 }
 
 
-var user_name
-var address_base64
-var now_address
-
-$('.navig').click(function() {
-  var dog_page_route = `route_${$(this).attr('id')}`;
-  window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&navig="+dog_page_route);
-});
-
-$('.XXicon').click(function() {
-  window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&");
-});
-
 //navigate from dogprofile page
 var navig = "./map/navig.json"
 $(document).ready(function() {
