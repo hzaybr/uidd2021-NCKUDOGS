@@ -185,7 +185,7 @@ function initMap() {
       var user_name = $('.username').attr('id')
       var address_base64 = $('.address_base64').attr('id')
       console.log(`map name: ${user_name}`);
-      window.location.assign(`http://luffy.ee.ncku.edu.tw:15038/mixiang.html?${redir_url}&`);
+      window.location.assign(`https://luffy.ee.ncku.edu.tw:15038/mixiang.html?${redir_url}&`);
     });
     route_marker.setVisible(false);
     camera_marker.setVisible(false);
@@ -354,11 +354,11 @@ var now_address
 
 $('.navig').click(function() {
   var dog_page_route = `route_${$(this).attr('id')}`;
-  window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url+"&navig="+dog_page_route);
+  window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&navig="+dog_page_route);
 });
 
 $('.XXicon').click(function() {
-  window.location.assign("https://hzaybr.github.io/uidd2020/index.html?"+redir_url+"&");
+  window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&");
 });
 
 //navigate from dogprofile page
