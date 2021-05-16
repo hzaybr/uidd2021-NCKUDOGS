@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./about.css" rel="stylesheet" type="text/css"> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+
+    <title>about us</title>
+  </head>
+
+  <body style="overflow: hidden;">
+		<div class="background">
+			<p style="font-weight: bolder; text-align: center; font-size: 6vw; margin: 4vw;">關於我們</p>
+			<img src="./image/bg_top.png" style="width: 100%; position: absolute; bottom: -1vw; transform: rotate(180deg);">
+			<img src="./image/XX.png" class="backicon">
+		</div>
+
+		<div class="grid-container">
+			<div>
+				<img src="./image/big12.png" class="avatar" id="p1" width=100%">
+				<b class="grid-font" style="font-size: 4vw;">黃子芸</b>
+				<p class="grid-font">工程師</p>
+			</div>     
+			<div>
+				<img src="./image/big17.png" class="avatar" id="p2" width=100%>
+				<b class="grid-font" style="font-size: 4vw;">林孟萱</b>
+				<p class="grid-font">工程師</p>
+			</div>     
+			<div>
+				<img src="./image/big14.png" class="avatar" id="p3" width=100%>
+				<b class="grid-font" style="font-size: 4vw;">陳彥勳</b>
+				<p class="grid-font">工程師</p>
+			</div>     
+			<div>
+				<img src="./image/big13.png" class="avatar" id="p4" width=100%>
+				<b class="grid-font" style="font-size: 4vw;">方柏翔</b>
+				<p class="grid-font">工程師</p>
+			</div>     
+			<div> 
+				<img src="./image/big15.png" class="avatar" id="p5" width=100%>
+				<b class="grid-font" style="font-size: 4vw;">楊善淞</b>
+				<p class="grid-font">設計師</p>
+			</div> 
+			<div>
+				<img src="./image/big16.png" class="avatar" id="p6" width=100%>  
+				<b class="grid-font" style="font-size: 4vw;">陳加軒</b>
+				<p class="grid-font">設計師</p>
+			</div>     
+		</div>
+
+
+    <div class='blur'>
+      <div class="intro" id="bp1">
+        <img src="./image/big12.png" width="100%">
+        <p class="p-font"><b style="font-size: 5vw;">黃子芸</b></p>
+        <p class="p-font">不能養狗所以只好每天到系館玩狗，希望幫助更多人認識親近學校裡的狗狗。</p>
+      </div>
+      <div class="intro" id="bp2">
+        <img src="./image/big17.png" width="100%">
+        <p class="p-font"><b style="font-size: 5vw;">林孟萱</b></p>
+        <p class="p-font">雖然有點怕狗狗，但還是想更加認識這些常在校園中出現的可愛校狗們。</p>
+      </div>
+      <div class="intro" id="bp3">
+        <img src="./image/big14.png" width="100%">
+        <p class="p-font"><b style="font-size: 5vw;">陳彥勳</b></p>
+        <p class="p-font">到現在還是完全不認識成大的校狗，不知道哪隻是可以親近的，趁這個機會認識一下牠們</p>
+      </div>
+      <div class="intro" id="bp4">
+        <img src="./image/big13.png" width="100%">
+        <p class="p-font"><b style="font-size: 5vw;">方柏翔</b></p>
+        <p class="p-font">我終於知道米香跟麵線怎麼分了，希望可以讓大家更加認識校園中的狗狗們</p>
+      </div>
+      <div class="intro" id="bp5">
+        <img src="./image/big15.png" width="100%">
+        <p class="p-font"><b style="font-size: 5vw;">楊善淞</b></p>
+        <p class="p-font">想摸狗狗，但不知道牠們是不是給摸，所以想傳遞資訊來讓更多想跟狗玩的人知道怎麼跟牠們玩。</p>
+      </div>
+      <div class="intro" id="bp6">
+        <img src="./image/big16.png" width="100%">
+        <p class="p-font"><b style="font-size: 5vw;">陳加軒</b></p>
+        <p class="p-font">航太系大四，興趣是偶爾畫個圖跟看Netflix，心臓を捧げよ！</p>
+      </div>
+   </div>
+		
+    <script>
+      $(document).click(() => { 
+        console.log("Event triggered!")
+        })
+    </script>
+    <script>
+      $(document).ready(function(){
+          $('#fullpage').fullpage({
+            slidesNavigation: true,
+            controlArrows: false,
+            loopHorizontal: false,
+          });
+      })
+    </script>
+    <script src='./about.js'></script>
+ 
+  </body>
+</html>
