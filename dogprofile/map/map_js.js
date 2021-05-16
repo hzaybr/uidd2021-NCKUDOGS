@@ -284,22 +284,23 @@ $('.XXicon').click(function() {
 });
 
 //navigate from dogprofile page
+var navig = "./map/navig.json"
 $(document).ready(function() {
-  user_name = $('.username').attr('id')
-  address_base64 = $('.address_base64').attr('id')
-  now_address = location.href
-  //find if navig is in address or not
-  var navig = now_address.search(/navig/)
-  console.log(navig);
-  if (navig!=-1){
+  $.get(navig, function(json) {
+    var dogID = json["dogID"];
+    console.log(`map dogID: ${dogID}`);
+  if (dogID<20) {
     setTimeout(function() {
-      var route_id = now_address.match(/route_([1-9])/)[0].slice(6);
-      console.log(route_id);
-      target_num = parseInt(Markers[route_id].getTitle());
+      target_num = parseInt(Markers[dogID].getTitle());
       route();
       dogMarker_click(Markers[target_num]);
-      // route(route_id);
      }, 300);
 
+    $.post('./navig', {
+      dogID: 50
+      },(data) =>{
+      });
+
    };
+  });
  });
