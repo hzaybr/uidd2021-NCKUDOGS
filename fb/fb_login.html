@@ -79,7 +79,7 @@
       // successful.  See statusChangeCallback() for when this call is made.
       function testAPI() {
         console.log('Welcome!  Fetching your information.... ')
-        FB.api('/me', "GET", { fields: 'name, picture' }, function(response) {
+        FB.api('/me', "GET", { fields: 'name, picture.height(1600).width(1600)' }, function(response) {
           console.log(`Successful login for: ${response.name}`)
 
           let id = response.id;
