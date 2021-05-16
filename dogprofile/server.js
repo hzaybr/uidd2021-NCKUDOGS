@@ -145,3 +145,22 @@ app.post("/upload_image", async (req, resp) => {
         }
     });
 });
+
+/* position*/
+let position_file = "./map/position.json";
+
+app.post("/update_position", async (req, resp) => {
+  console.log(req.body.dogID);
+  console.log(req.body.lat);
+  console.log(req.body.lng);
+  const jsonObj = JSON.parse(await readJSON(position_file));
+  jsonObj[req.body.dogID] = {
+        "lat":  parseFloat(req.body.lat),
+        "lng":  parseFloat(req.body.lng)
+  };
+  fs.writeFile(position_file, JSON.stringify(jsonObj, null, 4), (err) => {
+        if(err){
+            console.log("Write file failed: " + err);
+        }
+  });
+});

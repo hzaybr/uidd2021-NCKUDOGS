@@ -219,10 +219,10 @@ p {
   grid-template-columns: repeat(6,7vw);
   justify-content: space-between;
 }
-.heart, .avatar, .w-heart {
+.heart, .profile-avatar, .w-heart {
   width: 100%;
 }
-.avatar {
+.profile-avatar {
 	border-radius: 50%;
 }
 .pop-com {
@@ -392,8 +392,8 @@ section button:disabled {
   padding: 8px 0;
   position: absolute;
   z-index: 1;
-  top: 200%;
-  left: 70%;
+  top: 150%;
+  left: 120%;
   margin-left: -180px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
