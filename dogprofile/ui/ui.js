@@ -45,10 +45,12 @@ function listClick(){
 function profileClick(){
   $('.profile').stop();
   if (profileDisplay){
+    $('.profile').css('display','none');
     $('.profile').animate({'left':'105vw'},500);
   }
   else{
     displayCheck();
+    $('.profile').css('display','block');
     $('.profile').animate({'left':'3.73vw'},500);
   }
   profileDisplay = !profileDisplay;
