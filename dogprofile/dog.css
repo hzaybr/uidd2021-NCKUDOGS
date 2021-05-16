@@ -224,6 +224,7 @@ p {
 }
 .profile-avatar {
 	border-radius: 50%;
+  width: 9.06vw;
 }
 .pop-com {
   width: 100%;
