@@ -164,3 +164,20 @@ app.post("/update_position", async (req, resp) => {
         }
   });
 });
+
+/* navigation */
+let navig = "./map/navig.json";
+
+app.post("/navig", async (req, resp) => {
+  var dogID = req.body.dogID;
+  console.log(`dogID: ${dogId}`);
+
+  const jsonObj = JSON.parse(await readJSON(navig));
+  jsonObj["dogID"] = dogID; 
+  fs.writeFile(navig, JSON.stringify(jsonObj, null, 4), (err) => {
+        if(err){
+            console.log("Write file failed: " + err);
+        }
+  });
+  });
+

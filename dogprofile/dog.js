@@ -156,8 +156,21 @@ $('.mesng-icon').click(function() {
 	window.open('https://m.me/ncku.vdogs');
 });
 
+/*****************/
+$('.navig').click(function() {
+  var dogID = $(this).attr('id');
+
+  $.post('./navig', {
+    dogID: dogID
+    },(data) =>{
+    });
+    window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&");
+});
 
 
+$('.XXicon').click(function() {
+  window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&");
+});
 
 
 
