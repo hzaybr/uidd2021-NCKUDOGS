@@ -4,7 +4,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const https = require('https')
-const config = require('./config.js')
+const config = require('./config.js');
+const { json } = require("express");
 
 /* Enable json parsing */
 app.use(express.urlencoded({extended: false, limit: "100mb"}));
@@ -28,7 +29,7 @@ server.listen(port, () => {
 });
 
 /* Read JSON file */
-function readJSON(path){
+function readJSON(path) {
     return new Promise((res, rej) => {
         fs.readFile(path, (err, str) => {
             if(err){
@@ -38,6 +39,14 @@ function readJSON(path){
             res(str);
         });
     })
+}
+
+function writeJSON(path, data) {
+    fs.writeFile(path, JSON.stringify(data, null, 4), (err) => {
+        if(err){
+            console.log("Write file failed: " + err);
+        }
+    });
 }
 
 let cmt_file  = "./data/comments.json";
@@ -64,19 +73,22 @@ app.post("/update_users", async (req, resp) => {
         score = jsonObj[req.body.id].score;
     }
 
-    jsonObj[req.body.id] = {
-        "name":     req.body.name,
-        "profile":  req.body.profile,
-        "score":    score
-    };
+    if (jsonObj.hasOwnProperty(req.body.id)) { // existed user
+        jsonObj[req.body.id].name = req.body.name;
+        jsonObj[req.body.id].profile = req.body.profile;
+        jsonObj[req.body.id].score = score;
+    }
+    else { // new user
+        jsonObj[req.body.id] = {
+            "name":     req.body.name,
+            "profile":  req.body.profile,
+            "score":    score,
+            "comments": {},
+            "photos":   {}
+        };
+    }
     
-    /* Write back to JSON */
-    fs.writeFile(user_file, JSON.stringify(jsonObj, null, 4), (err) => {
-        if(err){
-            console.log("Write file failed: " + err);
-        }
-    });
-
+    writeJSON(user_file, jsonObj);
     resp.send(await readJSON(user_file));
 });
 
@@ -90,36 +102,40 @@ app.post("/load_comments", async (req, resp) => {
 
 /* Show the new comment and store it in JSON */
 app.post("/post_comment", async (req, resp) => {
-    const jsonObj = JSON.parse(await readJSON(cmt_file));
 
-    jsonObj[req.body.comment_id] = {
+    /* Write comment to comments.json */
+    const cmtJsonObj = JSON.parse(await readJSON(cmt_file));
+    cmtJsonObj[req.body.comment_id] = {
         "user":     req.body.user_id,
         "comment":  req.body.comment,
         "photo":    req.body.photo
     };
+    writeJSON(cmt_file, cmtJsonObj);
 
-    /* Write back to JSON */
-    fs.writeFile(cmt_file, JSON.stringify(jsonObj, null, 4), (err) => {
-        if(err){
-            console.log("Write file failed: " + err);
-        }
-    });
+    /* Write comment to users.json */
+    const userJsonObj = JSON.parse(await readJSON(user_file));
+    userJsonObj[req.body.user_id].comments[req.body.comment_id] = req.body.comment;
+    writeJSON(user_file, userJsonObj);
 
-    resp.send(JSON.stringify(jsonObj));
+    /* Return comment json object */
+    resp.send(JSON.stringify(cmtJsonObj));
 });
 
 /* Delete comment */
 app.post("/delete_comment", async (req, resp) => {
-    const jsonObj = JSON.parse(await readJSON(cmt_file));
-    delete jsonObj[req.body.id];
 
-    fs.writeFile(cmt_file, JSON.stringify(jsonObj, null, 4), (err) => {
-        if(err){
-            console.log("Write file failed: " + err);
-        }
-    })
+    /* Delete comment in comments.json */
+    const cmtJsonObj = JSON.parse(await readJSON(cmt_file));
+    delete cmtJsonObj[req.body.comment_id];
+    writeJSON(cmt_file, cmtJsonObj);
 
-    resp.send(JSON.stringify(jsonObj));
+    /* Write comment to users.json */
+    const userJsonObj = JSON.parse(await readJSON(user_file));
+    delete userJsonObj[req.body.user_id].comments[req.body.comment_id];
+    writeJSON(user_file, userJsonObj);
+
+    /* Return comment json object */
+    resp.send(JSON.stringify(cmtJsonObj));
 });
 
 /**********************************************************/
@@ -132,52 +148,45 @@ app.post("/load_images", async (req, resp) => {
 
 /* Show the new image and store it in JSON */
 app.post("/upload_image", async (req, resp) => {
-    const jsonObj = JSON.parse(await readJSON(img_file));
-    jsonObj[req.body.image_id] = {
+
+    /* Write image to images.json */
+    const imgJsonObj = JSON.parse(await readJSON(img_file));
+    imgJsonObj[req.body.image_id] = {
         "user": req.body.user_id,
         "photo": req.body.photo
     }
+    writeJSON(img_file, imgJsonObj);
 
-    /* Write back to JSON */
-    fs.writeFile(img_file, JSON.stringify(jsonObj, null, 4), (err) => {
-        if(err){
-            console.log("Write file failed: " + err);
-        }
-    });
+    /* Write image to users.json */
+    const userJsonObj = JSON.parse(await readJSON(user_file));
+    userJsonObj[req.body.user_id].photos[req.body.image_id] = req.body.photo;
+    writeJSON(user_file, userJsonObj);
 });
 
 /* position*/
 let position_file = "./map/position.json";
 
 app.post("/update_position", async (req, resp) => {
-  console.log(req.body.dogID);
-  console.log(req.body.lat);
-  console.log(req.body.lng);
-  const jsonObj = JSON.parse(await readJSON(position_file));
-  jsonObj[req.body.dogID] = {
+    console.log(req.body.dogID);
+    console.log(req.body.lat);
+    console.log(req.body.lng);
+    const jsonObj = JSON.parse(await readJSON(position_file));
+    jsonObj[req.body.dogID] = {
         "lat":  parseFloat(req.body.lat),
         "lng":  parseFloat(req.body.lng)
-  };
-  fs.writeFile(position_file, JSON.stringify(jsonObj, null, 4), (err) => {
-        if(err){
-            console.log("Write file failed: " + err);
-        }
-  });
+    };
+    writeJSON(position_file, jsonObj);
 });
 
 /* navigation */
 let navig = "./map/navig.json";
 
 app.post("/navig", async (req, resp) => {
-  var dogID = req.body.dogID;
-  console.log(`dogID: ${dogID}`);
+    var dogID = req.body.dogID;
+    console.log(`dogID: ${dogID}`);
 
-  const jsonObj = JSON.parse(await readJSON(navig));
-  jsonObj["dogID"] = dogID; 
-  fs.writeFile(navig, JSON.stringify(jsonObj, null, 4), (err) => {
-        if(err){
-            console.log("Write file failed: " + err);
-        }
-  });
-  });
+    const jsonObj = JSON.parse(await readJSON(navig));
+    jsonObj["dogID"] = dogID;
+    writeJSON(navig, jsonObj);
+});
 

@@ -331,7 +331,8 @@ function concat_comment(comment_id, user_id, comment, photo) {
 		$(`#${btn_dlt_id}`).click(function () {
 			const promise = new Promise((resolve, reject) => {
 				$.post("./delete_comment", {
-					id: comment_id,
+					user_id:	USER_ID,
+					comment_id: comment_id,
 				}, (resp) => {
 					resolve(resp);
 				});
@@ -430,11 +431,11 @@ function load_user() {
 		}
 		
 		/* Total users */
-		let user_len = Object.keys(user_data).length - score[0];
+		let user_len = Object.keys(user_data).length - score[0]; // exclude user with no score
 		document.getElementById("review-count").innerHTML = `(${user_len})`;
 
 		/* Average score */
-		let avg_score = Math.round(10 *　sum / user_len) / 10;
+		let avg_score = Math.round(10 * sum / user_len) / 10;
 		obj = document.getElementsByClassName("average-score");
 		for (let i = 0; i < obj.length; ++i) {
   			obj[i].innerHTML = avg_score;
