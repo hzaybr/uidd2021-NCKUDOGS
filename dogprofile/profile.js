@@ -24,6 +24,11 @@ $('.button').click(function() {
   };
 })
 
+$('.XXicon').click(function() {
+  window.location.assign('index.html')
+});
+
+
 /**********************************/
 const usersfile = "./data/users.json"
 var comments 
