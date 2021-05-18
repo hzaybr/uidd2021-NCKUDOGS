@@ -13,7 +13,13 @@ var route_marker;
 var route_uluru = {lat: current_lat, lng: current_lng};
 var more_marker;
 var more_uluru = {lat: current_lat, lng: current_lng};
-var infowincontent = '<div style="width:30vw" id="infowindow"><p style="text-align:center; margin:0px;width : 30vw;">CONTENT</p><img src="./map/love_icon/Group 420@3x.png" style="width : 30vw;"></div>';
+var infowincontent = '<div style="width:30vw" id="infowindow">\
+                      <p style="text-align:center; margin:0px;width : 30vw;">CONTENT</p>\
+                      <img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "1">\
+                      <img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "2">\
+                      <img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "3">\
+                      <img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "4">\
+                      <img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "5"></div>';
 var Markers=[];
 var Infowincontents=[];
 var count = -1;
