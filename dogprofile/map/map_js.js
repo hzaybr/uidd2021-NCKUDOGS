@@ -35,6 +35,7 @@ const MAP_BOUNDS = {
   west: 120.21060,
   east: 120.22808,
 };
+var userimg;
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
     directionsService = new google.maps.DirectionsService();
@@ -59,15 +60,15 @@ function initMap() {
       console.log('zoom'+map.getZoom());
     });
     //user mark
-    var userimg = document.createElement("img");
-    userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
-    // userimg.src = PROFILE_PIC;
-    ownermarker = new google.maps.Marker({
+    userimg = document.createElement("img");
+    // userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
+    userimg.src = PROFILE_PIC;
+    ownermarker = new MarkerWithLabel({
       position: owner_uluru,
       map: map,
       icon: {
         url:'./map/mark_icon/dog_marker_good.png',
-        scaledSize: new google.maps.Size(60, 60)
+        scaledSize: new google.maps.Size(62, 77)
       },
       labelContent: userimg, 
       labelAnchor: new google.maps.Point(-23, -70),
