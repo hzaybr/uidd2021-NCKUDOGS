@@ -312,22 +312,22 @@ function showMarkers(target_number){
 
 //navigate from dogprofile page
 var navig = "./map/navig.json"
-$(document).ready(function() {
+
+setTimeout(function() {
   $.get(navig, function(json) {
     var dogID = json["dogID"];
     console.log(`navig dogID: ${dogID}`);
   if (dogID<20) {
-    setTimeout(function() {
-      target_num = parseInt(Markers[dogID].getTitle());
-      route();
-      dogMarker_click(Markers[target_num]);
-     }, 300);
+    target_num = parseInt(Markers[dogID].getTitle());
+    route();
+    dogMarker_click(Markers[target_num]);
 
-    $.post('./navig', {
-      dogID: 50
-      },(data) =>{
-      });
+    setTimeout(function() {
+      $.post('./navig', {
+        dogID: 50
+        },() =>{});
+    },2000)
 
    };
-  });
  });
+}, 500)
