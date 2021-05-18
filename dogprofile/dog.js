@@ -295,18 +295,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 	txt += 	"<div class=\"w-user-bar\">";
 	txt += 		`<img class=\"profile-avatar\" src=${user.profile}>`;
 	txt += 		`<div class=\"username\" style=\"display: block;\">${user.name}</div>`;
-	txt += 	"</div>";
 
-	/* User score */
-	txt += 	"<div class=\"comment-score\">"
-	let i;
-	for (i = 0; i < user.score; ++i) {
-		txt += "<img style=\"width:5%\" src=\"./image/red_heart.png\">"
-	}
-	for(; i < 5; ++i) {
-		txt +=  "<img style=\"width:5%\" src=\"./image/gray_heart.png\">"
-	}
-	
 	if (user_id == USER_ID) {
 		console.log("edit");
 		txt += 	`<div class=\"cmt-btn\" onclick=\'(function(){document.getElementById(\"${option_id}\").classList.toggle(\"show\");})();'>AA`;
@@ -317,6 +306,19 @@ function concat_comment(comment_id, user_id, comment, photo) {
 		txt += 		"</span>";
 		txt += 	"</div>";
 	}
+
+	txt += 	"</div>";
+
+	/* User score */
+	txt += 	"<div class=\"comment-score\">"
+	let i;
+	for (i = 0; i < user.score; ++i) {
+		txt += "<img style=\"width:4.5%\" src=\"./image/red_heart.png\">"
+	}
+	for(; i < 5; ++i) {
+		txt +=  "<img style=\"width:4.5%\" src=\"./image/gray_heart.png\">"
+	}
+	
 
     txt +=	"</div>"
 

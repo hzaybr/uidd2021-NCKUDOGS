@@ -43,20 +43,19 @@ $(document).ready(function(){
 
 		for (var c in comments){
       cmt_txt += "<div class=\"c-border\">"
-			cmt_txt += "<img width=\"80%\" src=\"./aboutus_appv/image/Group 322@3x.png\">"
-			cmt_txt += "<div class=\"cmt-sub-grid\">"
-			cmt_txt += "<p style=\"margin:1vw; font-size:3.8vw; font-weight:bold;\">米香</p>"
-			cmt_txt += "<div style=\"margin: 1vw;padding-top:1.5vw;\">"
+			cmt_txt +=   "<img width=\"80%\" src=\"./aboutus_appv/image/Group 322@3x.png\">"
+			cmt_txt +=   "<div class=\"cmt-sub-grid\">"
+			cmt_txt +=     "<p style=\"margin:1vw; font-size:3.8vw; font-weight:bold;\">米香</p>"
+			cmt_txt +=     "<div style=\"margin: 1vw;padding-top:1.5vw;\">"
 			for(i=0;i<score;i++){
-				cmt_txt += "<img style=\"width:4%\" src=\"./image/red_heart.png\">"
+				cmt_txt +=     "<img style=\"width:4%\" src=\"./image/red_heart.png\">"
 			}
 			for(;i<5;i++){
-				cmt_txt += "<img style=\"width:4%\" src=\"./image/gray_heart.png\">"
+				cmt_txt +=     "<img style=\"width:4%\" src=\"./image/gray_heart.png\">"
 			}
-			cmt_txt += "</div>"
-			cmt_txt += "<p style=\"margin:1vw;font-size:3.6vw;\">"+comments[c]+"</p>"
-			cmt_txt += "</div>"
-			cmt_txt += "</div>"
+			cmt_txt +=     "</div>"
+			cmt_txt +=     "<p style=\"margin:1vw;font-size:3.6vw;\">"+comments[c]+"</p>"
+			cmt_txt +=   "</div>"
 			cmt_txt += "</div>"
       console.log(comments[c])
 		};
