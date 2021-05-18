@@ -71,7 +71,7 @@ function initMap() {
         scaledSize: new google.maps.Size(62, 77)
       },
       labelContent: userimg, 
-      labelAnchor: new google.maps.Point(-23, -70),
+      labelAnchor: new google.maps.Point(-25.5, -71.5),
       labelClass: "labels", 
       labelStyle: { opacity: 1.0 }
     });
