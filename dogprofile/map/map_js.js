@@ -13,7 +13,13 @@ var route_marker;
 var route_uluru = {lat: current_lat, lng: current_lng};
 var more_marker;
 var more_uluru = {lat: current_lat, lng: current_lng};
-var infowincontent = '<div style="width:30vw" id="infowindow"><p style="text-align:center; margin:0px;width : 30vw;">CONTENT</p><img src="./map/love_icon/Group 420@3x.png" style="width : 30vw;"></div>';
+var infowincontent = '<div style="width:30vw" id="infowindow">\
+                      <p style="text-align:center; margin:0px;width : 30vw;">CONTENT</p>\
+                      <img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "1">\
+                      <img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "2">\
+                      <img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "3">\
+                      <img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "4">\
+                      <img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "5"></div>';
 var Markers=[];
 var Infowincontents=[];
 var count = -1;
@@ -176,8 +182,18 @@ function dogMarker_click(target_marker){
       scaledSize: new google.maps.Size(130,130)
     }
     target_marker.setIcon(new_icon);
+    var target_infowincontent = infowincontent;
+    var avg_score = parseInt(localStorage.getItem("avg_score"));
+    if(avg_score==NaN){
+      avg_score = 4;
+    }
+    if(avg_score>=0&&avg_score<=5){
+      for(i=1;i<=avg_score;i++){
+        target_infowincontent = target_infowincontent.replace(`<img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "${i}">`,`<img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "${i}">`);
+      }
+    }
     var infowindow = new google.maps.InfoWindow({
-      content: infowincontent.replace('CONTENT',dog_name[target_num])
+      content: target_infowincontent.replace('CONTENT',dog_name[target_num])
     });
     infowindow.open(map, target_marker);   
     currentInfoWindow = infowindow;
@@ -242,11 +258,14 @@ $( "#mg1 img" ).click(function() {
 function route(){
   if(routemode){
     directionsDisplay.setDirections({routes: []});
+		var choose_num = target_num;
+		showMarkers(choose_num);
   }else{
     // add route funtion
     directionsDisplay.setMap(map);
     var choose_num = target_num;
     console.log(choose_num)
+		clearMarkers(choose_num);
     var target_lat = Markers[choose_num].getPosition().lat();;
     var target_lng = Markers[choose_num].getPosition().lng();;
     var request = {
@@ -267,6 +286,19 @@ function route(){
 }
 function camera(){
   $( "#camera_btn" ).click();
+}
+function setMapOnAll(target_number,map){
+  for (var i = 0; i< Markers.length; i++) {
+    if(i!=target_number){
+      Markers[i].setMap(map);
+    }
+  }
+}
+function clearMarkers(target_number){
+  setMapOnAll(target_number,null);
+}
+function showMarkers(target_number){
+  setMapOnAll(target_number,map);
 }
 
 

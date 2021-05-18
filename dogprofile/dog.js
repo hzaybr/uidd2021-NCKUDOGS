@@ -164,12 +164,12 @@ $('.navig').click(function() {
     dogID: dogID
     },(data) =>{
     });
-    window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&");
+    window.location.assign("index.html");
 });
 
 
 $('.XXicon').click(function() {
-  window.location.assign("https://luffy.ee.ncku.edu.tw:15038/index.html?"+redir_url+"&");
+  window.location.assign("index.html");
 });
 
 

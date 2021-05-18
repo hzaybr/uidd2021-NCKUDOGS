@@ -70,6 +70,7 @@ body {
 }
 
 .profile {
+  display: none;
   position: absolute;
   width: 92.53vw;
   height: 111.2vw;
