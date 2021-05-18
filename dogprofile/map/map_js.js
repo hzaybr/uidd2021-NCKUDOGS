@@ -242,11 +242,14 @@ $( "#mg1 img" ).click(function() {
 function route(){
   if(routemode){
     directionsDisplay.setDirections({routes: []});
+		var choose_num = target_num;
+		showMarkers(choose_num);
   }else{
     // add route funtion
     directionsDisplay.setMap(map);
     var choose_num = target_num;
     console.log(choose_num)
+		clearMarkers(choose_num);
     var target_lat = Markers[choose_num].getPosition().lat();;
     var target_lng = Markers[choose_num].getPosition().lng();;
     var request = {
@@ -267,6 +270,19 @@ function route(){
 }
 function camera(){
   $( "#camera_btn" ).click();
+}
+function setMapOnAll(target_number,map){
+  for (var i = 0; i< Markers.length; i++) {
+    if(i!=target_number){
+      Markers[i].setMap(map);
+    }
+  }
+}
+function clearMarkers(target_number){
+  setMapOnAll(target_number,null);
+}
+function showMarkers(target_number){
+  setMapOnAll(target_number,map);
 }
 
 
