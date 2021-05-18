@@ -1,7 +1,6 @@
 body {
 	margin: 0;
   overflow-x: hidden;
-  overflow-y: hidden;
 }
 p {
   margin: 2vw;
@@ -57,6 +56,7 @@ p {
   width: 100%;
   height: 100%;
   background-color: white;
+  overflow: hidden;
 }
 .pic-container, .gps-container {display: none;}
 .cmt-sub-grid {
@@ -74,4 +74,13 @@ p {
   border-bottom-color: #00000029;
   border-bottom-style: solid;
   border-bottom-width: 0.1vw;
+}
+.pic-grid {
+  display: grid;
+	grid-template-columns: repeat(3,33.1vw);
+	width: 100%;
+	grid-gap: 0.7vw;
+}
+.grid-photo {
+  background-size: cover;
 }

@@ -33,14 +33,15 @@ $('.XXicon').click(function() {
 const usersfile = "./data/users.json"
 var comments 
 var score
+var photos
 
 $(document).ready(function(){
 	$.get(usersfile, function(usr_json){
 		comments =  usr_json[USER_ID]["comments"];
 		score =  usr_json[USER_ID]["score"];
-		console.log(comments);
-    cmt_txt = ""
+		photos =  usr_json[USER_ID]["photos"];
 
+    cmt_txt = ""
 		for (var c in comments){
       cmt_txt += "<div class=\"c-border\">"
 			cmt_txt +=   "<img width=\"80%\" src=\"./aboutus_appv/image/Group 322@3x.png\">"
@@ -61,6 +62,16 @@ $(document).ready(function(){
 		};
 
 		$('.comment-grid').html(cmt_txt);
-	});
 
+    p_txt = ""
+    var pic_num = Object.keys(photos).length
+    var row = pic_num%3 + 1
+    console.log(row)
+    $('.pic-grid').css("grid-template-rows", `repeat(${row}, 33.1vw)`)
+    for(var p in photos){
+      p_txt += `<div class="grid-photo" style="background-image:url(${photos[p]})"></div>`
+    }
+    $('.pic-grid').html(p_txt);
+
+	});
 });
