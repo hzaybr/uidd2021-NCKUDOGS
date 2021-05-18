@@ -59,13 +59,20 @@ function initMap() {
       console.log('zoom'+map.getZoom());
     });
     //user mark
+    var userimg = document.createElement("img");
+    userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
+    // userimg.src = PROFILE_PIC;
     ownermarker = new google.maps.Marker({
       position: owner_uluru,
       map: map,
       icon: {
-        url:PROFILE_PIC,
+        url:'./map/mark_icon/dog_marker_good.png',
         scaledSize: new google.maps.Size(60, 60)
-      }
+      },
+      labelContent: userimg, 
+      labelAnchor: new google.maps.Point(-23, -70),
+      labelClass: "labels", 
+      labelStyle: { opacity: 1.0 }
     });
     //dog's mark 
     $.get(position_file,function(json){
