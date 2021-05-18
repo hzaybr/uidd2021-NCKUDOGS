@@ -184,12 +184,12 @@ function dogMarker_click(target_marker){
     target_marker.setIcon(new_icon);
     var target_infowincontent = infowincontent;
     var avg_score = parseInt(localStorage.getItem("avg_score"));
-    if(avg_score==null){
+    if(avg_score==NaN){
       avg_score = 4;
     }
     if(avg_score>=0&&avg_score<=5){
       for(i=1;i<=avg_score;i++){
-        target_infowincontent = target_infowincontent.replace(`<img src="./images/860757@3x.png" style="width : 5vw;" id = "${i}"`,`<img src="./images/860758@3x.png" style="width : 5vw;" id = "${i}"`);
+        target_infowincontent = target_infowincontent.replace(`<img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "${i}">`,`<img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "${i}">`);
       }
     }
     var infowindow = new google.maps.InfoWindow({
