@@ -61,8 +61,8 @@ function initMap() {
     });
     //user mark
     userimg = document.createElement("img");
-    // userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
-    userimg.src = PROFILE_PIC;
+    userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
+    // userimg.src = PROFILE_PIC;
     ownermarker = new MarkerWithLabel({
       position: owner_uluru,
       map: map,
@@ -71,7 +71,7 @@ function initMap() {
         scaledSize: new google.maps.Size(62, 77)
       },
       labelContent: userimg, 
-      labelAnchor: new google.maps.Point(-23, -70),
+      labelAnchor: new google.maps.Point(-25.5, -71.5),
       labelClass: "labels", 
       labelStyle: { opacity: 1.0 }
     });
