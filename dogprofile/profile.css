@@ -59,9 +59,19 @@ p {
   background-color: white;
 }
 .pic-container, .gps-container {display: none;}
-.comment-grid {
+.cmt-sub-grid {
+	display: grid;
+	height: 100%;
+	width: 100%;
+	grid-template-rows: 30% 30% auto;
+}
+.c-border {
 	display: grid;
 	grid-template-columns: 20% 80%;
-	align-items: center;
 	justify-items: center;
+  height: auto;
+  padding: 3vw;
+  border-bottom-color: #00000029;
+  border-bottom-style: solid;
+  border-bottom-width: 0.1vw;
 }
