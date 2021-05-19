@@ -139,6 +139,9 @@ $('#messenger-icon').click(function(){
   window.location.assign("https://www.facebook.com/ncku.vdogs")  
 })
 
+$('.profile-avatar').click(function() {
+  window.location.assign('userprofile.html')
+})
 $('#observ').click(function(){
   $('#s2').fadeIn(0);
 })

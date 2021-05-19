@@ -35,6 +35,7 @@ const MAP_BOUNDS = {
   west: 120.21060,
   east: 120.22808,
 };
+var userimg;
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
     directionsService = new google.maps.DirectionsService();
@@ -59,13 +60,20 @@ function initMap() {
       console.log('zoom'+map.getZoom());
     });
     //user mark
-    ownermarker = new google.maps.Marker({
+    userimg = document.createElement("img");
+    // userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
+    userimg.src = PROFILE_PIC;
+    ownermarker = new MarkerWithLabel({
       position: owner_uluru,
       map: map,
       icon: {
-        url:PROFILE_PIC,
-        scaledSize: new google.maps.Size(60, 60)
-      }
+        url:'./map/mark_icon/dog_marker_good.png',
+        scaledSize: new google.maps.Size(62, 77)
+      },
+      labelContent: userimg, 
+      labelAnchor: new google.maps.Point(-25.5, -71.5),
+      labelClass: "labels", 
+      labelStyle: { opacity: 1.0 }
     });
     //dog's mark 
     $.get(position_file,function(json){
@@ -304,22 +312,22 @@ function showMarkers(target_number){
 
 //navigate from dogprofile page
 var navig = "./map/navig.json"
-$(document).ready(function() {
+
+setTimeout(function() {
   $.get(navig, function(json) {
     var dogID = json["dogID"];
     console.log(`navig dogID: ${dogID}`);
   if (dogID<20) {
-    setTimeout(function() {
-      target_num = parseInt(Markers[dogID].getTitle());
-      route();
-      dogMarker_click(Markers[target_num]);
-     }, 300);
+    target_num = parseInt(Markers[dogID].getTitle());
+    route();
+    dogMarker_click(Markers[target_num]);
 
-    $.post('./navig', {
-      dogID: 50
-      },(data) =>{
-      });
+    setTimeout(function() {
+      $.post('./navig', {
+        dogID: 50
+        },() =>{});
+    },2000)
 
    };
-  });
  });
+}, 500)

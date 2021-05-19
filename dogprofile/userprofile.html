@@ -1,0 +1,82 @@
+<!DOCTYPEE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./profile.css" rel="stylesheet" type="text/css"> 
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+
+    <title>user</title>
+  </head>
+ 
+  <body>
+    <img class="bg-top" src="./image/bg_top.jpg">
+
+    <!-- comment -->
+    <div class="comment-container">
+      <img class="XXicon" src="./image/XX.png">
+      <div>
+        <p class="top-name"></p>
+      </div>
+      <div class="topbar-grid">
+        <div class ="button" id="00" style="color: #ff8b2c;"><p><b>評論</b></p></div>
+        <div class ="button" id="01"><p><b>照片</b></p></div>
+        <div class ="button" id="02"><p><b>定位</b></p></div>
+      </div>
+      <div class="scroll-bar"></div>
+
+      <div style="width: 100%; height: 87%;	overflow-y: auto;">
+				<div class="comment-grid">
+          <!-- load comment from profile.js -->  
+				</div>
+      </div>
+
+    </div>
+
+    <!-- pic -->
+    <div class="pic-container">
+      <img class="XXicon" src="./image/XX.png">
+      <div>
+        <p class="top-name"></p>
+      </div>
+      <div class="topbar-grid">
+        <div class ="button" id="10"><p><b>評論</b></p></div>
+        <div class ="button" id="11" style="color: #ff8b2c;"><p><b>照片</b></p></div>
+        <div class ="button" id="12"><p><b>定位</b></p></div>
+      </div>
+      <div class="scroll-bar"></div>
+
+      <div style="width: 100%; height: 87%;	overflow-y: auto;">
+        <div class="pic-grid">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- gps -->
+    <div class="gps-container">
+      <img class="XXicon" src="./image/XX.png">
+      <div>
+        <p class="top-name"></p>
+      </div>
+      <div class="topbar-grid">
+        <div class ="button" id="20"><p><b>評論</b></p></div>
+        <div class ="button" id="21"><p><b>照片</b></p></div>
+        <div class ="button" id="22" style="color: #ff8b2c;"><p><b>定位</b></p></div>
+      </div>
+      <div class="scroll-bar"></div>
+
+    </div>
+
+    <script src="./ui/user.js"></script>
+    <script src='./profile.js'></script>
+    <script>
+      $(document).ready(function() {
+        $('.top-name').html(USER_NAME).show();
+        
+      })
+    </script>
+
+  </body>
+</html>

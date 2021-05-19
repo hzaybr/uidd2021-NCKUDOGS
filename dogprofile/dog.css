@@ -27,7 +27,7 @@ p {
   font-weight: bold;
   color: #FF8B2C;
 }
-.username {display: none; font-weight: bold;}
+.username {display: none; font-weight: bold; font-size: 4vw;}
 .start {
   overflow: auto;
   position: absolute;
@@ -213,11 +213,10 @@ p {
   display: grid;
   width: 75%;
   height: 11vw;
-  padding-top: 5vw;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding: 5vw;
   grid-template-columns: repeat(6,7vw);
   justify-content: space-between;
+  align-items: center;
 }
 .heart, .profile-avatar, .w-heart {
   width: 100%;
@@ -269,12 +268,13 @@ p {
 #writing-cancel-btn { left: 4vw;}
 #writing-post-btn { right: 4vw;}
 .w-user-bar {
-  width: 90%;
+  width: 94%;
   height: 12vw;
-  padding: 6vw;
+  padding: 2vw;
+  padding-left: 5vw;
   grid-gap: 5vw;
   display: grid;
-  grid-template-columns: 10vw auto;
+  grid-template-columns: 10vw auto 10vw;
   align-items: center;
 }
 .w-heart-grid {
@@ -382,7 +382,7 @@ section button:disabled {
   background-size: cover;
   background-repeat: false;
   color:rgba(0, 0, 0, 0);
-  height: 7vw;
+  height: 5vw;
 }
 .cmt-option {
   visibility: hidden;
@@ -424,8 +424,10 @@ hr.cmt-btn-ln {
   to {opacity:1 ;}
 }
 .comment {
+  padding: 2vw;
 	padding-left: 6vw;
 	padding-right: 6vw;
+  font-size: 3.8vw;
 }
 .comment-pic {
   max-width:100%;

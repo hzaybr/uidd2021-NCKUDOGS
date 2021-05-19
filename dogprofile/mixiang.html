@@ -204,7 +204,7 @@
         </div>
 
         <div class="com-border">
-          <p style="font-size: 4.2vw; margin: 2vw; margin-left: 5vw;">評分和評論</p>
+          <p style="font-size: 4vw; margin: 2vw; margin-left: 5vw; font-weight:bold;">你的評論</p>
           <p style="font-size: 3.7vw; margin-left: 5vw;;">分享你的經驗以協助他人</p>
 
           <div class="heart-grid">
@@ -233,14 +233,14 @@
           </div>
 
         </div>
-        <p id="comment_start" style="font-size: 4.2vw; padding: 2vw; padding-left: 5vw; margin:0;"><b>評論</b></p>
+        <p id="comment_start" style="font-size: 4vw; padding: 2vw; padding-left: 5vw; margin:0;"><b>評論</b></p>
         <ul class="clearfix comments" id="comment_box">       
           <!-- 
           Load comments from json.
           Below is an example of what a comment should look like:
           (Comment start)
           -->
-          <div class="com-border" id="comment_developer">
+          <div class="com-border" id="comment_developer" style="display:none;">
 
             <div class="w-user-bar">
               <img class="profile-avatar" src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2056833377791449&height=50&width=50&ext=1622896800&hash=AeR_zZHe_bE22BUKc0U">
@@ -279,8 +279,6 @@
         <img class="profile-avatar" src="image/Ellipse_303.png">
         <div class="username"></div>
         <!--user_name = $('.username').attr('id') -->
-        <div class="address_base64"></div>
-        <!--address = $('.address_base64').attr('id') -->
       </div>
 
       <div class="w-heart-grid">
@@ -350,7 +348,6 @@
 
     <script src="./ui/user.js"></script>
     <script src='./dog.js'></script>
-    <script src="./map/map_js.js"></script>
     <script>
       $(document).ready(function() {
         var user_name = $('.username').attr('id');
