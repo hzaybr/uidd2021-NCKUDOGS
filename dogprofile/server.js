@@ -8,14 +8,14 @@ const config = require('./config.js');
 const { json } = require("express");
 
 /* Enable json parsing */
-app.use(express.urlencoded({extended: false, limit: "100mb"}));
-app.use(express.json({limit: "100mb"}));
+app.use(express.urlencoded({extended: false, limit: "1024mb"}));
+app.use(express.json({limit: "1024mb"}));
 
 /* Static path */
 app.use("/", express.static(__dirname));
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 15038;
 
 const sslOptions = {
   key: fs.readFileSync(config.key_path),
@@ -29,12 +29,36 @@ server.listen(port, () => {
 });
 
 /* Read JSON file */
-function readJSON(path) {
+
+/* 
+ * __readJSON() sometimes returns incomplete json data
+ * without giving any error message.
+ * This function trys parsing the data until success.
+ * 
+ * Notice that this function will enter endless loop if
+ * the json file to read is already invalid.
+ */
+async function readJSON(path) {
+    while (true) {
+        try {
+            const obj = await __readJSON(path);
+            JSON.parse(obj);
+            return obj;
+        } catch (err) {
+            if (err == -1) {
+                return "";
+            }
+            console.log(`Failed to read ${path} -> ${err}`);
+        }
+    }
+}
+
+function __readJSON(path) {
     return new Promise((res, rej) => {
         fs.readFile(path, (err, str) => {
             if(err){
                 console.log("File read failed:", err);
-                rej();
+                rej(-1);
             }
             res(str);
         });

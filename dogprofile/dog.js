@@ -187,15 +187,18 @@ $(function(){
 		score:		""
 	}, () => {});
 
-	load_user(); // Load in user data first
-
-	/* 
-	 * The 1 sec delay is essential for high success rate
-	 * of comment being loaded correctly.
-	 * I tried using Promise to ensure executing order but doesn't work.
-	 */
-	setTimeout(load_comment, 1000);
-	setTimeout(load_image, 1000);
+	/* Initialize image and comment section */
+	const promise = new Promise((resolve, reject) => {
+		$.post("./load_users", (user_json) => {
+			user_data = JSON.parse(user_json);
+			resolve(user_data);
+		});
+	});
+	promise.then((value) => {
+		load_user();
+		load_image();
+		load_comment();
+	});
 
 });
 
@@ -340,7 +343,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 				});
 			});				
 			promise.then((value) => {
-			reload_comment();
+				reload_comment();
 			});			
 		});
 
@@ -415,40 +418,37 @@ function load_image() {
 }
 
 function load_user() {
-	$.post("./load_users", (user_json) => {
-		user_data = JSON.parse(user_json);
 
-		/* Sum of score */
-		let sum = 0;
-		let score = [0,0,0,0,0,0];
-		$.each(user_data, function(index, val) {
-			sum += val.score;
-			++score[val.score];
-		});
-
-		/* Score bars */
-		let obj = document.getElementsByClassName("score-bar-count");
-		for (let i = 1; i <= obj.length; ++i) {
-			obj[obj.length-i].style.width = `${score[i] * 100 / Math.max(...score)}%`;
-		}
-		
-		/* Total users */
-		let user_len = Object.keys(user_data).length - score[0]; // exclude user with no score
-		document.getElementById("review-count").innerHTML = `(${user_len})`;
-
-		/* Average score */
-		let avg_score = Math.round(10 * sum / user_len) / 10;
-		obj = document.getElementsByClassName("average-score");
-		for (let i = 0; i < obj.length; ++i) {
-  			obj[i].innerHTML = avg_score;
-		}
-		localStorage.setItem("avg_score", avg_score);
-
-		/* Hearts */
-		for (let i = 0; i <= avg_score; ++i) {
-			heart = `.info-heart:nth-child(${i+1}), .review-heart:nth-child(${i})`;
-			$(heart).attr('src','./image/red_heart.png');
-		}
-		
+	/* Sum of score */
+	let sum = 0;
+	let score = [0,0,0,0,0,0];
+	$.each(user_data, function(index, val) {
+		sum += val.score;
+		++score[val.score];
 	});
+
+	/* Score bars */
+	let obj = document.getElementsByClassName("score-bar-count");
+	for (let i = 1; i <= obj.length; ++i) {
+		obj[obj.length-i].style.width = `${score[i] * 100 / Math.max(...score)}%`;
+	}
+	
+	/* Total users */
+	let user_len = Object.keys(user_data).length - score[0]; // exclude user with no score
+	document.getElementById("review-count").innerHTML = `(${user_len})`;
+
+	/* Average score */
+	let avg_score = Math.round(10 * sum / user_len) / 10;
+	obj = document.getElementsByClassName("average-score");
+	for (let i = 0; i < obj.length; ++i) {
+		obj[i].innerHTML = avg_score;
+	}
+	localStorage.setItem("avg_score", avg_score);
+
+	/* Hearts */
+	for (let i = 0; i <= avg_score; ++i) {
+		heart = `.info-heart:nth-child(${i+1}), .review-heart:nth-child(${i})`;
+		$(heart).attr('src','./image/red_heart.png');
+	}
+	
 }
