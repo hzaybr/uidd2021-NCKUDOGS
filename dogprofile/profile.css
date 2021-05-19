@@ -80,6 +80,7 @@ p {
 	grid-template-columns: repeat(3,33.1vw);
 	width: 100%;
 	grid-gap: 0.7vw;
+  padding-top: 2vw;
 }
 .grid-photo {
   background-size: cover;
