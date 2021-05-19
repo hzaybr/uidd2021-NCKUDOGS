@@ -35,7 +35,7 @@ var comments
 var score
 var photos
 
-$(document).ready(function(){
+//$(document).ready(function(){
 	$.get(usersfile, function(usr_json){
 		comments =  usr_json[USER_ID]["comments"];
 		score =  usr_json[USER_ID]["score"];
@@ -74,4 +74,4 @@ $(document).ready(function(){
     $('.pic-grid').html(p_txt);
 
 	});
-});
+//});
