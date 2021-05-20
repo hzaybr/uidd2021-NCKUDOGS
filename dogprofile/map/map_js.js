@@ -121,7 +121,7 @@ function initMap() {
       var user_name = $('.username').attr('id')
       var address_base64 = $('.address_base64').attr('id')
       console.log(`map name: ${user_name}`);
-      window.location.assign("mixiang.html");
+      window.location.assign("dog.html");
     });
     route_marker.setVisible(false);
     camera_marker.setVisible(false);
