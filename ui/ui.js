@@ -45,11 +45,13 @@ function listClick(){
 function profileClick(){
   $('.profile').stop();
   if (profileDisplay){
-    $('.profile').animate({'left':'105vw','display':'none'},500);
+    $('.profile').animate({'left':'105vw'},500);
+    setTimeout(function(){$('.profile').css('display','none');},500);
   }
   else{
     displayCheck();
-    $('.profile').animate({'left':'3.73vw','display':'block'},500);
+    $('.profile').css('display','block');
+    $('.profile').animate({'left':'3.73vw'},500);
   }
   profileDisplay = !profileDisplay;
 
