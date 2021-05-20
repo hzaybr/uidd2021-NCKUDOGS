@@ -167,13 +167,26 @@ $('.navig').click(function() {
     window.location.assign("index.html");
 });
 
-
 $('.XXicon').click(function() {
   window.location.assign("index.html");
 });
 
 
-
+/*******************************************************************/
+const dogfile = "./dog.json"
+$(document).ready(function() {
+  $.get(dogfile, function(json){
+    var dog_id = $('.navig').attr('id');
+    var dog = json[dog_id]
+    $('#dogname').html(dog["name"]);
+    $('.top-name').html(dog["name"]);
+    $('#subname').html(dog["subname"]);
+    $('.place').html(dog["place"]);
+    $('.health-info').html(dog["health-info"]);
+    $('#li-intro').html(dog["li-intro"]);
+    $('#all-info').html(dog["all-info"]);
+  });
+});
 
 
 /***************************************************************** */

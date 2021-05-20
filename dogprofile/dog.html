@@ -7,7 +7,7 @@
       
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
 
-    <title>米香</title>
+    <title>dog</title>
   </head>
  
   <body>
@@ -20,7 +20,7 @@
 
       <div class="info">
         <div>
-          <p style="font-size: 5vw; margin: 0;"><b>米香</b></p>
+          <p id="dogname" style="font-size: 5vw; margin: 0; font-weight:bold;"></p>
           <div class="info-score">
             <p style="font-size: 4vw; margin: 0; display: inherit;" class="average-score">5.0</p>
             <img style="width:80%" class="info-heart" src="./image/gray_heart.png">
@@ -29,7 +29,7 @@
             <img style="width:80%" class="info-heart" src="./image/gray_heart.png">
             <img style="width:80%" class="info-heart" src="./image/gray_heart.png">
           </div>
-          <p style="font-size: 3.8vw; margin: 0;">自強三傻</p>
+          <p id="subname" style="font-size: 3.8vw; margin: 0;"></p>
         </div>
         <img class="navig" id="5" src="./image/dog_icon_navigation.png">
       </div>
@@ -44,18 +44,18 @@
 
       <div class="place-grid">
         <div><img style="width: 4vw; margin: 2vw;" src="./image/place.png"></div>
-        <div><p>自強校區</p></div>
+        <div><p class="place"></p></div>
       </div>
       <div class="health-grid">
         <div><img style="width: 4vw; margin: 2vw;" src="./image/health.png"></div>
         <div>
-          <p>健康狀況：良好，幾年前曾驗出心絲蟲，但經過這幾年的治療與回診，已沒有再檢驗出心絲蟲的跡象。</p>
+          <p class="health-info"></p>
         </div>
       </div>
       <div class="intro-grid">
         <div><img style="width: 5vw; margin: 2vw;" src="./image/info.png"></div>
         <div>
-          <p>米香為自強三傻之一，胸前的一片短短白毛與大大的耳朵是他的特色。個性活潑開朗，對人和善，睡覺被吵醒還是會開心地搖尾巴跑過來找你～</p>
+          <p id="li-intro"></p>
         </div>
       </div>
       <p class="d-all">全部顯示</p>
@@ -66,7 +66,7 @@
     <div class="intro-container">
       <img class="XXicon" src="./image/XX.png">
       <div>
-        <p class="top-name">米香</p>
+        <p class="top-name"></p>
         <img class="arrow" id="a0" src="./image/dog_button_arrow.png">
       </div>
       <div class="topbar-grid">
@@ -80,19 +80,17 @@
       <div style="height: 145vw; overflow-y: auto;">
         <div class="place-grid">
           <div><img style="width: 4vw; margin: 2vw;" src="./image/place.png"></div>
-          <div><p>自強校區</p></div>
+          <div><p class="place"></p></div>
         </div>
         <div class="health-grid">
           <div><img style="width: 4vw; margin: 2vw;" src="./image/health.png"></div>
           <div>
-            <p>健康狀況：良好，幾年前曾驗出心絲蟲，但經過這幾年的治療與回診，已沒有再檢驗出心絲蟲的跡象。</p>
+            <p class="health-info"></p>
           </div>
         </div>
         <div class="intro-grid">
           <div><img style="width: 5vw; margin: 2vw;" src="./image/info.png"></div>
-          <div>
-            <p>米香為自強三傻之一，胸前的一片短短白毛與大大的耳朵是他的特色。個性活潑開朗，對人和善，睡覺被吵醒還是會開心地搖尾巴跑過來找你～</p>
-            <p>曾經是大食怪，大家吃不完的飼料都由他解決，但最近被照顧到會挑食了！另外他的怪僻是咬葉子和啃樹枝（嚼嚼</p>
+          <div id="all-info">
           </div>
         </div>
       </div>
