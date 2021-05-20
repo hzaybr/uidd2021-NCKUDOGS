@@ -45,8 +45,7 @@ function listClick(){
 function profileClick(){
   $('.profile').stop();
   if (profileDisplay){
-    $('.profile').animate({'left':'105vw'},500);
-    setTimeout(function(){$('.profile').css('display','none');},500);
+    $('.profile').animate({'left':'105vw'},500,function(){$('.profile').css('display','none')});
   }
   else{
     displayCheck();
