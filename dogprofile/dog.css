@@ -13,6 +13,8 @@ p {
 	bottom: 0;
 	z-index: 1;
 }
+#dogname { font-size: 5vw; margin: 0; font-weight:bold;}
+#subname {font-size: 3.8vw; margin: 0;}
 .XXicon {
   position: absolute;
   z-index: 1;
