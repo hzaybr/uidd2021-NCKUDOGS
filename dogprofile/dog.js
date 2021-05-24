@@ -209,6 +209,7 @@ $(function(){
 		});
 	});
 	promise.then((value) => {
+		console.log(user_data);
 		load_user();
 		load_image();
 		load_comment();
@@ -239,6 +240,7 @@ $('#post-btn, #writing-post-btn').click(function() {
 		$.post('./post_comment', {
 			comment_id: is_editing? editing_comment_id : comment_id,
 			user_id:	USER_ID,
+			dog_id:		1,
 			comment:	$('.commentBox').val(),
 			photo:		$('.preview-pic')[0].src
 		}, (resp) => {
@@ -272,9 +274,10 @@ function post_image() {
 			concat_image(++image_id, PROFILE_PIC, e.target.result);
 
             $.post("./upload_image", {
-                image_id: image_id,
-				user_id: USER_ID,
-                photo: e.target.result
+                image_id:	image_id,
+				user_id: 	USER_ID,
+				dog_id:		1,
+                photo: 		e.target.result
             }, () => {});
         });
     
@@ -394,7 +397,7 @@ function load_comment() {
 		 */
 		$.each(JSON.parse(cmt_json), function(index, val) {
 			comment_id = parseInt(index, 10);
-			concat_comment(comment_id, val.user, val.comment, val.photo);
+			concat_comment(comment_id, val.user_id, val.comment, val.photo);
 		});
 	});
 }
@@ -424,7 +427,7 @@ function concat_image(image_id, user_pic, photo) {
 function load_image() {
 	$.post("./load_images", (img_json) => {
 		$.each(JSON.parse(img_json), function(index, val) {
-			let pic = user_data[val.user].profile;
+			let pic = user_data[val.user_id].profile;
 			image_id = parseInt(index, 10);
 			concat_image(image_id, pic, val.photo);
 		});
