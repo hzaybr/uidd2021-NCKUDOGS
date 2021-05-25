@@ -336,3 +336,51 @@ body {
   width: 14vw;
   border-radius:50%;
 }
+
+.dog_markerinfo {
+  display: none;
+  position: absolute;
+  width: 74vw;
+  height: 97vw;
+  left: 13vw;
+  top: 33vw;
+  background: #FFFFFF;
+  border-radius: 36px;
+}
+.dog_markerinfo_flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dog_markerinfo .name{
+  margin-top: 2.9vw;
+  margin-bottom: 2.4vw;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #8D8D8D;
+}
+.dog_markerinfo img{
+  width: 5.35vw;
+}
+.dog_markerinfo .photo{
+  margin-top: 9.5vw;
+  width: 40vw;
+}
+.dog_markerinfo .btn_navigation{
+  position: absolute;
+  top: 66vw;
+  left: 9vw;
+  width: 16vw;
+}
+.dog_markerinfo .btn_camera{
+  position: absolute;
+  top: 75vw;
+  width: 16vw;
+}
+.dog_markerinfo .btn_detail{
+  position: absolute;
+  top: 66vw;
+  right: 9vw;
+  width: 16vw;
+}
