@@ -7,6 +7,7 @@ var searchDisplay = false;
 var markDisplay = false;
 var profileDisplay = false;
 var markmode = false;
+var markerinfoShow = false;
 
 function displayCheck(){
   if(listDisplay){
@@ -28,6 +29,9 @@ function displayCheck(){
     $('.mark').animate({'right': '4vw'},500);
     document.getElementById('m1').style.display="block";
     markmode = !markmode;
+  }
+  if(markerinfoShow){
+    markerClick();
   }
 }
 
@@ -87,6 +91,18 @@ function markClick(){
   }
   markDisplay = !markDisplay;
   markmode = markDisplay;
+}
+
+function markerClick(){
+  $('.dog_markerinfo').stop();
+  if (markerinfoShow){
+    $('.dog_markerinfo').css('display','none');
+  }
+  else{
+    displayCheck();
+    $('.dog_markerinfo').css('display','block');
+  }
+  markerinfoShow = !markerinfoShow;
 }
 
 $('#list-icon').click(function(){

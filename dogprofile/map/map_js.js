@@ -75,6 +75,10 @@ function initMap() {
       labelClass: "labels", 
       labelStyle: { opacity: 1.0 }
     });
+    //test
+    // ownermarker.addListener('click',function(){
+    //   markerClick();
+    // });
     //dog's mark 
     $.get(position_file,function(json){
 			for(i=1;i<20;i++){
@@ -146,69 +150,70 @@ function addMarker(icon_path,location) {
 }
 function dogMarker_click(target_marker){
   //reset all markers' zindex
-  for(i=0;i<=count;i++){
-    Markers[i].setZIndex(1);
-  }
-  target_marker.setZIndex(3);
-  //reset map
-  if(currentInfoWindow != ''){
-    currentInfoWindow.close();   
-    currentInfoWindow = '';
-    route_marker.setVisible(false);
-    camera_marker.setVisible(false);
-    more_marker.setVisible(false);
-  }
-  //show other markers
-  if(btnshow&&parseInt(target_marker.getTitle())==target_num){
-    btnshow = false;
-    var old_icon = {
-      url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
-      scaledSize: new google.maps.Size(62,77)
-    }
-    target_marker.setIcon(old_icon);
-  }else{
-    route_marker.setVisible(true);
-    camera_marker.setVisible(true);
-    more_marker.setVisible(true);
-    route_uluru = {lat: target_marker.getPosition().lat()-0.00015, lng: target_marker.getPosition().lng()-0.00025};
-    route_marker.setPosition(route_uluru);
-    camera_uluru = {lat: target_marker.getPosition().lat()-0.0003, lng: target_marker.getPosition().lng()};
-    camera_marker.setPosition(camera_uluru);
-    more_uluru = {lat: target_marker.getPosition().lat()-0.00015, lng: target_marker.getPosition().lng()+0.00025};
-    more_marker.setPosition(more_uluru);
-    var old_icon = {
-      url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
-      scaledSize: new google.maps.Size(62,77)
-    }
-    Markers[target_num].setIcon(old_icon);
-    target_num = parseInt(target_marker.getTitle());
-    var new_icon = {
-      url: './map/mark_icon_big/dog_marker_big_'+(target_num+1)+'.png',
-      scaledSize: new google.maps.Size(130,130)
-    }
-    target_marker.setIcon(new_icon);
-    var target_infowincontent = infowincontent;
-    var avg_score = parseInt(localStorage.getItem("avg_score"));
-    if(avg_score==NaN){
-      avg_score = 4;
-    }
-    if(avg_score>=0&&avg_score<=5){
-      for(i=1;i<=avg_score;i++){
-        target_infowincontent = target_infowincontent.replace(`<img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "${i}">`,`<img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "${i}">`);
-      }
-    }
-    var infowindow = new google.maps.InfoWindow({
-      content: target_infowincontent.replace('CONTENT',dog_name[target_num])
-    });
-    infowindow.open(map, target_marker);   
-    currentInfoWindow = infowindow;
-    lat=target_marker.getPosition().lat();
-    lng=target_marker.getPosition().lng();
-    uluru = {lat: lat, lng: lng};
-    map.setCenter(uluru);
-    map.setZoom(19);
-    btnshow = true;
-  }
+  // for(i=0;i<=count;i++){
+  //   Markers[i].setZIndex(1);
+  // }
+  // target_marker.setZIndex(3);
+  // //reset map
+  // if(currentInfoWindow != ''){
+  //   currentInfoWindow.close();   
+  //   currentInfoWindow = '';
+  //   route_marker.setVisible(false);
+  //   camera_marker.setVisible(false);
+  //   more_marker.setVisible(false);
+  // }
+  // //show other markers
+  // if(btnshow&&parseInt(target_marker.getTitle())==target_num){
+  //   btnshow = false;
+  //   var old_icon = {
+  //     url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
+  //     scaledSize: new google.maps.Size(62,77)
+  //   }
+  //   target_marker.setIcon(old_icon);
+  // }else{
+  //   route_marker.setVisible(true);
+  //   camera_marker.setVisible(true);
+  //   more_marker.setVisible(true);
+  //   route_uluru = {lat: target_marker.getPosition().lat()-0.00015, lng: target_marker.getPosition().lng()-0.00025};
+  //   route_marker.setPosition(route_uluru);
+  //   camera_uluru = {lat: target_marker.getPosition().lat()-0.0003, lng: target_marker.getPosition().lng()};
+  //   camera_marker.setPosition(camera_uluru);
+  //   more_uluru = {lat: target_marker.getPosition().lat()-0.00015, lng: target_marker.getPosition().lng()+0.00025};
+  //   more_marker.setPosition(more_uluru);
+  //   var old_icon = {
+  //     url: './map/mark_icon/dog_marker_'+(target_num+1)+'.png',
+  //     scaledSize: new google.maps.Size(62,77)
+  //   }
+  //   Markers[target_num].setIcon(old_icon);
+  //   target_num = parseInt(target_marker.getTitle());
+  //   var new_icon = {
+  //     url: './map/mark_icon_big/dog_marker_big_'+(target_num+1)+'.png',
+  //     scaledSize: new google.maps.Size(130,130)
+  //   }
+  //   target_marker.setIcon(new_icon);
+  //   var target_infowincontent = infowincontent;
+  //   var avg_score = parseInt(localStorage.getItem("avg_score"));
+  //   if(avg_score==NaN){
+  //     avg_score = 4;
+  //   }
+  //   if(avg_score>=0&&avg_score<=5){
+  //     for(i=1;i<=avg_score;i++){
+  //       target_infowincontent = target_infowincontent.replace(`<img src="./map/love_icon/860757@3x.png" style="width : 5vw;" id = "${i}">`,`<img src="./map/love_icon/860758@3x.png" style="width : 5vw;" id = "${i}">`);
+  //     }
+  //   }
+  //   var infowindow = new google.maps.InfoWindow({
+  //     content: target_infowincontent.replace('CONTENT',dog_name[target_num])
+  //   });
+  //   infowindow.open(map, target_marker);   
+  //   currentInfoWindow = infowindow;
+  markerClick();
+  lat=target_marker.getPosition().lat();
+  lng=target_marker.getPosition().lng();
+  uluru = {lat: lat, lng: lng};
+  map.setCenter(uluru);
+  map.setZoom(19);
+  btnshow = true;
+  // }
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{
