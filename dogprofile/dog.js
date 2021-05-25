@@ -190,6 +190,7 @@ $(document).ready(function() {
 });
 
 
+
 /***************************************************************** */
 
 $(function(){
@@ -203,13 +204,12 @@ $(function(){
 
 	/* Initialize image and comment section */
 	const promise = new Promise((resolve, reject) => {
-		$.post("./load_users", (user_json) => {
+		$.post('./load_data', {table: 'users'}, (user_json) => {
 			user_data = JSON.parse(user_json);
 			resolve(user_data);
 		});
 	});
 	promise.then((value) => {
-		console.log(user_data);
 		load_user();
 		load_image();
 		load_comment();
@@ -390,7 +390,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 }
 
 function load_comment() {
-	$.post("./load_comments", (cmt_json) => {		
+	$.post('./load_data', {table: 'comments'}, (cmt_json) => {
 		/*
 		 * To ensure all [comment_id] are unique,
 		 * the newer comment will always have the bigger [comment_id].
@@ -425,7 +425,7 @@ function concat_image(image_id, user_pic, photo) {
 }
 
 function load_image() {
-	$.post("./load_images", (img_json) => {
+	$.post('./load_data', {table: 'images'}, (img_json) => {
 		$.each(JSON.parse(img_json), function(index, val) {
 			let pic = user_data[val.user_id].profile;
 			image_id = parseInt(index, 10);

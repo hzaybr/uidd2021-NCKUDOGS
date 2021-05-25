@@ -7,15 +7,153 @@ const https = require('https')
 const config = require('./config.js');
 const { json } = require("express");
 const sqlite3 = require('sqlite3').verbose();
-
-/* Database */
 const db = new sqlite3.Database('data.db');
+
 // db.run('DROP TABLE users');
 // db.run('DROP TABLE comments');
 // db.run('DROP TABLE images');
 // db.run('CREATE TABLE users(id INTEGER PRIMARY KEY, name, profile)');
 // db.run('CREATE TABLE comments(id INTEGER PRIMARY KEY, user_id INTEGER, dog_id INTEGER, comment, photo CLOB, timestamp DATETIME)');
 // db.run('CREATE TABLE images(id INTEGER PRIMARY KEY, user_id INTEGER, dog_id INTEGER, photo CLOB, timestamp DATETIME)');
+
+
+
+/* Enable json parsing */
+app.use(express.urlencoded({extended: false, limit: "1024mb"}));
+app.use(express.json({limit: "1024mb"}));
+
+/* Static path */
+app.use("/", express.static(__dirname));
+
+const sslOptions = {
+    key: fs.readFileSync(config.key_path),
+    ca: fs.readFileSync(config.ca_path),
+    cert: fs.readFileSync(config.cert_path)
+}
+
+/* Any number from the IANA ephemeral port range (49152-65535) */
+const port = 15037;
+
+const server = https.createServer(sslOptions, app)
+server.listen(port, () => {
+    console.log(`Listening on port: ${port}`);
+});
+
+
+
+
+
+
+/**********************************************************/
+/* Paths */
+/**********************************************************/
+
+app.post("/load_data", async (req, resp) => {
+    resp.send(JSON.stringify(await sql2JSON(req.body.table)));
+});
+
+
+
+/**********************************************************/
+/* Users */
+
+app.post("/update_users", async (req, resp) => {
+    sqlUpdate('users', {   
+                "id":       req.body.id,
+                "name":     req.body.name,
+                "profile":  req.body.profile
+            });
+
+    resp.send(JSON.stringify(await sql2JSON('users')));
+});
+/**********************************************************/
+
+
+
+/**********************************************************/
+/* Comments */
+
+app.post("/post_comment", async (req, resp) => {
+    db.each('SELECT datetime(\'now\')', (err, row) => {
+        sqlUpdate('comments', {
+            "id":           req.body.comment_id,
+            "user_id":      req.body.user_id,
+            "dog_id":       req.body.dog_id,
+            "comment":      req.body.comment,
+            "photo":        req.body.photo,
+            "timestamp":    Object.values(row)[0]
+        });
+    });
+    resp.send(JSON.stringify(await sql2JSON('comments')));
+});
+
+app.post("/delete_comment", async (req, resp) => {
+    sqlDelete('comments', req.body.comment_id);
+    resp.send(JSON.stringify(await sql2JSON('comments')));
+});
+/**********************************************************/
+
+
+
+/**********************************************************/
+/* Photos */
+
+app.post("/upload_image", async (req, resp) => { 
+    db.each('SELECT datetime(\'now\')', (err, row) => {
+        sqlUpdate('images', {
+            "id":           req.body.image_id,
+            "user_id":      req.body.user_id,
+            "dog_id":       req.body.dog_id,
+            "photo":        req.body.photo,
+            "timestamp":    Object.values(row)[0]
+        });
+    });
+    resp.send(JSON.stringify(await sql2JSON('images')));
+});
+/**********************************************************/
+
+
+
+
+/* position*/
+let position_file = "./map/position.json";
+
+app.post("/update_position", async (req, resp) => {
+    console.log(req.body.dogID);
+    console.log(req.body.lat);
+    console.log(req.body.lng);
+    const jsonObj = JSON.parse(await readJSON(position_file));
+    jsonObj[req.body.dogID] = {
+        "lat":  parseFloat(req.body.lat),
+        "lng":  parseFloat(req.body.lng)
+    };
+    writeJSON(position_file, jsonObj);
+});
+
+/* navigation */
+let navig = "./map/navig.json";
+
+app.post("/navig", async (req, resp) => {
+    var dogID = req.body.dogID;
+    console.log(`dogID: ${dogID}`);
+
+    const jsonObj = JSON.parse(await readJSON(navig));
+    jsonObj["dogID"] = dogID;
+    writeJSON(navig, jsonObj);
+});
+
+
+
+
+
+
+/**********************************************************/
+/* Functions */
+/**********************************************************/
+
+
+/**********************************************************/
+/* Database functions */
 
 function sqlInsert(table, params) {
     let keys = Object.keys(params);
@@ -44,23 +182,23 @@ function sqlUpdate(table, params) {
 }
 
 function sqlDelete(table, index) {
-    var sqlDel = "delete from " + table + " where id=?";
-    db.run(sqlDel, index);
+    let command = "delete from " + table + " where id=?";
+    db.run(command, index);
 }
 
 function sqlPrint(table) {
-    var sqlSELECT = "SELECT * FROM " + table;
-    db.each(sqlSELECT, function (err, row) {
+    var command = "SELECT * FROM " + table;
+    db.each(command, function (err, row) {
         console.log(row);
     });
 }
 
 function sql2JSON(table) {
     return new Promise((res, rej) => {
-        var sqlSELECT = "SELECT rowid AS rowid, * FROM " + table;
+        var command = "SELECT rowid AS rowid, * FROM " + table;
         let jsonObj = {};
 
-        db.each(sqlSELECT, (err, row) => { // This gets called for every row our query returns
+        db.each(command, (err, row) => { // This gets called for every row our query returns
             let keys = Object.keys(row);
             jsonObj[row.rowid] = {};
             for (var i = 0; i < keys.length; ++i) {
@@ -71,30 +209,12 @@ function sql2JSON(table) {
         });
     });
 }
+/**********************************************************/
 
 
-/* Enable json parsing */
-app.use(express.urlencoded({extended: false, limit: "1024mb"}));
-app.use(express.json({limit: "1024mb"}));
 
-/* Static path */
-app.use("/", express.static(__dirname));
-
-const sslOptions = {
-    key: fs.readFileSync(config.key_path),
-    ca: fs.readFileSync(config.ca_path),
-    cert: fs.readFileSync(config.cert_path)
-}
-
-/* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
-
-const server = https.createServer(sslOptions, app)
-server.listen(port, () => {
-    console.log(`Listening on port: ${port}`);
-});
-
-/* Read JSON file */
+/**********************************************************/
+/* JSON file functions */
 
 /* 
  * __readJSON() sometimes returns incomplete json data
@@ -138,105 +258,4 @@ function writeJSON(path, data) {
         }
     });
 }
-
-let cmt_file  = "./data/comments.json";
-let img_file  = "./data/images.json";
-let user_file = "./data/users.json";
-
 /**********************************************************/
-/* Users */
-
-/* Send user data json files to other scripts */
-app.post("/load_users", async (req, resp) => {
-    resp.send(JSON.stringify(await sql2JSON('users')));
-});
-
-/* Update user data */
-app.post("/update_users", async (req, resp) => {
-    sqlUpdate('users', {   
-                "id":       req.body.id,
-                "name":     req.body.name,
-                "profile":  req.body.profile
-            });
-
-    resp.send(JSON.stringify(await sql2JSON('users')));
-});
-
-/**********************************************************/
-/* Comments */
-
-/* Load comments when entering site */
-app.post("/load_comments", async (req, resp) => {
-    resp.send(JSON.stringify(await sql2JSON('comments')));
-});
-
-/* Show the new comment and store it in JSON */
-app.post("/post_comment", async (req, resp) => {
-    db.each('SELECT datetime(\'now\')', (err, row) => {
-        sqlUpdate('comments', {
-            "id":           req.body.comment_id,
-            "user_id":      req.body.user_id,
-            "dog_id":       req.body.dog_id,
-            "comment":      req.body.comment,
-            "photo":        req.body.photo,
-            "timestamp":    Object.values(row)[0]
-        });
-    });
-    resp.send(JSON.stringify(await sql2JSON('comments')));
-});
-
-/* Delete comment */
-app.post("/delete_comment", async (req, resp) => {
-    sqlDelete('comments', req.body.comment_id);
-    resp.send(JSON.stringify(await sql2JSON('comments')));
-});
-
-/**********************************************************/
-/* Photos */
-
-/* Load images when entering site */
-app.post("/load_images", async (req, resp) => {
-    resp.send(JSON.stringify(await sql2JSON('images')));
-});
-
-/* Show the new image and store it in JSON */
-app.post("/upload_image", async (req, resp) => { 
-    db.each('SELECT datetime(\'now\')', (err, row) => {
-        sqlUpdate('images', {
-            "id":           req.body.image_id,
-            "user_id":      req.body.user_id,
-            "dog_id":       req.body.dog_id,
-            "photo":        req.body.photo,
-            "timestamp":    Object.values(row)[0]
-        });
-    });
-    resp.send(JSON.stringify(await sql2JSON('images')));
-});
-
-/* position*/
-let position_file = "./map/position.json";
-
-app.post("/update_position", async (req, resp) => {
-    console.log(req.body.dogID);
-    console.log(req.body.lat);
-    console.log(req.body.lng);
-    const jsonObj = JSON.parse(await readJSON(position_file));
-    jsonObj[req.body.dogID] = {
-        "lat":  parseFloat(req.body.lat),
-        "lng":  parseFloat(req.body.lng)
-    };
-    writeJSON(position_file, jsonObj);
-});
-
-/* navigation */
-let navig = "./map/navig.json";
-
-app.post("/navig", async (req, resp) => {
-    var dogID = req.body.dogID;
-    console.log(`dogID: ${dogID}`);
-
-    const jsonObj = JSON.parse(await readJSON(navig));
-    jsonObj["dogID"] = dogID;
-    writeJSON(navig, jsonObj);
-});
-
