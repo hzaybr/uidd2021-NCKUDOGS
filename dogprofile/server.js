@@ -73,6 +73,21 @@ app.post("/update_users", async (req, resp) => {
 /**********************************************************/
 /* Comments */
 
+app.post("/load_comments", async (req, resp) => {
+    var command = "SELECT rowid AS rowid, * FROM comments WHERE dog_id = ";
+    command += req.body.dog_id;
+    let jsonObj = {};
+
+    db.each(command, (err, row) => { // This gets called for every row our query returns
+        jsonObj[row.rowid] = {};
+        jsonObj[row.rowid]['user_id'] = row['user_id'];
+        jsonObj[row.rowid]['comment'] = row['comment'];
+        jsonObj[row.rowid]['photo'] = row['photo'];
+    }, (err) => { // This gets called after each of our rows have been processed
+        resp.send(JSON.stringify(jsonObj));
+    });
+});
+
 app.post("/post_comment", async (req, resp) => {
     db.each('SELECT datetime(\'now\')', (err, row) => {
         sqlUpdate('comments', {
@@ -97,6 +112,20 @@ app.post("/delete_comment", async (req, resp) => {
 
 /**********************************************************/
 /* Photos */
+
+app.post("/load_images", async (req, resp) => {
+    var command = "SELECT rowid AS rowid, * FROM images WHERE dog_id = ";
+    command += req.body.dog_id;
+    let jsonObj = {};
+
+    db.each(command, (err, row) => { // This gets called for every row our query returns
+        jsonObj[row.rowid] = {};
+        jsonObj[row.rowid]['user_id'] = row['user_id'];
+        jsonObj[row.rowid]['photo'] = row['photo'];
+    }, (err) => { // This gets called after each of our rows have been processed
+        resp.send(JSON.stringify(jsonObj));
+    });
+});
 
 app.post("/upload_image", async (req, resp) => { 
     db.each('SELECT datetime(\'now\')', (err, row) => {
