@@ -32,7 +32,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 15038;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -160,7 +160,7 @@ app.post("/update_position", async (req, resp) => {
 });
 
 /* navigation */
-let navig = "./map/navig.json";
+const navig = "./map/navig.json";
 
 app.post("/navig", async (req, resp) => {
     var dogID = req.body.dogID;
@@ -172,6 +172,15 @@ app.post("/navig", async (req, resp) => {
 });
 
 
+/* dogID */
+app.post("/dogpage", async (req, resp) => {
+    var dog_page_id = req.body.dog_page_id;
+    console.log(`dog page ID: ${dog_page_id}`);
+
+    const jsonObj = JSON.parse(await readJSON(navig));
+    jsonObj["dog_page_id"] = dog_page_id;
+    writeJSON(navig, jsonObj);
+});
 
 
 

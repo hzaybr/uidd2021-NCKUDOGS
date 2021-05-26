@@ -175,10 +175,18 @@ $('.XXicon').click(function() {
 
 /*******************************************************************/
 const dogfile = "./dog.json"
+const IDfile = "./map/navig.json"
+var dog_page_id
+
 $(document).ready(function() {
+  $.get(IDfile, function(json){
+    dog_page_id = json['dog_page_id']
+    console.log('dog: '+dog_page_id)
+    $('.navig').attr('id', dog_page_id)
+    });
+
   $.get(dogfile, function(json){
-    var dog_id = $('.navig').attr('id');
-    var dog = json[dog_id]
+    var dog = json[dogi_page_id]
     $('#dogname').html(dog["name"]);
     $('.top-name').html(dog["name"]);
     $('#subname').html(dog["subname"]);

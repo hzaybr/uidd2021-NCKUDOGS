@@ -122,7 +122,6 @@ function initMap() {
       camera();
     });
     more_marker.addListener('click',function(){
-      window.location.assign("dog.html");
     });
     route_marker.setVisible(false);
     camera_marker.setVisible(false);
@@ -353,6 +352,12 @@ $( ".btn_camera" ).click(function() {
 	camera();
 });
 $( ".btn_detail" ).click(function() {
+  var dog_page_id = $(this).attr('id')
+  console.log(dog_page_id)
+  $.post('./dogpage',{
+    dog_page_id: dog_page_id
+    },() => {}
+  );
 	window.location.assign("dog.html");
 });
 //navigate from dogprofile page
