@@ -97,6 +97,9 @@ function markerClick(){
   $('.dog_markerinfo').stop();
   if (markerinfoShow){
     $('.dog_markerinfo').css('display','none');
+		map.setOptions({draggable: true});
+    showMarkers();
+		map.setZoom(17);
   }
   else{
     displayCheck();

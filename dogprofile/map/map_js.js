@@ -144,7 +144,11 @@ function addMarker(icon_path,location) {
     zIndex:1
     });
   marker.addListener('click', function() {
+   //	markerinfoShow = false;
     dogMarker_click(marker);
+		if(!markerinfoShow){
+		 dogMarker_click(marker);	
+		}
   });
   Markers.push(marker);
 }
@@ -206,14 +210,20 @@ function dogMarker_click(target_marker){
   //   });
   //   infowindow.open(map, target_marker);   
   //   currentInfoWindow = infowindow;
-  markerClick();
-  lat=target_marker.getPosition().lat();
-  lng=target_marker.getPosition().lng();
-  uluru = {lat: lat, lng: lng};
-  map.setCenter(uluru);
-  map.setZoom(19);
-  btnshow = true;
+  // markerClick();
+  // map.setOptions({draggable: false});
+	//clearMarkers(target_marker);
+  //lat=target_marker.getPosition().lat();
+  //lng=target_marker.getPosition().lng();
+  //uluru = {lat: lat, lng: lng};
+  //map.setCenter(uluru);
+  //map.setZoom(19);
+  //btnshow = true;
   // }
+  $('.dog_markerinfo').css('display','block');
+  markerinfoShow = !markerinfoShow;
+  map.setOptions({draggable: false});
+  clearMarkers(target_marker);
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{
@@ -243,7 +253,12 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   uluru = {lat: lat, lng: lng};
   map.setCenter(uluru);
   map.setZoom(19);
-  dogMarker_click(Markers[choose_num]);
+ // displayCheck();
+	dogMarker_click(Markers[choose_num]);
+ // $('.dog_markerinfo').css('display','block');
+ // markerinfoShow = !markerinfoShow;
+ // map.setOptions({draggable: false});
+ // clearMarkers(Markers[choose_num]);
 });
 
 $( "#mg1 img" ).click(function() {
