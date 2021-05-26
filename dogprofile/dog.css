@@ -4,7 +4,10 @@ body {
 }
 p {
   margin: 2vw;
+  font-family: "SegoeUISymbolRegular";
+  /*
   font-family: "Segoe UI","微軟正黑體",sans-serif;
+  */
 }
 .bg-top {
 	width: 100vw;
@@ -23,7 +26,8 @@ p {
   right: 0;
 }
 .d-all {
-  margin-bottom: 5vw;
+  margin: 0vw;
+  margin-bottom: 6vw;
   text-align: center;
   font-size: 4vw;
   font-weight: bold;
@@ -101,11 +105,11 @@ p {
 }
 .intro-grid, .place-grid, .health-grid {
   display: grid;
-  width: 90vw;
+  width: 91vw;
   padding: 2vw; 
   padding-left: 5vw; 
-  padding-right: 5vw; 
-  grid-template-columns: 10% auto;
+  padding-right: 4vw; 
+  grid-template-columns: 10vw auto;
   font-size: 4.2vw;
 }
 .place-grid , .health-grid{
@@ -113,6 +117,13 @@ p {
   border-bottom-style: solid;
   border-bottom-width: 0.3vw;
 }
+.sub-container {
+  height: 140vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 1vw;
+}
+#all-info {padding-bottom: 10vw;}
 .top-name {
   font-weight: 900;
   font-size: 5vw;	
@@ -364,7 +375,6 @@ section button:disabled {
 .comments {
   padding: 0%;
   -webkit-overflow-scrolling: touch;
-  height: 300px;
 }
 .comment-score {
 	width: 50%;
@@ -440,6 +450,7 @@ hr.cmt-btn-ln {
 .clearfix {
   clear: both;
   margin: 0;
+  padding-bottom: 10vw;
 }
 
 label {

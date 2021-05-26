@@ -194,7 +194,7 @@ $(document).ready(function() {
     $('.health-info').html(dog["health-info"]);
     $('#li-intro').html(dog["li-intro"]);
     $('#all-info').html(dog["all-info"]);
-    $('.top-pic').css('background-image',`url(${dog['image']})`);
+    $('.top-pic').css('background-image',`url(./image/${dog_page_id}.jpg)`);
   });
 });
 
