@@ -353,33 +353,29 @@ $( ".btn_camera" ).click(function() {
 });
 $( ".btn_detail" ).click(function() {
   var dog_page_id = $(this).attr('id')
+  /*
   console.log(dog_page_id)
   $.post('./dogpage',{
     dog_page_id: dog_page_id
     },() => {}
   );
+  */
+  localStorage.setItem("dog page id", dog_page_id);
   setTimeout(function() {
     window.location.assign("dog.html");
   }, 200);
 });
+
 //navigate from dogprofile page
-var navig = "./map/navig.json"
+let dogID = localStorage.getItem("dog page id")
+$(document).ready(function() {
+  setTimeout(function() {
+    if (dogID<20) {
+      target_num = parseInt(Markers[dogID].getTitle());
+      route();
+      localStorage.setItem("dog page id", 50);
+      
+     };
 
-setTimeout(function() {
-  $.get(navig, function(json) {
-    var dogID = json["dogID"];
-    console.log(`navig dogID: ${dogID}`);
-  if (dogID<20) {
-    target_num = parseInt(Markers[dogID].getTitle());
-    route();
-    dogMarker_click(Markers[target_num]);
-
-    setTimeout(function() {
-      $.post('./navig', {
-        dogID: 50
-        },() =>{});
-    },2000)
-
-   };
- });
-}, 500)
+  }, 500)
+});

@@ -159,12 +159,6 @@ $('.mesng-icon').click(function() {
 
 /******************************************************************/
 $('.navig').click(function() {
-  var dogID = $(this).attr('id');
-
-  $.post('./navig', {
-    dogID: dogID
-    },(data) =>{
-    });
     window.location.assign("index.html");
 });
 
@@ -176,15 +170,9 @@ $('.XXicon').click(function() {
 /*******************************************************************/
 const dogfile = "./dog.json"
 const IDfile = "./map/navig.json"
-var dog_page_id
+let dog_page_id = localStorage.getItem("dog page id")
 
 $(document).ready(function() {
-  $.get(IDfile, function(json){
-    dog_page_id = json['dog_page_id']
-    console.log('dog: '+dog_page_id)
-    $('.navig').attr('id', dog_page_id)
-    });
-
   $.get(dogfile, function(json){
     var dog = json[dog_page_id]
     $('#dogname').html(dog["name"]);

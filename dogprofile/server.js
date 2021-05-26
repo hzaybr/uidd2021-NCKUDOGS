@@ -177,7 +177,7 @@ app.post("/update_position", async (req, resp) => {
     writeJSON(position_file, jsonObj);
 });
 
-/* navigation */
+/* navigation 
 const navig = "./map/navig.json";
 
 app.post("/navig", async (req, resp) => {
@@ -187,10 +187,11 @@ app.post("/navig", async (req, resp) => {
     const jsonObj = JSON.parse(await readJSON(navig));
     jsonObj["dogID"] = dogID;
     writeJSON(navig, jsonObj);
+    console.log(`store navig ID: ${dogID}`)
 });
+*/
 
-
-/* dogID */
+/* dogID 
 app.post("/dogpage", async (req, resp) => {
     var dog_page_id = req.body.dog_page_id;
     console.log(`dog page ID: ${dog_page_id}`);
@@ -198,8 +199,9 @@ app.post("/dogpage", async (req, resp) => {
     const jsonObj = JSON.parse(await readJSON(navig));
     jsonObj["dog_page_id"] = dog_page_id;
     writeJSON(navig, jsonObj);
+    console.log(`store dogpage ID: ${dog_page_id}`)
 });
-
+*/
 
 
 
