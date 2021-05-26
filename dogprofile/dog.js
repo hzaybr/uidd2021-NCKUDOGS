@@ -186,7 +186,7 @@ $(document).ready(function() {
     });
 
   $.get(dogfile, function(json){
-    var dog = json[dogi_page_id]
+    var dog = json[dog_page_id]
     $('#dogname').html(dog["name"]);
     $('.top-name').html(dog["name"]);
     $('#subname').html(dog["subname"]);
