@@ -159,10 +159,11 @@ $('.mesng-icon').click(function() {
 
 /******************************************************************/
 $('.navig').click(function() {
-    window.location.assign("index.html");
+  window.location.assign("index.html");
 });
 
 $('.XXicon').click(function() {
+  localStorage.setItem("dog page id", 50)
   window.location.assign("index.html");
 });
 
