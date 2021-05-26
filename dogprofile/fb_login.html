@@ -11,7 +11,6 @@
   <body>
 
     <script src="id.js"></script>
-    <!--script src="../../../sns/id.js"></script-->    
     <script>
       // This is called with the results from from FB.getLoginStatus().
       function statusChangeCallback(response) {
@@ -105,7 +104,7 @@
           localStorage.setItem("user", JSON.stringify(response));
  
           setTimeout(function() {
-            window.location.assign("index.html");
+          //  window.location.assign("index.html");
           },2000);
 
         })
