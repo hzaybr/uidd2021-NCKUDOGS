@@ -101,11 +101,11 @@ p {
 }
 .intro-grid, .place-grid, .health-grid {
   display: grid;
-  width: 90vw;
+  width: 86vw;
   padding: 2vw; 
   padding-left: 5vw; 
   padding-right: 5vw; 
-  grid-template-columns: 12vw 76vw;
+  grid-template-columns: 10% auto;
   font-size: 4.2vw;
 }
 .place-grid , .health-grid{
