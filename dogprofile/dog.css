@@ -101,7 +101,7 @@ p {
 }
 .intro-grid, .place-grid, .health-grid {
   display: grid;
-  width: 86vw;
+  width: 90vw;
   padding: 2vw; 
   padding-left: 5vw; 
   padding-right: 5vw; 
