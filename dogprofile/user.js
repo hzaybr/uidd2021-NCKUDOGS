@@ -3,7 +3,7 @@ _user = JSON.parse(_user);
 
 var USER_ID = _user.id;
 var USER_NAME = _user.name;
-var PROFILE_PIC = _user.picture.data.url;
+var PROFILE_PIC = _user.image_url;
 
 console.log(`User id: ${USER_ID}`);
 console.log(`User name: ${USER_NAME}`);

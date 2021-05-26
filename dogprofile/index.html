@@ -48,38 +48,58 @@
         </div>
         <img src="./ui/image/dog_icon_profile.png" class="icon" id="profile-icon" title="profile">
         <div class="profile">
-          <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
-          <div class="username" id="汪汪"></div>
-
-          <div id="user-title">
-            <p>狗狗好朋友</p>
+          <div class="pg" id="view-pg" style="display:block">
+            <button id=edit-btn>Edit</button>
+            <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
+            <div class="username" id="汪汪"></div>
+            <div id="user-title">
+              <p>狗狗好朋友</p>
+            </div>
+            <img id="dog-3rd" src="./aboutus_appv/image/Group 326@3x.png"></img>
+            <img id="icon-3rd" src="./ui/image/3rd.png"></img>
+					  <img id="dog-2nd" src="./aboutus_appv/image/Group 327@3x.png"></img>
+            <img id="icon-2nd" src="./ui/image/2nd.png"></img>
+            <img id="dog-1st" src="./aboutus_appv/image/Group 328@3x.png"></img>
+            <img id="icon-1st" src="./ui/image/1st.png"></img>
+				    <div id="user-contribution-grid">
+						  <div>
+                <p class="contr-title">評論</p>
+              </div>
+              <div>
+                <p class="contr-title">照片</p>
+              </div>
+ 						  <div>
+                <p class="contr-title">定位</p>
+              </div>
+              <div>
+						  	<p class="contr-num" id="comment-count">XX</p>
+					  	</div>
+	            <div>
+                <p class="contr-num" id="upload-count">XX</p>
+						  </div>
+              <div>
+							  <p class="contr-num" id="locate-count">XX</p>
+						  </div>
+            </div>
           </div>
-          <img id="dog-3rd" src="./aboutus_appv/image/Group 326@3x.png"></img>
-          <img id="icon-3rd" src="./ui/image/3rd.png"></img>
-					<img id="dog-2nd" src="./aboutus_appv/image/Group 326@3x.png"></img>
-          <img id="icon-2nd" src="./ui/image/2nd.png"></img>
-          <img id="dog-1st" src="./aboutus_appv/image/Group 326@3x.png"></img>
-          <img id="icon-1st" src="./ui/image/1st.png"></img>
-				  <div id="user-contribution-grid">
-						<div>
-              <p class="contr-title">評論</p>
+          <div class="pg" id="edit-pg" style="display:none">
+            <p id="labe-user-avatar">User Avatar:</p> 
+            <div id="avatar-choose-grid">
+              <div>
+                <img class="avatar-choose" src="./aboutus_appv/image/Group 326@3x.png"></img>
+              </div>
+              <div>
+                <img class="avatar-choose" src="./aboutus_appv/image/Group 327@3x.png"></img>
+              </div>
+              <div>
+                <img class="avatar-choose" src="./aboutus_appv/image/Group 328@3x.png"></img>
+              </div>
             </div>
-            <div>
-              <p class="contr-title">照片</p>
-            </div>
- 						<div>
-              <p class="contr-title">定位</p>
-            </div>
-             <div>
-							<p class="contr-num" id="comment-count">99</p>
-						</div>
-	           <div>
-              <p class="contr-num" id="upload-count">99</p>
-						</div>
-            <div>
-							<p class="contr-num" id="locate-count">3</p>
-						</div>
-					</div>
+            <p id="label-username">User Name:</p>
+            <input type="text" id="edit-name" placeholder="your name..."><br>
+            <button id="save-btn">save</button>
+            <button id="cancel-btn">cancel</button>
+          </div>
 				</div>
         <!--img src="./ui/image/dog_icon_messenger.png" class="icon" id="messenger-icon" title="Contact"-->
         <div class="search" id='s1' >
@@ -268,6 +288,22 @@
             </div>
           </div>
         </div>
+    </div>
+    <div class="dog_markerinfo">
+      <div class="dog_markerinfo_flex">
+        <p class="name" id="dog_name">名字</p>
+        <div class="heart">
+          <img src="ui/image/heart_icon/860757@3x.png" id="dog_heart1">
+          <img src="ui/image/heart_icon/860757@3x.png" id="dog_heart2">
+          <img src="ui/image/heart_icon/860757@3x.png" id="dog_heart3">
+          <img src="ui/image/heart_icon/860757@3x.png" id="dog_heart4">
+          <img src="ui/image/heart_icon/860757@3x.png" id="dog_heart5">
+        </div>
+        <img src="ui/image/mark_icon_big/dog_marker_big_1.png" class="photo" id="dog_photo">
+        <img src="ui/image/dog_icon_navigation.png" class="btn_navigation">
+        <img src="ui/image/dog_icon_ins.png" class="btn_camera">
+        <img src="ui/image/dog_icon_detail.png" class="btn_detail">
+      </div>
     </div>
     <input type="file" id="camera_btn" capture="camera" accept="image/*" hidden/>
 

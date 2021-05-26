@@ -85,6 +85,18 @@ body {
   */
 }
 
+.pg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#edit-btn {
+  position: absolute;
+  right: 5%;
+  top: 2%;
+}
+
 .profile-avatar {
 	width: 38%;
 	margin-top: 7%;
@@ -195,6 +207,62 @@ body {
   text-align: center;
 
   color: #000000;
+}
+
+#edit-pg p {
+  margin: 0;
+  height: 10%;
+  font-family: Noto Sans Telugu;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 10vw;
+  line-height: 100%;
+  text-align: center;
+}
+
+
+#avatar-choose-grid {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  top: 15%;
+  left: 0%;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 100%;
+  justify-content: space-evenly;
+  align-content: space-around; 
+}
+
+#avatar-choose-grid img {
+  position: absolute; 
+  width: 30%;
+}
+
+#label-username {
+  position: relative;
+  top: 40%; 
+}
+
+#edit-name {
+  position: absolute;
+  top: 65%;
+  width: 60%;
+  margin-top: 1%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+#save-btn {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+}
+
+#cancel-btn {
+  position: absolute;
+  top: 80%;
+  right: 20%;
 }
 
 .search {
@@ -335,4 +403,52 @@ body {
 .labels img{
   width: 14vw;
   border-radius:50%;
+}
+
+.dog_markerinfo {
+  display: none;
+  position: absolute;
+  width: 74vw;
+  height: 97vw;
+  left: 13vw;
+  top: 33vw;
+  background: #FFFFFF;
+  border-radius: 36px;
+}
+.dog_markerinfo_flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dog_markerinfo .name{
+  margin-top: 2.9vw;
+  margin-bottom: 2.4vw;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #8D8D8D;
+}
+.dog_markerinfo img{
+  width: 5.35vw;
+}
+.dog_markerinfo .photo{
+  margin-top: 9.5vw;
+  width: 40vw;
+}
+.dog_markerinfo .btn_navigation{
+  position: absolute;
+  top: 66vw;
+  left: 9vw;
+  width: 16vw;
+}
+.dog_markerinfo .btn_camera{
+  position: absolute;
+  top: 75vw;
+  width: 16vw;
+}
+.dog_markerinfo .btn_detail{
+  position: absolute;
+  top: 66vw;
+  right: 9vw;
+  width: 16vw;
 }
