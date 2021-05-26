@@ -358,7 +358,9 @@ $( ".btn_detail" ).click(function() {
     dog_page_id: dog_page_id
     },() => {}
   );
-	window.location.assign("dog.html");
+  setTimeout(function() {
+    window.location.assign("dog.html");
+  }, 200);
 });
 //navigate from dogprofile page
 var navig = "./map/navig.json"
