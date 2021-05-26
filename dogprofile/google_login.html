@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Google Sign In Demo</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./google_login.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <meta name="google-signin-scope" content="profile email">
+  </head>
+  <body>
+		<script src="id.js"></script>
+    <script>
+      const fm = document.getElementsByTagName('meta')[0]
+      const m = document.createElement('meta')
+      m.content = myClientId + '.apps.googleusercontent.com'
+      m.name = 'google-signin-client_id'
+      fm.parentNode.insertBefore(m, fm)
+    </script>
+    <!--meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com"-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile()
+        console.log(`ID: ${profile.getId()}`) // Don't send this directly to your server!
+        console.log(`Full Name: ${profile.getName()}`)
+        console.log(`Given Name: ${profile.getGivenName()}`)
+        console.log(`Family Name: ${profile.getFamilyName()}`)
+        console.log(`Image URL: ${profile.getImageUrl()}`)
+        console.log(`Email: ${profile.getEmail()}`)
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token
+        console.log(`ID Token: ${id_token}`)
+				
+				var unconnected = document.getElementsByClassName('unconnected')
+				for (i = 0; i < unconnected.length; i++) {
+    			unconnected[i].style.display = 'none'
+				}
+        var connected = document.getElementsByClassName('connected');
+				for (i = 0; i < connected.length; i++) {
+    			connected[i].style.display = 'block'
+        }
+
+				let fitName = document.getElementById("status");
+        fitName.innerHTML = `${profile.getName()}`;
+          
+        //dynamically change font size
+        function isOverflow(element) {
+          return element.scrollHeight > element.clientHeight ||  element.scrollWidth > element.clientWidth;    
+        }
+       	let styleFontSize = window.getComputedStyle(fitName,null).getPropertyValue('font-size');
+        let fontSize = parseFloat(styleFontSize);
+        while (isOverflow(fitName)) {
+          fontSize--;
+          if (fontSize == 1){
+            break;
+          }
+          fitName.style.fontSize = fontSize + "px";
+        }
+
+        console.log(`font-size:${fitName.style.fontSize}`);
+        //
+
+        //localStorage.setItem("user", JSON.stringify(response));
+ 
+        setTimeout(function() {
+          window.location.assign("index.html");
+        },2000);	
+      }
+    </script>
+		<div>
+  		<img class="unconnected" src="./image/dog_div_login_first.png">
+    	<div class="g-signin2 unconnected" id="google-login-button" data-onsuccess="onSignIn" data-theme="dark"></div>
+      <!--img class="unconnected" src="./image/dog_button_login_fb.png" id="fb-login-button"-->
+      <img class="connected" src="./image/dog_div_already_logged_in.png" style="display:none">
+      <div class="connected" id="status" style="display:none"></div>
+      <img class="app-icon" src="./image/dog_icon_wong_wong.png">
+    </div>
+		<a href="#" onclick="signOut();">Sign out</a>
+		<script>
+  		function signOut() {
+    		var auth2 = gapi.auth2.getAuthInstance();
+    		auth2.signOut().then(function () {
+      		console.log('User signed out.');
+					var unconnected = document.getElementsByClassName('unconnected')
+					for (i = 0; i < unconnected.length; i++) {
+    				unconnected[i].style.display = 'block'
+					}
+        	var connected = document.getElementsByClassName('connected');
+					for (i = 0; i < connected.length; i++) {
+    				connected[i].style.display = 'none'
+        	}
+    		});
+  		}
+		</script>
+    <!-- see https://developers.google.com/identity/sign-in/web/ -->
+    <!-- see https://stackoverflow.com/questions/35983283/using-google-signin-without-metadata-tags -->
+	<body>
+</html>
+<!--
+vi:et:sw=2:ts=2
+-->
