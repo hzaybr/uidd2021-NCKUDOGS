@@ -53,12 +53,12 @@ function initMap() {
       zoomControl: false,
       mapId: '892f444c9eaa9e2'
     });
-    map.addListener('zoom_changed',()=>{
-      if(map.getZoom()!=19&&currentInfoWindow != ''){
-        dogMarker_click(Markers[target_num]);
-      }
-      console.log('zoom'+map.getZoom());
-    });
+   // map.addListener('zoom_changed',()=>{
+   //   if(map.getZoom()!=19&&currentInfoWindow != ''){
+   //     dogMarker_click(Markers[target_num]);
+   //   }
+   //   console.log('zoom'+map.getZoom());
+   // });
     //user mark
     userimg = document.createElement("img");
     // userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
@@ -146,9 +146,9 @@ function addMarker(icon_path,location) {
   marker.addListener('click', function() {
    //	markerinfoShow = false;
     dogMarker_click(marker);
-		if(!markerinfoShow){
-		 dogMarker_click(marker);	
-		}
+		//if(!markerinfoShow){
+		 //dogMarker_click(marker);	
+		//}
   });
   Markers.push(marker);
 }
@@ -213,17 +213,25 @@ function dogMarker_click(target_marker){
   // markerClick();
   // map.setOptions({draggable: false});
 	//clearMarkers(target_marker);
-  //lat=target_marker.getPosition().lat();
-  //lng=target_marker.getPosition().lng();
-  //uluru = {lat: lat, lng: lng};
-  //map.setCenter(uluru);
-  //map.setZoom(19);
+  lat=target_marker.getPosition().lat();
+  lng=target_marker.getPosition().lng();
+  uluru = {lat: lat, lng: lng};
+  map.setCenter(uluru);
+  map.setZoom(19);
+	//markerinfoShow = false;
+  //displayCheck();
   //btnshow = true;
   // }
+  target_num = parseInt(target_marker.getTitle());
+  $('#dog_name').html(dog_name[target_num]);
+  $('#dog_photo').attr("src",`./map/mark_icon_big/dog_marker_big_${target_num+1}.png`);
+  $('.btn_navigation').attr('id',`${target_num}`);
+  $('.btn_detail').attr('id',`${target_num}`);
   $('.dog_markerinfo').css('display','block');
-  markerinfoShow = !markerinfoShow;
+  markerinfoShow = true;
   map.setOptions({draggable: false});
-  clearMarkers(target_marker);
+  clearMarkers(Markers[target_num]);
+	Markers[target_num].setMap(map);
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{
@@ -245,7 +253,7 @@ $( "#mark-icon" ).click(function() {
   
 });
 $( "#sg1 img,#sg2 img" ).click(function() {
-  
+  //searchClick(); 
   var id_str = $(this).attr('id');
   var choose_num = parseInt(id_str.slice(3,id_str.length))-1;
   lat=Markers[choose_num].getPosition().lat();
@@ -253,8 +261,11 @@ $( "#sg1 img,#sg2 img" ).click(function() {
   uluru = {lat: lat, lng: lng};
   map.setCenter(uluru);
   map.setZoom(19);
- // displayCheck();
+	if(routemode){
+		route();
+  }
 	dogMarker_click(Markers[choose_num]);
+	//searchClick();
  // $('.dog_markerinfo').css('display','block');
  // markerinfoShow = !markerinfoShow;
  // map.setOptions({draggable: false});
@@ -262,6 +273,9 @@ $( "#sg1 img,#sg2 img" ).click(function() {
 });
 
 $( "#mg1 img" ).click(function() {
+	if(routemode){
+		route();
+	}
   var id_str = $(this).attr('id');
   var choose_num = parseInt(id_str.slice(4,id_str.length))-1;
   uluru = {lat: current_lat, lng: current_lng};
@@ -272,7 +286,7 @@ $( "#mg1 img" ).click(function() {
   map.setZoom(19);
   btnshow = false;
   dogMarker_click(Markers[choose_num]);
-  markClick();
+	markClick();
   $.post('./update_position', {
     dogID:  choose_num+1,
     lat: 		current_lat,
@@ -285,12 +299,19 @@ function route(){
     directionsDisplay.setDirections({routes: []});
 		var choose_num = target_num;
 		showMarkers(choose_num);
+		$('.dog_markerinfo').css('display','none');
+		markerinfoShow = false;
+		map.setOptions({draggable: true});
   }else{
     // add route funtion
     directionsDisplay.setMap(map);
     var choose_num = target_num;
-    console.log(choose_num)
+		$('.dog_markerinfo').css('display','none');
+  	markerinfoShow = false;
+  	map.setOptions({draggable: true});
+    //console.log(choose_num)
 		clearMarkers(choose_num);
+		Markers[choose_num].setMap(map);
     var target_lat = Markers[choose_num].getPosition().lat();;
     var target_lng = Markers[choose_num].getPosition().lng();;
     var request = {
@@ -325,8 +346,15 @@ function clearMarkers(target_number){
 function showMarkers(target_number){
   setMapOnAll(target_number,map);
 }
-
-
+$( ".btn_navigation" ).click(function() {
+	route();
+});
+$( ".btn_camera" ).click(function() {
+	camera();
+});
+$( ".btn_detail" ).click(function() {
+	window.location.assign("dog.html");
+});
 //navigate from dogprofile page
 var navig = "./map/navig.json"
 
