@@ -160,6 +160,56 @@ $('#messenger-icon').click(function(){
 $('.profile-avatar').click(function() {
   window.location.assign('userprofile.html')
 })
+
+$('#edit-btn').click(function(){
+  $('#view-pg').css('display','none')
+  $('#edit-pg').css('display','block')
+	document.getElementById('edit-name').value = $('.username').attr('id')
+})
+
+$('#edit-pg button').click(function(){
+  $('#view-pg').css('display','block')
+  $('#edit-pg').css('display','none')
+})
+
+$('.avatar-choose').click(function(){
+	if ($(this).attr('id') == ''){
+		$('.avatar-choose').attr('id','')
+		$('.avatar-choose').css('border','none')
+		$(this).attr('id','chosen')
+		$(this).css('border','3px solid lightblue')
+	}
+	else{
+		$('.avatar-choose').attr('id','')
+		$('.avatar-choose').css('border','none')	
+	}
+})
+
+/***********************************************************/
+//save change 
+
+$('#save-btn').click(function(){
+	//change avatar
+	if (document.getElementById('chosen')!= null){
+		let chosenAvatarSrc = $('#chosen').attr('src')
+		let avatars = document.getElementsByClassName('profile-avatar');
+		for (let i = 0; i < avatars.length; ++i) {
+  		avatars[i].src = chosenAvatarSrc;
+		}
+	}
+	//change username
+	let editName = document.getElementById('edit-name').value
+	console.log('editName',editName)
+	$('.username').attr('id',editName)
+	$('.username').html(editName)
+})
+/**************************************************************/
+
+$('#cancel-btn').click(function(){
+	$('.avatar-choose').attr('id','')
+	$('.avatar-choose').css('border','none')
+})
+
 $('#observ').click(function(){
   $('#s2').fadeIn(0);
 })

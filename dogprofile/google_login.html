@@ -10,7 +10,7 @@
     <meta name="google-signin-scope" content="profile email">
   </head>
   <body>
-		<script src="id.js"></script>
+		  <script src="id.js"></script>
     <script>
       const fm = document.getElementsByTagName('meta')[0]
       const m = document.createElement('meta')
@@ -35,16 +35,16 @@
         var id_token = googleUser.getAuthResponse().id_token
         console.log(`ID Token: ${id_token}`)
 				
-				var unconnected = document.getElementsByClassName('unconnected')
-				for (i = 0; i < unconnected.length; i++) {
-    			unconnected[i].style.display = 'none'
-				}
-        var connected = document.getElementsByClassName('connected');
-				for (i = 0; i < connected.length; i++) {
-    			connected[i].style.display = 'block'
+		    var unconnected = document.getElementsByClassName('unconnected')
+		    for (i = 0; i < unconnected.length; i++) {
+          unconnected[i].style.display = 'none'
+        }
+        var connected = document.getElementsByClassName('connected')
+        for (i = 0; i < connected.length; i++) {
+          connected[i].style.display = 'block'
         }
 
-				let fitName = document.getElementById("status");
+        let fitName = document.getElementById("status");
         fitName.innerHTML = `${profile.getName()}`;
           
         //dynamically change font size
@@ -72,33 +72,33 @@
       }
     </script>
 		<div>
-  		<img class="unconnected" src="./image/dog_div_login_first.png">
-    	<div class="g-signin2 unconnected" id="google-login-button" data-onsuccess="onSignIn" data-theme="dark"></div>
-      <!--img class="unconnected" src="./image/dog_button_login_fb.png" id="fb-login-button"-->
-      <img class="connected" src="./image/dog_div_already_logged_in.png" style="display:none">
-      <div class="connected" id="status" style="display:none"></div>
-      <img class="app-icon" src="./image/dog_icon_wong_wong.png">
+  	  <img class="unconnected" src="./image/dog_div_login_first.png">
+       <div class="g-signin2 unconnected" id="google-login-button" data-onsuccess="onSignIn" data-theme="dark"></div>
+       <!--img class="unconnected" src="./image/dog_button_login_fb.png" id="fb-login-button"-->
+       <img class="connected" src="./image/dog_div_already_logged_in.png" style="display:none">
+       <div class="connected" id="status" style="display:none"></div>
+       <img class="app-icon" src="./image/dog_icon_wong_wong.png">
     </div>
 		<a href="#" onclick="signOut();">Sign out</a>
 		<script>
-  		function signOut() {
-    		var auth2 = gapi.auth2.getAuthInstance();
-    		auth2.signOut().then(function () {
-      		console.log('User signed out.');
-					var unconnected = document.getElementsByClassName('unconnected')
-					for (i = 0; i < unconnected.length; i++) {
-    				unconnected[i].style.display = 'block'
-					}
-        	var connected = document.getElementsByClassName('connected');
-					for (i = 0; i < connected.length; i++) {
-    				connected[i].style.display = 'none'
-        	}
-    		});
-  		}
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          var unconnected = document.getElementsByClassName('unconnected')
+          for (i = 0; i < unconnected.length; i++) {
+            unconnected[i].style.display = 'block'
+          }
+          var connected = document.getElementsByClassName('connected');
+          for (i = 0; i < connected.length; i++) {
+            connected[i].style.display = 'none'
+          }
+        });
+      }
 		</script>
     <!-- see https://developers.google.com/identity/sign-in/web/ -->
     <!-- see https://stackoverflow.com/questions/35983283/using-google-signin-without-metadata-tags -->
-	<body>
+  <body>
 </html>
 <!--
 vi:et:sw=2:ts=2
