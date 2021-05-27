@@ -9,7 +9,6 @@ let user_data = "";
 let is_editing = false;
 let editing_comment_id = 0;
 let blank_pic = "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png";
-let DOG_ID = 1;
 
 $('html').click(function(e) {
   if(!$(e.target).hasClass('cmt-btn'))
@@ -238,7 +237,7 @@ $('#post-btn, #writing-post-btn').click(function() {
 		$.post('./post_comment', {
 			comment_id: is_editing? editing_comment_id : comment_id,
 			user_id:	USER_ID,
-			dog_id:		DOG_ID,
+			dog_id:		dog_page_id,
 			comment:	$('.commentBox').val(),
 			photo:		$('.preview-pic')[0].src
 		}, (resp) => {
@@ -274,7 +273,7 @@ function post_image() {
             $.post("./upload_image", {
                 image_id:	image_id,
 				user_id: 	USER_ID,
-				dog_id:		DOG_ID,
+				dog_id:		dog_page_id,
                 photo: 		e.target.result
             }, () => {});
         });
@@ -388,7 +387,7 @@ function concat_comment(comment_id, user_id, comment, photo) {
 }
 
 function load_comment() {
-	$.post('./load_comments', {dog_id: DOG_ID}, (cmt_json) => {
+	$.post('./load_comments', {dog_id: dog_page_id}, (cmt_json) => {
 		/*
 		 * To ensure all [comment_id] are unique,
 		 * the newer comment will always have the bigger [comment_id].
@@ -423,7 +422,7 @@ function concat_image(image_id, user_pic, photo) {
 }
 
 function load_image() {
-	$.post('./load_images', {dog_id: DOG_ID}, (img_json) => {
+	$.post('./load_images', {dog_id: dog_page_id}, (img_json) => {
 		$.each(JSON.parse(img_json), function(index, val) {
 			let pic = user_data[val.user_id].profile;
 			image_id = parseInt(index, 10);
