@@ -9,22 +9,6 @@ const { json } = require("express");
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('data.db');
 
-/* >> npm install --save bcryptjs && npm uninstall --save bcrypt */
-// const bcrypt = require('bcryptjs');
-// const saltRounds = 10;
-// const myPlaintextPassword = 'p@@sW00d_123456';
-// const hash = '$2a$10$3WUhJpRd.KxigIJ0/5wbo.WDvtTBWVB.drtzmqNx24u4bdNwA8pP.';
-
-// const correctPassword = 'p@@sW00d_123456';
-// const wrongPassword = 'zaqxsw123456'
-
-// bcrypt.hash(myPlaintextPassword, saltRounds).then(function(hash) {
-//     console.log(hash);
-// });
-
-// console.log(bcrypt.compareSync(correctPassword, hash));
-// console.log(bcrypt.compareSync(wrongPassword, hash));
-
 
 
 // db.serialize(function() {
@@ -75,6 +59,7 @@ server.listen(port, () => {
 
 /**********************************************************/
 /* Users */
+
 app.post("/load_users", async (req, resp) => {
     var command = "SELECT * FROM users";
     let jsonObj = {};
@@ -89,12 +74,16 @@ app.post("/load_users", async (req, resp) => {
 });
 
 app.post("/update_users", async (req, resp) => {
-    sqlUpdate('users', {   
+    let command = "SELECT name FROM users WHERE id = " + req.body.id;
+    db.get(command, (err, row) => {
+        if (!row) { // User first log in
+            sqlUpdate('users', {   
                 "id":       req.body.id,
                 "name":     req.body.name,
                 "profile":  req.body.profile
             });
-
+        }
+    });
     resp.send(JSON.stringify(await sql2JSON('users')));
 });
 /**********************************************************/
