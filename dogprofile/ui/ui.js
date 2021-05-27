@@ -206,20 +206,12 @@ $('#save-btn').click(function(){
   
 
   //pass to db
-
-  console.log('typeEditName:', typeof editName)
-  console.log('typeChosenAvatarSrc:', typeof chosenAvatarSrc)
-
-	console.log('id:',USER_ID)
-	console.log('name:',editName)
-	console.log('profile:',chosenAvatarSrc)
-  /*
+  
 	$.post('./update_users', {
 		id: 		USER_ID,
 		name:		editName,
-		profile:	chosenAvatarSrc}
+		profile:	chosenAvatarSrc
   }, () => {});
-  */
 
 })
 /**************************************************************/
