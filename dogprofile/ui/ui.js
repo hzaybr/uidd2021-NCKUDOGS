@@ -190,31 +190,36 @@ $('.avatar-choose').click(function(){
 
 $('#save-btn').click(function(){
   //change avatar
-  /*
+  let chosenAvatarSrc = PROFILE_PIC
   if (document.getElementById('chosen')!= null){
-		let chosenAvatarSrc = $('#chosen').attr('src')
+		chosenAvatarSrc = $('#chosen').attr('src')
 		let avatars = document.getElementsByClassName('profile-avatar');
 		for (let i = 0; i < avatars.length; ++i) {
   		avatars[i].src = chosenAvatarSrc;
 		}
   }
-  */
-  if (document.getElementById('chosen')!= null){
-    let PROFILE_PIC = $('#chosen').attr('src')
-  }
 
 	//change username
-	let USER_NAME = document.getElementById('edit-name').value
-	console.log('editName',editName)
+	let editName = document.getElementById('edit-name').value
 	$('.username').attr('id',editName)
   $('.username').html(editName)
   
+
+  //pass to db
+
+  console.log('typeEditName:', typeof editName)
+  console.log('typeChosenAvatarSrc:', typeof chosenAvatarSrc)
+
+	console.log('id:',USER_ID)
+	console.log('name:',editName)
+	console.log('profile:',chosenAvatarSrc)
+  /*
 	$.post('./update_users', {
 		id: 		USER_ID,
-		name:		USER_NAME,
-		profile:	PROFILE_PIC,
-		score:		""
-	}, () => {});
+		name:		editName,
+		profile:	chosenAvatarSrc}
+  }, () => {});
+  */
 
 })
 /**************************************************************/
