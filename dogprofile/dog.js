@@ -2,7 +2,7 @@ var hide_class
 const container_list = ['.intro-container', '.pic-container', '.comment-container', '.report-container']
 const scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
 
-let score = 0;
+let SCORE = 0;
 let comment_id = 0;
 let image_id = 0;
 let user_data = "";
@@ -93,12 +93,12 @@ $('.arrow').click(function() {
 $('.heart').click(function() {
   $('.pop-com').fadeIn();
 
-  score = $(this).attr('id')[1];
-  console.log(`score: ${score}`);
+  SCORE = $(this).attr('id')[1];
+  console.log(`score: ${SCORE}`);
   for (i=1; i<=5; i++){
     //heart in comment
     hid = `.heart:nth-child(${i+1})`;
-    if(i<=score){
+    if(i<=SCORE){
     $(hid).attr('src','./image/red_heart.png');
     }
     else {
@@ -118,7 +118,7 @@ $('.write-com').click(function() {
   
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
-    if(i<=score){
+    if(i<=SCORE){
       // console.log($(hid).attr('id'));
       $(hid).attr('src','./image/red_heart.png');
     }
@@ -139,11 +139,11 @@ $('#writing-cancel-btn').click(function() {
 });
 
 $('.w-heart').click(function() {
-  score = $(this).attr('id')[2];
-  console.log(`score: ${score}`);
+  SCORE = $(this).attr('id')[2];
+  console.log(`score: ${SCORE}`);
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
-    if(i<=score){
+    if(i<=SCORE){
     $(hid).attr('src','./image/red_heart.png');
     }
     else {
@@ -195,13 +195,12 @@ $(function(){
 	$.post('./update_users', {
 		id: 		USER_ID,
 		name:		USER_NAME,
-		profile:	PROFILE_PIC,
-		score:		""
+		profile:	PROFILE_PIC
 	}, () => {});
 
 	/* Initialize image and comment section */
 	const promise = new Promise((resolve, reject) => {
-		$.post('./load_users', (user_json) => {
+		$.post('./load_users', {dog_id: dog_page_id}, (user_json) => {
 			user_data = JSON.parse(user_json);
 			resolve(user_data);
 		});
@@ -216,26 +215,21 @@ $(function(){
 
 $('#post-btn, #writing-post-btn').click(function() {
 
-	// if ($('.commentBox').val().length == 0)
-	// 	return;
-
-
-	user_data[USER_ID].score = score;
+	user_data[USER_ID].score = SCORE;
 
 	if (!is_editing) { // write a new comment
 		concat_comment(++comment_id, USER_ID, $('.commentBox').val(), $('.preview-pic')[0].src);
 	}
 	
-	$.post('./update_users', {
-		id: 		USER_ID,
-		name:		USER_NAME,
-		profile:	PROFILE_PIC,
-		score:		score
+	$.post('./update_score', {
+		user_id: 	USER_ID,
+		dog_id:		dog_page_id,
+		score:		SCORE
 	}, () => {});
 
 	const promise = new Promise((resolve, reject) => {
 		$.post('./post_comment', {
-			comment_id: is_editing? editing_comment_id : comment_id,
+			comment_id: is_editing? editing_comment_id : -1,
 			user_id:	USER_ID,
 			dog_id:		dog_page_id,
 			comment:	$('.commentBox').val(),
@@ -365,13 +359,13 @@ function concat_comment(comment_id, user_id, comment, photo) {
 		$(`#${btn_edit_id}`).click(function () {			
 			editing_comment_id = comment_id;
 			is_editing = true;
-			score = user.score;
+			SCORE = user.score;
 
 			$('.comment-container').hide();
 			$('.writing-container').show();
 			for (i = 1; i <= 5; i++){
 				hid = `.w-heart:nth-child(${i})`;
-				if (i <= score) {
+				if (i <= SCORE) {
 				  $(hid).attr('src','./image/red_heart.png');
 				}
 				else {
@@ -435,20 +429,20 @@ function load_user() {
 
 	/* Sum of score */
 	let sum = 0;
-	let score = [0,0,0,0,0,0];
+	let scores = [0,0,0,0,0,0];
 	$.each(user_data, function(index, val) {
 		sum += val.score;
-		++score[val.score];
+		++scores[val.score];
 	});
 
 	/* Score bars */
 	let obj = document.getElementsByClassName("score-bar-count");
 	for (let i = 1; i <= obj.length; ++i) {
-		obj[obj.length-i].style.width = `${score[i] * 100 / Math.max(...score)}%`;
+		obj[obj.length-i].style.width = `${scores[i] * 100 / Math.max(...scores)}%`;
 	}
 	
 	/* Total users */
-	let user_len = Object.keys(user_data).length - score[0]; // exclude user with no score
+	let user_len = Object.keys(user_data).length - scores[0]; // exclude user with no score
 	document.getElementById("review-count").innerHTML = `(${user_len})`;
 
 	/* Average score */

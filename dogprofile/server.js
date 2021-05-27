@@ -18,9 +18,15 @@ const db = new sqlite3.Database('data.db');
 //     db.run('DROP TABLE images');
 
 //     /* Create table */
-//     db.run('CREATE TABLE users(id TEXT PRIMARY KEY, name, profile)');
-//     db.run('CREATE TABLE comments(id INTEGER PRIMARY KEY, user_id TEXT, dog_id INTEGER, comment, photo CLOB, timestamp DATETIME)');
-//     db.run('CREATE TABLE images(id INTEGER PRIMARY KEY, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)');
+//     let cmd = "CREATE TABLE users(id TEXT PRIMARY KEY, name TEXT, profile CLOB";
+//     for (var i = 0; i < 19; ++i) {
+//        cmd += ", dog_" + i.toString() + " TINYINT DEFAULT 0";
+//     }
+//     cmd += ")";
+//     console.log(cmd);
+//     db.run(cmd);
+    // db.run("CREATE TABLE comments(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, comment TEXT, photo CLOB, timestamp DATETIME)");
+//     db.run("CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)");
 // })
 
 
@@ -53,6 +59,17 @@ server.listen(port, () => {
 /**********************************************************/
 
 
+/**********************************************************/
+/* Score */
+
+app.post("/update_score", async (req, resp) => {
+    let command = "UPDATE users SET dog_" + req.body.dog_id + " = " + req.body.score
+                    + " WHERE id = \"" + req.body.user_id + "\"";
+    db.run(command);
+});
+/**********************************************************/
+
+
 
 /**********************************************************/
 /* Users */
@@ -60,18 +77,20 @@ server.listen(port, () => {
 app.post("/load_users", async (req, resp) => {
     var command = "SELECT * FROM users";
     let jsonObj = {};
+    let dog_id = "dog_" + req.body.dog_id;
 
     db.each(command, (err, row) => { // This gets called for every row our query returns
         jsonObj[row.id] = {};
-        jsonObj[row.id]['name'] = row.name;
-        jsonObj[row.id]['profile'] = row.profile;
+        jsonObj[row.id]["name"] = row["name"];
+        jsonObj[row.id]["profile"] = row["profile"];
+        jsonObj[row.id]["score"] = row[dog_id];
     }, (err) => { // This gets called after each of our rows have been processed
         resp.send(JSON.stringify(jsonObj));
     });
 });
 
 app.post("/update_users", async (req, resp) => {
-    let command = "SELECT name FROM users WHERE id = " + req.body.id;
+    let command = "SELECT name FROM users WHERE id = \"" + req.body.id + "\"";
     db.get(command, (err, row) => {
         if (!row) { // User first log in
             sqlUpdate('users', {   
@@ -106,17 +125,26 @@ app.post("/load_comments", async (req, resp) => {
 });
 
 app.post("/post_comment", async (req, resp) => {
-    db.get("SELECT datetime('now','localtime')", (err, row) => {
-        sqlUpdate('comments', {
-            "id":           req.body.comment_id,
-            "user_id":      req.body.user_id,
-            "dog_id":       req.body.dog_id,
-            "comment":      req.body.comment,
-            "photo":        req.body.photo,
-            "timestamp":    Object.values(row)[0]
+    db.serialize(function() {
+        db.get("SELECT datetime('now','localtime')", (err, row) => {
+            let cmt = {
+                "user_id":      req.body.user_id,
+                "dog_id":       req.body.dog_id,
+                "comment":      req.body.comment,
+                "photo":        req.body.photo,
+                "timestamp":    Object.values(row)[0]
+            };
+            if (req.body.comment_id != -1) { // edit comment
+                cmt["id"] = req.body.comment_id;
+            }
+            sqlUpdate('comments', cmt);
+        });
+    
+        db.get("SELECT last_insert_rowid() FROM comments", (err, row) => {
+            // console.log(row);
+            // resp.send(row["last_insert_rowid()"]);
         });
     });
-    resp.send(JSON.stringify(await sql2JSON('comments')));
 });
 
 app.post("/delete_comment", async (req, resp) => {
