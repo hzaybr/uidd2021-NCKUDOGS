@@ -202,7 +202,7 @@ $(function(){
 
 	/* Initialize image and comment section */
 	const promise = new Promise((resolve, reject) => {
-		$.post('./load_data', {table: 'users'}, (user_json) => {
+		$.post('./load_users', (user_json) => {
 			user_data = JSON.parse(user_json);
 			resolve(user_data);
 		});

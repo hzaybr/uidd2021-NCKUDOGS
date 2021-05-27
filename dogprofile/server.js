@@ -27,12 +27,17 @@ const db = new sqlite3.Database('data.db');
 
 
 
-// db.run('DROP TABLE users');
-// db.run('DROP TABLE comments');
-// db.run('DROP TABLE images');
-// db.run('CREATE TABLE users(id INTEGER PRIMARY KEY, name, profile)');
-// db.run('CREATE TABLE comments(id INTEGER PRIMARY KEY, user_id INTEGER, dog_id INTEGER, comment, photo CLOB, timestamp DATETIME)');
-// db.run('CREATE TABLE images(id INTEGER PRIMARY KEY, user_id INTEGER, dog_id INTEGER, photo CLOB, timestamp DATETIME)');
+// db.serialize(function() {
+//     /* Delete table */
+//     db.run('DROP TABLE users');
+//     db.run('DROP TABLE comments');
+//     db.run('DROP TABLE images');
+
+//     /* Create table */
+//     db.run('CREATE TABLE users(id TEXT PRIMARY KEY, name, profile)');
+//     db.run('CREATE TABLE comments(id INTEGER PRIMARY KEY, user_id TEXT, dog_id INTEGER, comment, photo CLOB, timestamp DATETIME)');
+//     db.run('CREATE TABLE images(id INTEGER PRIMARY KEY, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)');
+// })
 
 
 
@@ -66,14 +71,22 @@ server.listen(port, () => {
 /* Paths */
 /**********************************************************/
 
-app.post("/load_data", async (req, resp) => {
-    resp.send(JSON.stringify(await sql2JSON(req.body.table)));
-});
-
 
 
 /**********************************************************/
 /* Users */
+app.post("/load_users", async (req, resp) => {
+    var command = "SELECT * FROM users";
+    let jsonObj = {};
+
+    db.each(command, (err, row) => { // This gets called for every row our query returns
+        jsonObj[row.id] = {};
+        jsonObj[row.id]['name'] = row.name;
+        jsonObj[row.id]['profile'] = row.profile;
+    }, (err) => { // This gets called after each of our rows have been processed
+        resp.send(JSON.stringify(jsonObj));
+    });
+});
 
 app.post("/update_users", async (req, resp) => {
     sqlUpdate('users', {   
