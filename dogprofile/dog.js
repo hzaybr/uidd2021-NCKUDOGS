@@ -159,26 +159,23 @@ $('.mesng-icon').click(function() {
 
 /******************************************************************/
 $('.navig').click(function() {
-  var dogID = $(this).attr('id');
-
-  $.post('./navig', {
-    dogID: dogID
-    },(data) =>{
-    });
-    window.location.assign("index.html");
+  window.location.assign("index.html");
 });
 
 $('.XXicon').click(function() {
+  localStorage.setItem("dog page id", 50)
   window.location.assign("index.html");
 });
 
 
 /*******************************************************************/
 const dogfile = "./dog.json"
+const IDfile = "./map/navig.json"
+let dog_page_id = localStorage.getItem("dog page id")
+
 $(document).ready(function() {
   $.get(dogfile, function(json){
-    var dog_id = $('.navig').attr('id');
-    var dog = json[dog_id]
+    var dog = json[dog_page_id]
     $('#dogname').html(dog["name"]);
     $('.top-name').html(dog["name"]);
     $('#subname').html(dog["subname"]);
@@ -186,7 +183,7 @@ $(document).ready(function() {
     $('.health-info').html(dog["health-info"]);
     $('#li-intro').html(dog["li-intro"]);
     $('#all-info').html(dog["all-info"]);
-    $('.top-pic').css('background-image',`url(${dog['image']})`);
+    $('.top-pic').css('background-image',`url(./image/${dog_page_id}.jpg)`);
   });
 });
 

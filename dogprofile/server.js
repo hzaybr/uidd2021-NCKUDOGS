@@ -9,6 +9,24 @@ const { json } = require("express");
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('data.db');
 
+/* >> npm install --save bcryptjs && npm uninstall --save bcrypt */
+// const bcrypt = require('bcryptjs');
+// const saltRounds = 10;
+// const myPlaintextPassword = 'p@@sW00d_123456';
+// const hash = '$2a$10$3WUhJpRd.KxigIJ0/5wbo.WDvtTBWVB.drtzmqNx24u4bdNwA8pP.';
+
+// const correctPassword = 'p@@sW00d_123456';
+// const wrongPassword = 'zaqxsw123456'
+
+// bcrypt.hash(myPlaintextPassword, saltRounds).then(function(hash) {
+//     console.log(hash);
+// });
+
+// console.log(bcrypt.compareSync(correctPassword, hash));
+// console.log(bcrypt.compareSync(wrongPassword, hash));
+
+
+
 // db.run('DROP TABLE users');
 // db.run('DROP TABLE comments');
 // db.run('DROP TABLE images');
@@ -32,7 +50,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 15038;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -159,8 +177,8 @@ app.post("/update_position", async (req, resp) => {
     writeJSON(position_file, jsonObj);
 });
 
-/* navigation */
-let navig = "./map/navig.json";
+/* navigation 
+const navig = "./map/navig.json";
 
 app.post("/navig", async (req, resp) => {
     var dogID = req.body.dogID;
@@ -169,10 +187,21 @@ app.post("/navig", async (req, resp) => {
     const jsonObj = JSON.parse(await readJSON(navig));
     jsonObj["dogID"] = dogID;
     writeJSON(navig, jsonObj);
+    console.log(`store navig ID: ${dogID}`)
 });
+*/
 
+/* dogID 
+app.post("/dogpage", async (req, resp) => {
+    var dog_page_id = req.body.dog_page_id;
+    console.log(`dog page ID: ${dog_page_id}`);
 
-
+    const jsonObj = JSON.parse(await readJSON(navig));
+    jsonObj["dog_page_id"] = dog_page_id;
+    writeJSON(navig, jsonObj);
+    console.log(`store dogpage ID: ${dog_page_id}`)
+});
+*/
 
 
 
