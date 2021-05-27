@@ -48,9 +48,6 @@ server.listen(port, () => {
 
 
 
-
-
-
 /**********************************************************/
 /* Paths */
 /**********************************************************/
@@ -109,7 +106,7 @@ app.post("/load_comments", async (req, resp) => {
 });
 
 app.post("/post_comment", async (req, resp) => {
-    db.each('SELECT datetime(\'now\')', (err, row) => {
+    db.get("SELECT datetime('now','localtime')", (err, row) => {
         sqlUpdate('comments', {
             "id":           req.body.comment_id,
             "user_id":      req.body.user_id,
@@ -148,7 +145,7 @@ app.post("/load_images", async (req, resp) => {
 });
 
 app.post("/upload_image", async (req, resp) => { 
-    db.each('SELECT datetime(\'now\')', (err, row) => {
+    db.get("SELECT datetime('now','localtime')" , (err, row) => {
         sqlUpdate('images', {
             "id":           req.body.image_id,
             "user_id":      req.body.user_id,
