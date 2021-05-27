@@ -189,19 +189,33 @@ $('.avatar-choose').click(function(){
 //save change 
 
 $('#save-btn').click(function(){
-	//change avatar
-	if (document.getElementById('chosen')!= null){
+  //change avatar
+  /*
+  if (document.getElementById('chosen')!= null){
 		let chosenAvatarSrc = $('#chosen').attr('src')
 		let avatars = document.getElementsByClassName('profile-avatar');
 		for (let i = 0; i < avatars.length; ++i) {
   		avatars[i].src = chosenAvatarSrc;
 		}
-	}
+  }
+  */
+  if (document.getElementById('chosen')!= null){
+    let PROFILE_PIC = $('#chosen').attr('src')
+  }
+
 	//change username
-	let editName = document.getElementById('edit-name').value
+	let USER_NAME = document.getElementById('edit-name').value
 	console.log('editName',editName)
 	$('.username').attr('id',editName)
-	$('.username').html(editName)
+  $('.username').html(editName)
+  
+	$.post('./update_users', {
+		id: 		USER_ID,
+		name:		USER_NAME,
+		profile:	PROFILE_PIC,
+		score:		""
+	}, () => {});
+
 })
 /**************************************************************/
 

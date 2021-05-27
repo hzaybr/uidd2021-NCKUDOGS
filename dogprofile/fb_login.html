@@ -99,9 +99,8 @@
           }
 
           console.log(`font-size:${fitName.style.fontSize}`);
-        //
-
-          localStorage.setItem("user", JSON.stringify(response));
+          //
+          localStorage.setItem("user", JSON.stringify({id: `${response.id}`, name: `${response.name}`, image_url: `${response.picture.data.url}`}));
  
           setTimeout(function() {
             window.location.assign("index.html");
