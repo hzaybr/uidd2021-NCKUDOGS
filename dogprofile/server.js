@@ -140,9 +140,8 @@ app.post("/post_comment", async (req, resp) => {
             sqlUpdate('comments', cmt);
         });
     
-        db.get("SELECT last_insert_rowid() FROM comments", (err, row) => {
-            // console.log(row);
-            // resp.send(row["last_insert_rowid()"]);
+        db.get("SELECT MAX(id) FROM comments", (err, row) => {
+            resp.send(row["MAX(id)"].toString());
         });
     });
 });
@@ -173,16 +172,20 @@ app.post("/load_images", async (req, resp) => {
 });
 
 app.post("/upload_image", async (req, resp) => { 
-    db.get("SELECT datetime('now','localtime')" , (err, row) => {
-        sqlUpdate('images', {
-            "id":           req.body.image_id,
-            "user_id":      req.body.user_id,
-            "dog_id":       req.body.dog_id,
-            "photo":        req.body.photo,
-            "timestamp":    Object.values(row)[0]
+    db.serialize(function() {
+        db.get("SELECT datetime('now','localtime')" , (err, row) => {
+            sqlUpdate('images', {
+                "user_id":      req.body.user_id,
+                "dog_id":       req.body.dog_id,
+                "photo":        req.body.photo,
+                "timestamp":    Object.values(row)[0]
+            });
+        });
+    
+        db.get("SELECT MAX(id) FROM images", (err, row) => {
+            resp.send(row["MAX(id)"].toString());
         });
     });
-    resp.send(JSON.stringify(await sql2JSON('images')));
 });
 /**********************************************************/
 
@@ -261,7 +264,7 @@ function sqlUpdate(table, params) {
     for (var i = 0; i < keys.length; ++i) {
         q.push("?");
     }
-    command += q.join(',') + ')';
+    command += q.join(',') + ');';
 
     db.run(command, Object.values(params));
 }
