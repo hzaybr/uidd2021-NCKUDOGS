@@ -3,10 +3,10 @@ const container_list = ['.intro-container', '.pic-container', '.comment-containe
 const scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
 
 let SCORE = 0;
-let user_data = "";
+let user_data = {};
 let is_editing = false;
 let editing_comment_id = 0;
-let blank_pic = "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png";
+const BLANK_PIC = "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png";
 
 $('html').click(function(e) {
   if(!$(e.target).hasClass('cmt-btn'))
@@ -128,6 +128,7 @@ $('.write-com').click(function() {
 
 $('#writing-cancel-btn').click(function() {
   is_editing = false;
+  $('.preview-pic')[0].src = BLANK_PIC;
   $('.commentBox').val('');
   $('.comment-container').fadeIn();
   $('.writing-container').hide();
@@ -236,7 +237,7 @@ $('#post-btn, #writing-post-btn').click(function() {
 		});
 	});
 
-	$('.preview-pic')[0].src = blank_pic;
+	$('.preview-pic')[0].src = BLANK_PIC;
 	$('.commentBox').val('');
 	$('.comment-container').fadeIn();
 	$('.writing-container').hide();
