@@ -92,8 +92,7 @@ function initMap() {
 				for(i=1;i<20;i++){
             var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
             addMarker(marker_path,{lat: position_file[i].lat, lng: position_file[i].lng})
-        }
-        //console.log(json); 
+        } 
     	});
 		}); 
    /* $.get(position_file,function(json){
@@ -303,7 +302,8 @@ $( "#mg1 img" ).click(function() {
   dogMarker_click(Markers[choose_num]);
 	markClick();
   $.post('./update_position', {
-    dogID:  choose_num+1,
+    user_id: "unknow",
+    dog_id:  choose_num,
     lat: 		current_lat,
 		lng:		current_lng
 	}, () => {});

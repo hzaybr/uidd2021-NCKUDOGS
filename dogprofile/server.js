@@ -45,7 +45,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 1503;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -199,15 +199,26 @@ app.get("/dog_position", async (req, resp) => {
     resp.send(JSON.stringify(await sql2JSON('position_original'))); 
 });
 app.post("/update_position", async (req, resp) => {
-    console.log(req.body.dogID);
+		db.get("SELECT datetime('now','localtime')", (err, row) => {
+    	sqlInsert('position_record',{
+        "user_id":  req.body.user_id,
+        "dog_id":   req.body.dog_id,
+        "lat":      req.body.lat,
+        "lng":      req.body.lng,
+        "timestamp":Object.values(row)[0]
+    	})
+			console.log('success');
+		});
+   /* console.log(req.body.user_id)
+    console.log(req.body.dog_id);
     console.log(req.body.lat);
-    console.log(req.body.lng);
-    const jsonObj = JSON.parse(await readJSON(position_file));
+    console.log(req.body.lng);*/
+   /* const jsonObj = JSON.parse(await readJSON(position_file));
     jsonObj[req.body.dogID] = {
         "lat":  parseFloat(req.body.lat),
         "lng":  parseFloat(req.body.lng)
     };
-    writeJSON(position_file, jsonObj);
+    writeJSON(position_file, jsonObj);*/
 });
 
 /* navigation 
