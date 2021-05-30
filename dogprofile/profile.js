@@ -30,13 +30,22 @@ $('.XXicon').click(function() {
 
 
 /**********************************/
-const usersfile = "./data/users.json"
-var comments 
-var score
-var photos
+$(document).ready(function(){
+  $.post('/load_profile_cmt', {
+    userID: USER_ID
+    }, (data) =>{
+      let len = Object.keys(data).length
+      for(i=len; i>=0; i--){
+          console.log(data[i])
+       }
+   
+    
+    })
 
-//$(document).ready(function(){
-	$.get(usersfile, function(usr_json){
+})
+
+
+/*	$.get(usersfile, function(usr_json){
 		comments =  usr_json[USER_ID]["comments"];
 		score =  usr_json[USER_ID]["score"];
 		photos =  usr_json[USER_ID]["photos"];
@@ -74,4 +83,5 @@ var photos
     $('.pic-grid').html(p_txt);
 
 	});
-//});
+});
+*/

@@ -45,7 +45,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 1503;
+const port = 15038;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -189,9 +189,6 @@ app.post("/upload_image", async (req, resp) => {
 });
 /**********************************************************/
 
-
-
-
 /* position*/
 let position_file = "./map/position.json";
 
@@ -220,6 +217,22 @@ app.post("/update_position", async (req, resp) => {
     };
     writeJSON(position_file, jsonObj);*/
 });
+
+
+/* load profile page */
+app.post("/load_profile_cmt", async (req, res) => {
+  let command = `SELECT dog_id, comment, timestamp FROM comments WHERE user_id = '${req.body.userID}'`
+  var data ={} 
+  db.all(command, function(err, rows) {
+    rows.forEach(function(row, i) {
+      data[i] = row
+    console.log(data)
+    })
+    console.log(data)
+    res.send(data)
+  })
+});
+
 
 /* navigation 
 const navig = "./map/navig.json";
