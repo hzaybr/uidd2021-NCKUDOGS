@@ -226,9 +226,7 @@ app.post("/load_profile_cmt", async (req, res) => {
   db.all(command, function(err, rows) {
     rows.forEach(function(row, i) {
       data[i] = row
-    console.log(data)
     })
-    console.log(data)
     res.send(data)
   })
 });
