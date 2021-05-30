@@ -45,7 +45,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 1503;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -195,6 +195,10 @@ app.post("/upload_image", async (req, resp) => {
 /* position*/
 let position_file = "./map/position.json";
 
+app.get("/dog_position", async (req, resp) => {
+    console.log("Hello");
+    resp.send(JSON.stringify(await sql2JSON('position_original'))); 
+});
 app.post("/update_position", async (req, resp) => {
     console.log(req.body.dogID);
     console.log(req.body.lat);

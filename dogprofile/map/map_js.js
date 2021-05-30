@@ -27,7 +27,8 @@ var target_num = 0;
 var previous_num;
 // var redir_url = location.href.match(/.html(\W|\w|\z)*&/)[0].slice(6).slice(0,-1);;
 var dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
-var position_file="./map/position.json"
+//var position_file="./map/position.json";
+var position_file;
 var currentInfoWindow = '';
 const MAP_BOUNDS = {
   north: 22.95441,
@@ -36,6 +37,11 @@ const MAP_BOUNDS = {
   east: 120.22808,
 };
 var userimg;
+/*$(document).ready(function() {
+    $.get("/dog_position", function(json){
+        
+    });
+});*/
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
     directionsService = new google.maps.DirectionsService();
@@ -79,13 +85,23 @@ function initMap() {
     // ownermarker.addListener('click',function(){
     //   markerClick();
     // });
-    //dog's mark 
-    $.get(position_file,function(json){
+    //dog's mark
+   	$(document).ready(function() {
+      $.get("/dog_position", function(json){
+        position_file = JSON.parse(json);
+				for(i=1;i<20;i++){
+            var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
+            addMarker(marker_path,{lat: position_file[i].lat, lng: position_file[i].lng})
+        }
+        //console.log(json); 
+    	});
+		}); 
+   /* $.get(position_file,function(json){
 			for(i=1;i<20;i++){
      	var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
        addMarker(marker_path,{lat: json[i].lat, lng: json[i].lng})
      }	 
-    })
+    })*/
     findposition(ownermarker);
     route_marker = new google.maps.Marker({
       position: route_uluru,
