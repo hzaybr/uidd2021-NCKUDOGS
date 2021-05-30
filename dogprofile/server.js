@@ -223,14 +223,25 @@ app.post("/update_position", async (req, resp) => {
 app.post("/load_profile_cmt", async (req, res) => {
   let command = `SELECT dog_id, comment, timestamp FROM comments WHERE user_id = '${req.body.userID}'`
   var data ={} 
-  db.all(command, function(err, rows) {
+  db.all(command, (err, rows) =>{
     rows.forEach(function(row, i) {
       data[i] = row
     })
+//    console.log(data)
     res.send(data)
   })
 });
 
+app.post("/load_score", async (req, res) => {
+  var txt = "dog_0"
+  for (var i=1; i<19; i++) {
+    txt+= `,dog_${i}`
+  }
+  let command = `SELECT ${txt} FROM users WHERE id = '${req.body.userID}'`
+  db.get(command, (err, row) =>{
+    res.send(row)
+  })
+});
 
 /* navigation 
 const navig = "./map/navig.json";

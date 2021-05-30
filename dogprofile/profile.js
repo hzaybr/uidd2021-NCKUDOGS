@@ -34,43 +34,58 @@ $('.XXicon').click(function() {
 var comment
 var dog_id
 var time
-var score = 0
+var cmt_txt
+
+$(function() {
+  $.post('/load_score', {
+    userID: USER_ID,
+    },(data) => {
+      scores =  Object.values(data)
+      var txt = ""
+      scores.forEach(function(score, i) {
+        if(score != 0){
+          txt += `<div class="score_${i}" id=${score}></div>`
+          }
+          $('.n-score').html(txt)
+        })
+    })
+})
+
 $(document).ready(function(){
   $.post('/load_profile_cmt', {
     userID: USER_ID
     }, (data) =>{
       let len = Object.keys(data).length-1
-      let cmt_txt = ""
+      cmt_txt = ""
 
       for(var i=len; i>=0; i--){
-        console.log(data[i])
         comment = data[i].comment
         dog_id = data[i].dog_id
         time = data[i].timestamp
-        cmt_txt = load_cmt(cmt_txt, comment, dog_id, time)
+        load_cmt()
        }
       $('.comment-grid').html(cmt_txt);
     })
 
 })
 
-function load_cmt(cmt_txt, comment, dog_id, time) {
-  cmt_txt += "<div class=\"c-border\">"
-  cmt_txt +=   "<img width=\"80%\" src=\"./image/dog/"+dog_id+".png\">"
-  cmt_txt +=   "<div class=\"cmt-sub-grid\">"
-  cmt_txt +=     "<p style=\"margin:1vw; font-size:3.8vw; font-weight:bold;\">"+dog_name[dog_id]+"</p>"
-  cmt_txt +=     "<div style=\"margin: 1vw;padding-top:1.5vw;\">"
-  for(i=0;i<score;i++){
-    cmt_txt +=     "<img style=\"width:4%\" src=\"./image/red_heart.png\">"
+function load_cmt(){
+  cmt_txt += `<div class="c-border">`
+  cmt_txt +=   `<img width="80%" src="./image/dog/${dog_id}.png">`
+  cmt_txt +=   `<div class="cmt-sub-grid">`
+  cmt_txt +=     `<p class="dogname">${dog_name[dog_id]}</p>`
+  cmt_txt +=     `<div class="heart-grid" id=${dog_id}>`
+  var score = $(`.score_${dog_id}`).attr('id')
+  for(i=0; i<score; i++){
+    cmt_txt +=     `<img class="heart" src="./image/red_heart.png">`
   }
-  for(;i<5;i++){
-    cmt_txt +=     "<img style=\"width:4%\" src=\"./image/gray_heart.png\">"
+  for(; i<5; i++){
+    cmt_txt +=     `<img class="heart" src="./image/gray_heart.png">`
   }
-  cmt_txt +=     "</div>"
-  cmt_txt +=     "<p style=\"margin:1vw;font-size:3.6vw;\">"+comment+"</p>"
+  cmt_txt +=     `</div>`
+  cmt_txt +=     `<p style="margin:1vw;font-size:3.6vw;">${comment}</p>`
   cmt_txt +=   "</div>"
   cmt_txt += "</div>"
-  return cmt_txt;
 };
 
   
