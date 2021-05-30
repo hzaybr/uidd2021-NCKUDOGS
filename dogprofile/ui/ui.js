@@ -230,20 +230,21 @@ $('#manage').click(function(){
 })
 
 /**********************************************************/
-const usrfile = "./data/users.json"
 var comments
 var photos
 
-//$(document).ready(function() {
-  $.get(usrfile, function(usr_json){
-    comments =  usr_json[USER_ID]["comments"];
-    photos =  usr_json[USER_ID]["photos"];
-    var com_cnt = Object.keys(comments).length
-    var pic_cnt = Object.keys(photos).length
-    console.log(`com: ${com_cnt}, pic: ${pic_cnt}`);
-
-    $('#comment-count').html(com_cnt);
-    $('#upload-count').html(pic_cnt);
+$(function() {
+  $.post('/load_profile_cmt', {
+    userID: USER_ID
+    }, (data) =>{
+      let com_cnt = Object.keys(data).length
+      $('#comment-count').html(com_cnt);
+  })
+  $.post('/load_profile_img', {
+    userID: USER_ID
+    }, (data) =>{
+      let pic_cnt = Object.keys(data).length
+      $('#upload-count').html(pic_cnt);
   })
 
-//});
+});

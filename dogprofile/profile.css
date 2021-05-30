@@ -83,10 +83,20 @@ p {
 	grid-gap: 0.7vw;
   padding-top: 2vw;
 }
+.name-time {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	padding-right: 2vw;
+}
 .dogname {
   margin:1vw;
   font-size:3.8vw;
   font-weight:bold;
+}
+.dtime {
+  text-align:right;
+  margin:1vw;
+  font-size:3.3vw;
 }
 .heart-grid {margin: 1vw;padding-top:1.5vw;}
 .heart {width: 4%;}
