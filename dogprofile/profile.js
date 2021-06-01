@@ -11,9 +11,7 @@ $('.button').click(function() {
     $(this).css('color','black');
     hide = container_list[from];
     show = container_list[to];
-    console.log(`hide ${hide}, show ${show}`);
     yellow = `#${to+to}`;
-    console.log(yellow);
 
     $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
     setTimeout(function() {
@@ -32,21 +30,21 @@ $('.XXicon').click(function() {
 /**************************************************************************/
 var comment
 var dog_id
-var times = []
 var cmt_txt, p_txt
 
 $(document).ready(function() {
   var len
+  var times = []
   document.title = `${USER_NAME}｜汪汪`;
 
-  const promise_s = new Promise((resolve, reject) => {
+  const promise = new Promise((resolve, reject) => {
     $.post('/load_score',{
       userID: USER_ID
       },(data)=>{
         resolve(Object.values(data))
         });
    });
-  promise_s.then((scores) =>{
+  promise.then((scores) =>{
     p = new Promise((resolve, reject) => {
       $.post('/load_profile_cmt', {
       userID: USER_ID
@@ -71,17 +69,16 @@ $(document).ready(function() {
             time_txt = caculate_time(times[i], time_now)
             $(`#time${len-i}`).html(time_txt)
           }
-
-      })
+        })
     })
+
   })
 
-    $.post('/load_profile_img', {
-      userID: USER_ID
-    }, (data) =>{
-      console.log('load img')
-      load_img(data)
-    })
+  $.post('/load_profile_img', {
+    userID: USER_ID
+  }, (data) =>{
+    load_img(data)
+  })
 
 })
 
@@ -121,9 +118,13 @@ function load_img(photos) {
 };
 
 function caculate_time(time, time_now) {
+  time = time.replace(/-/g, '/')
+  time_now = time_now.replace(/-/g, '/')
+
+  t = new Date(time)
   t1= Date.parse(time)
   t2 = Date.parse(time_now)
-  t = new Date(t1)
+  
   second_dif = parseInt((t2-t1)/1000);
   if(second_dif >=60){
     minute_dif = parseInt(second_dif/60)
