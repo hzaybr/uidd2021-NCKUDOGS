@@ -242,6 +242,18 @@ app.post("/load_profile_img", async (req, res) => {
   })
 });
 
+app.post("/load_profile_position", async (req, res) => {
+  let command = `SELECT dog_id, lat, lng, timestamp FROM position_record WHERE user_id = '${req.body.userID}'`
+  var data ={} 
+  db.all(command, (err, rows) =>{
+    rows.forEach(function(row, i) {
+      data[i] = row
+    })
+    console.log(data)
+    res.send(data)
+  })
+})
+
 app.post("/load_score", async (req, res) => {
   var txt = "dog_0"
   for (var i=1; i<19; i++) {

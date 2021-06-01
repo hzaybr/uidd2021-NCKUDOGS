@@ -80,12 +80,18 @@ $(document).ready(function() {
     load_img(data)
   })
 
+  $.post('/load_profile_position', {
+    userID: USER_ID
+  }, (data) =>{
+    console.log(data)
+  })
+
 })
 
 
 function load_cmt(scores, num){
   cmt_txt += `<div class="c-border">`
-  cmt_txt +=   `<img width="100%" src="./image/dog/${dog_id}.png">`
+  cmt_txt +=   `<img width="90%" src="./image/dog/${dog_id}.png">`
   cmt_txt +=   `<div class="cmt-sub-grid">`
   cmt_txt +=     `<div class="name-time">`
   cmt_txt +=       `<p class="dogname">${dog_name[dog_id]}</p>`
