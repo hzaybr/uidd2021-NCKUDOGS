@@ -36,7 +36,7 @@ p {
   justify-content: space-evenly;
   justify-items: center;
   align-items: center;
-  font-size: 3.3vw;
+  font-size: 3.6vw;
   text-align: center;
   font-weight: 900;
 }
@@ -68,7 +68,8 @@ p {
 }
 .c-border {
 	display: grid;
-	grid-template-columns: 20% 80%;
+  grid-gap: 3%;
+	grid-template-columns: 20% 77%;
 	justify-items: center;
   height: auto;
   padding: 3vw;
@@ -86,17 +87,17 @@ p {
 .name-time {
 	display: grid;
 	grid-template-columns: 50% 50%;
-	padding-right: 2vw;
+	padding-right: 1vw;
 }
 .dogname {
-  margin:1vw;
-  font-size:3.8vw;
-  font-weight:bold;
+  margin: 1vw;
+  font-size: 4vw;
+  font-weight: bold;
 }
 .dtime {
-  text-align:right;
-  margin:1vw;
-  font-size:3.3vw;
+  text-align: right;
+  margin: 1vw;
+  font-size: 3.5vw;
 }
 .heart-grid {margin: 1vw;padding-top:1.5vw;}
 .heart {width: 4%;}
