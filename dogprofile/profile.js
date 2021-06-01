@@ -34,9 +34,9 @@ var comment
 var dog_id
 var times = []
 var cmt_txt, p_txt
-var len
 
 $(document).ready(function() {
+  var len
   document.title = `${USER_NAME}｜汪汪`;
 
   const promise_s = new Promise((resolve, reject) => {
@@ -121,43 +121,37 @@ function load_img(photos) {
 };
 
 function caculate_time(time, time_now) {
-  console.log(time)
-  console.log(time_now)
-  var year1 = parseInt(time.slice(0,4), 10)
-  var year2 = parseInt(time_now.slice(0,4), 10)
-  var month1 = parseInt(time.slice(5,7), 10)
-  var month2 = parseInt(time_now.slice(5,7), 10)
-  var date1 = parseInt(time.slice(8,10), 10)
-  var date2 = parseInt(time_now.slice(8,10), 10)
-  var hour1 = parseInt(time.slice(11,13), 10)
-  var hour2 = parseInt(time_now.slice(11,13), 10)
-  var minute1 = parseInt(time.slice(14,16), 10)
-  var minute2 = parseInt(time_now.slice(14,16), 10)
-  var second1 = parseInt(time.slice(17), 10)
-  var second2 = parseInt(time_now.slice(17), 10)
-  let display = `${year1}年${month1}月${date1}日${hour1}時${minute1}分${second1}秒`
-  console.log(display)
-  if(year2 > year1) {
-    time_txt = `${year1}年${month1}月${date1}日`
-   }
-  else if(month2 > month1){
-    time_txt = `${month1}月${date1}日`
+  t1= Date.parse(time)
+  t2 = Date.parse(time_now)
+  t = new Date(t1)
+  second_dif = parseInt((t2-t1)/1000);
+  if(second_dif >=60){
+    minute_dif = parseInt(second_dif/60)
+    if(minute_dif >=60){
+      hour_dif = parseInt(minute_dif/60)
+      if(hour_dif>=24){
+        day_dif = parseInt(hour_dif/24)
+        if(day_dif>=30){
+          month_dif = parseInt(day_dif/30)
+          if(month_dif>12)
+            time_txt = `${t.getFullYear()}年${t.getMonth()+1}月${t.getDate()}日` 
+          else
+            time_txt = `${t.getMonth()+1}月${t.getDate()}日`
+        }
+        else if(day_dif>=7 && day_dif<30)
+          time_txt = `${parseInt(day_dif/7)}週前`
+        else
+          time_txt = `${day_dif}天前`
+      }
+      else
+        time_txt = `${hour_dif}小時前` 
+    }
+    else
+      time_txt = `${minute_dif}分鐘前`
   }
-  else if(date2-date1>=7){
-    var weeks = parseInt((date2-date1)/7)
-    time_txt = `${weeks}週前`
-  }
-  else if(date2 > date1){
-    time_txt = `${date2-date1}天前`
-  }
-  else if(hour2 > hour1){
-    time_txt = `${hour2-hour1}小時前`
-  }
-  else if(minute2 > minute1){
-    time_txt = `${minute2-minute1}分鐘前`
-  }
-  else if(second2 > second1){
-    time_txt = `${second2-second1}秒前`
-  }
+  else
+    time_txt = `${second_dif}秒前`
+
+
   return time_txt
 }
