@@ -47,6 +47,14 @@
         let fitName = document.getElementById("status");
         fitName.innerHTML = `${profile.getName()}`;
           
+        //get userID
+        $.post('/idtoken', {
+          idToken: id_token
+          },(data)=>{
+            var userid = data.sub
+            localStorage.setItem("user", JSON.stringify({id: userid, name: `${profile.getName()}`, image_url: `${profile.getImageUrl()}`}));
+            })
+   
         //dynamically change font size
         function isOverflow(element) {
           return element.scrollHeight > element.clientHeight ||  element.scrollWidth > element.clientWidth;    
@@ -62,8 +70,6 @@
         }
 
         console.log(`font-size:${fitName.style.fontSize}`);
-        //
-        localStorage.setItem("user", JSON.stringify({id: id_token, name: `${profile.getName()}`, image_url: `${profile.getImageUrl()}`}));
  
         setTimeout(function() {
           window.location.assign("index.html");

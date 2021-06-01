@@ -8,6 +8,7 @@ const config = require('./config.js');
 const { json } = require("express");
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('data.db');
+const request = require('request');
 
 
 
@@ -53,6 +54,25 @@ server.listen(port, () => {
 });
 
 
+/* get userID from id token*/
+app.post("/idtoken", (req, res)=>{
+  p = new Promise((resolve, reject) =>{
+  var token = req.body.idToken
+  resolve(token)
+  })
+  p.then((token)=>{
+    request({
+        uri: `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`,
+        method: "GET",
+        timeout: 10000,
+        followRedirect: true,
+        maxRedirects: 10
+    }, function(error, response, body) {
+      body = JSON.parse(body)
+      res.send(body)
+    });
+  })
+})
 
 /**********************************************************/
 /* Paths */
@@ -249,7 +269,6 @@ app.post("/load_profile_position", async (req, res) => {
     rows.forEach(function(row, i) {
       data[i] = row
     })
-    console.log(data)
     res.send(data)
   })
 })
@@ -270,32 +289,6 @@ app.post("/load_time", async (req, res) =>{
     res.send(Object.values(row)[0])
   })
 })
-
-/* navigation 
-const navig = "./map/navig.json";
-
-app.post("/navig", async (req, resp) => {
-    var dogID = req.body.dogID;
-    console.log(`dogID: ${dogID}`);
-
-    const jsonObj = JSON.parse(await readJSON(navig));
-    jsonObj["dogID"] = dogID;
-    writeJSON(navig, jsonObj);
-    console.log(`store navig ID: ${dogID}`)
-});
-*/
-
-/* dogID 
-app.post("/dogpage", async (req, resp) => {
-    var dog_page_id = req.body.dog_page_id;
-    console.log(`dog page ID: ${dog_page_id}`);
-
-    const jsonObj = JSON.parse(await readJSON(navig));
-    jsonObj["dog_page_id"] = dog_page_id;
-    writeJSON(navig, jsonObj);
-    console.log(`store dogpage ID: ${dog_page_id}`)
-});
-*/
 
 
 
