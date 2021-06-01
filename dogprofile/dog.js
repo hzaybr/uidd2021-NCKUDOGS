@@ -174,6 +174,7 @@ let dog_page_id = localStorage.getItem("dog page id")
 $(document).ready(function() {
   $.get(dogfile, function(json){
     var dog = json[dog_page_id]
+    document.title = `${dog["name"]}｜汪汪`;
     $('#dogname').html(dog["name"]);
     $('.top-name').html(dog["name"]);
     $('#subname').html(dog["subname"]);

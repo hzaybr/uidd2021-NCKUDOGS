@@ -36,7 +36,8 @@ var dog_id
 var time
 var cmt_txt, p_txt
 
-$(function() {
+$(document).ready(function() {
+  document.title = `${USER_NAME}｜汪汪`;
   $.post('/load_score', {
     userID: USER_ID,
     },(data) => {
