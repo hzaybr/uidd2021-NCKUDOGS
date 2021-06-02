@@ -107,7 +107,7 @@ function load_cmt(scores, num){
     cmt_txt +=     `<img class="heart" src="./image/gray_heart.png">`
     }
   cmt_txt +=     `</div>`
-  cmt_txt +=     `<p style="margin:1vw;font-size:3.9vw;">${comment}</p>`
+  cmt_txt +=     `<p style="margin:1vw;font-size:4.4vw;">${comment}</p>`
   cmt_txt +=   "</div>"
   cmt_txt +=   "</div>"
   cmt_txt += `<img src="${photo}" style="max-width: 100%">`

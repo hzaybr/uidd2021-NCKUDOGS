@@ -70,7 +70,8 @@ p {
 	display: grid;
 	height: 100%;
 	width: 100%;
-	grid-template-rows: 30% 30% auto;
+	grid-template-rows: 6vw 5vw auto;
+  grid-gap: 1vw;
 }
 .c-grid {
 	display: grid;
@@ -80,7 +81,7 @@ p {
   height: auto;
   padding: 3vw;
 }
-.c-border {box-shadow: 0 0.4vw 0.8vw #00000029;}
+.c-border {box-shadow: 0 0.4vw 0.6vw #00000029;}
 .pic-grid {
   display: grid;
 	grid-template-columns: repeat(3,33.1vw);
@@ -95,13 +96,14 @@ p {
 }
 .dogname {
   margin: 1vw;
-  font-size: 4vw;
+  font-size: 4.5vw;
   font-weight: bold;
 }
 .dtime {
   text-align: right;
   margin: 1vw;
-  font-size: 3.5vw;
+  font-size: 4vw;
+  color: #00000099;
 }
 .heart-grid {margin: 1vw;padding-top:1.5vw;}
 .heart {width: 4%;}
