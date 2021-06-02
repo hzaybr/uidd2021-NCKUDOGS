@@ -64,7 +64,7 @@ p {
   width: 100%;
   height: 79%;
   overflow-y: auto;
-  padding-bottom: 10vw;
+  padding-bottom: 10%;
 }
 .cmt-sub-grid {
 	display: grid;
@@ -81,7 +81,12 @@ p {
   height: auto;
   padding: 3vw;
 }
-.c-border {box-shadow: 0 0.4vw 0.6vw #00000029;}
+.c-border {
+  padding: 1vw;
+  border-bottom-color: #bdbdbdc2;
+  border-bottom-style: solid;
+  border-bottom-width: 0.3vw;
+}
 .pic-grid {
   display: grid;
 	grid-template-columns: repeat(3,33.1vw);
