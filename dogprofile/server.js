@@ -241,7 +241,7 @@ app.post("/update_position", async (req, resp) => {
 
 /* load profile page */
 app.post("/load_profile_cmt", async (req, res) => {
-  let command = `SELECT dog_id, comment, timestamp FROM comments WHERE user_id = '${req.body.userID}'`
+  let command = `SELECT dog_id, comment, photo, timestamp FROM comments WHERE user_id = '${req.body.userID}'`
   var data ={} 
   db.all(command, (err, rows) =>{
     rows.forEach(function(row, i) {

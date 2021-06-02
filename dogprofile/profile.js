@@ -28,8 +28,7 @@ $('.XXicon').click(function() {
 
 
 /**************************************************************************/
-var comment
-var dog_id
+var comment, dog_id, photo
 var cmt_txt, p_txt
 
 $(document).ready(function() {
@@ -54,6 +53,7 @@ $(document).ready(function() {
         for(var i=len; i>=0; i--){
           comment = data[i].comment
           dog_id = data[i].dog_id
+          photo = data[i].photo
           times.push(data[i].timestamp)
           load_cmt(scores, i)
         }
@@ -91,6 +91,7 @@ $(document).ready(function() {
 
 function load_cmt(scores, num){
   cmt_txt += `<div class="c-border">`
+  cmt_txt += `<div class="c-grid">`
   cmt_txt +=   `<img width="90%" src="./image/dog/${dog_id}.png">`
   cmt_txt +=   `<div class="cmt-sub-grid">`
   cmt_txt +=     `<div class="name-time">`
@@ -108,6 +109,8 @@ function load_cmt(scores, num){
   cmt_txt +=     `</div>`
   cmt_txt +=     `<p style="margin:1vw;font-size:3.9vw;">${comment}</p>`
   cmt_txt +=   "</div>"
+  cmt_txt +=   "</div>"
+  cmt_txt += `<img src="${photo}" style="max-width: 100%">`
   cmt_txt += "</div>"
 };
 
