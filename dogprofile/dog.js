@@ -219,7 +219,7 @@ $(function(){
 $('#post-btn, #writing-post-btn').click(function() {
 
 	user_data[USER_ID].score = SCORE;
-	
+
 	$.post('./update_score', {
 		user_id: 	USER_ID,
 		dog_id:		dog_page_id,
@@ -256,12 +256,21 @@ $('#post-btn, #writing-post-btn').click(function() {
 	is_editing = false;
 });
 
-/* Convert image to base 64 */
 function post_image() {
 
-    if (this.files && this.files[0]) {   
-        var FR = new FileReader();
-        
+    if (this.files && this.files[0]) {
+		const FR = new FileReader();
+
+		heic2any(this.files[0])
+		.then((result) => { // result is a BLOB of the PNG formatted image
+			FR.readAsDataURL(result); // turn BLOB to Base64
+		})
+		.catch((errorObject) => {
+			(errorObject.code === 1) // file is not HEIC
+			? FR.readAsDataURL(this.files[0])
+			: console.log(errorObject);
+		});
+	
         FR.addEventListener("load", function(e) {
             $.post("./upload_image", {
 				user_id: 	USER_ID,
@@ -271,8 +280,6 @@ function post_image() {
 				concat_image(image_id, PROFILE_PIC, e.target.result);
 			});
         });
-   
-        FR.readAsDataURL( this.files[0] );
     }
 }
 
@@ -459,3 +466,7 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 		$('.preview-pic')[0].src = photo;
 	});
 }
+
+
+
+

@@ -26,7 +26,7 @@ const request = require('request');
 //     cmd += ")";
 //     console.log(cmd);
 //     db.run(cmd);
-    // db.run("CREATE TABLE comments(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, comment TEXT, photo CLOB, timestamp DATETIME)");
+//     db.run("CREATE TABLE comments(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, comment TEXT, photo CLOB, timestamp DATETIME)");
 //     db.run("CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)");
 // })
 
@@ -46,7 +46,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15038;
+const port = 15037;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
