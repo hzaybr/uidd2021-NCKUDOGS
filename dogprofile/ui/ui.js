@@ -163,11 +163,59 @@ $('.profile-avatar').click(function() {
 
 $('#edit-btn').click(function(){
   $('#view-pg').css('display','none')
+  $('.profile').css({height:'93.22vh',top:'3.44vh'})
   $('#edit-pg').css('display','block')
 	document.getElementById('edit-name').value = $('.username').attr('id')
 })
 
-$('#edit-pg button').click(function(){
+//document.getElementById("profile-camera").addEventListener("change", );
+//document.getElementById("profile-gallery").addEventListener("change", );
+
+function uploadProfile() {
+  const file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+	console.log('upload');
+	reader.onload = function () {
+    $('#edit-pg .profile-avatar').src = reader.result;
+		console.log('change');
+	}
+  reader.readAsDataURL(file);
+  /*
+	reader.addEventListener("onload", function () {
+    // convert image file to base64 string
+    $('#edit-pg .profile-avatar').src = reader.result;
+		console.log('change');
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+*/
+}
+
+document.getElementById('profile-gallery').onchange	= function (evt) {
+  var tgt = evt.target || window.event.srcElement,
+	files = tgt.files;
+	console.log('onchage')
+	// FileReader support
+	if (FileReader && files && files.length) {
+		var fr = new FileReader();
+		fr.onload = function () {
+    	$('#edit-pg .profile-avatar').attr('src', fr.result);
+			console.log('change')
+		}
+		fr.readAsDataURL(files[0]);
+		}
+
+	// Not supported
+	else {
+  	// fallback -- perhaps submit the input to an iframe and temporarily store
+  	// them on the server until the user's session ends.
+	}
+}
+
+$('#save-btn,#cancel-btn').click(function(){
+  $('.profile').css({height:'111.2vw',top:'21.6vw'})
   $('#view-pg').css('display','block')
   $('#edit-pg').css('display','none')
 })
@@ -175,15 +223,20 @@ $('#edit-pg button').click(function(){
 $('.avatar-choose').click(function(){
 	if ($(this).attr('id') == ''){
 		$('.avatar-choose').attr('id','')
-		$('.avatar-choose').css('border','none')
+    $('.avatar-choose').css('border','none')
+    $('#edit-pg .profile-avatar').attr('src', $(this).attr('src'))
 		$(this).attr('id','chosen')
-		$(this).css('border','3px solid lightblue')
+		$(this).css('border','5px solid #9441FF')
 	}
-	else{
+  else{
+    $('#edit-pg .profile-avatar').attr('src', PROFILE_PIC)
 		$('.avatar-choose').attr('id','')
 		$('.avatar-choose').css('border','none')	
 	}
 })
+
+
+
 
 /***********************************************************/
 //save change 
@@ -217,7 +270,8 @@ $('#save-btn').click(function(){
 /**************************************************************/
 
 $('#cancel-btn').click(function(){
-	$('.avatar-choose').attr('id','')
+  $('#edit-pg .profile-avatar').attr('src', PROFILE_PIC)
+  $('.avatar-choose').attr('id','')
 	$('.avatar-choose').css('border','none')
 })
 

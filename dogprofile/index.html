@@ -30,7 +30,8 @@
   <!-- home page(map) -->
   <div class="home-page">
     
-				<div id="map"></div>
+        <div id="map"></div>
+
         <img src="./ui/image/dog_icon_list.png" class="icon" id="list-icon" title="More">
         <div class="list-grid">
           <div>
@@ -50,6 +51,7 @@
             <p>關於網站</p>
           </div>
         </div>
+
         <img src="./ui/image/dog_icon_profile.png" class="icon" id="profile-icon" title="profile">
         <div class="profile">
           <div class="pg" id="view-pg" style="display:block">
@@ -87,22 +89,61 @@
             </div>
           </div>
           <div class="pg" id="edit-pg" style="display:none">
-            <p id="labe-user-avatar">User Avatar:</p> 
-            <div id="avatar-choose-grid">
+            <img id="save-btn" src="./image/profile_save.png"></img>
+            <img id="cancel-btn" src="./image/profile_cancel.png"></img>
+            <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
+						<p id="user-name-title">用戶名稱</p>	
+            <input type="text" id="edit-name" placeholder="your name..."><br>
+        		<div class="profile-upload-grid">
+          		<div class="upload-btn">
+        	    	<div class="upload-pic">
+      	        	<img style="height: 4vw;" src="./image/camera.png">
+    	          	<input type="file" id="profile-camera" accept="image/*" capture="camera" hidden/>
+  	            	<label for="profile-camera"><b>拍攝照片</b></label>
+	            	</div>
+	          	</div>
+
+	          	<div class="upload-btn">
+	            	<div class="upload-pic">
+          	    	<img style="height: 4vw;" src="./image/gallery.png">
+        	      	<input type="file" id="profile-gallery" accept="image/*" hidden/>
+      	        	<label for="profile-gallery"><b>圖庫上傳</b></label>
+    	        	</div>
+  	        	</div>
+	        	</div>
+            <p class="avatar-title" id="human-title">人類</p>
+            <div id="avatar-human-grid">
               <div>
-                <img class="avatar-choose" src="./aboutus_appv/image/Group 326@3x.png"></img>
+                <img class="avatar-choose" src="./image/avatar_human1.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./aboutus_appv/image/Group 327@3x.png"></img>
+                <img class="avatar-choose" src="./image/avatar_human2.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./aboutus_appv/image/Group 328@3x.png"></img>
+                <img class="avatar-choose" src="./image/avatar_human3.png"></img>
+              </div>
+              <div>
+                <img class="avatar-choose" src="./image/avatar_human4.png"></img>
+              </div>
+              <div>
+                <img class="avatar-choose" src="./image/avatar_human5.png"></img>
+              </div>
+              <div>
+                <img class="avatar-choose" src="./image/avatar_human6.png"></img>
               </div>
             </div>
-            <p id="label-username">User Name:</p>
-            <input type="text" id="edit-name" placeholder="your name..."><br>
-            <button id="save-btn">save</button>
-            <button id="cancel-btn">cancel</button>
+            <p class="avatar-title" id="dog-title">狗狗</p>
+            <div id="avatar-dog-grid">
+              <div>
+                <img class="avatar-choose" src="./image/avatar_dog1.png"></img>
+              </div>
+              <div>
+                <img class="avatar-choose" src="./image/avatar_dog2.png"></img>
+              </div>
+              <div>
+                <img class="avatar-choose" src="./image/avatar_dog3.png"></img>
+              </div>
+            </div>
           </div>
 				</div>
         <!--img src="./ui/image/dog_icon_messenger.png" class="icon" id="messenger-icon" title="Contact"-->
