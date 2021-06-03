@@ -30,12 +30,12 @@ function displayCheck(){
     document.getElementById('m1').style.display="block";
     markmode = !markmode;
   }
-  if(markerinfoShow){
-    markerClick();
-  }
 }
 
 function listClick(){
+	if(markerinfoShow){
+    markerUnclick();
+  }
   $('.list-grid').stop();
   if (listDisplay){
     $('.list-grid').animate({'left':'-65vw'},500);
@@ -47,6 +47,9 @@ function listClick(){
   listDisplay = !listDisplay;
 }
 function profileClick(){
+	if(markerinfoShow){
+    markerUnclick();
+  }
   $('.profile').stop();
   if (profileDisplay){
     $('.profile').animate({'left':'105vw'},500,function(){$('.profile').css('display','none');})
@@ -60,6 +63,9 @@ function profileClick(){
 
 }
 function searchClick(){
+	if(markerinfoShow){
+    markerUnclick();
+  }
   $('#search-icon').stop();
   $('.search').stop();
   if (searchDisplay){
@@ -75,6 +81,9 @@ function searchClick(){
 }
 
 function markClick(){
+	if(markerinfoShow){
+    markerUnclick();
+  }
   $('#mark-icon').stop();
   $('.mark_tip').stop();
   if (markDisplay){
@@ -93,19 +102,15 @@ function markClick(){
   markmode = markDisplay;
 }
 
-function markerClick(){
-  $('.dog_markerinfo').stop();
-  if (markerinfoShow){
+function markerUnclick(){
+  if(!routemode){
     $('.dog_markerinfo').css('display','none');
-		map.setOptions({draggable: true});
-    showMarkers();
-		map.setZoom(17);
+    clearMarkers(-1);
+    showMarkers(-1);
+    map.setZoom(17);
+    markerinfoShow = false;
+    map.setOptions({draggable: true});
   }
-  else{
-    displayCheck();
-    $('.dog_markerinfo').css('display','block');
-  }
-  markerinfoShow = !markerinfoShow;
 }
 
 $('#list-icon').click(function(){
@@ -124,6 +129,10 @@ $('#map').click(function(){
 
 $('.mark_tip').click(function(){
   displayCheck();
+})
+
+$('.dog_markerinfo').click(function(){
+  markerUnclick();
 })
 
 $('#mark-icon').click(function(){

@@ -16,22 +16,25 @@ body {
 #list-icon {
   left: 1.33vw;
   top: 1.33vw;
+  z-index: 6;
 }
 
 #profile-icon {
   right: 1.33vw;
   top: 1.33vw;
+  z-index: 6;
 }
 
 #search-icon {
   left: 1.33vw;
   bottom: 1.33vw;
+  z-index: 6;
 }
 
 #mark-icon {
   right: 1.33vw;
   bottom: 1.33vw;
-  z-index: 3;
+  z-index: 6;
 }
 
 .list-grid {
@@ -456,18 +459,24 @@ img.avatar-choose {
 
 .dog_markerinfo {
   display: none;
-  position: absolute;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-color: #b8b7b79f;
+  z-index: 5;
+}
+.dog_markerinfo_flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+	position: absolute;
   width: 74vw;
   height: 97vw;
   left: 13vw;
   top: 33vw;
   background: #FFFFFF;
   border-radius: 36px;
-}
-.dog_markerinfo_flex{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  z-index: 7;
 }
 .dog_markerinfo .name{
   margin-top: 2.9vw;

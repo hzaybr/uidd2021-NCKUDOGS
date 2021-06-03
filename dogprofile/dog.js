@@ -126,16 +126,18 @@ $('.write-com').click(function() {
   }
 });
 
-$('#writing-cancel-btn').click(function() {
-  is_editing = false;
-  $('.preview-pic')[0].src = BLANK_PIC;
-  $('.commentBox').val('');
-  $('.comment-container').fadeIn();
-  $('.writing-container').hide();
-  $('.w-heart').attr('src','./image/heart.png');
-  $('.heart').attr('src','./image/heart.png');
-  $('.pop-com').hide();
-});
+$('#writing-cancel-btn').click(hide_commentBox);
+
+function hide_commentBox() {
+	is_editing = false;
+	$('.preview-pic')[0].src = BLANK_PIC;
+	$('.commentBox').val('');
+	$('.comment-container').fadeIn();
+	$('.writing-container').hide();
+	$('.w-heart').attr('src','./image/heart.png');
+	$('.heart').attr('src','./image/heart.png');
+	$('.pop-com').hide();
+}
 
 $('.w-heart').click(function() {
   SCORE = $(this).attr('id')[2];
@@ -219,61 +221,80 @@ $(function(){
 $('#post-btn, #writing-post-btn').click(function() {
 
 	user_data[USER_ID].score = SCORE;
-	
+
 	$.post('./update_score', {
 		user_id: 	USER_ID,
 		dog_id:		dog_page_id,
 		score:		SCORE
 	});
 
-	const promise = new Promise((resolve, reject) => {
-		$.post('./post_comment', {
-			comment_id: is_editing? editing_comment_id : -1,
-			user_id:	USER_ID,
-			dog_id:		dog_page_id,
-			comment:	$('.commentBox').val(),
-			photo:		$('.preview-pic')[0].src
-		}, (comment_id) => {
-			resolve(comment_id);
+	if (is_editing) {
+		const promise = new Promise((resolve, reject) => {
+			$.post('./edit_comment', {
+				comment_id: editing_comment_id,
+				comment:	$('.commentBox').val(),
+				photo:		$('.preview-pic')[0].src
+			}, (finished) => {
+				resolve(finished);
+			});
 		});
-	});
 
-	$('.preview-pic')[0].src = BLANK_PIC;
-	$('.commentBox').val('');
-	$('.comment-container').fadeIn();
-	$('.writing-container').hide();
-	$('.w-heart').attr('src','./image/heart.png');
-	$('.heart').attr('src','./image/heart.png');
-	$('.pop-com').hide();
+		promise.then((finished) => {
+			reload_comment();
+		});
+	}
+	else {
+		const promise = new Promise((resolve, reject) => {
+			$.post('./post_comment', {
+				user_id:	USER_ID,
+				dog_id:		dog_page_id,
+				comment:	$('.commentBox').val(),
+				photo:		$('.preview-pic')[0].src
+			}, (comment_id) => {
+				resolve(comment_id);
+			});
+		});
 
-	promise.then((comment_id) => {
-		if (!is_editing) { // Write a new comment
+		promise.then((comment_id) => {
 			concat_comment(comment_id, USER_ID, $('.commentBox').val(), $('.preview-pic')[0].src);
-		}
-		reload_comment();
-	});
+			reload_comment();
+		});
+	}
 
-	is_editing = false;
+	hide_commentBox();
 });
 
-/* Convert image to base 64 */
+const FR = new FileReader();
+FR.addEventListener("load", function(e) {
+	$.post("./upload_image", {
+		user_id: 	USER_ID,
+		dog_id:		dog_page_id,
+		photo: 		e.target.result
+	}, (image_id) => {
+		concat_image(image_id, PROFILE_PIC, e.target.result);
+	});
+});
+
 function post_image() {
 
-    if (this.files && this.files[0]) {   
-        var FR = new FileReader();
-        
-        FR.addEventListener("load", function(e) {
-            $.post("./upload_image", {
-				user_id: 	USER_ID,
-				dog_id:		dog_page_id,
-                photo: 		e.target.result
-            }, (image_id) => {
-				concat_image(image_id, PROFILE_PIC, e.target.result);
-			});
-        });
-   
-        FR.readAsDataURL( this.files[0] );
-    }
+    if (!(this.files && this.files[0]))
+		return;
+
+	const file = this.files[0];
+
+	heic2any({
+		blob: file,
+		toType: "image/jpeg",
+		quality: 0.1
+	})
+	.then((result) => { // result is a BLOB of the PNG formatted image
+		FR.readAsDataURL(result);
+	})
+	.catch((errorObject) => {
+		(errorObject.code === 1)
+		? FR.readAsDataURL(file)	// file is not HEIC
+		: console.log(errorObject);	// other errors
+	});
 }
 
 function add_pic_to_comment() {
@@ -343,12 +364,13 @@ function load_user() {
 
 	/* Score bars */
 	let obj = document.getElementsByClassName("score-bar-count");
+	let max = Math.max(...scores.slice(1));
 	for (let i = 1; i <= obj.length; ++i) {
-		obj[obj.length-i].style.width = `${scores[i] * 100 / Math.max(...scores)}%`;
+		obj[obj.length-i].style.width = `${scores[i] * 100 / max}%`;
 	}
 	
 	/* Total users */
-	let user_len = Object.keys(user_data).length - scores[0]; // exclude user with no score
+	let user_len = Object.keys(user_data).length - scores[0]; // Exclude user with no score
 	document.getElementById("review-count").innerHTML = `(${user_len})`;
 
 	/* Average score */
@@ -459,3 +481,7 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 		$('.preview-pic')[0].src = photo;
 	});
 }
+
+
+
+
