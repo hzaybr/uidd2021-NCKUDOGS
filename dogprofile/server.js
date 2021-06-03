@@ -30,7 +30,7 @@ const request = require('request');
 //     db.run("CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)");
 // })
 
-
+db.run("DELETE FROM images");
 
 /* Enable json parsing */
 app.use(express.urlencoded({extended: false, limit: "1024mb"}));
@@ -73,6 +73,8 @@ app.post("/idtoken", (req, res)=>{
     });
   })
 })
+
+
 
 /**********************************************************/
 /* Paths */

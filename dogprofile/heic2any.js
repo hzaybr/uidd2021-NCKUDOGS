@@ -199,7 +199,7 @@ function decodeBuffer(buffer) {
     });
 }
 function heic2any(ref) {
-    var blob = ref;
+    var blob = ref.blob;
     var toType = ref.toType; if ( toType === void 0 ) toType = "image/png";
     var quality = ref.quality; if ( quality === void 0 ) quality = 0.92;
     var gifInterval = ref.gifInterval; if ( gifInterval === void 0 ) gifInterval = 0.4;

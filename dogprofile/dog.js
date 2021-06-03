@@ -260,14 +260,15 @@ function post_image() {
 
     if (this.files && this.files[0]) {
 		const FR = new FileReader();
+		const file = this.files[0];
 
-		heic2any(this.files[0])
+		heic2any({ blob: file })
 		.then((result) => { // result is a BLOB of the PNG formatted image
 			FR.readAsDataURL(result); // turn BLOB to Base64
 		})
 		.catch((errorObject) => {
 			(errorObject.code === 1) // file is not HEIC
-			? FR.readAsDataURL(this.files[0])
+			? FR.readAsDataURL(file)
 			: console.log(errorObject);
 		});
 	
@@ -356,7 +357,7 @@ function load_user() {
 	}
 	
 	/* Total users */
-	let user_len = Object.keys(user_data).length - scores[0]; // exclude user with no score
+	let user_len = Object.keys(user_data).length - scores[0]; // Exclude user with no score
 	document.getElementById("review-count").innerHTML = `(${user_len})`;
 
 	/* Average score */
