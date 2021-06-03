@@ -458,8 +458,7 @@ img.avatar-choose {
 }
 
 .dog_markerinfo {
-  display: block;
-  /* display: none; */
+  display: none;
   position: relative;
   height: 100vh;
   width: 100vw;
