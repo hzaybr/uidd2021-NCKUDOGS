@@ -81,11 +81,7 @@ body {
   top: 21.6vw;
   background: #FFFFFF;
   border-radius: 36px;
- /*
-  background-image: url('./image/dog_div_list.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  */
+  z-index: 7;
 }
 
 .pg {
@@ -101,11 +97,14 @@ body {
 }
 
 .profile-avatar {
-	width: 38%;
-	margin-top: 7%;
-	margin-left: 31%;
-	margin-right: 31%;
+	display: block;
+	width: 14.65vh;
+	height: 14.65vh;
+	margin-top: 5vh;
+	margin-left: auto;
+	margin-right: auto;
 	border-radius: 50%;
+	border: 5px solid #9441FF;
 }
 
 #user-title {
@@ -212,60 +211,110 @@ body {
   color: #000000;
 }
 
-#edit-pg p {
-  margin: 0;
-  height: 10%;
-  font-family: Noto Sans Telugu;
-  font-style: normal;
-  font-weight: 800;
-  font-size: 10vw;
-  line-height: 100%;
-  text-align: center;
+#user-name-title {
+	display: inline-block;
+	width: 100%;
+	height: 16px;
+	padding-left: 5.06vw;
+	font-family: Segoe UI;
+  font-size: 12px;
+	color: #00000099;
+  text-align: left;
+	margin-top: 0;
+	margin-bottom: 0.5vh;
 }
 
-
-#avatar-choose-grid {
-  position: absolute;
+.profile-upload-grid {
+  display: grid;
+  grid-template-columns: 40% 40%;
   width: 100%;
-  height: 30%;
-  top: 15%;
+	justify-content: space-evenly;
+}
+
+.profile-upload-grid .upload-btn {
+  font-weight: Regular;
+  width: 100%;
+  height: 5vh;
+  border-radius: 5.3vw;
+  box-shadow: 0vw 0.4vw 1.6vw #00000033;
+}
+
+.upload-btn .upload-pic {
+  width: auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 7vw auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-pic label {
+	font-size: 2vh;
+}
+
+p.avatar-title {
+	display: inline-block;
+  width: 100%;
+  height: 27px;
+  padding-left: 5.06vw;
+  font-family: Segoe UI;
+  font-weight: Bold;
+  font-size: 20px;
+  text-align: left;
+	margin-top: 3vh;
+	margin-bottom: 1vh;
+}
+#avatar-human-grid {
+  width: 100%;
+  height: 24.74vh;
   left: 0%;
   display: grid;
-  grid-template-columns: 30% 30% 30%;
-  grid-template-rows: 100%;
+  grid-template-columns: repeat(3,25.06vw);
+  grid-template-rows: 11.57vh 11.57vh;
   justify-content: space-evenly;
-  align-content: space-around; 
+  align-content: space-between;
 }
 
-#avatar-choose-grid img {
-  position: absolute; 
-  width: 30%;
+#avatar-dog-grid {
+    width: 100%;
+    height: 11.57vh;
+    left: 0%;
+    display: grid;
+    grid-template-columns: repeat(3,25.06vw);
+    grid-template-rows: 11.57vh;
+    justify-content: space-evenly;
 }
 
-#label-username {
-  position: relative;
-  top: 40%; 
+img.avatar-choose {
+    position: absolute;
+    max-height: 11.57vh;
+    height: 11.57vh;
+    border-radius: 50%;
 }
 
 #edit-name {
-  position: absolute;
-  top: 65%;
-  width: 60%;
-  margin-top: 1%;
-  margin-left: 20%;
-  margin-right: 20%;
+    display: block;
+    width: 80%;
+    height: 2.46vh;
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-bottom: 1px solid black;
 }
 
 #save-btn {
   position: absolute;
-  top: 80%;
-  left: 20%;
+  width: 10.66vw;
+  top: 4.8vh;
+  right: 2.66vw;
 }
 
 #cancel-btn {
   position: absolute;
-  top: 80%;
-  right: 20%;
+  width: 10.66vw;
+  top: 4.8vh;
+  left: 2.66vw;
 }
 
 .search {
