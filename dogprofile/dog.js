@@ -344,7 +344,7 @@ function load_user() {
 	/* Score bars */
 	let obj = document.getElementsByClassName("score-bar-count");
 	for (let i = 1; i <= obj.length; ++i) {
-		obj[obj.length-i].style.width = `${scores[i] * 100 / Math.max(...scores)}%`;
+		obj[obj.length-i].style.width = `${scores[i] * 100 / Math.max(...scores.slice(1))}%`;
 	}
 	
 	/* Total users */
