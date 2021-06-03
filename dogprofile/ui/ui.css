@@ -409,11 +409,11 @@ body {
 }
 
 .dog_markerinfo {
-  display: none;
+  display: block;
+  /* display: none; */
   position: relative;
   height: 100vh;
   width: 100vw;
-  background-color: #b8b7b79f;
   z-index: 5;
 }
 .dog_markerinfo_flex{
@@ -422,42 +422,58 @@ body {
   align-items: center;
 	position: absolute;
   width: 74vw;
-  height: 97vw;
+  height: 87vw;
   left: 13vw;
-  top: 33vw;
+  top: 42vw;
   background: #FFFFFF;
   border-radius: 36px;
   z-index: 7;
 }
 .dog_markerinfo .name{
-  margin-top: 2.9vw;
-  margin-bottom: 2.4vw;
+  margin-top: 3.2vw;
+  margin-bottom: 1.9vw;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
   color: #8D8D8D;
 }
 .dog_markerinfo img{
-  width: 5.35vw;
+  width: 4.5vw;
 }
 .dog_markerinfo .photo{
-  margin-top: 9.5vw;
+  margin-top: 2.38vw;
   width: 40vw;
 }
 .dog_markerinfo .btn_navigation{
   position: absolute;
-  top: 66vw;
+  top: 57vw;
   left: 9vw;
   width: 16vw;
 }
-.dog_markerinfo .btn_camera{
+.dog_markerinfo .btn_marked{
   position: absolute;
-  top: 75vw;
+  top: 65vw;
   width: 16vw;
 }
 .dog_markerinfo .btn_detail{
   position: absolute;
-  top: 66vw;
+  top: 57vw;
   right: 9vw;
   width: 16vw;
+}
+.dog_markerinfo .time{
+  position: absolute;
+  width: 27.2vw;
+  top: 34vw;
+  left: 36.4vw;
+  background: #FFFFFF;
+  border-radius: 16px;
+  z-index: 5;
+  text-align: center;
+}
+.time p{
+  font-size: 24px;
+  margin-top: 1.6vw;
+  margin-bottom: 2.4vw;
+  font-weight: 700;
 }

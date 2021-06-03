@@ -37,11 +37,6 @@ const MAP_BOUNDS = {
   east: 120.22808,
 };
 var userimg;
-/*$(document).ready(function() {
-    $.get("/dog_position", function(json){
-        
-    });
-});*/
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
     directionsService = new google.maps.DirectionsService();
@@ -59,15 +54,8 @@ function initMap() {
       zoomControl: false,
       mapId: '892f444c9eaa9e2'
     });
-   // map.addListener('zoom_changed',()=>{
-   //   if(map.getZoom()!=19&&currentInfoWindow != ''){
-   //     dogMarker_click(Markers[target_num]);
-   //   }
-   //   console.log('zoom'+map.getZoom());
-   // });
     //user mark
     userimg = document.createElement("img");
-    // userimg.src = "https://cdn2.vectorstock.com/i/1000x1000/98/11/girl-icon-flat-single-avatarpeaople-icon-from-vector-14449811.jpg";
     userimg.src = PROFILE_PIC;
     ownermarker = new MarkerWithLabel({
       position: owner_uluru,
@@ -81,10 +69,7 @@ function initMap() {
       labelClass: "labels", 
       labelStyle: { opacity: 1.0 }
     });
-    //test
-    // ownermarker.addListener('click',function(){
-    //   markerClick();
-    // });
+    findposition(ownermarker);
     //dog's mark
    	$(document).ready(function() {
       $.get("/dog_position", function(json){
@@ -95,53 +80,6 @@ function initMap() {
         } 
     	});
 		}); 
-   /* $.get(position_file,function(json){
-			for(i=1;i<20;i++){
-     	var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
-       addMarker(marker_path,{lat: json[i].lat, lng: json[i].lng})
-     }	 
-    })*/
-    findposition(ownermarker);
-    route_marker = new google.maps.Marker({
-      position: route_uluru,
-      map: map,
-      icon:{
-        url:'./map/button_icon/dog_icon_route.png',
-        scaledSize: new google.maps.Size(60, 60)
-      },
-      zIndex:3
-    });
-    camera_marker = new google.maps.Marker({
-      position: camera_uluru,
-      map: map,
-      icon:{
-        url:'./map/button_icon/dog_icon_camera.png',
-        scaledSize: new google.maps.Size(60, 60)
-      },
-      zIndex:3
-    });
-    more_marker = new google.maps.Marker({
-      position: more_uluru,
-      map: map,
-      icon:{
-        url:'./map/button_icon/dog_icon_more.png',
-        scaledSize: new google.maps.Size(60, 60)
-      },
-      zIndex:3
-    });
-    route_marker.addListener('click',function(){
-      route();
-    });
-    camera_marker.addListener('click',function(){
-      //add camera function
-      camera();
-    });
-    more_marker.addListener('click',function(){
-    });
-    route_marker.setVisible(false);
-    camera_marker.setVisible(false);
-    more_marker.setVisible(false);
-    btnshow = false;
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -158,11 +96,7 @@ function addMarker(icon_path,location) {
     zIndex:1
     });
   marker.addListener('click', function() {
-   //	markerinfoShow = false;
     dogMarker_click(marker);
-		//if(!markerinfoShow){
-		 //dogMarker_click(marker);	
-		//}
   });
   Markers.push(marker);
 }
