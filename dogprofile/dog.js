@@ -126,16 +126,18 @@ $('.write-com').click(function() {
   }
 });
 
-$('#writing-cancel-btn').click(function() {
-  is_editing = false;
-  $('.preview-pic')[0].src = BLANK_PIC;
-  $('.commentBox').val('');
-  $('.comment-container').fadeIn();
-  $('.writing-container').hide();
-  $('.w-heart').attr('src','./image/heart.png');
-  $('.heart').attr('src','./image/heart.png');
-  $('.pop-com').hide();
-});
+$('#writing-cancel-btn').click(hide_commentBox);
+
+function hide_commentBox() {
+	is_editing = false;
+	$('.preview-pic')[0].src = BLANK_PIC;
+	$('.commentBox').val('');
+	$('.comment-container').fadeIn();
+	$('.writing-container').hide();
+	$('.w-heart').attr('src','./image/heart.png');
+	$('.heart').attr('src','./image/heart.png');
+	$('.pop-com').hide();
+}
 
 $('.w-heart').click(function() {
   SCORE = $(this).attr('id')[2];
@@ -226,34 +228,40 @@ $('#post-btn, #writing-post-btn').click(function() {
 		score:		SCORE
 	});
 
-	const promise = new Promise((resolve, reject) => {
-		$.post('./post_comment', {
-			comment_id: is_editing? editing_comment_id : -1,
-			user_id:	USER_ID,
-			dog_id:		dog_page_id,
-			comment:	$('.commentBox').val(),
-			photo:		$('.preview-pic')[0].src
-		}, (comment_id) => {
-			resolve(comment_id);
+	if (is_editing) {
+		const promise = new Promise((resolve, reject) => {
+			$.post('./edit_comment', {
+				comment_id: editing_comment_id,
+				comment:	$('.commentBox').val(),
+				photo:		$('.preview-pic')[0].src
+			}, (finished) => {
+				resolve(finished);
+			});
 		});
-	});
 
-	$('.preview-pic')[0].src = BLANK_PIC;
-	$('.commentBox').val('');
-	$('.comment-container').fadeIn();
-	$('.writing-container').hide();
-	$('.w-heart').attr('src','./image/heart.png');
-	$('.heart').attr('src','./image/heart.png');
-	$('.pop-com').hide();
+		promise.then((finished) => {
+			reload_comment();
+		});
+	}
+	else {
+		const promise = new Promise((resolve, reject) => {
+			$.post('./post_comment', {
+				user_id:	USER_ID,
+				dog_id:		dog_page_id,
+				comment:	$('.commentBox').val(),
+				photo:		$('.preview-pic')[0].src
+			}, (comment_id) => {
+				resolve(comment_id);
+			});
+		});
 
-	promise.then((comment_id) => {
-		if (!is_editing) { // Write a new comment
+		promise.then((comment_id) => {
 			concat_comment(comment_id, USER_ID, $('.commentBox').val(), $('.preview-pic')[0].src);
-		}
-		reload_comment();
-	});
+			reload_comment();
+		});
+	}
 
-	is_editing = false;
+	hide_commentBox();
 });
 
 const FR = new FileReader();

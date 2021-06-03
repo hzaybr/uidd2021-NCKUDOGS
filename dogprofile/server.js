@@ -156,9 +156,6 @@ app.post("/post_comment", async (req, resp) => {
                 "photo":        req.body.photo,
                 "timestamp":    Object.values(row)[0]
             };
-            if (req.body.comment_id != -1) { // edit comment
-                cmt["id"] = req.body.comment_id;
-            }
             sqlUpdate('comments', cmt);
         });
     
@@ -166,6 +163,14 @@ app.post("/post_comment", async (req, resp) => {
             resp.send(row["MAX(id)"].toString());
         });
     });
+});
+
+app.post("/edit_comment", async (req, resp) => {
+    let command = "";
+    command += "UPDATE comments\n";
+    command += `SET comment = \"${req.body.comment}\", photo = \"${req.body.photo}\"\n`;
+    command += "WHERE id = " + req.body.comment_id;
+    db.run(command, function(){ resp.send('success') });
 });
 
 app.post("/delete_comment", async (req, resp) => {
