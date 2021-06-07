@@ -185,32 +185,7 @@ document.getElementById("edit-name").addEventListener("focusout", function (){
   $('.profile').css('height','85vh')  
 })
 
-//document.getElementById("profile-camera").addEventListener("change", );
-//document.getElementById("profile-gallery").addEventListener("change", );
-
-function uploadProfile() {
-  const file = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-	console.log('upload');
-	reader.onload = function () {
-    $('#edit-pg .profile-avatar').src = reader.result;
-		console.log('change');
-	}
-  reader.readAsDataURL(file);
-  /*
-	reader.addEventListener("onload", function () {
-    // convert image file to base64 string
-    $('#edit-pg .profile-avatar').src = reader.result;
-		console.log('change');
-  }, false);
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-*/
-}
-
-document.getElementById('profile-gallery').onchange	= function (evt) {
+function uploadAvatar(evt) {
   var tgt = evt.target || window.event.srcElement,
 	files = tgt.files;
 	console.log('onchage')
@@ -219,16 +194,16 @@ document.getElementById('profile-gallery').onchange	= function (evt) {
 		var fr = new FileReader();
 		fr.onload = function () {
     	$('#edit-pg .profile-avatar').attr('src', fr.result);
-			console.log('change')
+      console.log('change')
+  		$('.avatar-choose').attr('id','')
+	  	$('.avatar-choose').css('border','none')
 		}
 		fr.readAsDataURL(files[0]);
 		}
 
-	// Not supported
 	else {
-  	// fallback -- perhaps submit the input to an iframe and temporarily store
-  	// them on the server until the user's session ends.
-	}
+    console.log("File Reader not support")  
+  }
 }
 
 $('#save-btn,#cancel-btn').click(function(){
@@ -238,6 +213,7 @@ $('#save-btn,#cancel-btn').click(function(){
 })
 
 $('.avatar-choose').click(function(){
+  $('.upload-pic input').val('')
 	if ($(this).attr('id') == ''){
 		$('.avatar-choose').attr('id','')
     $('.avatar-choose').css('border','none')
@@ -248,43 +224,33 @@ $('.avatar-choose').click(function(){
   else{
     $('#edit-pg .profile-avatar').attr('src', PROFILE_PIC)
 		$('.avatar-choose').attr('id','')
-		$('.avatar-choose').css('border','none')	
+    $('.avatar-choose').css('border','none')
+    console.log('clicked choosed')
 	}
 })
 
 
 
 
-/***********************************************************/
 //save change 
-
 $('#save-btn').click(function(){
   //change avatar
-  let chosenAvatarSrc = PROFILE_PIC
-  if (document.getElementById('chosen')!= null){
-		chosenAvatarSrc = $('#chosen').attr('src')
-		let avatars = document.getElementsByClassName('profile-avatar');
-		for (let i = 0; i < avatars.length; ++i) {
-  		avatars[i].src = chosenAvatarSrc;
-		}
-  }
-
-	//change username
+  var editedAvatarSrc =  $('#edit-pg .profile-avatar').attr('src') 
+  $('#view-pg .profile-avatar').attr('src', editedAvatarSrc) 
+  
+  //change username
 	let editName = document.getElementById('edit-name').value
 	$('.username').attr('id',editName)
   $('.username').html(editName)
   
 
   //pass to db
-  
 	$.post('./update_users', {
 		id: 		USER_ID,
 		name:		editName,
-		profile:	chosenAvatarSrc
+		profile:	editedAvatarSrc
   }, () => {});
-
 })
-/**************************************************************/
 
 $('#cancel-btn').click(function(){
   $('#edit-pg .profile-avatar').attr('src', PROFILE_PIC)

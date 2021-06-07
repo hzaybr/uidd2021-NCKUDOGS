@@ -96,7 +96,7 @@
           		<div class="upload-btn">
         	    	<div class="upload-pic">
       	        	<img style="height: 4vw;" src="./image/camera.png">
-    	          	<input type="file" id="profile-camera" accept="image/*" capture="camera" hidden/>
+    	          	<input type="file" id="profile-camera" onchange="uploadAvatar(event);" accept="image/*" capture="camera" hidden/>
   	            	<label for="profile-camera"><b>拍攝照片</b></label>
 	            	</div>
 	          	</div>
@@ -104,7 +104,7 @@
 	          	<div class="upload-btn">
 	            	<div class="upload-pic">
           	    	<img style="height: 4vw;" src="./image/gallery.png">
-        	      	<input type="file" id="profile-gallery" accept="image/*" hidden/>
+        	      	<input type="file" id="profile-gallery" onchange="uploadAvatar(event);" accept="image/*" hidden/>
       	        	<label for="profile-gallery"><b>圖庫上傳</b></label>
     	        	</div>
   	        	</div>
@@ -112,39 +112,38 @@
             <p class="avatar-title" id="human-title">人類</p>
             <div id="avatar-human-grid">
               <div>
-                <img class="avatar-choose" src="./image/avatar_human1.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_human1.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./image/avatar_human2.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_human2.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./image/avatar_human3.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_human3.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./image/avatar_human4.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_human4.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./image/avatar_human5.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_human5.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./image/avatar_human6.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_human6.png"></img>
               </div>
             </div>
             <p class="avatar-title" id="dog-title">狗狗</p>
             <div id="avatar-dog-grid">
               <div>
-                <img class="avatar-choose" src="./image/avatar_dog1.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_dog1.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./image/avatar_dog2.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_dog2.png"></img>
               </div>
               <div>
-                <img class="avatar-choose" src="./image/avatar_dog3.png"></img>
+                <img class="avatar-choose" id='' src="./image/avatar_dog3.png"></img>
               </div>
             </div>
           </div>
 				</div>
-        <!--img src="./ui/image/dog_icon_messenger.png" class="icon" id="messenger-icon" title="Contact"-->
         <div class="search" id='s1' >
           <div class="button-grid">
             <div>
