@@ -172,9 +172,17 @@ $('.profile-avatar').click(function() {
 
 $('#edit-btn').click(function(){
   $('#view-pg').css('display','none')
-  $('.profile').css({height:'93.22vh',top:'3.44vh'})
+  $('.profile').css({'height':'85vh','top':'3.44vh'})
   $('#edit-pg').css('display','block')
 	document.getElementById('edit-name').value = $('.username').attr('id')
+})
+document.getElementById("edit-name").addEventListener("focusin", function (){
+  var originHeight = $('.profile').css('height')
+  $('.profile').css('height', `${originHeight}`)  
+})
+
+document.getElementById("edit-name").addEventListener("focusout", function (){
+  $('.profile').css('height','85vh')  
 })
 
 //document.getElementById("profile-camera").addEventListener("change", );
