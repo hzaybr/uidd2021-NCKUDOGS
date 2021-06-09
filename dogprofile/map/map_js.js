@@ -56,7 +56,7 @@ function initMap() {
     });
     //user mark
     userimg = document.createElement("img");
-    userimg.src = PROFILE_PIC;
+		userimg.className = "map-profile-avatar";
     ownermarker = new MarkerWithLabel({
       position: owner_uluru,
       map: map,
@@ -113,7 +113,8 @@ function dogMarker_click(target_marker){
 	markerinfoShow = true;
   $('#dog_name').html(dog_name[target_num]);
   $('#dog_photo').attr("src",`./map/mark_icon_big/dog_marker_big_${target_num+1}.png`);
-  $('.btn_navigation').attr(target_num);
+  $('.btn_navigation').attr('id',target_num);
+  $('.btn_detail').attr('id',target_num);
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{

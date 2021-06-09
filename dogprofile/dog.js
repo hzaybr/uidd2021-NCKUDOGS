@@ -196,12 +196,14 @@ document.getElementById("fl_file2").addEventListener("change", post_image);
 document.getElementById("post-pic-in-comment").addEventListener("change", add_pic_to_comment);
 
 $(function(){
-
+  
+  /*
 	$.post('./update_users', {
 		id: 		USER_ID,
 		name:		USER_NAME,
 		profile:	PROFILE_PIC
 	}, () => {});
+  */
 
 	/* Initialize image and comment section */
 	const promise = new Promise((resolve, reject) => {

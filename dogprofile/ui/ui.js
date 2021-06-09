@@ -139,10 +139,6 @@ $('#mark-icon').click(function(){
   markClick();
 })
 
-$('.search-grid img').click(function(){
-  searchClick();
-})
-
 $('#about-dog').click(function(){
   $('.aboutdog-page').show();
   $('.home-page').hide();

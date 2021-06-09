@@ -46,7 +46,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 15040;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -114,6 +114,7 @@ app.post("/load_users", async (req, resp) => {
 app.post("/update_users", async (req, resp) => {
     let command = "SELECT name FROM users WHERE id = \"" + req.body.id + "\"";
     db.get(command, (err, row) => {
+        /*
         if (!row) { // User first log in
             sqlUpdate('users', {   
                 "id":       req.body.id,
@@ -121,6 +122,14 @@ app.post("/update_users", async (req, resp) => {
                 "profile":  req.body.profile
             });
         }
+        */
+             sqlUpdate('users', {   
+                "id":       req.body.id,
+                "name":     req.body.name,
+                "profile":  req.body.profile
+                });
+                console.log("update");
+  
     });
     resp.send(JSON.stringify(await sql2JSON('users')));
 });
