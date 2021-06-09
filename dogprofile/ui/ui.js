@@ -233,7 +233,7 @@ $('#save-btn').click(function(){
   //change avatar
   var editedAvatarSrc =  $('#edit-pg .profile-avatar').attr('src') 
   $('#view-pg .profile-avatar').attr('src', editedAvatarSrc) 
-  
+  $('#map-profile-avatar').attr('src', editedAvatarSrc) 
   //change username
 	let editName = document.getElementById('edit-name').value
 	$('.username').attr('id',editName)

@@ -5,6 +5,7 @@ var USER_ID = _user.id;
 var USER_NAME = _user.name;
 var PROFILE_PIC = _user.image_url;
 
+$(function(){
 	const promise = new Promise((resolve, reject) => {
 			$.post('./load_users', {dog_id: 1}, (user_json) => {
 				user_data = JSON.parse(user_json);
@@ -34,6 +35,7 @@ var PROFILE_PIC = _user.image_url;
     for (let i = 0; i < avatars.length; ++i) {
       avatars[i].src = PROFILE_PIC;
     }
-  
-    $('.map-profile-avatar').attr('src',PROFILE_PIC)
+ 		
+		initMap();	
 	});
+});

@@ -56,7 +56,8 @@ function initMap() {
     });
     //user mark
     userimg = document.createElement("img");
-		userimg.className = "map-profile-avatar";
+    userimg.id = "map-profile-avatar";
+    userimg.src = PROFILE_PIC;
     ownermarker = new MarkerWithLabel({
       position: owner_uluru,
       map: map,
@@ -79,7 +80,7 @@ function initMap() {
             addMarker(marker_path,{lat: position_file[i].lat, lng: position_file[i].lng})
         } 
     	});
-		}); 
+		});
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -246,3 +247,4 @@ $(document).ready(function() {
 
   }, 500)
 });
+
