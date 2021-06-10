@@ -8,6 +8,7 @@ var markDisplay = false;
 var profileDisplay = false;
 var markmode = false;
 var markerinfoShow = false;
+var findmarkedDisplay = false;
 
 function displayCheck(){
   if(listDisplay){
@@ -16,11 +17,11 @@ function displayCheck(){
   if(searchDisplay){
     searchClick();
   }
-  if(markDisplay){
-    if(!markmode){
-      markClick();
-    }
-  }
+  // if(markDisplay){
+  //   if(!markmode){
+  //     markClick();
+  //   }
+  // }
   if(profileDisplay){
      profileClick();
   }
@@ -29,6 +30,9 @@ function displayCheck(){
     $('.mark').animate({'right': '4vw'},500);
     document.getElementById('m1').style.display="block";
     markmode = !markmode;
+  }
+  if(findmarkedDisplay){
+    findmarked();
   }
 }
 
@@ -110,7 +114,28 @@ function markerUnclick(){
     map.setZoom(17);
     markerinfoShow = false;
     map.setOptions({draggable: true});
+    console.log(`map`)
   }
+  if(findmarkedDisplay){
+    clearMarkers(-1);
+  }
+}
+
+function findmarked(dogID){
+  console.log(dogID);
+  if(findmarkedDisplay){
+    $('.dog_markedmode').css('display','none');
+    showMarkers(-1);
+    ownermarker.setMap(map);
+  }else{
+    displayCheck();
+    $('.dog_markedmode').css('display','block');
+    $('.markeddog_photo').attr("src",`./map/mark_icon_big/dog_marker_big_${dogID+1}.png`);
+    console.log(`findmark`)
+    clearMarkers(-1);
+    ownermarker.setMap(null);
+  }
+  findmarkedDisplay = !findmarkedDisplay;
 }
 
 $('#list-icon').click(function(){
@@ -133,6 +158,10 @@ $('.mark_tip').click(function(){
 
 $('.dog_markerinfo').click(function(){
   markerUnclick();
+})
+
+$('.btn_X').click(function(){
+  findmarked();
 })
 
 $('#mark-icon').click(function(){

@@ -533,3 +533,26 @@ img.avatar-choose {
   margin-bottom: 2.4vw;
   font-weight: 700;
 }
+
+.dog_markedmode {
+  display: none;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  /* background: cornflowerblue; */
+  z-index: 5;
+}
+.dog_markedmode .btn_X{
+  /* display: block; */
+  position: absolute;
+  width: 15vw;
+  left: 42.5vw;
+  top: 16vw;
+}
+.dog_markedmode .markeddog_photo{
+  /* display: block; */
+  position: absolute;
+  width: 41vw;
+  left: 29.5vw;
+  top: 34vw;
+}

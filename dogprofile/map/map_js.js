@@ -81,6 +81,7 @@ function initMap() {
         } 
     	});
 		});
+    
 }
 function addMarker(icon_path,location) {
   count = count + 1;
@@ -115,6 +116,7 @@ function dogMarker_click(target_marker){
   $('#dog_name').html(dog_name[target_num]);
   $('#dog_photo').attr("src",`./map/mark_icon_big/dog_marker_big_${target_num+1}.png`);
   $('.btn_navigation').attr('id',target_num);
+  $('.btn_marked').attr('id',target_num);
   $('.btn_detail').attr('id',target_num);
 }
 function findposition(target_marker){
@@ -197,9 +199,7 @@ function route(){
   }
   routemode = !routemode;
 }
-function camera(){
-  $( "#camera_btn" ).click();
-}
+
 function setMapOnAll(target_number,map){
   for (var i = 0; i< Markers.length; i++) {
     if(i!=target_number){
@@ -216,8 +216,11 @@ function showMarkers(target_number){
 $( ".btn_navigation" ).click(function() {
 	route();
 });
-$( ".btn_camera" ).click(function() {
-	camera();
+$( ".btn_marked" ).click(function() {
+  if(routemode){
+		route();
+  }
+	findmarked(parseInt($(this).attr('id')));
 });
 $( ".btn_detail" ).click(function() {
   var dog_page_id = $(this).attr('id')
