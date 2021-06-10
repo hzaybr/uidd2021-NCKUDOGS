@@ -57,7 +57,10 @@ function initMap() {
     //user mark
     userimg = document.createElement("img");
     userimg.id = "map-profile-avatar";
-    userimg.src = PROFILE_PIC;
+    userimg.src = "./image/dog_app_icon.png";
+    if(PROFILE_PIC){
+      userimg.src = PROFILE_PIC;
+    }
     ownermarker = new MarkerWithLabel({
       position: owner_uluru,
       map: map,

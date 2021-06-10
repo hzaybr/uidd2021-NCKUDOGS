@@ -89,21 +89,38 @@ $('.arrow').click(function() {
 });
 
 $('.heart').click(function() {
-  $('.pop-com').fadeIn();
+ 
+  if(login_status){
+    $('.pop-com').fadeIn();
 
-  SCORE = $(this).attr('id')[1];
-  console.log(`score: ${SCORE}`);
-  for (i=1; i<=5; i++){
-    //heart in comment
-    hid = `.heart:nth-child(${i+1})`;
-    if(i<=SCORE){
-    $(hid).attr('src','./image/red_heart.png');
-    }
-    else {
-    $(hid).attr('src','./image/heart.png');
-    }
-  };
+    SCORE = $(this).attr('id')[1];
+    console.log(`score: ${SCORE}`);
+    for (i=1; i<=5; i++){
+      //heart in comment
+      hid = `.heart:nth-child(${i+1})`;
+      if(i<=SCORE){
+        $(hid).attr('src','./image/red_heart.png');
+      }
+      else {
+        $(hid).attr('src','./image/heart.png');
+      }
+    };
+  }
+  else {
+   $('.unlogin').fadeIn(500);
+  }
 });
+
+$('.unlogin').click(function(){
+  $('.unlogin').fadeOut(500);
+})
+
+$('.add-pic').click(function(e){
+  if(!login_status){
+    e.preventDefault();
+    $('.unlogin').fadeIn(500);   
+  }
+})
 
 $('#cancel-btn').click(function() {
   $('.pop-com').hide();
@@ -145,10 +162,10 @@ $('.w-heart').click(function() {
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
     if(i<=SCORE){
-    $(hid).attr('src','./image/red_heart.png');
+      $(hid).attr('src','./image/red_heart.png');
     }
     else {
-    $(hid).attr('src','./image/heart.png');
+      $(hid).attr('src','./image/heart.png');
     }
   };
 });
@@ -278,25 +295,24 @@ FR.addEventListener("load", function(e) {
 });
 
 function post_image() {
+  if (!(this.files && this.files[0]))
+    return;
 
-    if (!(this.files && this.files[0]))
-		return;
-
-	const file = this.files[0];
-
-	heic2any({
-		blob: file,
-		toType: "image/jpeg",
-		quality: 0.1
-	})
-	.then((result) => { // result is a BLOB of the PNG formatted image
-		FR.readAsDataURL(result);
-	})
-	.catch((errorObject) => {
-		(errorObject.code === 1)
-		? FR.readAsDataURL(file)	// file is not HEIC
-		: console.log(errorObject);	// other errors
-	});
+  const file = this.files[0];
+  
+  heic2any({
+  	blob: file,
+  	toType: "image/jpeg",
+  	quality: 0.1
+  })
+  .then((result) => { // result is a BLOB of the PNG formatted image
+  	FR.readAsDataURL(result);
+  })
+  .catch((errorObject) => {
+  	(errorObject.code === 1)
+  	? FR.readAsDataURL(file)	// file is not HEIC
+  	: console.log(errorObject);	// other errors
+  });
 }
 
 function add_pic_to_comment() {

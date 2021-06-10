@@ -3,14 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-   	
-		<meta http-equiv="cache-control" content="no-cache">
+
+
+		<!--meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		
+		<meta http-equiv="expires" content="0"-->
+
 		<meta name="google-site-verification" content="h2vJ5wXYCqY_VSAVfDtHsymQpBI7TINCS3m5uAlc31o" />
 		<meta name="google-site-verification" content="45gMPEs-_bVaCsi2htxTYQ0QDTa2cjMj82TDASgHxyg" />
-
+		
+		<meta name="google-signin-scope" content="profile email">
+	
     <link rel="icon" type="image/png" href="./image/dog_app_icon.png"/>
     <link href="./ui/ui.css" rel="stylesheet" type="text/css">
     <link href="./aboutus_appv/about.css" rel="stylesheet" type="text/css">
@@ -28,8 +31,17 @@
     </style>
   </head>
   <body>
-
-  <!-- home page(map) -->
+		<script src="id.js"></script>
+    <script>
+      const fm = document.getElementsByTagName('meta')[0]
+      const m = document.createElement('meta')
+      m.content = myClientId + '.apps.googleusercontent.com'
+      m.name = 'google-signin-client_id'
+      fm.parentNode.insertBefore(m, fm)
+    </script>
+ 		<script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+	<!-- home page(map) -->
   <div class="home-page">
     
         <div id="map"></div>
@@ -57,6 +69,7 @@
         <img src="./ui/image/dog_icon_profile.png" class="icon" id="profile-icon" title="profile">
         <div class="profile">
           <div class="pg" id="view-pg" style="display:block">
+						<a href="#" onclick="signOut();">Sign out</a>	
             <button id=edit-btn>Edit</button>
             <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
             <div class="username" id="汪汪"></div>
@@ -727,6 +740,13 @@
         <p class="btm-info" style="font-size: 4vw; margin-top: 1vw; top: 83%;">成大流浪動物志工粉絲專頁</p>
       </div>
     </div>
+		
+		<div class='unlogin' >
+			<div class='login-container'>
+				<img id='google-login-describe' src='./image/dog_div_login_describe.png'>
+				<div class="g-signin2" id="google-login-button" data-onsuccess="onSignIn" data-width="220" data-height="48.22" data-theme="dark"></div>
+			</div>
+		</div>
 
     <script>
       $(document).ready(function(){
@@ -744,15 +764,11 @@
     <script src="./aboutus_appv/about.js"></script>
     <script src="./ui/user.js"></script>
 
-		<!--script>
-      $(document).ready(function() {
-        console.log("here");
-        var user_name = $('.username').attr('id');
-        $('.username').html(user_name).show();
-        console.log(`show name ${user_name}`);
-
-      })
-    </script-->
+		<script>
+			$(document).ready(function(){
+				initMap()
+			})
+		</script>>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnroImRbilgj-vcxJR47R4wrh6suZw0D4&map_ids=892f444c9eaa9e2&callback=initMap" async defer></script>
     <script src="https://unpkg.com/@googlemaps/markerwithlabel/dist/index.min.js"></script>
   </body>
