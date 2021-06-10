@@ -156,9 +156,10 @@ $( "#mg1 img" ).click(function() {
   Markers[choose_num].setPosition(uluru);
   btnshow = false;
   dogMarker_click(Markers[choose_num]);
-	markClick();
+  markClick();
+  //console.log(USER_ID);
   $.post('./update_position', {
-    user_id: "unknow",
+    user_id: USER_ID,
     dog_id:  choose_num,
     lat: 		current_lat,
 		lng:		current_lng
