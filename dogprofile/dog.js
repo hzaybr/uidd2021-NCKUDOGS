@@ -369,7 +369,10 @@ function load_user() {
 	document.getElementById("review-count").innerHTML = `(${user_len})`;
 
 	/* Average score */
-	let avg_score = Math.round(10 * sum / user_len) / 10;
+	let avg_score = 0;
+	if (user_len) {
+		avg_score = Math.round(10 * sum / user_len) / 10;
+	}
 	obj = document.getElementsByClassName("average-score");
 	for (let i = 0; i < obj.length; ++i) {
 		obj[i].innerHTML = avg_score.toFixed(1);
