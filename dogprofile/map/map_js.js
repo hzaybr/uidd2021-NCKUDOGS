@@ -78,7 +78,8 @@ function initMap() {
    	$(document).ready(function() {
       $.get("/dog_position", function(json){
         position_file = JSON.parse(json);
-				for(i=1;i<20;i++){
+        for(i=1;i<20;i++){
+            count = i-1;
             var marker_path = './map/mark_icon/dog_marker_'+i+'.png';
             addMarker(marker_path,{lat: position_file[i].lat, lng: position_file[i].lng})
         } 
@@ -87,7 +88,7 @@ function initMap() {
     
 }
 function addMarker(icon_path,location) {
-  count = count + 1;
+  //count = count + 1;
   var marker = new google.maps.Marker({
     draggable: false,
     animation: google.maps.Animation.DROP,

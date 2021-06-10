@@ -16,7 +16,7 @@ body {
 #list-icon {
   left: 1.33vw;
   top: 1.33vw;
-  z-index: 6;
+  z-index: 8;
 }
 
 #profile-icon {
@@ -39,37 +39,47 @@ body {
 
 .list-grid {
   position: absolute;
-  width: 58.13vw;
-  height: 64.53vw;
-  left: -65vw;
-  top: 10.71vh;
-  background-image: url('./image/dog_div_list.png');
+  background: white;
+  border-top-right-radius: 10vw;
+  border-bottom-right-radius: 10vw;
+  padding-top: 9%;
+  padding-left: 7vw;
+  width: 70vw;
+  height: 95%;
+  left: -77vw;
+  top: 0;
   background-repeat: no-repeat;
   background-size: contain;
   display: grid;
-  grid-template-columns: 21.33vw 21.33vw;
-  grid-template-rows: 25vw 25vw;
-  justify-content: space-evenly;
-  align-content: space-evenly;
+  grid-template-rows: repeat(5, 16vw);
+  z-index: 7;
 } 
-
+.icon-grid {
+	display: grid;
+	grid-template-columns: 10vw 20vw;
+	grid-gap: 3vw;
+	align-items: center;
+	border-block-color: #bdbdbdc2;
+	border-bottom-style: solid;
+	border-width: 0.1vw;
+  width: 100%;
+  left: -7vw;
+  padding-left: 7vw;
+  position: relative;
+}
 .list-grid img{
   position: relative;
-  width: 21.33vw;
+  width: 100%;
 }
 
 .list-grid p {
 	position: relative;
-	top: -1vw;
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: 900;
-	font-size: 1.1vh;
-	line-height: 1.35vh;
-
-	text-align: center;
-
+	font-size: 4.8vw;
 	color: #9A9A9A;
+  display: inline-block;
 }
 
 .profile {
@@ -81,7 +91,7 @@ body {
   top: 21.6vw;
   background: #FFFFFF;
   border-radius: 36px;
-  z-index: 7;
+  z-index: 9;
 }
 
 .pg {

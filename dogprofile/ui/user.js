@@ -30,7 +30,7 @@ function onSignIn(googleUser) {
               reload_comment();
             }
             else if(window.location.href.split('/').filter(e => e).slice(-1) == "index.html"){
-              load_profile();
+              load_profile_num();
 						}
             else if(window.location.href.split('/').filter(e => e).slice(-1) == "userprofile.html"){
               load_profile_detail();
@@ -62,7 +62,7 @@ function reload_user(){
     }
     else{
       console.log('first_login')
-   		$.post('./update_users', {
+   		$.post('./update_users_profile', {
 				id:	USER_ID,
 				name:	USER_NAME,
 				profile:	PROFILE_PIC

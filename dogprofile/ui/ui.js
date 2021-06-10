@@ -42,11 +42,11 @@ function listClick(){
   }
   $('.list-grid').stop();
   if (listDisplay){
-    $('.list-grid').animate({'left':'-65vw'},500);
+    $('.list-grid').animate({'left':'-77vw'},500);
   }
   else{
     displayCheck();
-    $('.list-grid').animate({'left':'5vw'},500);
+    $('.list-grid').animate({'left':'0'},500);
   }
   listDisplay = !listDisplay;
 }
@@ -283,13 +283,12 @@ $('#save-btn').click(function(){
 	$('.username').attr('id',editName)
   $('.username').html(editName)
   
-
   //pass to db
-	$.post('./update_users', {
+	$.post('./update_user_profile', {
 		id: 		USER_ID,
 		name:		editName,
 		profile:	editedAvatarSrc
-  }, () => {});
+  });
 })
 
 $('#cancel-btn').click(function(){
@@ -307,17 +306,18 @@ $('#manage').click(function(){
 })
 
 /**********************************************************/
+/* load comments, photos, positions count */
 var comments
 var photos
 
-function load_profile() {
+function load_profile_num() {
   $.post('/load_profile_cmt', {
     userID: USER_ID
     }, (data) =>{
       let com_cnt = Object.keys(data).length
       $('#comment-count').html(com_cnt);
   })
-  $.post('/load_profile_img', {
+  $.post('/load_profile_img_info', {
     userID: USER_ID
     }, (data) =>{
       let pic_cnt = Object.keys(data).length
