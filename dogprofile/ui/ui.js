@@ -323,4 +323,10 @@ function load_profile_num() {
       let pic_cnt = Object.keys(data).length
       $('#upload-count').html(pic_cnt);
   })
+  $.post('/load_profile_position', {
+    userID: USER_ID
+    }, (data) =>{
+      let p_cnt = Object.keys(data).length
+      $('#locate-count').html(p_cnt);
+  })
 }

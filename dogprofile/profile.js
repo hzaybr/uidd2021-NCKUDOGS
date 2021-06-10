@@ -36,6 +36,7 @@ function load_profile_detail() {
   var len
   var times = []
   document.title = `${USER_NAME}｜汪汪`;
+  $('.top-name').html(USER_NAME);
 
   const promise = new Promise((resolve, reject) => {
     $.post('/load_score',{
