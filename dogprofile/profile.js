@@ -26,6 +26,25 @@ $('.XXicon').click(function() {
   window.location.assign('index.html')
 });
 
+$('.pic-grid').on('click', '.grid-photo', function(){
+  id = $(this).attr('id').slice(6)
+  $('.blur-white').show();
+  $.post('./get_image', {
+    image_id: id,
+    userID: USER_ID
+    }, (data)=>{
+      $('.dog-pic').html(`<img width="88%" src="./image/dog/${data.dog_id}.png">`)
+      $('.dog-name').html(`<p>${dog_name[data.dog_id]}</p>`)
+      $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
+    })
+})
+
+$('.arrow').click(function() {
+  $('.blur-white').hide()
+  $('.photo img').remove()
+  $('.dog-pic img').remove()
+  $('.dog-name p').remove()
+});
 
 /**************************************************************************/
 var comment, dog_id, photo
