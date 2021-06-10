@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
+ 		<meta name="google-signin-scope" content="profile email">
+
     <link href="./dog.css" rel="stylesheet" type="text/css"> 
     <link rel="icon" type="image/png" href="./image/dog_app_icon.png"/>
     <link media="screen" href="http://openfontlibrary.org/face/segoe-ui-symbol" rel="stylesheet" type="text/css"/>
@@ -15,6 +17,16 @@
   </head>
  
   <body>
+		<script src="id.js"></script>
+    <script>
+      const fm = document.getElementsByTagName('meta')[0]
+      const m = document.createElement('meta')
+      m.content = myClientId + '.apps.googleusercontent.com'
+      m.name = 'google-signin-client_id'
+      fm.parentNode.insertBefore(m, fm)
+    </script>
+ 		<script src="https://apis.google.com/js/platform.js" async defer></script> 
+
     <img class="bg-top" src="./image/bg_top.svg">
 
     <!-- start page -->
@@ -349,6 +361,13 @@
       </div>
 
     </div>
+
+		<div class='unlogin' >
+			<div class='login-container'>
+				<img id='google-login-describe' src='./image/dog_div_login_describe.png'>
+				<div class="g-signin2" id="google-login-button" data-onsuccess="onSignIn" data-width="220" data-height="48.22" data-theme="dark"></div>
+			</div>
+		</div>
 
     <script src="./ui/user.js"></script>
     <script src='./dog.js'></script>

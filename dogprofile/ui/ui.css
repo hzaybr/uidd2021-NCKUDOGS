@@ -91,7 +91,7 @@ body {
   top: 21.6vw;
   background: #FFFFFF;
   border-radius: 36px;
-  z-index: 7;
+  z-index: 9;
 }
 
 .pg {
@@ -566,3 +566,38 @@ img.avatar-choose {
   left: 29.5vw;
   top: 34vw;
 }
+
+.unlogin {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-color: rgba(134, 134, 134, 0.5);
+  z-index: 10;
+}
+
+.login-container {
+  display: block;
+  position: relative;
+  width: 92.8vw;
+  height: 87.1vw;
+  top: 25.61vh;
+  margin: auto;
+}
+
+#google-login-describe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.g-signin2 {
+  position: relative;
+  display: block;
+  width: 63.21%;
+  height: 14.75%;
+  top: 69.45%;
+  margin: auto;
+}
+

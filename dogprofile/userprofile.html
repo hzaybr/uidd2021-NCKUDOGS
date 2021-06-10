@@ -5,13 +5,27 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="./profile.css" rel="stylesheet" type="text/css"> 
     <link rel="icon" type="image/png" href="./image/dog_app_icon.png"/>
-      
+ 		
+    <meta name="google-signin-scope" content="profile email">     
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
 
     <title></title>
   </head>
  
   <body>
+ 		<script src="id.js"></script>
+    <script>
+      const fm = document.getElementsByTagName('meta')[0]
+      const m = document.createElement('meta')
+      m.content = myClientId + '.apps.googleusercontent.com'
+      m.name = 'google-signin-client_id'
+      fm.parentNode.insertBefore(m, fm)
+    </script>
+ 		<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+	  <div class="g-signin2" id="google-login-button" style='display:none' data-onsuccess="onSignIn" data-width="220" data-height="48.22" data-theme="dark"></div>
+
     <img class="bg-top" src="./image/bg_top.svg">
 
     <!-- comment -->

@@ -32,7 +32,7 @@ var comment, dog_id, photo
 var cmt_txt, p_txt
 var pic_len
 
-$(document).ready(function() {
+function load_profile_detail() {
   var len
   var times = []
   document.title = `${USER_NAME}｜汪汪`;
@@ -92,7 +92,7 @@ $(document).ready(function() {
     console.log(data)
   })
 
-})
+}
 
 
 function load_cmt(scores, num){

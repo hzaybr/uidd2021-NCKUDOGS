@@ -142,8 +142,18 @@ $('#list-icon').click(function(){
   listClick();
 })
 $('#profile-icon').click(function(){
-  profileClick();
+  if(login_status){
+    profileClick();
+  }
+  else{
+    $('.unlogin').fadeIn(500);
+  }
 })
+
+$('.unlogin').click(function(){
+  $('.unlogin').fadeOut(500);
+})
+
 $('#search-icon').click(function(){
   searchClick();
 })
@@ -165,7 +175,12 @@ $('.btn_X').click(function(){
 })
 
 $('#mark-icon').click(function(){
-  markClick();
+  if(login_status){
+    markClick();
+  }
+  else{
+    $('.unlogin').fadeIn(500);
+  }
 })
 
 $('#about-dog').click(function(){
@@ -191,7 +206,7 @@ $('#messenger-icon').click(function(){
   window.location.assign("https://www.facebook.com/ncku.vdogs")  
 })
 
-$('.profile-avatar').click(function() {
+$('#view-pg .profile-avatar').click(function() {
   window.location.assign('userprofile.html')
 })
 
@@ -295,7 +310,7 @@ $('#manage').click(function(){
 var comments
 var photos
 
-$(function() {
+function load_profile_num() {
   $.post('/load_profile_cmt', {
     userID: USER_ID
     }, (data) =>{
@@ -308,5 +323,4 @@ $(function() {
       let pic_cnt = Object.keys(data).length
       $('#upload-count').html(pic_cnt);
   })
-
-});
+}

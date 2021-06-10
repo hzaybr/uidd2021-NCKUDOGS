@@ -90,21 +90,38 @@ $('.arrow').click(function() {
 });
 
 $('.heart').click(function() {
-  $('.pop-com').fadeIn();
+ 
+  if(login_status){
+    $('.pop-com').fadeIn();
 
-  SCORE = $(this).attr('id')[1];
-  console.log(`score: ${SCORE}`);
-  for (i=1; i<=5; i++){
-    //heart in comment
-    hid = `.heart:nth-child(${i+1})`;
-    if(i<=SCORE){
-    $(hid).attr('src','./image/red_heart.png');
-    }
-    else {
-    $(hid).attr('src','./image/heart.png');
-    }
-  };
+    SCORE = $(this).attr('id')[1];
+    console.log(`score: ${SCORE}`);
+    for (i=1; i<=5; i++){
+      //heart in comment
+      hid = `.heart:nth-child(${i+1})`;
+      if(i<=SCORE){
+        $(hid).attr('src','./image/red_heart.png');
+      }
+      else {
+        $(hid).attr('src','./image/heart.png');
+      }
+    };
+  }
+  else {
+   $('.unlogin').fadeIn(500);
+  }
 });
+
+$('.unlogin').click(function(){
+  $('.unlogin').fadeOut(500);
+})
+
+$('.add-pic').click(function(e){
+  if(!login_status){
+    e.preventDefault();
+    $('.unlogin').fadeIn(500);   
+  }
+})
 
 $('#cancel-btn').click(function() {
   $('.pop-com').hide();
@@ -146,10 +163,10 @@ $('.w-heart').click(function() {
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
     if(i<=SCORE){
-    $(hid).attr('src','./image/red_heart.png');
+      $(hid).attr('src','./image/red_heart.png');
     }
     else {
-    $(hid).attr('src','./image/heart.png');
+      $(hid).attr('src','./image/heart.png');
     }
   };
 });
