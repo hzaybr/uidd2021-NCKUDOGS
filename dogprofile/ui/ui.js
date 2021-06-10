@@ -268,13 +268,12 @@ $('#save-btn').click(function(){
 	$('.username').attr('id',editName)
   $('.username').html(editName)
   
-
   //pass to db
-	$.post('./update_users', {
+	$.post('./update_user_profile', {
 		id: 		USER_ID,
 		name:		editName,
 		profile:	editedAvatarSrc
-  }, () => {});
+  });
 })
 
 $('#cancel-btn').click(function(){
