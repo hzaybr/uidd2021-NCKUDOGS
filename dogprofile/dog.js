@@ -197,13 +197,11 @@ document.getElementById("post-pic-in-comment").addEventListener("change", add_pi
 
 $(function(){
   
-  /*
 	$.post('./update_users', {
 		id: 		USER_ID,
 		name:		USER_NAME,
 		profile:	PROFILE_PIC
 	}, () => {});
-  */
 
 	/* Initialize image and comment section */
 	const promise = new Promise((resolve, reject) => {
@@ -267,14 +265,9 @@ $('#post-btn, #writing-post-btn').click(function() {
 });
 
 const FR = new FileReader();
+let temp_id = -1;
 FR.addEventListener("load", function(e) {
-	$.post("./upload_image", {
-		user_id: 	USER_ID,
-		dog_id:		dog_page_id,
-		photo: 		e.target.result
-	}, (image_id) => {
-		concat_image(image_id, PROFILE_PIC, e.target.result);
-	});
+	__show_and_upload_image(temp_id--, e);
 });
 
 function post_image() {
@@ -289,7 +282,7 @@ function post_image() {
 		toType: "image/jpeg",
 		quality: 0.1
 	})
-	.then((result) => { // result is a BLOB of the PNG formatted image
+	.then((result) => { // result is a BLOB of the JPG formatted image
 		FR.readAsDataURL(result);
 	})
 	.catch((errorObject) => {
@@ -395,6 +388,18 @@ function load_user() {
 
 /******************************************************************/
 /* Raw function */
+
+function __show_and_upload_image(_temp_id, e) {
+	concat_image(_temp_id, PROFILE_PIC, e.target.result);
+
+	$.post("./upload_image", {
+		user_id: 	USER_ID,
+		dog_id:		dog_page_id,
+		photo: 		e.target.result
+	}, (image_id) => { // change _temp_id to image_id returned by db
+		$(`#image_${_temp_id}`)[0].id = `image_${image_id}`;
+	});
+}
 
 function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	let cmt_id = "comment_" + comment_id;
