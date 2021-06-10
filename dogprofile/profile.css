@@ -112,6 +112,7 @@ p {
 }
 .heart-grid {margin: 1vw;padding-top:1.5vw;}
 .heart {width: 4%;}
+.grid-photo {background-size: cover;}
 .blur-white {
   width: 100%;
   height: 100%;

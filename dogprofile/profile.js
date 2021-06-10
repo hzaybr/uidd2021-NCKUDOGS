@@ -76,11 +76,6 @@ function load_profile_detail() {
 
   })
 
-  $.post('/load_profile_img_info', {
-    userID: USER_ID
-  }, (data) =>{
-    load_tmp_img(data)
-  })
   $.post('/load_profile_img', {
     userID: USER_ID
   }, (data) =>{
@@ -121,22 +116,16 @@ function load_cmt(scores, num){
   cmt_txt += "</div>"
 };
 
-function load_tmp_img(photos) {
+function load_img(photos) {
     p_txt = ""
     pic_len = Object.keys(photos).length
     var row = pic_len%3 + 1
     console.log(`pic row: ${row}`)
     $('.pic-grid').css("grid-template-rows", `repeat(${row}, 33.1vw)`)
     for(var i=pic_len-1; i>=0; i--){
-      p_txt += `<div class="grid-photo" id="image_${photos[i].id}" style="background: #bdbdbdc2;"></div>`
+      p_txt += `<div class="grid-photo" id="image_${photos[i].id}" style="background-image: url(${photos[i].photo});"></div>`
     }
     $('.pic-grid').html(p_txt);
-};
-function load_img(photos) {
-  for(var i=pic_len-1; i>=0; i--) {
-    $(`#image_${photos[i].id}`).css('background-image',`url(${photos[i].photo})`)
-    $(`#image_${photos[i].id}`).css('background-size',`cover`)
-  }
 };
 
 function caculate_time(time, time_now) {

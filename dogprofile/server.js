@@ -273,19 +273,8 @@ app.post("/load_profile_cmt", async (req, res) => {
   })
 });
 
-app.post("/load_profile_img_info", async (req, res) => {
-  let command = `SELECT dog_id, photo, id, timestamp FROM images WHERE user_id = '${req.body.userID}'`
-  var data ={} 
-  db.all(command, (err, rows) =>{
-    rows.forEach(function(row, i) {
-      data[i] = row
-    })
-    res.send(data)
-  })
-});
-
 app.post("/load_profile_img", async (req, res) => {
-  let command = `SELECT photo FROM images WHERE user_id = '${req.body.userID}'`
+  let command = `SELECT dog_id, photo, id, timestamp FROM images WHERE user_id = '${req.body.userID}'`
   var data ={} 
   db.all(command, (err, rows) =>{
     rows.forEach(function(row, i) {

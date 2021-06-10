@@ -317,7 +317,7 @@ function load_profile_num() {
       let com_cnt = Object.keys(data).length
       $('#comment-count').html(com_cnt);
   })
-  $.post('/load_profile_img_info', {
+  $.post('/load_profile_img', {
     userID: USER_ID
     }, (data) =>{
       let pic_cnt = Object.keys(data).length
