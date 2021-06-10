@@ -42,11 +42,11 @@ function listClick(){
   }
   $('.list-grid').stop();
   if (listDisplay){
-    $('.list-grid').animate({'left':'-65vw'},500);
+    $('.list-grid').animate({'left':'-77vw'},500);
   }
   else{
     displayCheck();
-    $('.list-grid').animate({'left':'5vw'},500);
+    $('.list-grid').animate({'left':'0'},500);
   }
   listDisplay = !listDisplay;
 }
