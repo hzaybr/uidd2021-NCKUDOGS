@@ -314,7 +314,7 @@ function downscaleImage(dataUrl) {
 
 	return new Promise((res, rej) => {
 
-		/* Create a temporary image so that we can compute the height of the downscaled image */
+		/* Create a temporary image to compute the height of the downscaled image */
 		let image = new Image();
 		image.src = dataUrl;
 
@@ -328,7 +328,7 @@ function downscaleImage(dataUrl) {
 				height = Math.floor(width / ratio);
 			}
 			else if (width < height && height > max_length) {
-				width = max_length;
+				height = max_length;
 				width = Math.floor(height * ratio);
 			}
 		
@@ -345,7 +345,6 @@ function downscaleImage(dataUrl) {
 		}
 
 	});
-    // return canvas.toDataURL("image/jpeg", 0.1);
 }
 
 function add_pic_to_comment() {
