@@ -326,25 +326,42 @@ function reload_comment() {
 	load_comment();
 }
 
-function concat_image(image_id, user_pic, photo) {
+async function concat_image(image_id, user_pic, photo) {
 	let id = "image_" + image_id;
 	$(`<span class=\"image-image\" id=${id}>`).prependTo(".pic-grid");
 
 	let txt = "";
-	txt += 	"<div class=\"user-pic-for-image\">";
-	txt += 		`<img class=\"profile-avatar\" src=${user_pic} width=100%>`;
+	txt += 	`<div class="user-pic-for-image">`;
+	txt += 		`<img class="profile-avatar" src=${user_pic} width=100%>`;
 	txt += 	"</div>";
-	txt += 	`<img src=${photo} width=100%>`;
+	txt += 	`<img class="image-grid-image" src=${photo} width=100% height=100%>`;
 
 	$(`#${id}`).html(txt);
 }
 
 function load_image() {
-	$.post('./load_images', {dog_id: dog_page_id}, (img_json) => {
-		$.each(JSON.parse(img_json), function(index, val) {
-			let pic = user_data[val.user_id].profile;
-			concat_image(index, pic, val.photo);
+
+	const promise = new Promise((resolve, reject) => {
+		var id_arr = [];
+		$.post('./preload_images', {dog_id: dog_page_id}, (image_ids) => {
+			if(image_ids) {
+				id_arr = image_ids.split(',');
+			}
+			id_arr.forEach(index => {
+				concat_image(index, BLANK_PIC, null);
+			})
+			resolve(id_arr.reverse());
 		});
+	});
+
+	promise.then((id_arr) => {
+		id_arr.forEach(index => {
+			$.post('./query_image', {id: index}, (image) => {
+				image = JSON.parse(image);
+				$(`#image_${image.id} .profile-avatar`)[0].src = user_data[image.user_id].profile;
+				$(`#image_${image.id} .image-grid-image`)[0].src = image.photo;
+			});
+		})
 	});
 }
 

@@ -146,6 +146,11 @@ p {
 }
 .image-image {
   position: sticky;
+  height: 200px;
+  overflow: hidden;
+}
+.image-grid-image {
+  object-fit: cover;
 }
 .user-pic-for-image {
 	position: absolute;

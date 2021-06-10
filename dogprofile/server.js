@@ -192,17 +192,24 @@ app.post("/delete_comment", async (req, resp) => {
 /**********************************************************/
 /* Photos */
 
-app.post("/load_images", async (req, resp) => {
-    var command = "SELECT rowid AS rowid, * FROM images WHERE dog_id = ";
+app.post("/preload_images", async (req, resp) => {
+    var command = "SELECT id as id FROM images WHERE dog_id = ";
     command += req.body.dog_id;
-    let jsonObj = {};
+    let arr = [];
 
     db.each(command, (err, row) => { // This gets called for every row our query returns
-        jsonObj[row.rowid] = {};
-        jsonObj[row.rowid]['user_id'] = row['user_id'];
-        jsonObj[row.rowid]['photo'] = row['photo'];
+        arr.push(row.id);
     }, (err) => { // This gets called after each of our rows have been processed
-        resp.send(JSON.stringify(jsonObj));
+        resp.send(arr.toLocaleString());
+    });
+});
+
+app.post("/query_image", async (req, resp) => {
+    var command = "SELECT * FROM images WHERE id = ";
+    command += req.body.id;
+
+    db.get(command, (err, row) => {
+        resp.send(JSON.stringify(row));
     });
 });
 
