@@ -7,6 +7,7 @@ let user_data = {};
 let is_editing = false;
 let editing_comment_id = 0;
 const BLANK_PIC = "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png";
+const LOADING_PIC = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsSAAALEgHS3X78AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAADUlEQVQI12M8d+7cfwAIRwNrXorEqAAAAABJRU5ErkJggg=="
 
 $('html').click(function(e) {
   if(!$(e.target).hasClass('cmt-btn'))
@@ -292,6 +293,44 @@ function post_image() {
 	});
 }
 
+function downscaleImage(dataUrl) {
+
+	return new Promise((res, rej) => {
+
+		/* Create a temporary image so that we can compute the height of the downscaled image */
+		let image = new Image();
+		image.src = dataUrl;
+
+		image.onload = function() {
+			
+			let width = image.width, height = image.height;
+			let ratio = width / height;
+			const max_length = 600;
+			if (width >= height && width > max_length) {
+				width = max_length;
+				height = Math.floor(width / ratio);
+			}
+			else if (width < height && height > max_length) {
+				width = max_length;
+				width = Math.floor(height * ratio);
+			}
+		
+			/* Create a temporary canvas to draw the downscaled image on */
+			let canvas = document.createElement("canvas");
+			canvas.width = width;
+			canvas.height = height;
+		
+			/* Draw the downscaled image on the canvas and return the new data URL */
+			let ctx = canvas.getContext("2d");
+			ctx.drawImage(image, 0, 0, width, height);
+
+			res(canvas.toDataURL("image/jpeg", 0.7));
+		}
+
+	});
+    // return canvas.toDataURL("image/jpeg", 0.1);
+}
+
 function add_pic_to_comment() {
 	if (this.files && this.files[0]) {
         var FR = new FileReader();     
@@ -348,7 +387,7 @@ function load_image() {
 				id_arr = image_ids.split(',');
 			}
 			id_arr.forEach(index => {
-				concat_image(index, BLANK_PIC, null);
+				concat_image(index, LOADING_PIC, null);
 			})
 			resolve(id_arr.reverse());
 		});
@@ -409,13 +448,14 @@ function load_user() {
 /******************************************************************/
 /* Raw function */
 
-function __show_and_upload_image(_temp_id, e) {
-	concat_image(_temp_id, PROFILE_PIC, e.target.result);
+async function __show_and_upload_image(_temp_id, e) {
+	let photo = await downscaleImage(e.target.result);
+	concat_image(_temp_id, PROFILE_PIC, photo);
 
 	$.post("./upload_image", {
 		user_id: 	USER_ID,
 		dog_id:		dog_page_id,
-		photo: 		e.target.result
+		photo: 		photo
 	}, (image_id) => { // change _temp_id to image_id returned by db
 		$(`#image_${_temp_id}`)[0].id = `image_${image_id}`;
 	});
