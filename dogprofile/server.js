@@ -46,7 +46,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15040;
+const port = 1503;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -245,13 +245,14 @@ app.get("/dog_position", async (req, resp) => {
     resp.send(JSON.stringify(await sql2JSON('position_original'))); 
 });
 app.post("/update_position", async (req, resp) => {
+    var now = new Date(); 
 		db.get("SELECT datetime('now','localtime')", (err, row) => {
     	sqlInsert('position_record',{
         "user_id":  req.body.user_id,
         "dog_id":   req.body.dog_id,
         "lat":      req.body.lat,
         "lng":      req.body.lng,
-        "timestamp":Object.values(row)[0]
+        "timestamp":now.getTime()
     	})
 			console.log('success');
 		});
@@ -272,6 +273,26 @@ app.post("/marked_position", async (req, resp) => {
         //console.log(jsonObj);
         resp.send(JSON.stringify(jsonObj));
     });
+});
+
+app.post("/gettime", async (req, resp) => {
+  let command = "SELECT timestamp FROM position_record WHERE dog_id = '";
+  command += req.body.dog_id;
+  command += "'";
+  var now = new Date();
+  var gap = 0;
+	//console.log(now.getTime());
+  db.each(command, (err, row) => {
+    gap = Math.round((now.getTime()-row["timestamp"])/1000);
+		//console.log(now.getTime()-row["timestamp"]);
+  }, (err) => {
+    //console.log(gap);
+    if(gap==0||gap>=2592000){//over one month
+      resp.send(`0`);
+    }else{
+      resp.send(`${gap}`);
+    } 
+  });
 });
 
 /* load profile page */

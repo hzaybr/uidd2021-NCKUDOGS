@@ -107,6 +107,11 @@ function addMarker(icon_path,location) {
   Markers.push(marker);
 }
 function dogMarker_click(target_marker){
+	/*$.post("./gettime", {
+    dog_id: target_num
+  }, (data) => {
+		console.log(data);
+  });*/
 	lat=target_marker.getPosition().lat();
   lng=target_marker.getPosition().lng();
   uluru = {lat: lat, lng: lng};
@@ -115,6 +120,32 @@ function dogMarker_click(target_marker){
   target_num = parseInt(target_marker.getTitle());
   displayCheck();
   clearMarkers(target_num);
+  $.post("./gettime", {
+    dog_id: target_num
+  }, (data) => {
+    var gap_time = parseInt(data);
+    if(gap_time==0){
+      //console.log("急需更新");
+      $('.time p').html("急需更新");
+      $('.time p').css("font-size", "16px");
+    }else if(gap_time<60){
+      //console.log(`${gap_time}秒`);
+      $('.time p').html(`${gap_time}秒前`);
+      $('.time p').css("font-size", "16px");
+    }else if(gap_time<3600){
+      gap_time = Math.round(gap_time/60);
+      $('.time p').html(`${gap_time}分鐘前`);
+      $('.time p').css("font-size", "16px"); 
+    }else if(gap_time<86400){
+      gap_time = Math.round(gap_time/3600);
+      $('.time p').html(`${gap_time}小時前`);
+      $('.time p').css("font-size", "16px");  
+    }else if(gap_time<2592000){
+      gap_time = Math.round(gap_time/86400);
+      $('.time p').html(`${gap_time}天前`);
+      $('.time p').css("font-size", "16px");  
+    }
+  });
   $('.dog_markerinfo').css('display','block');
 	markerinfoShow = true;
   $('#dog_name').html(dog_name[target_num]);
