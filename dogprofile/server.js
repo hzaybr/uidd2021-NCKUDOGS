@@ -46,7 +46,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 1503;
+const port = 15040;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -108,6 +108,13 @@ app.post("/load_users", async (req, resp) => {
         jsonObj[row.id]["score"] = row[dog_id];
     }, (err) => { // This gets called after each of our rows have been processed
         resp.send(JSON.stringify(jsonObj));
+    });
+});
+
+app.post("/get_unique_user", async (req, resp) => {
+    let command = "SELECT name,profile FROM users WHERE id = \"" + req.body.id + "\"";
+    db.get(command, (err, row) => {
+      resp.send(JSON.stringify(row));
     });
 });
 
