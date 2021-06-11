@@ -127,19 +127,20 @@ function findmarked(dogID){
   console.log(dogID);
   if(findmarkedDisplay){
     $('.dog_markedmode').css('display','none');
-    $('.dog_markerinfo').css('display','block');
+    //$('.dog_markerinfo').css('display','block');
     ownermarker.setMap(map);
 		for (var i = 0; i< marked_markers.length; i++) {
       marked_markers[i].setMap(null);
     }
     marked_markers = [];
-		console.log(dogID);
+		showMarkers(-1);
+		/*console.log(dogID);
 		lat=Markers[dogID].getPosition().lat();
   	lng=Markers[dogID].getPosition().lng();
   	uluru = {lat: lat, lng: lng};
   	map.setCenter(uluru);
   	map.setZoom(19);
-		markerinfoShow = true;
+    markerinfoShow = true;*/
   }else{
     //displayCheck();
     $('.dog_markedmode').css('display','block');
@@ -150,10 +151,18 @@ function findmarked(dogID){
 		$.post("./marked_position", {
       dog_id: dogID
     }, (json) => {
-      marked_data = JSON.parse(json);
+      /*marked_data = JSON.parse(json);
       console.log(marked_data);
       for(i=1;i<=Object.keys(marked_data).length;i++){
         add_markedMarker({lat: parseFloat(marked_data[i].lat), lng: parseFloat(marked_data[i].lng)})
+      }*/
+			marked_data = JSON.parse(json);
+      if(Object.keys(marked_data).length>0){
+        for(i=1;i<=Object.keys(marked_data).length;i++){
+          add_markedMarker({lat: parseFloat(marked_data[i].lat), lng: parseFloat(marked_data[i].lng)})
+        }
+        map.setCenter({lat: parseFloat(marked_data[1].lat)+0.001, lng: parseFloat(marked_data[1].lng)});
+        map.setZoom(17);
       }
     });
 		
@@ -168,7 +177,7 @@ function add_markedMarker(location) {
     map: map,
     icon:{
       url:'./map/mark_icon_big/dog_marker_marked.png',
-      scaledSize: new google.maps.Size(62, 77)
+      scaledSize: new google.maps.Size(40, 50)
     },
     zIndex:9
     });
@@ -208,6 +217,14 @@ $('.dog_markerinfo').click(function(){
 
 $('.btn_X').click(function(){
   findmarked($(this).attr('id'));
+  $('.dog_markerinfo').css('display','block');
+  markerinfoShow = true;
+	lat=Markers[$(this).attr('id')].getPosition().lat();
+  lng=Markers[$(this).attr('id')].getPosition().lng();
+  uluru = {lat: lat, lng: lng};
+  map.setCenter(uluru);
+  map.setZoom(19);
+	clearMarkers(-1);
 })
 
 $('#mark-icon').click(function(){

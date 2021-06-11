@@ -262,7 +262,7 @@ app.post("/marked_position", async (req, resp) => {
         jsonObj[number]["lng"] = row["lng"];
         number++;
       }, (err) => {
-        console.log(jsonObj);
+        //console.log(jsonObj);
         resp.send(JSON.stringify(jsonObj));
     });
 });
