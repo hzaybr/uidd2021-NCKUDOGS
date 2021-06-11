@@ -26,7 +26,7 @@ function onSignIn(googleUser) {
 					  
             reload_user();
             if(window.location.href.split('/').filter(e => e).slice(-1) == "dog.html"){
-              if(document.getElementsByClassName("user-comment")){
+              if(load_complete){
                 reload_comment();
               }
             }

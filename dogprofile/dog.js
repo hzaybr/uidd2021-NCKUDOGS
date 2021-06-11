@@ -214,7 +214,7 @@ document.getElementById("fl_file2").addEventListener("change", post_image);
 document.getElementById("post-pic-in-comment").addEventListener("change", add_pic_to_comment);
 
 $(function(){
-  /*
+ /*
 	$.post('./update_users', {
 		id: 		USER_ID,
 		name:		USER_NAME,
@@ -359,17 +359,18 @@ function add_pic_to_comment() {
 
 function concat_comment(comment_id, user_id, comment, photo) {
 	__generate_comment_section_html(comment_id, user_id, comment, photo);
-
 	if (user_id == USER_ID) { // User can edit this comment
-		__generate_comment_buttons(comment_id, user_id, comment, photo);
+    __generate_comment_buttons(comment_id, user_id, comment, photo);
 	}
 }
 
+let load_complete=false;
 function load_comment() {
 	$.post('./load_comments', {dog_id: dog_page_id}, (cmt_json) => {
 		$.each(JSON.parse(cmt_json), function(index, val) {
 			concat_comment(index, val.user_id, val.comment, val.photo);
-		});
+    });
+    load_complete = true;
 	});
 }
 
@@ -485,6 +486,7 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	let btn_edit_id = "btn_edit_id" + comment_id;
 	let option_id = "cmt_option_" + comment_id;
 	let user = user_data[user_id];
+
 	$(`<div class=\"user-comment\" id=${cmt_id}>`).prependTo('.comments');
 	let txt = "";
 
