@@ -9,6 +9,8 @@ var profileDisplay = false;
 var markmode = false;
 var markerinfoShow = false;
 var findmarkedDisplay = false;
+var marked_data;
+var marked_markers = [];
 
 function displayCheck(){
   if(listDisplay){
@@ -32,7 +34,7 @@ function displayCheck(){
     markmode = !markmode;
   }
   if(findmarkedDisplay){
-    findmarked();
+    findmarked($('.btn_X').attr('id'));
   }
 }
 
@@ -125,19 +127,53 @@ function findmarked(dogID){
   console.log(dogID);
   if(findmarkedDisplay){
     $('.dog_markedmode').css('display','none');
-    showMarkers(-1);
+    $('.dog_markerinfo').css('display','block');
     ownermarker.setMap(map);
+		for (var i = 0; i< marked_markers.length; i++) {
+      marked_markers[i].setMap(null);
+    }
+    marked_markers = [];
+		console.log(dogID);
+		lat=Markers[dogID].getPosition().lat();
+  	lng=Markers[dogID].getPosition().lng();
+  	uluru = {lat: lat, lng: lng};
+  	map.setCenter(uluru);
+  	map.setZoom(19);
+		markerinfoShow = true;
   }else{
-    displayCheck();
+    //displayCheck();
     $('.dog_markedmode').css('display','block');
     $('.markeddog_photo').attr("src",`./map/mark_icon_big/dog_marker_big_${dogID+1}.png`);
-    console.log(`findmark`)
+    $('.btn_X').attr('id',dogID);
     clearMarkers(-1);
     ownermarker.setMap(null);
+		$.post("./marked_position", {
+      dog_id: dogID
+    }, (json) => {
+      marked_data = JSON.parse(json);
+      console.log(marked_data);
+      for(i=1;i<=Object.keys(marked_data).length;i++){
+        add_markedMarker({lat: parseFloat(marked_data[i].lat), lng: parseFloat(marked_data[i].lng)})
+      }
+    });
+		
   }
   findmarkedDisplay = !findmarkedDisplay;
 }
-
+function add_markedMarker(location) {
+  var marker = new google.maps.Marker({
+    draggable: false,
+    animation: google.maps.Animation.DROP,
+    position: location,
+    map: map,
+    icon:{
+      url:'./map/mark_icon_big/dog_marker_marked.png',
+      scaledSize: new google.maps.Size(62, 77)
+    },
+    zIndex:9
+    });
+  marked_markers.push(marker);
+}
 $('#list-icon').click(function(){
   listClick();
 })
@@ -171,7 +207,7 @@ $('.dog_markerinfo').click(function(){
 })
 
 $('.btn_X').click(function(){
-  findmarked();
+  findmarked($(this).attr('id'));
 })
 
 $('#mark-icon').click(function(){
