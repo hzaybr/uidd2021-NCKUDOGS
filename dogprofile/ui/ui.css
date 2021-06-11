@@ -549,11 +549,11 @@ img.avatar-choose {
   position: relative;
   height: 100vh;
   width: 100vw;
-  /* background: cornflowerblue; */
+  pointer-events:none;
   z-index: 5;
 }
 .dog_markedmode .btn_X{
-  /* display: block; */
+  pointer-events:auto;
   position: absolute;
   width: 15vw;
   left: 42.5vw;
