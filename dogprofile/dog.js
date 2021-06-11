@@ -214,13 +214,13 @@ document.getElementById("fl_file2").addEventListener("change", post_image);
 document.getElementById("post-pic-in-comment").addEventListener("change", add_pic_to_comment);
 
 $(function(){
-  
+  /*
 	$.post('./update_users', {
 		id: 		USER_ID,
 		name:		USER_NAME,
 		profile:	PROFILE_PIC
 	}, () => {});
-
+  */
 	/* Initialize image and comment section */
 	const promise = new Promise((resolve, reject) => {
 		$.post('./load_users', {dog_id: dog_page_id}, (user_json) => {
@@ -485,7 +485,6 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	let btn_edit_id = "btn_edit_id" + comment_id;
 	let option_id = "cmt_option_" + comment_id;
 	let user = user_data[user_id];
-
 	$(`<div class=\"user-comment\" id=${cmt_id}>`).prependTo('.comments');
 	let txt = "";
 

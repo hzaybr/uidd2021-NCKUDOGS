@@ -26,8 +26,9 @@ function onSignIn(googleUser) {
 					  
             reload_user();
             if(window.location.href.split('/').filter(e => e).slice(-1) == "dog.html"){
-              load_user();
-              reload_comment();
+              if(document.getElementsByClassName("user-comment")){
+                reload_comment();
+              }
             }
             else if(window.location.href.split('/').filter(e => e).slice(-1) == "index.html"){
               load_profile_num();
@@ -49,37 +50,50 @@ function onSignIn(googleUser) {
       }
 
 function reload_user(){
-	const promise = new Promise((resolve, reject) => {
-			$.post('./load_users', {dog_id: 1}, (user_json) => {
+  $.post('./update_users', {
+		id:	USER_ID,
+		name:	USER_NAME,
+		profile:	PROFILE_PIC
+  }, () => {});  
+ 
+  const promise = new Promise((resolve, reject) => {
+   		$.post('./get_unique_user', {
+				  id:	USER_ID
+        }, (user_info) => {resolve(JSON.parse(user_info))});  
+    /*
+    $.post('./load_users', {dog_id: dog_page_id}, (user_json) => {
 				user_data = JSON.parse(user_json);
 				resolve(user_data);
-			});
+      });
+      */
 	});
-  promise.then((value) => {
-    if(value[USER_ID]){
-      USER_NAME = value[USER_ID]["name"];
-      PROFILE_PIC = value[USER_ID]["profile"];
-    }
+  promise.then((user_info) => {
+    USER_NAME = user_info.name;
+    PROFILE_PIC = user_info.profile;
+    /*
     else{
       console.log('first_login')
-   		$.post('./update_users_profile', {
+   		$.post('./update_users', {
 				id:	USER_ID,
 				name:	USER_NAME,
 				profile:	PROFILE_PIC
-			}, () => {});  
+			}, (value) => {});  
     }
+    */
     console.log(`Database id: ${USER_ID}`);
     console.log(`Database name: ${USER_NAME}`);
 	  console.log(`Database PIC: ${PROFILE_PIC}`);
     	
-    $('.username').attr('id',USER_NAME);
-    $('.username').html(USER_NAME).show();
-
+    $('.pg .username').attr('id',USER_NAME);
+    $('.pg .username').html(USER_NAME).show();
+    $('.pg .profile-avatar, .heart-grid .profile-avatar,.writing-container .profile-avatar').attr('src',PROFILE_PIC); 
+    /*
     let avatars = document.getElementsByClassName('profile-avatar');
     for (let i = 0; i < avatars.length; ++i) {
       avatars[i].src = PROFILE_PIC;
     }
- 	  	
+    */ 
+
     try{
 		  initMap();
     }catch{}
