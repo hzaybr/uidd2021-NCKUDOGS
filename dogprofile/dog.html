@@ -149,17 +149,20 @@
 
         <div class="pic-grid">
           <!-- 
-          Load Images from json.
+          Load Images from db.
           Below is an example of what an image section should look like:
           (Image start)
           -->
 
-          <!-- <span class="image-image">
+          <span class="image-image">
             <div class="user-pic-for-image">
-              <img class="profile-avatar" src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2056833377791449&height=50&width=50&ext=1623114253&hash=AeR3otGFIVu1FxMODfc" width=100%>
+              <img class="profile-avatar" src="./image/avatar_human1.png" width=100%>
             </div>
-            <img src="./image/mi.jpg" id="image_000" width=100%>
-          </span> -->
+            <div class="photo-like">
+              <img class="photo-like-heart-button" src="./image/avatar_dog1.png" width=10%>
+            </div>
+            <img class="image-grid-image" src="./image/7.jpg" id="image_000" width=100% height=100%>
+          </span>
           
           <!-- (Image end) -->
         </div>
@@ -252,7 +255,7 @@
         <p id="comment_start" style="font-size: 4.2vw; padding: 2vw; padding-left: 5vw; margin:0;"><b>評論</b></p>
         <ul class="clearfix comments" id="comment_box">       
           <!-- 
-          Load comments from json.
+          Load comments from db.
           Below is an example of what a comment should look like:
           (Comment start)
           -->

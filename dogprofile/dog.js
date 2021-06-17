@@ -341,7 +341,7 @@ function downscaleImage(dataUrl) {
 			let ctx = canvas.getContext("2d");
 			ctx.drawImage(image, 0, 0, width, height);
 
-			res(canvas.toDataURL("image/jpeg", 0.7));
+			res(canvas.toDataURL("image/jpeg", 1)); // image quality = 100%
 		}
 
 	});
@@ -383,16 +383,33 @@ function reload_comment() {
 }
 
 async function concat_image(image_id, user_pic, photo) {
-	let id = "image_" + image_id;
+	const id = "image_" + image_id;
+	const img_btn_id = "liked_btn_" + image_id;
 	$(`<span class=\"image-image\" id=${id}>`).prependTo(".pic-grid");
 
 	let txt = "";
+	/* user profile pic */
 	txt += 	`<div class="user-pic-for-image">`;
 	txt += 		`<img class="profile-avatar" src=${user_pic} width=100%>`;
 	txt += 	"</div>";
+
+	/* like button */
+	txt +=	`<div class="photo-like">`;
+	txt +=		`<img id=${img_btn_id} class="photo-like-heart-button" src="./image/avatar_dog1.png" width=10%>`;
+	txt +=	`</div>`;
+
+	/* photo */
 	txt += 	`<img class="image-grid-image" src=${photo} width=100% height=100%>`;
 
 	$(`#${id}`).html(txt);
+
+	/* add like button function */
+	$(`#${img_btn_id}`).click(function () {
+		$.post('./like_image', {
+			user_id:	USER_ID,
+			image_id:	image_id
+		});
+	})
 }
 
 function load_image() {
@@ -479,13 +496,13 @@ async function __show_and_upload_image(_temp_id, e) {
 }
 
 function __generate_comment_section_html(comment_id, user_id, comment, photo) {
-	let cmt_id = "comment_" + comment_id;
-	let cmtpic_id = "cmtpic_" + comment_id;
-	let content_id = "content_" + comment_id;
-	let btn_dlt_id = "btn_dlt_" + comment_id;
-	let btn_edit_id = "btn_edit_id" + comment_id;
-	let option_id = "cmt_option_" + comment_id;
-	let user = user_data[user_id];
+	const cmt_id = "comment_" + comment_id;
+	const cmtpic_id = "cmtpic_" + comment_id;
+	const content_id = "content_" + comment_id;
+	const btn_dlt_id = "btn_dlt_" + comment_id;
+	const btn_edit_id = "btn_edit_id" + comment_id;
+	const option_id = "cmt_option_" + comment_id;
+	const user = user_data[user_id];
 
 	$(`<div class=\"user-comment\" id=${cmt_id}>`).prependTo('.comments');
 	let txt = "";
@@ -547,14 +564,14 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 	});
 
 	/* Add edit button function */
-	$(`#${btn_edit_id}`).click(function () {			
+	$(`#${btn_edit_id}`).click(function () {
 		editing_comment_id = comment_id;
 		is_editing = true;
 		SCORE = user.score;
 
 		$('.comment-container').hide();
 		$('.writing-container').show();
-		for (i = 1; i <= 5; i++){
+		for (i = 1; i <= 5; i++) {
 			hid = `.w-heart:nth-child(${i})`;
 			(i <= SCORE)
 			? $(hid).attr('src','./image/red_heart.png')
@@ -565,7 +582,3 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 		$('.preview-pic')[0].src = photo;
 	});
 }
-
-
-
-

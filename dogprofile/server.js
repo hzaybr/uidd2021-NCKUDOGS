@@ -19,15 +19,15 @@ const request = require('request');
 //     db.run('DROP TABLE images');
 
 //     /* Create table */
-//     let cmd = "CREATE TABLE users(id TEXT PRIMARY KEY, name TEXT, profile CLOB";
+//     let cmd = "CREATE TABLE users(id TEXT PRIMARY KEY NOT NULL, name TEXT, profile CLOB, liked TEXT";
 //     for (var i = 0; i < 19; ++i) {
 //        cmd += ", dog_" + i.toString() + " TINYINT DEFAULT 0";
 //     }
 //     cmd += ")";
 //     console.log(cmd);
 //     db.run(cmd);
-//     db.run("CREATE TABLE comments(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, comment TEXT, photo CLOB, timestamp DATETIME)");
-//     db.run("CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)");
+//     db.run("CREATE TABLE comments(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id TEXT, dog_id INTEGER, comment TEXT, photo CLOB, timestamp DATETIME)");
+//     db.run("CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)");
 // })
 
 // db.run("DELETE FROM images");
@@ -46,7 +46,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 1503;
+const port = 15037;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -234,6 +234,25 @@ app.post("/upload_image", async (req, resp) => {
         db.get("SELECT MAX(id) FROM images", (err, row) => {
             resp.send(row["MAX(id)"].toString());
         });
+    });
+});
+
+app.post("/like_image", async (req, resp) => { 
+    let command = `SELECT liked FROM users WHERE id = "${req.body.user_id}"`;
+    let img = parseInt(req.body.image_id);
+    
+    db.get(command, (err, row) => {
+        var arr = [];
+        if (row.liked) {
+            arr = row.liked.split(',').map(function(num) {
+                return parseInt(num);
+            });
+        }
+
+        var liked = new Set(arr);
+        liked.has(img)? liked.delete(img) : liked.add(img);
+        var arr_str = Array.from(liked).toLocaleString();
+        db.run(`UPDATE users SET liked = "${arr_str}" WHERE id = "${req.body.user_id}"`);
     });
 });
 /**********************************************************/

@@ -247,6 +247,19 @@ p {
   object-fit: cover;
   object-position: 50% 50%;
 }
+.photo-like {
+  position: absolute;
+  margin-left: 40vw;
+  margin-top: 39vw;
+}
+.photo-like-heart-button {
+  border-radius: 50%;
+  width: 9.06vw;
+  height: 9.06vw;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
 .pop-com {
   width: 100%;
   height: auto;
