@@ -81,7 +81,16 @@ p {
   height: auto;
   padding: 3vw;
 }
-.c-border {
+.l-grid {
+	display: grid;
+  grid-gap: 3%;
+	grid-template-columns: 20% 16% auto auto;
+	align-items: center;
+  height: auto;
+  padding: 3vw;
+  font-size: 4.5vw;
+}
+.c-border, .l-border {
   padding: 1vw;
   border-bottom-color: #bdbdbdc2;
   border-bottom-style: solid;
@@ -104,7 +113,7 @@ p {
   font-size: 4.5vw;
   font-weight: bold;
 }
-.dtime {
+.dtime, .l-time {
   text-align: right;
   margin: 1vw;
   font-size: 4vw;
@@ -155,10 +164,11 @@ p {
 .click_photo { width:100%;}
 #heart-count { font-size:4vw;}
 #click-heart { width: 100%; display: none;}
-#time {
+#time{
 	padding-top: 3vw;
 	padding-left: 5vw;
   font-size: 4vw;
   color: #00000099;
   display: none;
 }
+.l-name {font-weight: bold;}

@@ -44,7 +44,8 @@ $('.pic-grid').on('click', '.grid-photo', function(){
   promise.then((time) =>{
     $.post('/load_time', {
       }, (time_now) => {
-          time_txt = caculate_time(time, time_now)
+          new_time = preprocess_time(time)
+          time_txt = caculate_time(new_time, time_now)
           $(`#time`).html(time_txt)
     })
   })
@@ -100,7 +101,8 @@ function load_profile_detail() {
       $.post('/load_time', {
         }, (time_now) => {
           for(var i=len;  i>=0; i--) {
-            time_txt = caculate_time(times[i], time_now)
+            time = preprocess_time(times[i])
+            time_txt = caculate_time(time, time_now)
             $(`#time${len-i}`).html(time_txt)
           }
         })
@@ -114,10 +116,18 @@ function load_profile_detail() {
     load_img(data)
   })
 
-  $.post('/load_profile_position', {
-    userID: USER_ID
-  }, (data) =>{
-    console.log(data)
+  const promise_g = new Promise((resolve, reject) => {
+    $.post('/load_profile_position', {
+      userID: USER_ID
+    }, (data) =>{
+      resolve(data)
+    })
+  })
+  promise_g.then((data) => {
+    $.post("/load_time", {
+      }, (time_now) => {
+        load_location(data, time_now)
+    })
   })
 
 }
@@ -160,13 +170,37 @@ function load_img(photos) {
     $('.pic-grid').html(p_txt);
 };
 
-function caculate_time(time, time_now) {
+function load_location(data, time_now) {
+  len = Object.keys(data).length-1
+  txt = ""
+  for(var i=len; i>=0; i--){
+    lct = data[i]
+    txt += `<div class="l-border">`
+    txt += `  <div class="l-grid">`
+    txt += `    <img width=90% src="./image/dog/${lct.dog_id}.png">`
+    txt += `    <div class="l-name">${dog_name[lct.dog_id]}</div>`
+    txt += `    <div class="location">校區</div>`
+    ltime = lct.timestamp
+    time_display = caculate_time(ltime, time_now)
+    txt += `    <div class="l-time">${time_display}</div>`
+    txt += `  </div>`
+    txt += `</div>`
+    }
+  $('.locate-grid').html(txt)
+}
+
+function preprocess_time(time) {
   time = time.replace(/-/g, '/')
+  t1= Date.parse(time)
+  return t1
+}
+function caculate_time(time, time_now) {
   time_now = time_now.replace(/-/g, '/')
 
   t = new Date(time)
-  t1= Date.parse(time)
+  t1 = time
   t2 = Date.parse(time_now)
+
   
   second_dif = parseInt((t2-t1)/1000);
   if(second_dif >=60){
