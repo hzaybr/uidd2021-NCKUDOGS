@@ -351,6 +351,15 @@ $('#post-btn, #writing-post-btn').click(function() {
 		});
 	}
 
+	const promise = new Promise((resolve, reject) => {
+		$.post('./load_users', {dog_id: dog_page_id}, (user_json) => {
+			user_data = JSON.parse(user_json);
+			resolve(user_data);
+		});
+	});
+	promise.then((value) => {
+		load_user();
+	});
 	hide_commentBox();
 });
 
