@@ -133,15 +133,15 @@ function dogMarker_click(target_marker){
       $('.time p').html(`${gap_time}秒前`);
       $('.time p').css("font-size", "16px");
     }else if(gap_time<3600){
-      gap_time = Math.round(gap_time/60);
+      gap_time = Math.floor(gap_time/60);
       $('.time p').html(`${gap_time}分鐘前`);
       $('.time p').css("font-size", "16px"); 
     }else if(gap_time<86400){
-      gap_time = Math.round(gap_time/3600);
+      gap_time = Math.floor(gap_time/3600);
       $('.time p').html(`${gap_time}小時前`);
       $('.time p').css("font-size", "16px");  
     }else if(gap_time<2592000){
-      gap_time = Math.round(gap_time/86400);
+      gap_time = Math.floor(gap_time/86400);
       $('.time p').html(`${gap_time}天前`);
       $('.time p').css("font-size", "16px");  
     }
