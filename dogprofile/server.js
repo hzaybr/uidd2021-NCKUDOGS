@@ -262,12 +262,14 @@ app.post("/marked_position", async (req, resp) => {
     let command = "SELECT lat,lng FROM position_record WHERE dog_id = '";
     command += req.body.dog_id;
     command += "'";
-    var number = 1;
+    var number = 0;
+    var count = 1;
     let jsonObj = {};
     db.each(command, (err, row) => {
-        jsonObj[number] = {};
-        jsonObj[number]["lat"] = row["lat"];
-        jsonObj[number]["lng"] = row["lng"];
+        count = (number%10)+1;
+        jsonObj[count] = {};
+        jsonObj[count]["lat"] = row["lat"];
+        jsonObj[count]["lng"] = row["lng"];
         number++;
       }, (err) => {
         //console.log(jsonObj);
