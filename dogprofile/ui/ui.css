@@ -83,10 +83,9 @@ body {
 }
 
 .profile {
+  position: relative;
   display: none;
-  position: absolute;
   width: 92.53vw;
-  height: 126.66vw;
   left: 105vw;
   top: 21.6vw;
   background: #FFFFFF;
@@ -94,16 +93,21 @@ body {
   z-index: 9;
 }
 
-.pg {
-  position: absolute;
+.pg, .pg2 {
   width: 100%;
+  padding-top: 10vw;
+  padding-bottom: 10vw;
+}
+.pg2 {
   height: 100%;
+  padding-top: 8vw;
+  display: none;
 }
 
 #edit-btn {
   position: absolute;
   width: 7.49%;
-  top: 25.73%;
+  top: 34%;
   left: 59.07%;
 }
 
@@ -112,7 +116,6 @@ body {
 	display: block;
   width: 34.3%;
   aspect-ratio: 1 / 1;
-	margin-top: 7.78%;
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
@@ -129,7 +132,7 @@ body {
 	margin-top:1%;
 }
 .username {
-  margin: 1%;
+  margin: 3%;
   font-size: 4.8vw;
   text-align: center;
 }
@@ -138,7 +141,7 @@ body {
   font-family: Noto Sans Telugu;
   font-style: normal;
   font-weight: 800;
-  font-size: 1.86vw;
+  font-size: 3vw;
   line-height: 4vw;
   text-align: center;
   color: #FFFFFF;
@@ -185,15 +188,11 @@ body {
 }
 
 #user-contribution-grid {
-  position: absolute;
-  width: 57.6vw;
-  height: 14.4vw;
-  top: 88vw;
-  left: 17.33vw;
+  padding-top: 8vw;
   display: grid;
   grid-template-columns: repeat(3,auto);
   grid-template-rows: 5.06vw 9.33vw;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-content: space-evenly;
 }
 
@@ -225,14 +224,13 @@ body {
   color: #000000;
 }
 #signout-btn {
-    padding: 0;
-    margin: 0;
-    position: absolute;
     display: block;
     height: 8.8vw;
     width: 71.18%;
-    bottom: 5.86vw;
-    margin-left: 14.41%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-top: 8vw;
     line-height: 8.8vw;
     font-size: 3.73vw;
     font-family: Segoe UI;
@@ -246,27 +244,25 @@ body {
 #user-name-title {
 	display: inline-block;
 	width: 100%;
-	height: 16px;
-	padding-left: 5.06vw;
+	padding-left: 10%;
 	font-family: Segoe UI;
-  font-size: 12px;
+  font-size: 3.5vw;
 	color: #00000099;
   text-align: left;
-	margin-top: 0;
 	margin-bottom: 0.5vh;
 }
 
 .profile-upload-grid {
   display: grid;
-  grid-template-columns: 40% 40%;
-  width: 100%;
-	justify-content: space-evenly;
+  grid-template-columns: 38% 38%;
+	justify-content: center;
+  grid-gap: 7%;
 }
 
 .profile-upload-grid .upload-btn {
   font-weight: Regular;
   width: 100%;
-  height: 100%;
+  height: 8vw;
   border-radius: 5.3vw;
   box-shadow: 0vw 0.4vw 1.6vw #00000033;
 }
@@ -281,30 +277,27 @@ body {
 }
 
 .upload-pic label {
-	font-size: 80%;
+	font-size: 3.3vw; 
 }
 
 p.avatar-title {
 	display: inline-block;
   width: 100%;
   height: 3.58%;
-  padding-left: 5.06vw;
+  padding-left: 10%;
   font-family: Segoe UI;
   font-weight: Bold;
-  font-size: 100%;
+  font-size: 4.5vw;
   text-align: left;
 	margin-top: 3.23%;
-	margin-bottom: 1.07%;
+	margin-bottom: 3.07%;
 }
 #avatar-human-grid {
   width: 100%;
-  height: 26.68%;
-  left: 0%;
   display: grid;
-  grid-template-columns: repeat(3,25.06vw);
-  grid-template-rows: 40% 40%;
-  justify-content: space-evenly;
-  align-content: space-between;
+  grid-template-columns: repeat(3, 22vw);
+  grid-gap: 4%;
+  justify-content: center;
 }
 
 #avatar-dog-grid {
@@ -318,8 +311,7 @@ p.avatar-title {
 }
 
 img.avatar-choose {
-    max-height: 100%;
-    height: 100%;
+    width: 100%;
     border-radius: 50%;
     display: block;
     margin-left: auto;
@@ -329,7 +321,7 @@ img.avatar-choose {
 #edit-name {
     display: block;
     width: 80%;
-    height: 2..65%;
+    height: 4.65%;
     margin-top: 1%;
     margin-left: auto;
     margin-right: auto;
@@ -337,19 +329,13 @@ img.avatar-choose {
     border-bottom: 1px solid black;
 }
 
-#save-btn {
+#save-btn, #cancel-btn {
   position: absolute;
   height: 5.31%;
-  top: 5.17%;
+  top: 3.17%;
   right: 2.66vw;
 }
 
-#cancel-btn {
-  position: absolute;
-  height: 5.31%;
-  top: 5.17%;
-  left: 2.66vw;
-}
 
 #signout-blur {
   position: absolute;

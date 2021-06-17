@@ -277,7 +277,7 @@ $('#signout-confirm-btn').click(function(){
 
 $('#edit-btn').click(function(){
   $('#view-pg').css('display','none')
-  $('.profile').css({'height':'85vh','top':'3.44vh'})
+  $('.profile').css({'height':'auto','top':'2.44vh'})
   $('#edit-pg').css('display','block')
 	document.getElementById('edit-name').value = $('.username').attr('id')
 })
@@ -287,7 +287,7 @@ document.getElementById("edit-name").addEventListener("focusin", function (){
 })
 
 document.getElementById("edit-name").addEventListener("focusout", function (){
-  $('.profile').css('height','85vh')  
+  $('.profile').css('height','auto')  
 })
 
 function uploadAvatar(evt) {
@@ -312,7 +312,7 @@ function uploadAvatar(evt) {
 }
 
 $('#save-btn,#cancel-btn').click(function(){
-  $('.profile').css({height:'126.66vw',top:'21.6vw'})
+  $('.profile').css({height:'auto',top:'21.6vw'})
   $('#view-pg').css('display','block')
   $('#edit-pg').css('display','none')
 })

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook Login Demo</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="./fb_login.css" rel="stylesheet" type="text/css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+
+    <script src="id.js"></script>
+    <script>
+      // This is called with the results from from FB.getLoginStatus().
+      function statusChangeCallback(response) {
+        console.log('statusChangeCallback')
+        console.log(response)
+
+        // Step 4
+      if (response.status === 'connected') {
+        // Logged into your app and Facebook.
+        testAPI()
+        var unconnected = document.getElementsByClassName('unconnected')
+				for (i = 0; i < unconnected.length; i++) {
+    			unconnected[i].style.display = 'none'
+				}
+        var connected = document.getElementsByClassName('connected');
+				for (i = 0; i < connected.length; i++) {
+    			connected[i].style.display = 'block'
+        }
+			} else if (response.status === 'not_authorized') {
+        // The person is logged into Facebook, but not your app.
+        document.getElementById('status').innerHTML = ''
+      } else {
+        // The person is not logged into Facebook, so we're not sure if
+        // they are logged into this app or not.
+        document.getElementById('status').innerHTML = ''
+      }
+
+      }
+
+      // Step 3
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response)
+        })
+      }
+
+
+      //Step 2
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId  : myAppId,
+          cookie : true,    // enable cookies to allow the server to access the session
+          version: 'v10.0', // use graph api version v10.0
+          xfbml  : true,    // parse social plugins on this page
+        })
+        FB.AppEvents.logPageView()
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response)
+        })
+      }
+
+      // Load the SDK dynamically
+      ;(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0]
+        if (d.getElementById(id)) return
+        js = d.createElement(s)
+        js.id = id
+        js.src = '//connect.facebook.net/en_US/sdk.js'
+        fjs.parentNode.insertBefore(js, fjs)
+      }(document, 'script', 'facebook-jssdk'))
+
+
+
+      // Here we run a very simple test of the Graph API after login is
+      // successful.  See statusChangeCallback() for when this call is made.
+      function testAPI() {
+        console.log('Welcome!  Fetching your information.... ')
+        FB.api('/me', "GET", { fields: 'name, picture.height(1600).width(1600)' }, function(response) {
+          console.log(`Successful login for: ${response.name}`)
+
+          let fitName = document.getElementById("status");
+          fitName.innerHTML = `${response.name}`;
+          
+        //dynamically change font size
+          function isOverflow(element) {
+            return element.scrollHeight > element.clientHeight ||  element.scrollWidth > element.clientWidth;    
+          }
+       		let styleFontSize = window.getComputedStyle(fitName,null).getPropertyValue('font-size');
+          let fontSize = parseFloat(styleFontSize);
+          while (isOverflow(fitName)) {
+            fontSize--;
+            if (fontSize == 1){
+              break;
+            }
+            fitName.style.fontSize = fontSize + "px";
+          }
+
+          console.log(`font-size:${fitName.style.fontSize}`);
+          //
+          localStorage.setItem("user", JSON.stringify({id: `${response.id}`, name: `${response.name}`, image_url: `${response.picture.data.url}`}));
+ 
+          setTimeout(function() {
+            window.location.assign("index.html");
+          },2000);
+
+        })
+      }
+    </script>
+
+    <div>
+      <!-- Step 1 -->
+      <img class="unconnected" src="./image/dog_div_login_first.png">
+      <img class="unconnected" src="./image/dog_button_login_fb.png" id="fb-login-button">
+      <img class="connected" src="./image/dog_div_already_logged_in.png" style="display:none">
+      <div class="connected" id="status" style="display:none"></div>
+      <img class="app-icon" src="./image/dog_icon_wong_wong.png">
+    </div>
+
+		<script>
+			document.getElementById('fb-login-button').onclick = function() {
+    		//do the login
+    		FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});
+			}
+    </script>
+  </body>
+</html>
+<!--
+vi:et:ts=2
+-->

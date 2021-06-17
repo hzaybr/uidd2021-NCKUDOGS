@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#fb-login-button {
+  color: transparent;
+	position: absolute;
+	width: 29.6vw;
+	height: 6.4vw;
+	left: 35.2vw;
+	top: 97.6vw; 
+}
+
+img.unconnected {
+	position: absolute;
+	width: 37.33vw;
+	height: 24.26vw;
+	left: 31.33vw;
+	top: 84vw; 
+}
+
+img.connected {
+	position: absolute;
+	width: 28vw;
+	height: 20.53vw;
+	left: 36vw;
+	top: 87.73vw; 
+}
+
+#status {
+  position: absolute;
+	width: 19.2vw;
+	height: 10.26vw;
+	left: 40.4vw;
+	top: 89.13vw;
+	
+	font-family: Noto Sans Tamil UI;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 6.4vw;
+	line-height: 10.26vw;
+	text-align: center;
+
+	color: #FFFFFF;
+}
+
+.app-icon {
+  position: absolute;
+  width: 34.93vw;
+  height: 4.8vw;
+  left: 32.53vw;
+  bottom: 6.4vw;
+}
