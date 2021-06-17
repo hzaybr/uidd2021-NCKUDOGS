@@ -359,7 +359,11 @@ app.post("/load_profile_position", async (req, res) => {
 })
 
 app.post("/load_score", async (req, res) => {
-  let command = `SELECT * FROM users WHERE id = '${req.body.userID}'`
+  txt = "dog_0"
+  for (i=1; i<19; i++){
+    txt += `,dog_${i}`
+  }
+  let command = `SELECT ${txt} FROM users WHERE id = '${req.body.userID}'`
   db.get(command, (err, row) =>{
     res.send(row)
   })
