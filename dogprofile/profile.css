@@ -144,6 +144,21 @@ p {
   font-weight: bold;
   font-size: 4.8vw;
 }
-.click_photo {
-  width:100%;
+.click-heart-grid {
+	grid-template-columns: 6% auto;
+	padding-top: 3vw;
+	padding-left: 5vw;
+	display: grid;
+  align-items: center;
+  grid-gap: 2%;
+}
+.click_photo { width:100%;}
+#heart-count { font-size:4vw;}
+#click-heart { width: 100%; display: none;}
+#time {
+	padding-top: 3vw;
+	padding-left: 5vw;
+  font-size: 4vw;
+  color: #00000099;
+  display: none;
 }
