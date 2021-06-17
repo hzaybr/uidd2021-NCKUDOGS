@@ -340,7 +340,7 @@ app.post("/load_profile_img", async (req, res) => {
 });
 
 app.post("/get_image", async (req, res) => {
-  let command = `SELECT  * FROM images WHERE user_id='${req.body.userID}' AND id='${req.body.image_id}'`
+  let command = `SELECT * FROM images INNER JOIN  users ON images.user_id = users.id AND images.id='${req.body.image_id}'`
   var data ={} 
   db.get(command, (err, row) =>{
     res.send(row)
@@ -359,11 +359,7 @@ app.post("/load_profile_position", async (req, res) => {
 })
 
 app.post("/load_score", async (req, res) => {
-  var txt = "dog_0"
-  for (var i=1; i<19; i++) {
-    txt+= `,dog_${i}`
-  }
-  let command = `SELECT ${txt} FROM users WHERE id = '${req.body.userID}'`
+  let command = `SELECT * FROM users WHERE id = '${req.body.userID}'`
   db.get(command, (err, row) =>{
     res.send(row)
   })

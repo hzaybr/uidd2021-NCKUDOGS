@@ -13,7 +13,7 @@ p {
 	width: 100vw;
 	position: absolute;
 	bottom: -1.1vw;
-	z-index: 1;
+	z-index: 3;
   transform: scaleY(0.7);
 }
 #dogname { font-size: 5vw; margin: 0; font-weight:bold;}
@@ -125,18 +125,59 @@ p {
   padding-bottom: 8%;
 }
 #all-info {padding-bottom: 10vw;}
-.top-name {
+.top-name, .topbar {
   font-weight: 900;
   font-size: 5vw;	
   padding: 3vw;
   text-align: center;
 }
-.arrow {
+.arrow, .pic-arrow {
   width: 14vw;
   padding: 1.3vw;
   top: 0;
   position: absolute;
   z-index: 2;
+}
+.blur-white {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: absolute; 
+  z-index: 2;
+}
+.name-pic {
+  display: grid;
+  grid-template-columns: 15% auto;
+  align-items: center;
+  width: 95%;
+  height: 16vw;
+  padding-left: 5vw;
+	border-top-style: solid;
+	border-top-width: 0.2vw;
+	border-top-color: #8080803b;
+}
+.click-name p {
+  font-weight: bold;
+  font-size: 4.8vw;
+}
+.click_photo { width:100%;}
+.click-heart-grid {
+	grid-template-columns: 6% auto;
+	padding-top: 3vw;
+	padding-left: 5vw;
+	display: grid;
+  align-items: center;
+  grid-gap: 2%;
+}
+#heart-count {font-size: 4vw;}
+#click-heart {width: 100%; display: none;}
+#time {
+	padding-top: 3vw;
+	padding-left: 5vw;
+  font-size: 4vw;
+  color: #00000099;
+  display: none;
 }
 .add-pic-grid {
   display: grid;
@@ -154,6 +195,8 @@ p {
 }
 .user-pic-for-image {
 	position: absolute;
+  top: 1vw;
+  left: 1vw;
 }
 .preview-pic {
   display: block;
@@ -220,7 +263,7 @@ p {
 .score-bar-count {
   top: -1vw;
   background-color: #FF8B2C;
-  width: 100%;
+  width: 0;
 }
 .com-border, .user-comment{
   padding: 1vw;
@@ -249,8 +292,8 @@ p {
 }
 .photo-like {
   position: absolute;
-  margin-left: 40vw;
-  margin-top: 39vw;
+  bottom: 1vw;
+  right: 1vw;
 }
 .photo-like-heart-button {
   border-radius: 50%;

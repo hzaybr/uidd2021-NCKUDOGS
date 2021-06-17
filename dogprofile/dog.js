@@ -186,7 +186,7 @@ $('.XXicon').click(function() {
 });
 
 
-/*******************************************************************/
+//load intro from dog.json
 const dogfile = "./dog.json"
 const IDfile = "./map/navig.json"
 let dog_page_id = localStorage.getItem("dog page id")
@@ -207,8 +207,80 @@ $(document).ready(function() {
 });
 
 
+//click image
+$('.pic-grid').on('click', '.image-image', function(){
+  id = $(this).attr('id').slice(6)
+  console.log(id)
+  $('.blur-white').show();
+  const promise = new Promise((resolve,reject) =>{
+    $.post('/get_image', {
+      image_id: id
+      }, (data)=>{
+        $('.click-avatar').html(`<img width="85%" style="border-radius:50%;" src="${data.profile}">`)
+        $('.click-name').html(`<p>${data.name}</p>`)
+        $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
+        $('#click-heart').show(100)
+        $('#time').show(100)
+        resolve(data.timestamp)
+      })
+  })
+  promise.then((time) =>{
+    $.post('/load_time', {
+      }, (time_now) => {
+          time_txt = caculate_time(time, time_now)
+          $(`#time`).html(time_txt)
+    })
+  })
+})
 
-/******************************************************************/
+$('.pic-arrow').click(function() {
+  $('.blur-white').hide()
+  $('.photo img').remove()
+  $('.click-avatar img').remove()
+  $('.click-name p').remove()
+  $('#click-heart').hide()
+  $('#time').hide()
+});
+
+function caculate_time(time, time_now) {
+  time = time.replace(/-/g, '/')
+  time_now = time_now.replace(/-/g, '/')
+
+  t = new Date(time)
+  t1= Date.parse(time)
+  t2 = Date.parse(time_now)
+  
+  second_dif = parseInt((t2-t1)/1000);
+  if(second_dif >=60){
+    minute_dif = parseInt(second_dif/60)
+    if(minute_dif >=60){
+      hour_dif = parseInt(minute_dif/60)
+      if(hour_dif>=24){
+        day_dif = parseInt(hour_dif/24)
+        if(day_dif>=30){
+          month_dif = parseInt(day_dif/30)
+          if(month_dif>12)
+            time_txt = `${t.getFullYear()}年${t.getMonth()+1}月${t.getDate()}日` 
+          else
+            time_txt = `${t.getMonth()+1}月${t.getDate()}日`
+        }
+        else if(day_dif>=7 && day_dif<30)
+          time_txt = `${parseInt(day_dif/7)}週前`
+        else
+          time_txt = `${day_dif}天前`
+      }
+      else
+        time_txt = `${hour_dif}小時前` 
+    }
+    else
+      time_txt = `${minute_dif}分鐘前`
+  }
+  else
+    time_txt = `${second_dif}秒前`
+
+  return time_txt
+}
+/************************************************************************************************/
 document.getElementById("fl_file").addEventListener("change", post_image);
 document.getElementById("fl_file2").addEventListener("change", post_image);
 document.getElementById("post-pic-in-comment").addEventListener("change", add_pic_to_comment);
@@ -450,9 +522,11 @@ function load_user() {
 	/* Score bars */
 	let obj = document.getElementsByClassName("score-bar-count");
 	let max = Math.max(...scores.slice(1));
-	for (let i = 1; i <= obj.length; ++i) {
-		obj[obj.length-i].style.width = `${scores[i] * 100 / max}%`;
-	}
+  if(max!=0) {
+    for (let i = 1; i <= obj.length; ++i) {
+      obj[obj.length-i].style.width = `${scores[i] * 100 / max}%`;
+    }
+  }
 	
 	/* Total users */
 	let user_len = Object.keys(user_data).length - scores[0]; // Exclude user with no score
