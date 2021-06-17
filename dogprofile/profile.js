@@ -29,14 +29,25 @@ $('.XXicon').click(function() {
 $('.pic-grid').on('click', '.grid-photo', function(){
   id = $(this).attr('id').slice(6)
   $('.blur-white').show();
-  $.post('./get_image', {
-    image_id: id,
-    userID: USER_ID
-    }, (data)=>{
-      $('.dog-pic').html(`<img width="88%" src="./image/dog/${data.dog_id}.png">`)
-      $('.dog-name').html(`<p>${dog_name[data.dog_id]}</p>`)
-      $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
+  const promise = new Promise((resolve,reject) =>{
+    $.post('./get_image', {
+      image_id: id,
+      }, (data)=>{
+        $('.dog-pic').html(`<img width="88%" src="./image/dog/${data.dog_id}.png">`)
+        $('.dog-name').html(`<p>${dog_name[data.dog_id]}</p>`)
+        $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
+        $('#click-heart').show(100)
+        $('#time').show(100)
+        resolve(data.timestamp)
+      })
+  })
+  promise.then((time) =>{
+    $.post('/load_time', {
+      }, (time_now) => {
+          time_txt = caculate_time(time, time_now)
+          $(`#time`).html(time_txt)
     })
+  })
 })
 
 $('.arrow').click(function() {
@@ -44,6 +55,8 @@ $('.arrow').click(function() {
   $('.photo img').remove()
   $('.dog-pic img').remove()
   $('.dog-name p').remove()
+  $('#time').hide()
+  $('#click-heart').hide()
 });
 
 /**************************************************************************/
