@@ -70,9 +70,8 @@
         <img src="./ui/image/dog_icon_profile.png" class="icon" id="profile-icon" title="profile">
         <div class="profile">
           <div class="pg" id="view-pg" style="display:block">
-						<a href="#" onclick="signOut();">Sign out</a>	
-            <button id=edit-btn>Edit</button>
             <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
+            <img id=edit-btn src="./image/edit.png">
             <div class="username" id="汪汪"></div>
             <div id="user-title">
               <p>狗狗好朋友</p>
@@ -103,6 +102,7 @@
 							  <p class="contr-num" id="locate-count">-</p>
 						  </div>
             </div>
+            <p id='signout-btn'>登出<p>
           </div>
           <div class="pg" id="edit-pg" style="display:none">
             <img id="save-btn" src="./image/profile_save.png"></img>
@@ -161,7 +161,20 @@
               </div>
             </div>
           </div>
-				</div>
+        </div>
+        <div id='signout-blur'>
+          <div id='signout-container'>
+            <p id='signout-ask'>您確定要登出嗎?</p>
+            <div id='signout-btn-grid'>
+              <div>
+                <p id='signout-confirm-btn'>確定</p>
+              </div>
+              <div>
+                <p id='signout-cancel-btn'>取消</p>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="search" id='s1' >
           <div class="button-grid">
             <div>

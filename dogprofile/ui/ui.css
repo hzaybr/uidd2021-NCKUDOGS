@@ -86,7 +86,7 @@ body {
   display: none;
   position: absolute;
   width: 92.53vw;
-  height: 111.2vw;
+  height: 126.66vw;
   left: 105vw;
   top: 21.6vw;
   background: #FFFFFF;
@@ -102,8 +102,9 @@ body {
 
 #edit-btn {
   position: absolute;
-  right: 5%;
-  top: 2%;
+  width: 7.49%;
+  top: 25.73%;
+  left: 59.07%;
 }
 
 .profile-avatar {
@@ -111,7 +112,7 @@ body {
 	display: block;
   width: 34.3%;
   aspect-ratio: 1 / 1;
-	margin-top: 4.64%;
+	margin-top: 7.78%;
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
@@ -223,6 +224,24 @@ body {
 
   color: #000000;
 }
+#signout-btn {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: block;
+    height: 8.8vw;
+    width: 71.18%;
+    bottom: 5.86vw;
+    margin-left: 14.41%;
+    line-height: 8.8vw;
+    font-size: 3.73vw;
+    font-family: Segoe UI;
+    font-weight: 600;
+    text-align: center;
+    color: #000000DD;
+    border-radius: 4.8vw;
+    border: 1px solid #00000060;
+}
 
 #user-name-title {
 	display: inline-block;
@@ -331,6 +350,80 @@ img.avatar-choose {
   top: 5.17%;
   left: 2.66vw;
 }
+
+#signout-blur {
+  position: absolute;
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+#signout-container{
+  position: relative;
+  display: block;
+  width: 84.8%;
+  height: 123px;
+  top: calc(calc(100vh - 123px) / 2);
+  margin-left: auto;
+  margin-right: auto;
+
+  border-radius: 36px;
+  background-color: #FFFFFF;
+}
+
+#signout-container p{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: Segoe UI;
+  font-weight: 600;
+}
+
+#signout-ask {
+  top: 21px;
+  height: 21px;
+  line-height: 21px;
+  font-size: 14px;
+}
+
+#signout-btn-grid {
+  position: absolute;
+  display: grid;
+  height: 33px;
+  width: 100%;
+  top: 69px;
+  grid-template-columns: 1fr 1fr;
+}
+
+#signout-btn-grid p {
+  height: 31px;
+  line-height: 31px;
+  font-size: 12px;
+}
+
+#signout-confirm-btn {
+  color: #000000DD;
+  border: 1px solid #B8B8B8;
+  border-radius: 18px;
+  background-color: #FFFFFF; 
+}
+
+#signout-cancel-btn {
+  color: #FFFFFF;
+  border: 1px solid #BE6822;
+  border-radius: 18px;
+  background-color: #FF8B2C; 
+}
+
+
 
 .search {
   position: absolute;

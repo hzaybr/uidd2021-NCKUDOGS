@@ -263,6 +263,18 @@ $('#view-pg .profile-avatar').click(function() {
   window.location.assign('userprofile.html')
 })
 
+$('#signout-btn').click(function(){
+	$('#signout-blur').fadeIn(500);
+})
+
+$('#signout-cancel-btn').click(function(){
+	$('#signout-blur').fadeOut(500);
+})
+
+$('#signout-confirm-btn').click(function(){
+	signOut();
+})
+
 $('#edit-btn').click(function(){
   $('#view-pg').css('display','none')
   $('.profile').css({'height':'85vh','top':'3.44vh'})
@@ -300,7 +312,7 @@ function uploadAvatar(evt) {
 }
 
 $('#save-btn,#cancel-btn').click(function(){
-  $('.profile').css({height:'111.2vw',top:'21.6vw'})
+  $('.profile').css({height:'126.66vw',top:'21.6vw'})
   $('#view-pg').css('display','block')
   $('#edit-pg').css('display','none')
 })
@@ -349,6 +361,8 @@ $('#cancel-btn').click(function(){
   $('.avatar-choose').attr('id','')
 	$('.avatar-choose').css('border','none')
 })
+
+
 
 $('#observ').click(function(){
   $('#s2').fadeIn(0);
