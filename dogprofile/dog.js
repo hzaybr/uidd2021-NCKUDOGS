@@ -8,6 +8,8 @@ let is_editing = false;
 let editing_comment_id = 0;
 const BLANK_PIC = "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png";
 const LOADING_PIC = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsSAAALEgHS3X78AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAADUlEQVQI12M8d+7cfwAIRwNrXorEqAAAAABJRU5ErkJggg=="
+const LIKED = "./image/like.png";
+const UNLIKED = "./image/unlike.png";
 
 $('html').click(function(e) {
   if(!$(e.target).hasClass('cmt-btn'))
@@ -482,7 +484,7 @@ async function concat_image(image_id, user_pic, photo) {
 
 	/* like button */
 	txt +=	`<div class="photo-like">`;
-	txt +=		`<img id=${img_btn_id} class="photo-like-heart-button" src="./image/avatar_dog1.png" width=10%>`;
+	txt +=		`<img id=${img_btn_id} class="photo-like-heart-button" src="./image/unlike.png" width=10%>`;
 	txt +=	`</div>`;
 
 	/* photo */
@@ -496,6 +498,13 @@ async function concat_image(image_id, user_pic, photo) {
 			user_id:	USER_ID,
 			image_id:	image_id
 		});
+
+		var src = document.getElementById(img_btn_id).getAttribute('src');
+		(src === LIKED)
+		? $(`#${img_btn_id}`)[0].src = UNLIKED
+		: $(`#${img_btn_id}`)[0].src = LIKED;
+
+		return false;
 	})
 }
 
@@ -538,7 +547,7 @@ function load_image() {
 				$(`#image_${image.id} .profile-avatar`)[0].src = user_data[image.user_id].profile;
 				$(`#image_${image.id} .image-grid-image`)[0].src = image.photo;
 				if (liked.has(image.id)) {
-					$(`#liked_btn_${image.id}`)[0].src = "./image/avatar_human1.png";
+					$(`#liked_btn_${image.id}`)[0].src = LIKED;
 				}
 			});
 		})
