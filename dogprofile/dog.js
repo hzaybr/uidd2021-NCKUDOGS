@@ -210,8 +210,6 @@ $(document).ready(function() {
 //click image
 $('.pic-grid').on('click', '.image-image', function(){
   id = $(this).attr('id').slice(6)
-  console.log(id)
-  $('.blur-white').show();
   const promise = new Promise((resolve,reject) =>{
     $.post('/get_image', {
       image_id: id
@@ -230,6 +228,7 @@ $('.pic-grid').on('click', '.image-image', function(){
           time_txt = caculate_time(time, time_now)
           $(`#time`).html(time_txt)
     })
+  $('.blur-white').fadeIn(50);
   })
 })
 

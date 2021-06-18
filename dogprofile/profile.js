@@ -28,7 +28,6 @@ $('.XXicon').click(function() {
 
 $('.pic-grid').on('click', '.grid-photo', function(){
   id = $(this).attr('id').slice(6)
-  $('.blur-white').show();
   const promise = new Promise((resolve,reject) =>{
     $.post('./get_image', {
       image_id: id,
@@ -36,8 +35,8 @@ $('.pic-grid').on('click', '.grid-photo', function(){
         $('.dog-pic').html(`<img width="88%" src="./image/dog/${data.dog_id}.png">`)
         $('.dog-name').html(`<p>${dog_name[data.dog_id]}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
-        $('#click-heart').show(100)
-        $('#time').show(100)
+        $('#click-heart').fadeIn(100)
+        $('#time').fadeIn(100)
         resolve(data.timestamp)
       })
   })
@@ -48,6 +47,7 @@ $('.pic-grid').on('click', '.grid-photo', function(){
           time_txt = caculate_time(new_time, time_now)
           $(`#time`).html(time_txt)
     })
+  $('.blur-white').fadeIn(50);
   })
 })
 
