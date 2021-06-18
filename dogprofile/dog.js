@@ -364,8 +364,15 @@ $('#post-btn, #writing-post-btn').click(function() {
 
 const FR = new FileReader();
 let temp_id = -1;
-FR.addEventListener("load", function(e) {
-	__show_and_upload_image(temp_id--, e);
+FR.addEventListener("load", async function(e) {
+	let photo = await downscaleImage(e.target.result);
+	$.post("./upload_image", {
+		user_id: 	USER_ID,
+		dog_id:		dog_page_id,
+		photo: 		photo
+	}, (image_id) => {
+		concat_image(image_id, PROFILE_PIC, photo);
+	});
 });
 
 function post_image() {
@@ -563,19 +570,6 @@ function load_user() {
 
 /******************************************************************/
 /* Raw function */
-
-async function __show_and_upload_image(_temp_id, e) {
-	let photo = await downscaleImage(e.target.result);
-	concat_image(_temp_id, PROFILE_PIC, photo);
-
-	$.post("./upload_image", {
-		user_id: 	USER_ID,
-		dog_id:		dog_page_id,
-		photo: 		photo
-	}, (image_id) => { // change _temp_id to image_id returned by db
-		$(`#image_${_temp_id}`)[0].id = `image_${image_id}`;
-	});
-}
 
 function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	const cmt_id = "comment_" + comment_id;

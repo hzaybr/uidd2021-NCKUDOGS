@@ -27,7 +27,7 @@ const request = require('request');
 //     console.log(cmd);
 //     db.run(cmd);
 //     db.run("CREATE TABLE comments(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id TEXT, dog_id INTEGER, comment TEXT, photo CLOB, timestamp DATETIME)");
-//     db.run("CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id TEXT, dog_id INTEGER, photo CLOB, timestamp DATETIME)");
+//     db.run("CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id TEXT, dog_id INTEGER, photo CLOB, likes INTEGER DEFAULT 0, timestamp DATETIME)");
 // })
 
 // db.run("DELETE FROM images");
@@ -46,7 +46,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15038;
+const port = 15037;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -222,6 +222,11 @@ app.post("/query_image", async (req, resp) => {
 
 app.post("/upload_image", async (req, resp) => { 
     db.serialize(function() {
+        db.get("SELECT id FROM images ORDER BY id DESC LIMIT 1", (err, row) => {
+            var id = row?.id ?? 0;
+            resp.send((++id).toString());
+        });
+
         db.get("SELECT datetime('now','localtime')" , (err, row) => {
             sqlUpdate('images', {
                 "user_id":      req.body.user_id,
@@ -230,29 +235,41 @@ app.post("/upload_image", async (req, resp) => {
                 "timestamp":    Object.values(row)[0]
             });
         });
-    
-        db.get("SELECT MAX(id) FROM images", (err, row) => {
-            resp.send(row["MAX(id)"].toString());
-        });
     });
 });
 
 app.post("/like_image", async (req, resp) => { 
-    let command = `SELECT liked FROM users WHERE id = "${req.body.user_id}"`;
-    let img = parseInt(req.body.image_id);
-    
-    db.get(command, (err, row) => {
+
+    db.get(`SELECT liked FROM users WHERE id = "${req.body.user_id}"`, (err, row) => {
+        var img = parseInt(req.body.image_id);
         var arr = [];
+
         if (row.liked) {
             arr = row.liked.split(',').map(function(num) {
                 return parseInt(num);
             });
         }
 
-        var liked = new Set(arr);
-        liked.has(img)? liked.delete(img) : liked.add(img);
-        var arr_str = Array.from(liked).toLocaleString();
-        db.run(`UPDATE users SET liked = "${arr_str}" WHERE id = "${req.body.user_id}"`);
+        db.get(`SELECT likes FROM images WHERE id = ${img}`, (err, row) => {
+
+            if (row === undefined) {
+                console.log(`[Error]: Image id=${img} is not found\n`);
+                return;
+            }
+
+            var liked = new Set(arr), likes = row.likes;
+            if (liked.has(img)) {
+                liked.delete(img);
+                --likes;
+            } else {
+                liked.add(img);
+                ++likes;
+            }
+
+            var arr_str = Array.from(liked).toLocaleString();
+            db.run(`UPDATE images SET likes = ${likes} WHERE id = ${img}`);
+            db.run(`UPDATE users SET liked = "${arr_str}" WHERE id = "${req.body.user_id}"`);
+        });
     });
 });
 /**********************************************************/
