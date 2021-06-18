@@ -281,19 +281,16 @@ function caculate_time(time, time_now) {
 
   return time_txt
 }
+
+
+
 /************************************************************************************************/
 document.getElementById("fl_file").addEventListener("change", post_image);
 document.getElementById("fl_file2").addEventListener("change", post_image);
 document.getElementById("post-pic-in-comment").addEventListener("change", add_pic_to_comment);
 
-$(function(){
- /*
-	$.post('./update_users', {
-		id: 		USER_ID,
-		name:		USER_NAME,
-		profile:	PROFILE_PIC
-	}, () => {});
-  */
+$(function() {
+
 	/* Initialize image and comment section */
 	const promise = new Promise((resolve, reject) => {
 		$.post('./load_users', {dog_id: dog_page_id}, (user_json) => {
@@ -492,6 +489,10 @@ async function concat_image(image_id, user_pic, photo) {
 
 	$(`#${id}`).html(txt);
 
+	$(`#${id}`).click(function () {
+		$("#click-heart")[0].src = $(`#${img_btn_id}`)[0].src;
+	});
+
 	/* add like button function */
 	$(`#${img_btn_id}`).click(function () {
 		$.post('./like_image', {
@@ -552,16 +553,6 @@ function load_image() {
 			});
 		})
 	});
-
-	// promise.then((id_arr) => {
-	// 	id_arr.forEach(index => {
-	// 		$.post('./query_image', {id: index}, (image) => {
-	// 			image = JSON.parse(image);
-	// 			$(`#image_${image.id} .profile-avatar`)[0].src = user_data[image.user_id].profile;
-	// 			$(`#image_${image.id} .image-grid-image`)[0].src = image.photo;
-	// 		});
-	// 	})
-	// });
 }
 
 function load_user() {

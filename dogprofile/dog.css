@@ -171,7 +171,7 @@ p {
   grid-gap: 2%;
 }
 #heart-count {font-size: 4vw;}
-#click-heart {width: 100%; display: none;}
+#click-heart {width: 150%; display: none;}
 #time {
 	padding-top: 3vw;
 	padding-left: 5vw;
