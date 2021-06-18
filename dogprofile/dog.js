@@ -501,7 +501,7 @@ async function concat_image(image_id, user_pic, photo) {
 
 function load_image() {
 
-	const promise = new Promise((resolve, reject) => {
+	const p1 = new Promise((resolve, reject) => {
 		var id_arr = [];
 		$.post('./preload_images', {dog_id: dog_page_id}, (image_ids) => {
 			if(image_ids) {
@@ -514,15 +514,45 @@ function load_image() {
 		});
 	});
 
-	promise.then((id_arr) => {
+	const p2 = new Promise((resolve, reject) => {
+		$.post('./get_liked_images', {user_id: USER_ID}, (liked) => {
+			var arr = [];
+        	if (liked) {
+				arr = liked.split(',').map(function(num) {
+					return parseInt(num);
+				});
+			}
+			resolve(new Set(arr));
+		});
+	})
+
+	Promise.all([p1, p2]).then(values => {
+		console.log(values);
+
+		var id_arr = values[0];
+		var liked = values[1];
+
 		id_arr.forEach(index => {
 			$.post('./query_image', {id: index}, (image) => {
 				image = JSON.parse(image);
 				$(`#image_${image.id} .profile-avatar`)[0].src = user_data[image.user_id].profile;
 				$(`#image_${image.id} .image-grid-image`)[0].src = image.photo;
+				if (liked.has(image.id)) {
+					$(`#liked_btn_${image.id}`)[0].src = "./image/avatar_human1.png";
+				}
 			});
 		})
 	});
+
+	// promise.then((id_arr) => {
+	// 	id_arr.forEach(index => {
+	// 		$.post('./query_image', {id: index}, (image) => {
+	// 			image = JSON.parse(image);
+	// 			$(`#image_${image.id} .profile-avatar`)[0].src = user_data[image.user_id].profile;
+	// 			$(`#image_${image.id} .image-grid-image`)[0].src = image.photo;
+	// 		});
+	// 	})
+	// });
 }
 
 function load_user() {

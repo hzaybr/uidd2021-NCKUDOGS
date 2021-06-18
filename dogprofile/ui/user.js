@@ -23,6 +23,8 @@ function onSignIn(googleUser) {
            	USER_ID = userid;
 						USER_NAME = profile.getName();
 						PROFILE_PIC = profile.getImageUrl();
+
+            $.getScript('../dog.js');
 					  
             reload_user();
             if(window.location.href.split('/').filter(e => e).slice(-1) == "dog.html"){

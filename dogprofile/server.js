@@ -272,6 +272,12 @@ app.post("/like_image", async (req, resp) => {
         });
     });
 });
+
+app.post("/get_liked_images", async (req, resp) => {
+    db.get(`SELECT liked FROM users WHERE id = "${req.body.user_id}"`, (err, row) => {
+        resp.send(row.liked);
+    });
+});
 /**********************************************************/
 
 /* position*/

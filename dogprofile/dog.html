@@ -395,7 +395,11 @@
 		</div>
 
     <script src="./ui/user.js"></script>
-    <script src='./dog.js'></script>
+    <!-- <script src='./dog.js'></script> -->
+    <!-- 
+      Load script "dog.js" dynamically inside ui/user.js
+      to ensure execution order. (to prevent reading null USER_ID)
+     -->
     <script>
       $(document).ready(function() {
         var user_name = $('.username').attr('id');
