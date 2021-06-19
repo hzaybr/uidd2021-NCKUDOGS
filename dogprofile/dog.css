@@ -442,9 +442,11 @@ section button:disabled {
   -webkit-overflow-scrolling: touch;
 }
 .comment-score {
-	width: 50%;
-	display: inline;
-	padding-left: 6vw;
+	display: grid;
+  align-items: center;
+  grid-template-columns: repeat(5, 4%) auto;
+  grid-gap: 0.5%;
+	padding-left: 5vw;
 }
 .cmt-btn {
   position: relative;
@@ -492,6 +494,12 @@ section button:disabled {
 hr.cmt-btn-ln {
   border-top: 1px solid #cacaca;
 }
+.cmt-time {
+  margin: 0;
+  margin-left: 3vw;
+  font-size: 3.8vw;
+  color: #00000099;
+}
 @-webkit-keyframes fadeIn {
   from {opacity: 0;} 
   to {opacity: 1;}
@@ -502,8 +510,8 @@ hr.cmt-btn-ln {
 }
 .comment {
   padding: 2vw;
-	padding-left: 6vw;
-	padding-right: 6vw;
+	padding-left: 5vw;
+	padding-right: 5vw;
   font-size: 4.4vw;
 }
 .comment-pic {
@@ -526,9 +534,6 @@ label {
   font-size: 3.8vw;
 }
 
-.comment-score div:last-child {
-  float: right;
-}
 
 .unlogin {
   display: none;

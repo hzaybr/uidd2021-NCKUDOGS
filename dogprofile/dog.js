@@ -26,7 +26,7 @@ $('.start-button').click(function() {
   $(this).css('color','black');
   to = $(this).attr('id')[1];
   show = container_list[to];
-  console.log(`show ${show}`);
+  //console.log(`show ${show}`);
   yellow = `#${to+to}`;
 
   $('.start').hide();
@@ -62,9 +62,9 @@ $('.button').click(function() {
     $(this).css('color','black');
     hide = container_list[from];
     show = container_list[to];
-    console.log(`hide ${hide}, show ${show}`);
+    //console.log(`hide ${hide}, show ${show}`);
     yellow = `#${to+to}`;
-    console.log(yellow);
+    //console.log(yellow);
 
     $('.scroll-bar').animate({'left': scrollbar_position[to]}, 150);
     setTimeout(function() {
@@ -219,8 +219,8 @@ $('.pic-grid').on('click', '.image-image', function(){
         $('.click-avatar').html(`<img width="85%" style="border-radius:50%;" src="${data.profile}">`)
         $('.click-name').html(`<p>${data.name}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
-        $('#click-heart').show(100)
-        $('#time').show(100)
+        $('#click-heart').show()
+        $('#time').show()
         resolve(data.timestamp)
       })
   })
@@ -230,7 +230,7 @@ $('.pic-grid').on('click', '.image-image', function(){
           time_txt = caculate_time(time, time_now)
           $(`#time`).html(time_txt)
     })
-  $('.blur-white').fadeIn(50);
+  $('.blur-white').show();
   })
 })
 
@@ -455,6 +455,7 @@ function load_comment() {
 	$.post('./load_comments', {dog_id: dog_page_id}, (cmt_json) => {
 		$.each(JSON.parse(cmt_json), function(index, val) {
 			concat_comment(index, val.user_id, val.comment, val.photo);
+      load_time(index, val.timestamp)
     });
     load_complete = true;
 	});
@@ -466,6 +467,14 @@ function reload_comment() {
 		x[i].parentNode.removeChild(x[i]);
 	}
 	load_comment();
+}
+
+function load_time(index, time) {
+  $.post('/load_time', {
+    }, (time_now) => {
+        time_txt = caculate_time(time, time_now)
+        $(`#time_${index}`).html(time_txt)
+  })
 }
 
 async function concat_image(image_id, user_pic, photo) {
@@ -607,7 +616,8 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	const content_id = "content_" + comment_id;
 	const btn_dlt_id = "btn_dlt_" + comment_id;
 	const btn_edit_id = "btn_edit_id" + comment_id;
-	const option_id = "cmt_option_" + comment_id;
+  const option_id = "cmt_option_" + comment_id;
+	const time_id = "time_" + comment_id;
 	const user = user_data[user_id];
 
 	$(`<div class=\"user-comment\" id=${cmt_id}>`).prependTo('.comments');
@@ -634,12 +644,14 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt += 	"<div class=\"comment-score\">"
 	let i;
 	for (i = 0; i < user.score; ++i) {
-		txt += "<img style=\"width:4.5%\" src=\"./image/red_heart.png\">"
+		txt += "<img style=\"width:100%\" src=\"./image/red_heart.png\">"
 	}
 	for(; i < 5; ++i) {
-		txt +=  "<img style=\"width:4.5%\" src=\"./image/gray_heart.png\">"
+		txt +=  "<img style=\"width:100%\" src=\"./image/gray_heart.png\">"
 	}
-    txt +=	"</div>"
+  txt +=    `<div class="cmt-time" id="${time_id}"></div>`
+  txt +=	"</div>"
+
 
 	/* User comment */
 	txt +=	`<div class=\"comment\" id=${content_id}>${comment}</div>`;

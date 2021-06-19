@@ -46,7 +46,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 15038;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -156,6 +156,7 @@ app.post("/load_comments", async (req, resp) => {
         jsonObj[row.rowid]['user_id'] = row['user_id'];
         jsonObj[row.rowid]['comment'] = row['comment'];
         jsonObj[row.rowid]['photo'] = row['photo'];
+        jsonObj[row.rowid]['timestamp'] = row['timestamp'];
     }, (err) => { // This gets called after each of our rows have been processed
         resp.send(JSON.stringify(jsonObj));
     });
