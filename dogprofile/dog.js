@@ -21,10 +21,10 @@ $('html').click(function(e) {
   }
 });
 
-//id: from, to
+
 $('.start-button').click(function() {
   $(this).css('color','black');
-  to = $(this).attr('id')[1];
+  to = $(this).attr('id')[1];  //id: from, to
   show = container_list[to];
   //console.log(`show ${show}`);
   yellow = `#${to+to}`;
@@ -54,6 +54,7 @@ $('.d-all').click(function() {
     });
   }, 150);
 })
+
 $('.button').click(function() {
   from = $(this).attr('id')[0];
   to = $(this).attr('id')[1];
@@ -172,23 +173,29 @@ $('.w-heart').click(function() {
     }
   };
 });
-$('.mesng-icon').click(function() {
-	//window.open('https://www.facebook.com/ncku.vdogs');
-	window.open('https://m.me/ncku.vdogs');
-});
 
-/******************************************************************/
+/*** link buttons ***/
 $('.navig').click(function() {
   window.location.assign("index.html");
 });
-
 $('.XXicon').click(function() {
   localStorage.setItem("dog page id", 50)
   window.location.assign("index.html");
 });
+$('.mesng-icon').click(function() {
+	window.open('https://m.me/ncku.vdogs');
+});
+$('#re2').click(function() {
+  window.open("http://serv-oga.ncku.edu.tw/p/412-1057-6752.php?Lang=zh-tw")
+})
+$('#re3').click(function() {
+  window.open("https://docs.google.com/forms/d/e/1FAIpQLSeh8Q3FbGZkLZytGUlgKfhi-hqgKn1UpJp49Ya8DEZ2A0pkBA/viewform")
+})
+$('#re4').click(function() {
+  window.open('https://www.facebook.com/ncku.vdogs')
+})
 
-
-//load intro from dog.json
+/*** load intro from dog.json ***/
 const dogfile = "./dog.json"
 const IDfile = "./map/navig.json"
 let dog_page_id = localStorage.getItem("dog page id")
@@ -209,7 +216,7 @@ $(document).ready(function() {
 });
 
 
-//click image
+/*** click image ***/
 $('.pic-grid').on('click', '.image-image', function(){
   id = $(this).attr('id').slice(6)
   const promise = new Promise((resolve,reject) =>{
