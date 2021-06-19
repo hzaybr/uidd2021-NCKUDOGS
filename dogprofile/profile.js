@@ -35,19 +35,19 @@ $('.pic-grid').on('click', '.grid-photo', function(){
         $('.dog-pic').html(`<img width="88%" src="./image/dog/${data.dog_id}.png">`)
         $('.dog-name').html(`<p>${dog_name[data.dog_id]}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
-        $('#click-heart').fadeIn(100)
-        $('#time').fadeIn(100)
+        $('#click-heart').show()
+        $('#time').show()
         resolve(data.timestamp)
       })
   })
   promise.then((time) =>{
     $.post('/load_time', {
       }, (time_now) => {
-          new_time = preprocess_time(time)
-          time_txt = caculate_time(new_time, time_now)
+          time = preprocess_time(time)
+          time_txt = caculate_time(time, time_now)
           $(`#time`).html(time_txt)
     })
-  $('.blur-white').fadeIn(50);
+  $('.blur-white').show();
   })
 })
 
