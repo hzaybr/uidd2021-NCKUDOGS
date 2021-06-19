@@ -127,21 +127,22 @@ body {
 #user-title {
 	background: #9441FF;
 	border-radius: 26.5px;
-	margin-left: 40%;
-	margin-right: 40%;
+	margin-left: 38%;
+	margin-right: 38%;
 	margin-top:1%;
 }
 .username {
   margin: 3%;
-  font-size: 4.8vw;
+  font-size: 5vw;
+  font-weight: bold;
   text-align: center;
 }
 #user-title p {
   margin: 0;
   font-family: Noto Sans Telugu;
   font-style: normal;
-  font-weight: 800;
-  font-size: 3vw;
+  font-weight: 600;
+  font-size: 3.5vw;
   line-height: 4vw;
   text-align: center;
   color: #FFFFFF;
@@ -201,7 +202,7 @@ body {
   font-family: Noto Sans TC;
   font-style: normal;
   font-weight: 100;
-  font-size: 3.46vw;
+  font-size: 4vw;
   line-height: 5.06vw;
   /* identical to box height */
 

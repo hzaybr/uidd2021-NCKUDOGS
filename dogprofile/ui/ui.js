@@ -373,27 +373,51 @@ $('#manage').click(function(){
 })
 
 /**********************************************************/
-/* load comments, photos, positions count */
+/* load comments, photos, positions count, user title */
 var comments
 var photos
+const user_scores = [20, 55, 100, Infinity]
+const user_titles = ["狗狗觀察員", "狗狗好鄰居", "狗狗好朋友", "狗狗摯友"]
 
 function load_profile_num() {
-  $.post('/load_profile_cmt', {
-    userID: USER_ID
-    }, (data) =>{
-      let com_cnt = Object.keys(data).length
-      $('#comment-count').html(com_cnt);
+  const p1 = new Promise(function(resolve, reject){
+    $.post('/load_profile_cmt', {
+      userID: USER_ID
+      }, (data) =>{
+        let len = Object.keys(data).length
+        $('#comment-count').html(len);
+        resolve(len)
+    })
   })
-  $.post('/load_profile_img', {
-    userID: USER_ID
-    }, (data) =>{
-      let pic_cnt = Object.keys(data).length
-      $('#upload-count').html(pic_cnt);
+  const p2 = new Promise(function(resolve, reject){
+    $.post('/load_profile_img', {
+      userID: USER_ID
+      }, (data) =>{
+        let len = Object.keys(data).length
+        $('#upload-count').html(len);
+        resolve(len)
+    })
   })
-  $.post('/load_profile_position', {
-    userID: USER_ID
-    }, (data) =>{
-      let p_cnt = Object.keys(data).length
-      $('#locate-count').html(p_cnt);
+  const p3 = new Promise(function(resolve, reject){
+    $.post('/load_profile_position', {
+      userID: USER_ID
+      }, (data) =>{
+        let len = Object.keys(data).length
+        $('#locate-count').html(len);
+        resolve(len)
+      })
   })
+  Promise.all([p1, p2, p3]).then(value =>{
+    let user_score = value[0] + value[1] + 3*value[2]
+    console.log(user_score)
+    for(i=0; i<4; i++){
+      if(user_score < user_scores[i]){
+        let user_title = user_titles[i]
+        console.log(user_title)
+        $("#user-title p").html(user_title)
+        break
+      }
+    }
+  })
+
 }
