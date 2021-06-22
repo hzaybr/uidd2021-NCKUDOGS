@@ -324,7 +324,8 @@ $('.avatar-choose').click(function(){
     $('.avatar-choose').css('border','none')
     $('#edit-pg .profile-avatar').attr('src', $(this).attr('src'))
 		$(this).attr('id','chosen')
-		$(this).css('border','5px solid #9441FF')
+    border_color = $('.profile-avatar').css('border-color')
+		$(this).css('border',`5px solid ${border_color}`)
 	}
   else{
     $('#edit-pg .profile-avatar').attr('src', PROFILE_PIC)
