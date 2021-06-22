@@ -87,7 +87,7 @@ function reload_user(){
     	
     $('.pg .username').attr('id',USER_NAME);
     $('.pg .username').html(USER_NAME).show();
-    $('.pg .profile-avatar, .heart-grid .profile-avatar,.writing-container .profile-avatar').attr('src',PROFILE_PIC); 
+    $('.profile-avatar').attr('src',PROFILE_PIC); 
     /*
     let avatars = document.getElementsByClassName('profile-avatar');
     for (let i = 0; i < avatars.length; ++i) {
