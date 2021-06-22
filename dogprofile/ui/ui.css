@@ -368,7 +368,7 @@ img.avatar-choose {
 }
 #save-btn{ left: 2.66vw;}
 
-#signout-blur {
+#signout-blur, #checkedit-blur {
   position: absolute;
   display: none;
   height: 100vh;
@@ -378,7 +378,7 @@ img.avatar-choose {
   z-index: 10;
 }
 
-#signout-container{
+#signout-container, #checkedit-container{
   position: relative;
   display: block;
   width: 84.8%;
@@ -391,7 +391,7 @@ img.avatar-choose {
   background-color: #FFFFFF;
 }
 
-#signout-container p{
+#signout-container p, #checkedit-ask, #checkedit-btn{
   margin: 0;
   padding: 0;
   position: relative;
@@ -404,7 +404,7 @@ img.avatar-choose {
   font-weight: 600;
 }
 
-#signout-ask {
+#signout-ask, #checkedit-ask {
   top: 21px;
   height: 21px;
   line-height: 21px;
@@ -420,10 +420,20 @@ img.avatar-choose {
   grid-template-columns: 1fr 1fr;
 }
 
-#signout-btn-grid p {
+#signout-btn-grid p, #checkedit-btn {
   height: 31px;
   line-height: 31px;
   font-size: 12px;
+}
+#checkedit-btn {
+	position: absolute;
+	top: 69px;
+	width: 40%;
+	margin-left: 30%;
+    color: #000000DD;
+    border: 1px solid #B8B8B8;
+    border-radius: 18px;
+    background-color: #FFFFFF;
 }
 
 #signout-confirm-btn {

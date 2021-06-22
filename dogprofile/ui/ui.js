@@ -311,7 +311,7 @@ function uploadAvatar(evt) {
   }
 }
 
-$('#save-btn,#cancel-btn').click(function(){
+$('#cancel-btn').click(function(){
   $('.profile').css({height:'auto',top:'21.6vw'})
   $('#view-pg').css('display','block')
   $('#edit-pg').css('display','none')
@@ -340,21 +340,38 @@ $('.avatar-choose').click(function(){
 
 //save change 
 $('#save-btn').click(function(){
-  //change avatar
-  var editedAvatarSrc =  $('#edit-pg .profile-avatar').attr('src') 
-  $('#view-pg .profile-avatar').attr('src', editedAvatarSrc) 
-  $('#map-profile-avatar').attr('src', editedAvatarSrc) 
-  //change username
+  //check if existing special character
 	let editName = document.getElementById('edit-name').value
-	$('.username').attr('id',editName)
-  $('.username').html(editName)
-  
-  //pass to db
-	$.post('./update_user_profile', {
-		id: 		USER_ID,
-		name:		editName,
-		profile:	editedAvatarSrc
-  });
+  let re = /[\~\!\@\#\$\%\^\&\*\(\)\_\+\?\>\<\"\:\}\{\\\/\[\]\'\;\.\,\=\-，？！。：；‧．、「「」《》（）｜｛｝…［］—¥⋯·‘£|·€～]/g
+  let exist_special_char = re.test(editName)
+
+  if(exist_special_char){
+	  $('#checkedit-blur').fadeIn(500);
+  }
+  else{
+    //change username
+    $('.username').attr('id',editName)
+    $('.username').html(editName)
+
+    //change avatar
+    var editedAvatarSrc =  $('#edit-pg .profile-avatar').attr('src') 
+    $('#view-pg .profile-avatar').attr('src', editedAvatarSrc) 
+    $('#map-profile-avatar').attr('src', editedAvatarSrc) 
+    
+    $('.profile').css({height:'auto',top:'21.6vw'})
+    $('#view-pg').css('display','block')
+    $('#edit-pg').css('display','none')
+
+    //pass to db
+    $.post('./update_user_profile', {
+      id: 		USER_ID,
+      name:		editName,
+      profile:	editedAvatarSrc
+    });
+  }
+})
+$('#checkedit-btn').click(function() {
+	$('#checkedit-blur').fadeOut(500);
 })
 
 $('#cancel-btn').click(function(){
