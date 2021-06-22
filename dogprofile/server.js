@@ -38,6 +38,7 @@ app.use(express.json({limit: "1024mb"}));
 
 /* Static path */
 app.use("/", express.static(__dirname));
+app.use("/", express.static(`${__dirname}/aboutus_appv`));
 
 const sslOptions = {
     key: fs.readFileSync(config.key_path),

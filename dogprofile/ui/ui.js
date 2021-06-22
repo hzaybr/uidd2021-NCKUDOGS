@@ -252,7 +252,7 @@ $('#adopt').click(function(){
 })
 
 $('#vote').click(function(){
-  window.location.assign("https://luffy.ee.ncku.edu.tw/~hzaybr/uidd2020/aboutus_appv/aboutweb.html")  
+  window.location.assign("./aboutus_appv/aboutweb.html")  
 })
 
 $('#messenger-icon').click(function(){
