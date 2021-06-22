@@ -72,11 +72,17 @@
         <img src="./ui/image/dog_icon_profile.png" class="icon" id="profile-icon" title="profile">
         <div class="profile">
           <div class="pg" id="view-pg" style="display:block">
-            <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
-            <img id=edit-btn src="./image/edit.png">
+            <div class="profile-container">
+              <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
+            </div>
+            <img id=edit-btn src="./image/editpen/1.svg">
             <div class="username" id="汪汪"></div>
             <div id="user-title">
               <p></p>
+            </div>
+            <div class="uscore-container">
+              <p>貢獻度</p>
+              <p id="user-score">0</p>
             </div>
             <div style="display: none;">
               <img id="dog-3rd" src="./aboutus_appv/image/Group 326@3x.png"></img>
@@ -111,7 +117,9 @@
           <div class="pg2" id="edit-pg">
             <img id="save-btn" src="./image/profile_save.png"></img>
             <img id="cancel-btn" src="./image/profile_cancel.png"></img>
-            <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
+            <div class="profile-container">
+              <img class="profile-avatar" src="./aboutus_appv/image/Group 326@3x.png"></img>
+            </div>
 						<p id="user-name-title">用戶名稱</p>	
             <input type="text" id="edit-name" placeholder="your name..."><br>
         		<div class="profile-upload-grid">
@@ -780,7 +788,7 @@
     <script src="./map/map_js.js"></script>
     <script src="./ui/ui.js"></script>
     <script src="./aboutus_appv/about.js"></script>
-    <script src="./ui/user.js"></script>
+    <script src="./user.js"></script>
 
 		<script>
 			$(document).ready(function(){

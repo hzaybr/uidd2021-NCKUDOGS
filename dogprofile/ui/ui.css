@@ -106,12 +106,13 @@ body {
 
 #edit-btn {
   position: absolute;
-  width: 7.49%;
-  top: 34%;
+  width: 7%;
+  top: 35vw;
   left: 59.07%;
+  z-index: 3;
 }
 
-.profile-avatar {
+.profile-container {
   position: relative;
 	display: block;
   width: 34.3%;
@@ -119,13 +120,27 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
-	border: 5px solid #9441FF;
+	border: 0.7px solid;
+  object-fit: cover;
+  object-position: 50% 50%;
+
+}
+.profile-avatar {
+  position: relative;
+	display: block;
+  width: 92%;
+  aspect-ratio: 1 / 1;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50%;
+	border: 5px solid;
+  border-color: white;
   object-fit: cover;
   object-position: 50% 50%;
 }
 
 #user-title {
-	background: #9441FF;
+	background: white;
 	border-radius: 26.5px;
 	margin-left: 38%;
 	margin-right: 38%;
@@ -147,7 +162,22 @@ body {
   text-align: center;
   color: #FFFFFF;
 }
-
+.uscore-container {
+	text-align: center;
+	width: 70%;
+	border-bottom: 1px solid #707070;
+	margin: auto;
+  padding-top: 3%;
+}
+.uscore-container p {
+  margin: 0;
+  font-size: 4vw;
+}
+#user-score {
+  font-size: 6vw;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
 #dog-3rd {
   position: absolute;
   width: 11.73vw;
@@ -216,7 +246,7 @@ body {
   font-family: Noto Sans TC;
   font-style: normal;
   font-weight: 300;
-  font-size: 6.4vw;
+  font-size: 5.4vw;
   line-height: 9.33vw;
   /* identical to box height */
 
@@ -336,7 +366,7 @@ img.avatar-choose {
   top: 3.17%;
   right: 2.66vw;
 }
-
+#save-btn{ left: 2.66vw;}
 
 #signout-blur {
   position: absolute;

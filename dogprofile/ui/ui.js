@@ -376,8 +376,9 @@ $('#manage').click(function(){
 /* load comments, photos, positions count, user title */
 var comments
 var photos
-const user_scores = [20, 55, 100, Infinity]
+const user_scores = [20, 125, 300, 700, Infinity]
 const user_titles = ["狗狗觀察員", "狗狗好鄰居", "狗狗好朋友", "狗狗摯友"]
+const bgcolor = ["#bc6d3f", "#a6a6a6", "#ffbc00", "#9441FF"]
 
 function load_profile_num() {
   const p1 = new Promise(function(resolve, reject){
@@ -408,13 +409,19 @@ function load_profile_num() {
       })
   })
   Promise.all([p1, p2, p3]).then(value =>{
-    let user_score = value[0] + value[1] + 3*value[2]
+    let user_score = 2*value[0] + 6*value[1] + 10*value[2]
     console.log(user_score)
+		$("#user-score").html(user_score)
     for(i=0; i<4; i++){
-      if(user_score < user_scores[i]){
+      if(user_score >= user_scores[i]){
         let user_title = user_titles[i]
         console.log(user_title)
+        $("#user-title").css("background", bgcolor[i])
+        $(".profile-avatar").css("border-color", bgcolor[i])
+        $(".profile-container").css("border",bgcolor[i])
         $("#user-title p").html(user_title)
+        $("#edit-btn").attr('src',`./image/editpen/${i+2}.svg`)
+      }else{
         break
       }
     }
