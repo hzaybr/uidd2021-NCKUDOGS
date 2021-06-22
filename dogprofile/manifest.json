@@ -1,0 +1,12 @@
+{
+  "name": "汪汪",
+  "short_name": "汪汪",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [{
+    "src": "./image/dog_app_icon.png",
+    "sizes": "180x180",
+    "type": "image/png"
+  }]
+}
