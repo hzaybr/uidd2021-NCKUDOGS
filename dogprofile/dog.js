@@ -223,7 +223,7 @@ $('.pic-grid').on('click', '.image-image', function(){
     $.post('/get_image', {
       image_id: id
       }, (data)=>{
-        $('.click-avatar').html(`<img width="85%" style="border-radius:50%;" src="${data.profile}">`)
+        $('.click-avatar').html(`<img width="80%" style="border-radius:50%;" src="${data.profile}">`)
         $('.click-name').html(`<p>${data.name}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
         $('#click-heart').show()
@@ -632,7 +632,7 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 
 	/* User name and profile pic */
 	txt += 	"<div class=\"w-user-bar\">";
-	txt += 		`<img class=\"profile-avatar\" src=${user.profile}>`;
+	txt += 		`<img class=\"profile-avatar b-profile\" src=${user.profile}>`;
   txt += 		`<div class=\"name-title\" style=\"display: block;\">`
   txt +=      `<p class="username">${user.name}</p>`
   txt +=      `<p class="title">${user.title}</p>`

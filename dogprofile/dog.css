@@ -159,7 +159,7 @@ p {
 }
 .click-name p {
   font-weight: bold;
-  font-size: 4.8vw;
+  font-size: 4.6vw;
 }
 .click_photo { width:100%;}
 .click-heart-grid {
@@ -279,7 +279,7 @@ p {
 }
 .title {
   margin-top: 1vw;
-  font-size: 3.6vw;
+  font-size: 3.4vw;
   color: #00000099; 
 }
 .name-title p {margin: 0;}
@@ -288,7 +288,7 @@ p {
   width: 75%;
   height: 11vw;
   padding: 5vw;
-  grid-template-columns: repeat(6,7vw);
+  grid-template-columns: auto repeat(5,7vw);
   justify-content: space-between;
   align-items: center;
 }
@@ -301,6 +301,10 @@ p {
   height: 9.06vw;
   object-fit: cover;
   object-position: 50% 50%;
+}
+.b-profile {
+  width: 10.3vw;
+  height: 10.3vw;
 }
 .photo-like {
   position: absolute;
@@ -371,9 +375,7 @@ p {
   display: grid;
   width: 90%;
   height: 11vw;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 5vw;
+  padding: 5vw;
   grid-template-columns: repeat(5,8vw);
   justify-content: space-around;
 }
