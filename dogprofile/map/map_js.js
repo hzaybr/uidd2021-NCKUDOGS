@@ -201,19 +201,31 @@ $( "#sg1 img,#sg2 img" ).click(function() {
 
 $( "#mg1 img" ).click(function() {
 	var id_str = $(this).attr('id');
-  var choose_num = parseInt(id_str.slice(4,id_str.length))-1;
-  Markers[choose_num].setPosition(uluru);
+  target_num = parseInt(id_str.slice(4,id_str.length))-1;
+	$('#markcheck-ask').html(`您確定要將${dog_name[target_num]}定位在這裡嗎?`)
+  $('#markcheck-blur').fadeIn(500);
+});
+$('#markcheck-cancel-btn').click(function(){
+	markClick();
+	$('#markcheck-blur').fadeOut(500);
+})
+$('#markcheck-confirm-btn').click(function(){
+	//var id_str = $(this).attr('id');
+  //var choose_num = parseInt(id_str.slice(4,id_str.length))-1;
+  Markers[target_num].setPosition(uluru);
   btnshow = false;
-  dogMarker_click(Markers[choose_num]);
+  dogMarker_click(Markers[target_num]);
   markClick();
   //console.log(USER_ID);
   $.post('./update_position', {
     user_id: USER_ID,
-    dog_id:  choose_num,
+    dog_id:  target_num,
     lat: 		current_lat,
 		lng:		current_lng
 	}, () => {});
-});
+	$('#markcheck-blur').fadeOut(500);
+})
+
 
 function route(){
   if(routemode){
