@@ -148,11 +148,11 @@ p {
 }
 .name-pic {
   display: grid;
-  grid-template-columns: 15% auto;
+  grid-template-columns: 15% auto 10%;
   align-items: center;
-  width: 95%;
   height: 16vw;
   padding-left: 5vw;
+  padding-right: 1vw;
 	border-top-style: solid;
 	border-top-width: 0.2vw;
 	border-top-color: #8080803b;
@@ -170,6 +170,7 @@ p {
   align-items: center;
   grid-gap: 2%;
 }
+.pic-del-btn {width: 80%;}
 #heart-count {font-size: 4vw;}
 #click-heart {width: 150%; display: none;}
 #time {
