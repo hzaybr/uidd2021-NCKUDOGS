@@ -33,7 +33,7 @@ p {
   font-weight: bold;
   color: #FF8B2C;
 }
-.username {display: none; font-weight: bold; font-size: 4.5vw;}
+.username {font-weight: bold; font-size: 4.5vw;}
 .start {
   overflow: auto;
   position: absolute;
@@ -272,6 +272,17 @@ p {
   border-bottom-style: solid;
   border-bottom-width: 0.3vw;
 }
+.name-title {
+  display: grid;
+  grid-template-rows: auto auto;
+  font-size: 4.5vw;
+}
+.title {
+  margin-top: 1vw;
+  font-size: 3.6vw;
+  color: #00000099; 
+}
+.name-title p {margin: 0;}
 .heart-grid {
   display: grid;
   width: 75%;

@@ -432,17 +432,24 @@ function load_profile_num() {
 		$("#user-score").html(user_score)
     for(i=0; i<4; i++){
       if(user_score >= user_scores[i]){
-        let user_title = user_titles[i]
-        console.log(user_title)
+        var user_title = user_titles[i]
         $("#user-title").css("background", bgcolor[i])
         $(".profile-avatar").css("border-color", bgcolor[i])
         $(".profile-container").css("border",bgcolor[i])
         $("#user-title p").html(user_title)
         $("#edit-btn").attr('src',`./image/editpen/${i+2}.svg`)
+
       }else{
         break
       }
     }
+    //save title to db
+    console.log(user_title)
+    $.post('/save_title', {
+      user_title: user_title,
+      userID: USER_ID
+      }, ()=>{}
+    )
   })
 
 }

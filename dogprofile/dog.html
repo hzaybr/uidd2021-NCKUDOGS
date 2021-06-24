@@ -179,7 +179,10 @@
       <div style="height: 85%; padding-bottom: 10%; overflow-y: auto;">
         <div class="name-pic">
           <div class="click-avatar"></div>
-          <div class="click-name"><p></p></div>
+          <div class="name-title" style="display: block;">
+            <div class="click-name"><p></p></div>
+            <p class="title"></p>
+          </div>
           <img class="pic-del-btn" src="./image/dot.jpg">
         </div>
         <div class="photo"></div>
@@ -319,7 +322,10 @@
 
       <div class="w-user-bar">
         <img class="profile-avatar" src="image/Ellipse_303.png">
-        <div class="username"></div>
+        <div class="name-title" style="display: block;">
+          <p class="username"></p>
+          <p class="title"></p>
+        </div>
         <!--user_name = $('.username').attr('id') -->
       </div>
 
@@ -400,12 +406,6 @@
       Load script "dog.js" dynamically inside ui/user.js
       to ensure execution order. (to prevent reading null USER_ID)
      -->
-    <script>
-      $(document).ready(function() {
-        var user_name = $('.username').attr('id');
-        $('.username').html(user_name).show();
-      })
-    </script>
 
   </body>
 </html>
