@@ -140,11 +140,25 @@ function dogMarker_click(target_marker){
       gap_time = Math.floor(gap_time/3600);
       $('.time p').html(`${gap_time}小時前`);
       $('.time p').css("font-size", "16px");  
-    }else if(gap_time<2592000){
+    }else if(gap_time<604800){
       gap_time = Math.floor(gap_time/86400);
       $('.time p').html(`${gap_time}天前`);
       $('.time p').css("font-size", "16px");  
     }
+  });
+	for (let i = 1; i <= 5; ++i){
+		heart_id = `#dog_heart${i}`
+		$(heart_id).attr("src","ui/image/heart_icon/860757@3x.png")
+	}
+  $.post("./getheart", {
+		dog_id: target_num
+	}, (data) => {
+		var score = parseFloat(data);
+		for (let i = 1; i <= score; ++i){
+			heart_id = `#dog_heart${i}`
+			$(heart_id).attr("src","ui/image/heart_icon/860758@3x.png")
+		}
+		//console.log(data);
   });
   $('.dog_markerinfo').css('display','block');
 	markerinfoShow = true;

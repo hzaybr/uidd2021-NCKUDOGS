@@ -47,7 +47,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15038;
+const port = 1503;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -333,7 +333,7 @@ app.post("/gettime", async (req, resp) => {
 		//console.log(now.getTime()-row["timestamp"]);
   }, (err) => {
     //console.log(gap);
-    if(gap==0||gap>=2592000){//over one month
+    if(gap==0||gap>=604800){//over seven days
       resp.send(`0`);
     }else{
       resp.send(`${gap}`);
@@ -341,6 +341,30 @@ app.post("/gettime", async (req, resp) => {
   });
 });
 
+app.post("/getheart", async (req, resp) => {
+   	let dog_id = "dog_" + req.body.dog_id;
+    let command = `SELECT ${dog_id} FROM users`;
+    let total = 0;
+    let count = 0;
+    let score = 0;
+    db.each(command, (err, row) => {
+      if(row[dog_id]!=0){
+        total += row[dog_id];
+        count++;
+        //console.log(row[dog_id])
+			}
+    }, (err) => {
+      if(count==0){
+        console.log(score);
+      }else{
+        score = Math.round(10 * total / count) / 10;
+        //resp.send(`${score}`);
+        console.log(score);
+      }
+      resp.send(`${score}`);
+    });
+    
+});
 /* load profile page */
 app.post("/load_profile_cmt", async (req, res) => {
   let command = `SELECT * FROM comments WHERE user_id = '${req.body.userID}'`
