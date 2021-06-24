@@ -47,7 +47,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 1503;
+const port = 15038;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -107,6 +107,7 @@ app.post("/load_users", async (req, resp) => {
         jsonObj[row.id]["name"] = row["name"];
         jsonObj[row.id]["profile"] = row["profile"];
         jsonObj[row.id]["score"] = row[dog_id];
+        jsonObj[row.id]["title"] = row["title"];
     }, (err) => { // This gets called after each of our rows have been processed
         resp.send(JSON.stringify(jsonObj));
     });
@@ -138,6 +139,14 @@ app.post("/update_user_profile", async (req, resp) => {
     command += "UPDATE users\n";
     command += `SET profile = "${req.body.profile}", name = "${req.body.name}"\n`;
     command += `WHERE id = "${req.body.id}"`;
+    db.run(command);
+});
+
+app.post("/save_title", async (req, resp) => {
+    let command = "";
+    command += "UPDATE users\n";
+    command += `SET title = "${req.body.user_title}"\n`;
+    command += `WHERE id = "${req.body.userID}"`;
     db.run(command);
 });
 /**********************************************************/
@@ -321,6 +330,8 @@ app.post("/marked_position", async (req, resp) => {
     });
 });
 
+/***************************************************************/
+
 app.post("/gettime", async (req, resp) => {
   let command = "SELECT timestamp FROM position_record WHERE dog_id = '";
   command += req.body.dog_id;
@@ -365,6 +376,7 @@ app.post("/getheart", async (req, resp) => {
     });
     
 });
+
 /* load profile page */
 app.post("/load_profile_cmt", async (req, res) => {
   let command = `SELECT * FROM comments WHERE user_id = '${req.body.userID}'`

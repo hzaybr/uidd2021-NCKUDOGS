@@ -633,7 +633,14 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	/* User name and profile pic */
 	txt += 	"<div class=\"w-user-bar\">";
 	txt += 		`<img class=\"profile-avatar\" src=${user.profile}>`;
-	txt += 		`<div class=\"username\" style=\"display: block;\">${user.name}</div>`;
+  txt += 		`<div class=\"name-title\" style=\"display: block;\">`
+  txt +=      `<p class="username">${user.name}</p>`
+  txt +=      `<p class="title">${user.title}</p>`
+  txt +=    `</div>`;
+  /* load title */
+  $('.title').html(user.title)
+  $('.username').html(user.name)
+
 
 	if (user_id == USER_ID) {
 		txt += 	`<div class=\"cmt-btn\" onclick=\'(function(){document.getElementById(\"${option_id}\").classList.toggle(\"show\");})();'>AA`;
