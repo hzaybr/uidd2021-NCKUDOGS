@@ -368,7 +368,7 @@ img.avatar-choose {
 }
 #save-btn{ left: 2.66vw;}
 
-#signout-blur, #checkedit-blur {
+#signout-blur, #checkedit-blur, #markcheck-blur {
   position: absolute;
   display: none;
   height: 100vh;
@@ -378,7 +378,7 @@ img.avatar-choose {
   z-index: 10;
 }
 
-#signout-container, #checkedit-container{
+#signout-container, #checkedit-container, #markcheck-container{
   position: relative;
   display: block;
   width: 84.8%;
@@ -391,7 +391,7 @@ img.avatar-choose {
   background-color: #FFFFFF;
 }
 
-#signout-container p, #checkedit-ask, #checkedit-btn{
+#signout-container p, #checkedit-ask, #checkedit-btn, #markcheck-container p{
   margin: 0;
   padding: 0;
   position: relative;
@@ -404,14 +404,14 @@ img.avatar-choose {
   font-weight: 600;
 }
 
-#signout-ask, #checkedit-ask {
+#signout-ask, #checkedit-ask, #markcheck-ask {
   top: 21px;
   height: 21px;
   line-height: 21px;
   font-size: 14px;
 }
 
-#signout-btn-grid {
+#signout-btn-grid, #markcheck-btn-grid {
   position: absolute;
   display: grid;
   height: 33px;
@@ -420,7 +420,7 @@ img.avatar-choose {
   grid-template-columns: 1fr 1fr;
 }
 
-#signout-btn-grid p, #checkedit-btn {
+#signout-btn-grid p, #checkedit-btn, #markcheck-btn-grid p {
   height: 31px;
   line-height: 31px;
   font-size: 12px;
@@ -436,14 +436,14 @@ img.avatar-choose {
     background-color: #FFFFFF;
 }
 
-#signout-confirm-btn {
+#signout-confirm-btn, #markcheck-confirm-btn {
   color: #000000DD;
   border: 1px solid #B8B8B8;
   border-radius: 18px;
   background-color: #FFFFFF; 
 }
 
-#signout-cancel-btn {
+#signout-cancel-btn, #markcheck-cancel-btn {
   color: #FFFFFF;
   border: 1px solid #BE6822;
   border-radius: 18px;
