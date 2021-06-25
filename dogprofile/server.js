@@ -47,7 +47,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 1503;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -325,7 +325,9 @@ app.post("/update_position", async (req, resp) => {
         "timestamp":now.getTime()
     	})
 			console.log('success');
-		});
+    });
+		let command = "UPDATE position_original SET lat = " + req.body.lat + ", lng = " + req.body.lng + " WHERE dog_id = " + req.body.dog_id;
+    db.run(command);
 });
 app.post("/marked_position", async (req, resp) => {
     console.log(req.body.dog_id);
