@@ -242,14 +242,16 @@ $('.pic-grid').on('click', '.image-image', function(){
   })
 })
 
-$('.pic-arrow').click(function() {
-  $('.blur-white').hide()
-  $('.photo img').remove()
-  $('.click-avatar img').remove()
-  $('.click-name p').remove()
-  $('#click-heart').hide()
-  $('#time').hide()
-});
+$('.pic-arrow').click(hide_blur_white);
+
+function hide_blur_white() {
+	$('.blur-white').hide()
+	$('.photo img').remove()
+	$('.click-avatar img').remove()
+	$('.click-name p').remove()
+	$('#click-heart').hide()
+	$('#time').hide()
+}
 
 function caculate_time(time, time_now) {
   time = time.replace(/-/g, '/')
@@ -310,7 +312,6 @@ $(function() {
 		load_user();
 
 		Promise.all([load_image(), load_comment()]).then(values => {
-			console.log(values);
 			PAGE_LOAD_COMPLETE = true;
 		});
 	});
@@ -373,17 +374,22 @@ $('#post-btn, #writing-post-btn').click(function() {
 });
 
 const FR = new FileReader();
-let temp_id = -1;
 FR.addEventListener("load", async function(e) {
 	let photo = await downscaleImage(e.target.result);
+
 	$.post("./upload_image", {
 		user_id: 	USER_ID,
 		dog_id:		dog_page_id,
 		photo: 		photo
 	}, (image_id) => {
 		concat_image(image_id, PROFILE_PIC, photo);
+		attach_image_event(image_id);
 	});
 });
+
+function uploading_image(id) {
+
+}
 
 function post_image() {
 
@@ -603,6 +609,19 @@ function load_user() {
 	
 }
 
+function attach_image_event(id) {
+	$(`#image_${id}`).click(function() {
+		const img = this;
+		$('.pic-del-btn').show();
+		$('.pic-del-btn').off();
+		$('.pic-del-btn').click(function() {
+			__delete_image(id);
+			img.parentNode.removeChild(img);
+			hide_blur_white();
+		});
+	});
+}
+
 
 
 /******************************************************************/
@@ -614,7 +633,7 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	const content_id = "content_" + comment_id;
 	const btn_dlt_id = "btn_dlt_" + comment_id;
 	const btn_edit_id = "btn_edit_id" + comment_id;
-  const option_id = "cmt_option_" + comment_id;
+  	const option_id = "cmt_option_" + comment_id;
 	const time_id = "time_" + comment_id;
 	const user = user_data[user_id];
 
@@ -622,17 +641,18 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	let txt = "";
 
 	/* User name and profile pic */
-	txt += 	"<div class=\"w-user-bar\">";
+	txt += 	`<div class="w-user-bar">`;
 	txt += 		`<img class=\"profile-avatar b-profile\" src=${user.profile}>`;
-  txt += 		`<div class=\"name-title\" style=\"display: block;\">`
-  txt +=      `<p class="username">${user.name}</p>`
-  txt +=      `<p class="title">${user.title}</p>`
-  txt +=    `</div>`;
-  /* load title */
-  $('.title').html(user.title)
-  $('.username').html(user.name)
+	txt += 		`<div class=\"name-title\" style="display: block;">`
+	txt +=      `<p class="username">${user.name}</p>`
+	txt +=      `<p class="title">${user.title}</p>`
+	txt +=  `</div>`;
+		
+	/* Load title */
+	$('.title').html(user.title)
+	$('.username').html(user.name)
 
-
+	/* Comment button */
 	if (user_id == USER_ID) {
 		txt += 	`<div class=\"cmt-btn\" onclick=\'(function(){document.getElementById(\"${option_id}\").classList.toggle(\"show\");})();'>AA`;
 		txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
@@ -654,8 +674,8 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	for(; i < 5; ++i) {
 		txt +=  "<img style=\"width:100%\" src=\"./image/gray_heart.png\">"
 	}
-  txt +=    `<div class="cmt-time" id="${time_id}"></div>`
-  txt +=	"</div>"
+	txt +=    `<div class="cmt-time" id="${time_id}"></div>`
+	txt +=	"</div>"
 
 
 	/* User comment */
@@ -674,10 +694,7 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 	/* Add delete button function */
 	$(`#${btn_dlt_id}`).click(function () {
 		const promise = new Promise((resolve, reject) => {
-			$.post("./delete_comment", {
-				user_id:	USER_ID,
-				comment_id: comment_id,
-			}, (resp) => {
+			$.post("./delete_comment", {comment_id: comment_id}, (resp) => {
 				resolve(resp);
 			});
 		});				
@@ -704,4 +721,8 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 		$('.commentBox').val($(`#${content_id}`)[0].innerHTML);
 		$('.preview-pic')[0].src = photo;
 	});
+}
+
+function __delete_image(id) {
+	$.post("./delete_image", {image_id: id});
 }

@@ -233,10 +233,6 @@ app.post("/query_image", async (req, resp) => {
 
 app.post("/upload_image", async (req, resp) => { 
     db.serialize(function() {
-        db.get("SELECT id FROM images ORDER BY id DESC LIMIT 1", (err, row) => {
-            var id = row?.id ?? 0;
-            resp.send((++id).toString());
-        });
 
         db.get("SELECT datetime('now','localtime')" , (err, row) => {
             sqlUpdate('images', {
@@ -246,7 +242,16 @@ app.post("/upload_image", async (req, resp) => {
                 "timestamp":    Object.values(row)[0]
             });
         });
+
+        db.get("SELECT id FROM images ORDER BY id DESC LIMIT 1", (err, row) => {
+            var id = row?.id ?? 0;
+            resp.send(id.toString());
+        });
     });
+});
+
+app.post("/delete_image", async (req, resp) => {
+    db.run(`DELETE from images WHERE id = ${req.body.image_id}`);
 });
 
 app.post("/like_image", async (req, resp) => { 
@@ -287,6 +292,18 @@ app.post("/like_image", async (req, resp) => {
 app.post("/get_liked_images", async (req, resp) => {
     db.get(`SELECT liked FROM users WHERE id = "${req.body.user_id}"`, (err, row) => {
         resp.send(row.liked);
+    });
+});
+
+app.post("/get_user_photo_ids", async (req, resp) => {
+    var command = `SELECT id as id FROM images\n`
+    command += `WHERE dog_id = ${req.body.dog_id} AND user_id = "${req.body.user_id}"`;
+    let arr = [];
+
+    db.each(command, (err, row) => {
+        arr.push(row.id);
+    }, (err) => {
+        resp.send(arr.toLocaleString());
     });
 });
 /**********************************************************/

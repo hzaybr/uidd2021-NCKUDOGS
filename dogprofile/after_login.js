@@ -18,7 +18,7 @@ function logged_in() {
                 });
             }
             resolve(arr);
-        });    
+        });
     })
 
     promise.then(arr => {
@@ -28,5 +28,22 @@ function logged_in() {
             }
         });
     })
+
+    $.post('./get_user_photo_ids', {dog_id: dog_page_id, user_id: USER_ID}, (ids) => {
+        const posted_by_user = new Set(ids.split(','));
+
+        $('.image-image').each((index, pic) => {
+            let img_id = pic.id.slice(6);
+
+            if (posted_by_user.has(img_id)) {
+                attach_image_event(img_id);
+            }
+            else {
+                $(`#${pic.id}`).click(function() {
+                    $('.pic-del-btn').hide();
+                })
+            }
+        })
+    });
 
 }
