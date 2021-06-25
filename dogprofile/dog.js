@@ -3,6 +3,7 @@ const container_list = ['.intro-container', '.pic-container', '.comment-containe
 const scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
 
 let SCORE = 0;
+let PAGE_LOAD_COMPLETE = false;
 let user_data = {};
 let is_editing = false;
 let editing_comment_id = 0;
@@ -307,8 +308,11 @@ $(function() {
 	});
 	promise.then((value) => {
 		load_user();
-		load_image();
-		load_comment();
+
+		Promise.all([load_image(), load_comment()]).then(values => {
+			console.log(values);
+			PAGE_LOAD_COMPLETE = true;
+		});
 	});
 
 });
@@ -459,12 +463,15 @@ function concat_comment(comment_id, user_id, comment, photo) {
 
 let load_complete=false;
 function load_comment() {
-	$.post('./load_comments', {dog_id: dog_page_id}, (cmt_json) => {
-		$.each(JSON.parse(cmt_json), function(index, val) {
-			concat_comment(index, val.user_id, val.comment, val.photo);
-      load_time(index, val.timestamp)
-    });
-    load_complete = true;
+	return new Promise((res, rej) => {
+		$.post('./load_comments', {dog_id: dog_page_id}, (cmt_json) => {
+			$.each(JSON.parse(cmt_json), function(index, val) {
+				concat_comment(index, val.user_id, val.comment, val.photo);
+				load_time(index, val.timestamp)
+			});
+			load_complete = true;
+			res('comment_loaded');
+		});
 	});
 }
 
@@ -527,48 +534,32 @@ async function concat_image(image_id, user_pic, photo) {
 
 function load_image() {
 
-	const p1 = new Promise((resolve, reject) => {
-		var id_arr = [];
-		$.post('./preload_images', {dog_id: dog_page_id}, (image_ids) => {
-			if(image_ids) {
-				id_arr = image_ids.split(',');
-			}
-			id_arr.forEach(index => {
-				concat_image(index, LOADING_PIC, null);
-			})
-			resolve(id_arr.reverse());
-		});
-	});
-
-	const p2 = new Promise((resolve, reject) => {
-		$.post('./get_liked_images', {user_id: USER_ID}, (liked) => {
-			var arr = [];
-        	if (liked) {
-				arr = liked.split(',').map(function(num) {
-					return parseInt(num);
-				});
-			}
-			resolve(new Set(arr));
-		});
-	})
-
-	Promise.all([p1, p2]).then(values => {
-		console.log(values);
-
-		var id_arr = values[0];
-		var liked = values[1];
-
-		id_arr.forEach(index => {
-			$.post('./query_image', {id: index}, (image) => {
-				image = JSON.parse(image);
-				$(`#image_${image.id} .profile-avatar`)[0].src = user_data[image.user_id].profile;
-				$(`#image_${image.id} .image-grid-image`)[0].src = image.photo;
-				if (liked.has(image.id)) {
-					$(`#liked_btn_${image.id}`)[0].src = LIKED;
+	return new Promise((res, rej) => {
+		const promise = new Promise((resolve, reject) => {
+			var id_arr = [];
+			$.post('./preload_images', {dog_id: dog_page_id}, (image_ids) => {
+				if(image_ids) {
+					id_arr = image_ids.split(',');
 				}
+				id_arr.forEach(index => {
+					concat_image(index, LOADING_PIC, null);
+				})
+				resolve(id_arr.reverse());
 			});
-		})
-	});
+		});
+	
+		promise.then(id_arr => {	
+			id_arr.forEach(index => {
+				$.post('./query_image', {id: index}, (image) => {
+					image = JSON.parse(image);
+					$(`#image_${image.id} .profile-avatar`)[0].src = user_data[image.user_id].profile;
+					$(`#image_${image.id} .image-grid-image`)[0].src = image.photo;
+				});
+			})
+			res('image_loaded');
+		});
+
+	});	
 }
 
 function load_user() {

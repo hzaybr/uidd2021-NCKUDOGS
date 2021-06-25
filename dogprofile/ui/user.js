@@ -24,7 +24,7 @@ function onSignIn(googleUser) {
 						USER_NAME = profile.getName();
 						PROFILE_PIC = profile.getImageUrl();
 
-            $.getScript('../dog.js');
+            $.getScript('../after_login.js');
 					  
             reload_user();
             if(window.location.href.split('/').filter(e => e).slice(-1) == "dog.html"){
