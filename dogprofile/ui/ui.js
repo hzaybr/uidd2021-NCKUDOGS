@@ -9,6 +9,7 @@ var profileDisplay = false;
 var markmode = false;
 var markerinfoShow = false;
 var findmarkedDisplay = false;
+//var ispositionFind = false;
 var marked_data;
 var marked_markers = [];
 
@@ -229,11 +230,19 @@ $('.btn_X').click(function(){
 
 $('#mark-icon').click(function(){
   if(login_status){
-    markClick();
+    if(ispositionFind){
+			markClick();
+		}else{
+			$('#markmode-blur').fadeIn(500);
+		}
+    
   }
   else{
     $('.unlogin').fadeIn(500);
   }
+})
+$('#markmode-confirm-btn').click(function(){
+	$('#markmode-blur').fadeOut(500);
 })
 
 $('#about-dog').click(function(){
@@ -432,24 +441,17 @@ function load_profile_num() {
 		$("#user-score").html(user_score)
     for(i=0; i<4; i++){
       if(user_score >= user_scores[i]){
-        var user_title = user_titles[i]
+        let user_title = user_titles[i]
+        console.log(user_title)
         $("#user-title").css("background", bgcolor[i])
         $(".profile-avatar").css("border-color", bgcolor[i])
         $(".profile-container").css("border",bgcolor[i])
         $("#user-title p").html(user_title)
         $("#edit-btn").attr('src',`./image/editpen/${i+2}.svg`)
-
       }else{
         break
       }
     }
-    //save title to db
-    console.log(user_title)
-    $.post('/save_title', {
-      user_title: user_title,
-      userID: USER_ID
-      }, ()=>{}
-    )
   })
 
 }

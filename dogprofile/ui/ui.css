@@ -368,7 +368,7 @@ img.avatar-choose {
 }
 #save-btn{ left: 2.66vw;}
 
-#signout-blur, #checkedit-blur, #markcheck-blur {
+#signout-blur, #checkedit-blur, #markcheck-blur, #markmode-blur {
   position: absolute;
   display: none;
   height: 100vh;
@@ -378,7 +378,7 @@ img.avatar-choose {
   z-index: 10;
 }
 
-#signout-container, #checkedit-container, #markcheck-container{
+#signout-container, #checkedit-container, #markcheck-container, #markmode-container{
   position: relative;
   display: block;
   width: 84.8%;
@@ -391,7 +391,7 @@ img.avatar-choose {
   background-color: #FFFFFF;
 }
 
-#signout-container p, #checkedit-ask, #checkedit-btn, #markcheck-container p{
+#signout-container p, #checkedit-ask, #checkedit-btn, #markcheck-container p, #markmode-container p{
   margin: 0;
   padding: 0;
   position: relative;
@@ -404,7 +404,7 @@ img.avatar-choose {
   font-weight: 600;
 }
 
-#signout-ask, #checkedit-ask, #markcheck-ask {
+#signout-ask, #checkedit-ask, #markcheck-ask, #markmode-hint {
   top: 21px;
   height: 21px;
   line-height: 21px;
@@ -436,7 +436,7 @@ img.avatar-choose {
     background-color: #FFFFFF;
 }
 
-#signout-confirm-btn, #markcheck-confirm-btn {
+#signout-confirm-btn, #markcheck-confirm-btn, #markmode-confirm-btn {
   color: #000000DD;
   border: 1px solid #B8B8B8;
   border-radius: 18px;
@@ -450,7 +450,15 @@ img.avatar-choose {
   background-color: #FF8B2C; 
 }
 
+#markmode-hint {
+	font-size: 16px;
+}
 
+#markmode-container #markmode-confirm-btn {
+	display: block;
+	width: 50%;
+	top: 60px;
+}
 
 .search {
   position: absolute;

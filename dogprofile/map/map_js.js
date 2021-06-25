@@ -2,6 +2,7 @@ var map;
 var directionsService;
 var directionsDisplay;
 var routemode = false;
+var ispositionFind = false;
 var btnshow = false;
 var current_lat = 22.996923587079912; 
 var current_lng = 120.22256354362793;
@@ -169,6 +170,8 @@ function dogMarker_click(target_marker){
   $('.btn_detail').attr('id',target_num);
 }
 function findposition(target_marker){
+	//current_lat = null;
+  //current_lng = null;
   navigator.geolocation.getCurrentPosition((position) =>{
     console.log(position.coords);
     current_lat=position.coords.latitude;
@@ -177,7 +180,12 @@ function findposition(target_marker){
     target_marker.setPosition(uluru);
     map.setCenter(uluru);
     map.setZoom(17);
-  });
+		ispositionFind = true;
+  } , (err) => {
+		ispositionFind = false;
+		//console.log('no location');
+	});
+	
 }
 $( "#mark-icon" ).click(function() {
   if(markDisplay){
@@ -187,6 +195,7 @@ $( "#mark-icon" ).click(function() {
 			route();
 		}
     findposition(ownermarker);
+		//console.log(current_lat);	
   }
   
 });
