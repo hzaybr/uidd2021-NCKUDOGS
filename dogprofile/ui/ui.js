@@ -56,6 +56,11 @@ function profileClick(){
 	if(markerinfoShow){
     markerUnclick();
   }
+  if(document.getElementById('edit-pg').style.display != 'none'){
+    $('.profile').css({height:'auto',top:'21.6vw'})
+    $('#view-pg').css('display','block')
+    $('#edit-pg').css('display','none')
+  }
   $('.profile').stop();
   if (profileDisplay){
     $('.profile').animate({'left':'105vw'},500,function(){$('.profile').css('display','none');})
@@ -270,7 +275,7 @@ $('#view-pg .profile-avatar, .username').click(function() {
   window.location.assign('userprofile.html')
 })
 
-$('.uscore-container p').click(function() {
+$('.uscore-container p, #user-title').click(function() {
   $('.title-container').show()
 })
 $('#title-cancel').click(function() {
