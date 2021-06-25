@@ -266,10 +266,16 @@ $('#messenger-icon').click(function(){
   window.location.assign("https://www.facebook.com/ncku.vdogs")  
 })
 
-$('#view-pg .profile-avatar').click(function() {
+$('#view-pg .profile-avatar, .username').click(function() {
   window.location.assign('userprofile.html')
 })
 
+$('.uscore-container p').click(function() {
+  $('.title-container').show()
+})
+$('#title-cancel').click(function() {
+  $('.title-container').hide()
+})
 $('#signout-btn').click(function(){
 	$('#signout-blur').fadeIn(500);
 })
@@ -401,7 +407,7 @@ $('#manage').click(function(){
 /* load comments, photos, positions count, user title */
 var comments
 var photos
-const user_scores = [20, 125, 300, 700, Infinity]
+const user_scores = [10, 80, 200, 500, Infinity]
 const user_titles = ["狗狗觀察員", "狗狗好鄰居", "狗狗好朋友", "狗狗摯友"]
 const bgcolor = ["#bc6d3f", "#a6a6a6", "#ffbc00", "#9441FF"]
 
@@ -440,11 +446,10 @@ function load_profile_num() {
     for(i=0; i<4; i++){
       if(user_score >= user_scores[i]){
         var user_title = user_titles[i]
-        $("#user-title").css("background", bgcolor[i])
         $(".profile-avatar").css("border-color", bgcolor[i])
         $(".profile-container").css("border",bgcolor[i])
-        $("#user-title p").html(user_title)
         $("#edit-btn").attr('src',`./image/editpen/${i+2}.svg`)
+        $("#user-title").html(`<img width=100% src="image/usertitle/${i}.svg">`)
 
       }else{
         break

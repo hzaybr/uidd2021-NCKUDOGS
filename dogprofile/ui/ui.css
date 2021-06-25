@@ -100,7 +100,6 @@ body {
 }
 .pg2 {
   height: 100%;
-  padding-top: 8vw;
   display: none;
 }
 
@@ -140,11 +139,17 @@ body {
 }
 
 #user-title {
+  position: relative;
+  width: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  /*
 	background: white;
 	border-radius: 26.5px;
 	margin-left: 38%;
 	margin-right: 38%;
 	margin-top:1%;
+  */
 }
 .username {
   margin: 3%;
@@ -368,6 +373,26 @@ img.avatar-choose {
 }
 #save-btn{ left: 2.66vw;}
 
+.title-container {
+  display: none;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+  z-index: 9;
+}
+.titleinfo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8vw;
+}
+#title-cancel {
+  position: absolute;
+  right: 7vw;
+  top: 15vw;
+  width: 9vw;
+}
 #signout-blur, #checkedit-blur, #markcheck-blur, #markmode-blur {
   position: absolute;
   display: none;
