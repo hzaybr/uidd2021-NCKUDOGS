@@ -37,6 +37,14 @@ const MAP_BOUNDS = {
   west: 120.21060,
   east: 120.22808,
 };
+const NCKU_BOUNDS = {
+  edge1: 23.004150681824047,
+  edge2: 120.21353887926601,
+  edge3: 22.99620824595256,
+  edge4: 120.22484366498219,
+  edge5: 22.991437207479798,
+  edge6: 120.21774369158845,
+}
 var userimg;
 function initMap() {
     var uluru = {lat: 23.0, lng: 120.21986287979763};
@@ -170,12 +178,17 @@ function dogMarker_click(target_marker){
   $('.btn_detail').attr('id',target_num);
 }
 function findposition(target_marker){
-	//current_lat = null;
-  //current_lng = null;
   navigator.geolocation.getCurrentPosition((position) =>{
     console.log(position.coords);
     current_lat=position.coords.latitude;
     current_lng=position.coords.longitude;
+	/*	if(current_lat<NCKU_BOUNDS.edge1&&current_lat>NCKU_BOUNDS.edge3&&current_lng>NCKU_BOUNDS.edge2&&current_lng<NCKU_BOUNDS.edge4){
+      ispositionFind = true;
+    }else if(current_lat<NCKU_BOUNDS.edge3&&current_lat>NCKU_BOUNDS.edge5&&current_lng>NCKU_BOUNDS.edge6&&current_lng<NCKU_BOUNDS.edge4){
+      ispositionFind = true;
+    }else{
+      ispositionFind = false;
+    }*/
     uluru = {lat: current_lat, lng: current_lng};
     target_marker.setPosition(uluru);
     map.setCenter(uluru);
@@ -183,7 +196,6 @@ function findposition(target_marker){
 		ispositionFind = true;
   } , (err) => {
 		ispositionFind = false;
-		//console.log('no location');
 	});
 	
 }
