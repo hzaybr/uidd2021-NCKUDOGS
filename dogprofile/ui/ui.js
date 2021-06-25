@@ -275,7 +275,7 @@ $('#view-pg .profile-avatar, .username').click(function() {
   window.location.assign('userprofile.html')
 })
 
-$('.uscore-container p').click(function() {
+$('.uscore-container p, #user-title').click(function() {
   $('.title-container').show()
 })
 $('#title-cancel').click(function() {
