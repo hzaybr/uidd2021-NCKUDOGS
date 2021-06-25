@@ -408,8 +408,8 @@ function post_image() {
 	})
 	.catch((errorObject) => {
 		(errorObject.code === 1)
-		? FR.readAsDataURL(file)	// file is not HEIC
-		: console.log(errorObject);	// other errors
+		? FR.readAsDataURL(file)		// file is not HEIC
+		: console.error(errorObject);	// other errors
 	});
 }
 
@@ -609,6 +609,7 @@ function load_user() {
 	
 }
 
+$('.pic-del-btn').hide();
 function attach_image_event(id) {
 	$(`#image_${id}`).click(function() {
 		const img = this;
