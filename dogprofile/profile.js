@@ -35,7 +35,13 @@ $('.pic-grid').on('click', '.grid-photo', function(){
         $('.dog-pic').html(`<img width="88%" src="./image/dog/${data.dog_id}.png">`)
         $('.dog-name').html(`<p>${dog_name[data.dog_id]}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
-        $('#click-heart').show()
+        $('#click-heart').show();
+        (data.likes === 0)
+          ? img = './image/unlike.png'
+          : img = './image/like.png';
+
+        $('#click-heart').attr('src', img)
+        $('#heart-count').html(`<p>${data.likes}個愛心</p>`)
         $('#time').show()
         resolve(data.timestamp)
       })

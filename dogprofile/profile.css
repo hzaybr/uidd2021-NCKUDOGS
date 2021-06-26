@@ -154,12 +154,11 @@ p {
   font-size: 4.8vw;
 }
 .click-heart-grid {
-	grid-template-columns: 6% auto;
+	grid-template-columns: 9% auto;
 	padding-top: 3vw;
-	padding-left: 5vw;
+	padding-left: 3vw;
 	display: grid;
   align-items: center;
-  grid-gap: 2%;
 }
 .click_photo { width:100%;}
 #heart-count { font-size:4vw;}
