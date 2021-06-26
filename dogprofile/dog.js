@@ -227,7 +227,9 @@ $('.pic-grid').on('click', '.image-image', function(){
         $('.click-name').html(`<p>${data.name}</p>`)
         $('.pictitle').html(`<p>${data.title}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
-        $('#click-heart').show()
+        $('#heart-count').html(`<p>${data.likes}個愛心</p>`)
+        $('.click-heart').show()
+        $('.click-heart').attr('id', `clk_btn_${id}`)
         $('#time').show()
         resolve(data.timestamp)
       })
@@ -250,7 +252,8 @@ function hide_blur_white() {
 	$('.click-avatar img').remove()
 	$('.click-name p').remove()
 	$('.pictitle p').remove()
-	$('#click-heart').hide()
+	$('.click-heart').hide()
+  $('.click-heart').attr('id','')
 	$('#time p').remove()
   $('.real-pic-del-btn').hide()
 }
@@ -502,6 +505,7 @@ function load_time(index, time) {
 async function concat_image(image_id, user_pic, photo) {
 	const id = "image_" + image_id;
 	const img_btn_id = "liked_btn_" + image_id;
+	const clk_btn_id = "clk_btn_" + image_id;
 	$(`<span class=\"image-image\" id=${id}>`).prependTo(".pic-grid");
 
 	let txt = "";
@@ -521,7 +525,7 @@ async function concat_image(image_id, user_pic, photo) {
 	$(`#${id}`).html(txt);
 
 	$(`#${id}`).click(function () {
-		$("#click-heart")[0].src = $(`#${img_btn_id}`)[0].src;
+		$(".click-heart")[0].src = $(`#${img_btn_id}`)[0].src;
 	});
 
 	/* add like button function */
