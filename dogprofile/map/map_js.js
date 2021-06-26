@@ -188,18 +188,18 @@ function findposition(target_marker){
     console.log(position.coords);
     current_lat=position.coords.latitude;
     current_lng=position.coords.longitude;
-	/*	if(current_lat<NCKU_BOUNDS.edge1&&current_lat>NCKU_BOUNDS.edge3&&current_lng>NCKU_BOUNDS.edge2&&current_lng<NCKU_BOUNDS.edge4){
+		if(current_lat<NCKU_BOUNDS.edge1&&current_lat>NCKU_BOUNDS.edge3&&current_lng>NCKU_BOUNDS.edge2&&current_lng<NCKU_BOUNDS.edge4){
       ispositionFind = true;
     }else if(current_lat<NCKU_BOUNDS.edge3&&current_lat>NCKU_BOUNDS.edge5&&current_lng>NCKU_BOUNDS.edge6&&current_lng<NCKU_BOUNDS.edge4){
       ispositionFind = true;
     }else{
       ispositionFind = false;
-    }*/
+    }
     uluru = {lat: current_lat, lng: current_lng};
     target_marker.setPosition(uluru);
     map.setCenter(uluru);
     map.setZoom(17);
-		ispositionFind = true;
+		//ispositionFind = true;
   } , (err) => {
 		ispositionFind = false;
 	});
