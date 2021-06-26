@@ -47,7 +47,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15038;
+const port = 150388888888;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -334,9 +334,9 @@ app.post("/marked_position", async (req, resp) => {
     /*let command = "SELECT position_original.lat, position_record.lat FROM position_original,position_record"
 									 +" ON position_original.dog_id = position_record.dog_id"
 									 +" WHERE position_original.dog_id = '";*/
-		let command = "SELECT lat,lng FROM position_original WHERE dog_id = '";
+		let command = "SELECT lat,lng FROM position_original WHERE dog_id = ";
     command += req.body.dog_id;
-    command += "'";
+    //command += "'";
     var number = 0;
     var count = 1;
     let jsonObj = {};
