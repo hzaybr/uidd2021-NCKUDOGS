@@ -86,6 +86,7 @@ function initMap() {
     findposition(ownermarker);
     //dog's mark
    	$(document).ready(function() {
+			Markers = [];
       $.get("/dog_position", function(json){
         position_file = JSON.parse(json);
         for(i=1;i<20;i++){
@@ -238,21 +239,17 @@ $('#markcheck-cancel-btn').click(function(){
 	$('#markcheck-blur').fadeOut(500);
 })
 $('#markcheck-confirm-btn').click(function(){
-	//var id_str = $(this).attr('id');
-  //var choose_num = parseInt(id_str.slice(4,id_str.length))-1;
-  Markers[target_num].setPosition(uluru);
-  btnshow = false;
-  dogMarker_click(Markers[target_num]);
-  markClick();
-  //console.log(USER_ID);
-  $.post('./update_position', {
+	markClick();
+	$('#markcheck-blur').fadeOut(500);
+	Markers[target_num].setPosition(uluru);
+	btnshow = false;
+	$.post('./update_position', {
     user_id: USER_ID,
     dog_id:  target_num,
     lat: 		current_lat,
 		lng:		current_lng
 	}, () => {});
-	$('#markcheck-blur').fadeOut(500);
-	ownermarker.setZIndex(1);
+	ownermarker.setZIndex(1);	
 })
 
 
