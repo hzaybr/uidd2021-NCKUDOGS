@@ -33,7 +33,7 @@ p {
   font-weight: bold;
   color: #FF8B2C;
 }
-.username {font-weight: bold; font-size: 4.5vw;}
+#username, .com-username {font-weight: bold; font-size: 4.5vw;}
 .start {
   overflow: auto;
   position: absolute;
@@ -277,7 +277,7 @@ p {
   grid-template-rows: auto auto;
   font-size: 4.5vw;
 }
-.title {
+.title, .pictitle {
   margin-top: 1vw;
   font-size: 3.4vw;
   color: #00000099; 

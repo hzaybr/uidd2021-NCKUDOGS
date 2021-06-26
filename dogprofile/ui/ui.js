@@ -456,12 +456,13 @@ function load_profile_num() {
       })
   })
   Promise.all([p1, p2, p3]).then(value =>{
+    var user_title = ""
     let user_score = 2*value[0] + 6*value[1] + 10*value[2]
     console.log(user_score)
 		$("#user-score").html(user_score)
     for(i=0; i<4; i++){
       if(user_score >= user_scores[i]){
-        var user_title = user_titles[i]
+        user_title = user_titles[i]
         $(".profile-avatar").css("border-color", bgcolor[i])
         $(".profile-container").css("border",bgcolor[i])
         $("#edit-btn").attr('src',`./image/editpen/${i+2}.svg`)

@@ -135,7 +135,6 @@ $('#cancel-btn').click(function() {
 $('.write-com').click(function() {
   $('.comment-container').hide();
   $('.writing-container').show();
-  
   for (i=1; i<=5; i++){
     hid = `.w-heart:nth-child(${i})`;
     if(i<=SCORE){
@@ -226,6 +225,7 @@ $('.pic-grid').on('click', '.image-image', function(){
       }, (data)=>{
         $('.click-avatar').html(`<img width="80%" style="border-radius:50%;" src="${data.profile}">`)
         $('.click-name').html(`<p>${data.name}</p>`)
+        $('.pictitle').html(data.title)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
         $('#click-heart').show()
         $('#time').show()
@@ -606,7 +606,6 @@ function load_user() {
 		heart = `.info-heart:nth-child(${i+1}), .review-heart:nth-child(${i})`;
 		$(heart).attr('src','./image/red_heart.png');
 	}
-	
 }
 
 $('.pic-del-btn').hide();
@@ -645,13 +644,13 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt += 	`<div class="w-user-bar">`;
 	txt += 		`<img class=\"profile-avatar b-profile\" src=${user.profile}>`;
 	txt += 		`<div class=\"name-title\" style="display: block;">`
-	txt +=      `<p class="username">${user.name}</p>`
+	txt +=      `<p class="com-username">${user.name}</p>`
 	txt +=      `<p class="title">${user.title}</p>`
 	txt +=  `</div>`;
 		
 	/* Load title */
-	$('.title').html(user.title)
-	$('.username').html(user.name)
+	//$('.title').html(user.title)
+	//$('.username').html(user.name)
 
 	/* Comment button */
 	if (user_id == USER_ID) {

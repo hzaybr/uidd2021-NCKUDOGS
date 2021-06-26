@@ -23,6 +23,7 @@ function onSignIn(googleUser) {
            	USER_ID = userid;
 						USER_NAME = profile.getName();
 						PROFILE_PIC = profile.getImageUrl();
+            $('#username').html(USER_NAME)
 
             $.getScript('../after_login.js');
 					  
