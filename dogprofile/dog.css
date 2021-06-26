@@ -147,6 +147,7 @@ p {
   z-index: 2;
 }
 .name-pic {
+  position: relative;
   display: grid;
   grid-template-columns: 15% auto 10%;
   align-items: center;
@@ -171,6 +172,20 @@ p {
   grid-gap: 2%;
 }
 .pic-del-btn {width: 80%;}
+.real-pic-del-btn {
+  background-color: rgb(250, 250, 250);
+  box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+  position: absolute;
+  top: 12vw;
+  right: 8vw;
+	width: 40vw;
+	height: auto;
+	padding: 2vw;
+	text-align: center;
+	border-radius: 10px;
+	font-size: 16px;
+  display: none;
+}
 #heart-count {font-size: 4vw;}
 #click-heart {width: 150%; display: none;}
 #time {
@@ -180,6 +195,7 @@ p {
   color: #00000099;
   display: none;
 }
+#time p {margin: 0;}
 .add-pic-grid {
   display: grid;
   grid-template-columns: 40vw 40vw;

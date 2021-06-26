@@ -225,7 +225,7 @@ $('.pic-grid').on('click', '.image-image', function(){
       }, (data)=>{
         $('.click-avatar').html(`<img width="80%" style="border-radius:50%;" src="${data.profile}">`)
         $('.click-name').html(`<p>${data.name}</p>`)
-        $('.pictitle').html(data.title)
+        $('.pictitle').html(`<p>${data.title}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
         $('#click-heart').show()
         $('#time').show()
@@ -236,7 +236,7 @@ $('.pic-grid').on('click', '.image-image', function(){
     $.post('/load_time', {
       }, (time_now) => {
           time_txt = caculate_time(time, time_now)
-          $(`#time`).html(time_txt)
+          $(`#time`).html(`<p>${time_txt}</p>`)
     })
   $('.blur-white').show();
   })
@@ -249,8 +249,10 @@ function hide_blur_white() {
 	$('.photo img').remove()
 	$('.click-avatar img').remove()
 	$('.click-name p').remove()
+	$('.pictitle p').remove()
 	$('#click-heart').hide()
-	$('#time').hide()
+	$('#time p').remove()
+  $('.real-pic-del-btn').hide()
 }
 
 function caculate_time(time, time_now) {
@@ -614,14 +616,29 @@ function attach_image_event(id) {
 		const img = this;
 		$('.pic-del-btn').show();
 		$('.pic-del-btn').off();
+/*
 		$('.pic-del-btn').click(function() {
 			__delete_image(id);
 			img.parentNode.removeChild(img);
 			hide_blur_white();
-		});
-	});
+    });
+*/
+
+    $('.real-pic-del-btn').attr('id', `picdel_${id}`)
+		$('.pic-del-btn').click(function() {
+      $('.real-pic-del-btn').toggle()
+    })
+
+  });
 }
 
+$('.real-pic-del-btn').click(function() {
+  let id = $(this).attr('id').slice(7)
+  let img = document.getElementById(`image_${id}`)
+	__delete_image(id);
+	img.parentNode.removeChild(img);
+	hide_blur_white();
+});
 
 
 /******************************************************************/
