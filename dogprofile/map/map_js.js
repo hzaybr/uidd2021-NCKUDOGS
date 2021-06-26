@@ -77,6 +77,7 @@ function initMap() {
         url:'./map/mark_icon/dog_marker_good.png',
         scaledSize: new google.maps.Size(62, 77)
       },
+			zIndex:1,
       labelContent: userimg, 
       labelAnchor: new google.maps.Point(-25.5, -71.5),
       labelClass: "labels", 
@@ -108,7 +109,7 @@ function addMarker(icon_path,location) {
       url:icon_path,
       scaledSize: new google.maps.Size(62, 77)
     },
-    zIndex:1
+    zIndex:2
     });
   marker.addListener('click', function() {
     dogMarker_click(marker);
@@ -207,6 +208,7 @@ $( "#mark-icon" ).click(function() {
 			route();
 		}
     findposition(ownermarker);
+		ownermarker.setZIndex(3);
 		//console.log(current_lat);	
   }
   
@@ -218,6 +220,7 @@ $( "#sg1 img,#sg2 img" ).click(function() {
 		route();
   }
 	dogMarker_click(Markers[choose_num]);
+	ownermarker.setZIndex(1);
 });
 
 $( "#mg1 img" ).click(function() {
@@ -245,6 +248,7 @@ $('#markcheck-confirm-btn').click(function(){
 		lng:		current_lng
 	}, () => {});
 	$('#markcheck-blur').fadeOut(500);
+	ownermarker.setZIndex(1);
 })
 
 
