@@ -326,18 +326,36 @@ app.post("/update_position", async (req, resp) => {
     	})
 			console.log('success');
     });
-		let command = "UPDATE position_original SET lat = " + req.body.lat + ", lng = " + req.body.lng + " WHERE dog_id = " + req.body.dog_id;
-    db.run(command);
+		//let command = "UPDATE position_original SET lat = " + req.body.lat + ", lng = " + req.body.lng + " WHERE dog_id = " + req.body.dog_id;
+    //db.run(command);
 });
 app.post("/marked_position", async (req, resp) => {
     console.log(req.body.dog_id);
-    let command = "SELECT lat,lng FROM position_record WHERE dog_id = '";
+    /*let command = "SELECT position_original.lat, position_record.lat FROM position_original,position_record"
+									 +" ON position_original.dog_id = position_record.dog_id"
+									 +" WHERE position_original.dog_id = '";*/
+		let command = "SELECT lat,lng FROM position_original WHERE dog_id = '";
     command += req.body.dog_id;
     command += "'";
     var number = 0;
     var count = 1;
     let jsonObj = {};
+		
     db.each(command, (err, row) => {
+        count = (number%10)+1;
+        jsonObj[count] = {};
+        jsonObj[count]["lat"] = row["lat"];
+        jsonObj[count]["lng"] = row["lng"];
+        number++;
+      }, (err) => {
+        //console.log(jsonObj);
+        //resp.send(JSON.stringify(jsonObj));
+      });
+    
+		command = "SELECT lat,lng FROM position_record WHERE dog_id = '";
+    command += req.body.dog_id;
+    command += "'";
+		db.each(command, (err, row) => {
         count = (number%10)+1;
         jsonObj[count] = {};
         jsonObj[count]["lat"] = row["lat"];
