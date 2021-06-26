@@ -170,13 +170,17 @@ function dogMarker_click(target_marker){
 		}
 		//console.log(data);
   });
-  $('.dog_markerinfo').css('display','block');
+  //$('.dog_markerinfo').css('display','block');
+	$('.dog_markerinfo').fadeIn(500);
 	markerinfoShow = true;
   $('#dog_name').html(dog_name[target_num]);
   $('#dog_photo').attr("src",`./map/mark_icon_big/dog_marker_big_${target_num+1}.png`);
   $('.btn_navigation').attr('id',target_num);
   $('.btn_marked').attr('id',target_num);
   $('.btn_detail').attr('id',target_num);
+	$('.btn_navigation').animate({'top':'57vw','left':'9vw'},500);
+	$('.btn_marked').animate({'top':'65vw'},500);
+	$('.btn_detail').animate({'top':'57vw','right':'9vw'},500);
 }
 function findposition(target_marker){
   navigator.geolocation.getCurrentPosition((position) =>{

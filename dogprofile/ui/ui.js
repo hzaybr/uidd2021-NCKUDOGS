@@ -115,7 +115,11 @@ function markClick(){
 
 function markerUnclick(){
   if(!routemode){
-    $('.dog_markerinfo').css('display','none');
+		$('.btn_navigation').animate({'top':'32vw','left':'29vw'},500);
+		$('.btn_marked').animate({'top':'32vw'},500);
+		$('.btn_detail').animate({'top':'32vw','right':'29vw'},500);
+    //$('.dog_markerinfo').css('display','none');
+		$('.dog_markerinfo').fadeOut(500);
     clearMarkers(-1);
     showMarkers(-1);
     map.setZoom(17);
@@ -131,8 +135,11 @@ function markerUnclick(){
 function findmarked(dogID){
   console.log(dogID);
   if(findmarkedDisplay){
-    $('.dog_markedmode').css('display','none');
-    //$('.dog_markerinfo').css('display','block');
+   // $('.dog_markedmode').css('display','none');
+    $('.markeddog_photo').animate({'top':'55vw'},250);
+		$('.dog_markedmode').fadeOut(500);
+		
+		//$('.markeddog_photo').animate({'top':'34vw'},500);
     ownermarker.setMap(map);
 		for (var i = 0; i< marked_markers.length; i++) {
       marked_markers[i].setMap(null);
@@ -148,9 +155,10 @@ function findmarked(dogID){
     markerinfoShow = true;*/
   }else{
     //displayCheck();
-    $('.dog_markedmode').css('display','block');
+    $('.dog_markedmode').fadeIn(100);
     $('.markeddog_photo').attr("src",`./map/mark_icon_big/dog_marker_big_${dogID+1}.png`);
-    $('.btn_X').attr('id',dogID);
+    $('.markeddog_photo').animate({'top':'34vw'},50);
+		$('.btn_X').attr('id',dogID);
     clearMarkers(-1);
     ownermarker.setMap(null);
 		$.post("./marked_position", {
@@ -222,7 +230,10 @@ $('.dog_markerinfo').click(function(){
 
 $('.btn_X').click(function(){
   findmarked($(this).attr('id'));
-  $('.dog_markerinfo').css('display','block');
+  $('.dog_markerinfo').fadeIn(500);
+	$('.btn_navigation').animate({'top':'57vw','left':'9vw'},500);
+	$('.btn_marked').animate({'top':'65vw'},500);
+	$('.btn_detail').animate({'top':'57vw','right':'9vw'},500);
   markerinfoShow = true;
 	lat=Markers[$(this).attr('id')].getPosition().lat();
   lng=Markers[$(this).attr('id')].getPosition().lng();

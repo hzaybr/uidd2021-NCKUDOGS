@@ -662,22 +662,23 @@ img.avatar-choose {
 .dog_markerinfo .photo{
   margin-top: 2.38vw;
   width: 40vw;
+  z-index: 8; 
 }
 .dog_markerinfo .btn_navigation{
   position: absolute;
-  top: 57vw;
-  left: 9vw;
+  top: 32vw;
+ /* left: 29vw;*/
   width: 16vw;
 }
 .dog_markerinfo .btn_marked{
   position: absolute;
-  top: 65vw;
+  top: 32vw;
   width: 16vw;
 }
 .dog_markerinfo .btn_detail{
   position: absolute;
-  top: 57vw;
-  right: 9vw;
+  top: 32vw;
+ /* right: 9vw;*/
   width: 16vw;
 }
 .dog_markerinfo .time{
@@ -717,7 +718,7 @@ img.avatar-choose {
   position: absolute;
   width: 41vw;
   left: 29.5vw;
-  top: 34vw;
+  top: 55vw;
 }
 
 .unlogin {
