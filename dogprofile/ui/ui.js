@@ -432,32 +432,38 @@ function load_profile_num() {
     $.post('/load_profile_cmt', {
       userID: USER_ID
       }, (data) =>{
-        let len = Object.keys(data).length
-        $('#comment-count').html(len);
-        resolve(len)
+        let cmt = Object.keys(data).length
+        $('#comment-count').html(cmt);
+        resolve(cmt)
     })
   })
   const p2 = new Promise(function(resolve, reject){
     $.post('/load_profile_img', {
       userID: USER_ID
       }, (data) =>{
-        let len = Object.keys(data).length
-        $('#upload-count').html(len);
-        resolve(len)
+        let img = Object.keys(data).length
+        $('#upload-count').html(img);
+        likes = 0
+        for(var i=0; i<img; i++){
+          likes += data[i].likes
+          console.log(data[i].likes)
+        }
+        resolve(5*img+likes)
     })
   })
   const p3 = new Promise(function(resolve, reject){
     $.post('/load_profile_position', {
       userID: USER_ID
       }, (data) =>{
-        let len = Object.keys(data).length
-        $('#locate-count').html(len);
-        resolve(len)
+        let lct = Object.keys(data).length
+        $('#locate-count').html(lct);
+        resolve(lct)
       })
   })
   Promise.all([p1, p2, p3]).then(value =>{
+    console.log(value)
     var user_title = ""
-    let user_score = 2*value[0] + 6*value[1] + 10*value[2]
+    let user_score = value[0] + value[1] + 8*value[2]
     console.log(user_score)
 		$("#user-score").html(user_score)
     for(i=0; i<4; i++){
