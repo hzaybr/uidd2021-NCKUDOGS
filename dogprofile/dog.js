@@ -253,9 +253,10 @@ function hide_blur_white() {
 	$('.click-name p').remove()
 	$('.pictitle p').remove()
 	$('.click-heart').hide()
-  $('.click-heart').attr('id','')
+  	$('.click-heart').attr('id','')
 	$('#time p').remove()
-  $('.real-pic-del-btn').hide()
+	$('.pic-del-btn').hide();
+  	$('.real-pic-del-btn').hide()
 }
 
 function caculate_time(time, time_now) {
@@ -620,36 +621,19 @@ function load_user() {
 	}
 }
 
-$('.pic-del-btn').hide();
 function attach_image_event(id) {
 	$(`#image_${id}`).click(function() {
 		const img = this;
 		$('.pic-del-btn').show();
-		$('.pic-del-btn').off();
-/*
-		$('.pic-del-btn').click(function() {
+
+		$('.real-pic-del-btn').off();
+		$('.real-pic-del-btn').click(function() {
 			__delete_image(id);
 			img.parentNode.removeChild(img);
 			hide_blur_white();
-    });
-*/
-
-    $('.real-pic-del-btn').attr('id', `picdel_${id}`)
-		$('.pic-del-btn').click(function() {
-      $('.real-pic-del-btn').toggle()
-    })
-
-  });
+		});
+  	});
 }
-
-$('.real-pic-del-btn').click(function() {
-  let id = $(this).attr('id').slice(7)
-  let img = document.getElementById(`image_${id}`)
-	__delete_image(id);
-	img.parentNode.removeChild(img);
-	hide_blur_white();
-});
-
 
 /******************************************************************/
 /* Raw function */
@@ -674,14 +658,10 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt +=      `<p class="com-username">${user.name}</p>`
 	txt +=      `<p class="title">${user.title}</p>`
 	txt +=  `</div>`;
-		
-	/* Load title */
-	//$('.title').html(user.title)
-	//$('.username').html(user.name)
 
 	/* Comment button */
 	if (user_id == USER_ID) {
-		txt += 	`<div class=\"cmt-btn\" onclick=\'(function(){document.getElementById(\"${option_id}\").classList.toggle(\"show\");})();'>AA`;
+		txt += 	`<div class="cmt-btn" onclick='(function(){document.getElementById("${option_id}").classList.toggle("show");})();'>AA`;
 		txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
 		txt += 			`<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
 		txt += 			"<hr class=\"cmt-btn-ln\">";
