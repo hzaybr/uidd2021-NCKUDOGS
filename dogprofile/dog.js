@@ -703,3 +703,11 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 function __delete_image(id) {
 	$.post("./delete_image", {image_id: id});
 }
+
+function reload_comment() {
+	var x = document.getElementsByClassName("user-comment");
+	for(var i = x.length - 1; i >= 0; i--) {
+		x[i].parentNode.removeChild(x[i]);
+	}
+	load_comment();
+}
