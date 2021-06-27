@@ -1,6 +1,8 @@
 const container_list = ['.comment-container', '.pic-container', '.gps-container']
 const scrollbar_position = ['15vw', '43.1vw', '71.5vw']
 const dog_name = ['豆皮','小小乖','跳跳','皮蛋','白米','米香','麵線','呆呆','阿勇','小武','阿貴','奶茶','豆豆','仙草','黑熊','豆腐','北極熊','棕熊','拉拉'];
+const lat_bn = [22.9922, 22.9958, 23.001, 23.002]
+const lng_bn = [120.2142, 120.218, 120.2220, 120.225]
 
 
 $('.button').click(function() {
@@ -74,6 +76,7 @@ var pic_len
 function load_profile_detail() {
   var len
   var times = []
+  var ptimes = []
   document.title = `${USER_NAME}｜汪汪`;
   $('.top-name').html(USER_NAME);
 
@@ -126,16 +129,29 @@ function load_profile_detail() {
     $.post('/load_profile_position', {
       userID: USER_ID
     }, (data) =>{
-      resolve(data)
+        load_location(data)
+        resolve(data)
     })
   })
   promise_g.then((data) => {
-    $.post("/load_time", {
-      }, (time_now) => {
-        load_location(data, time_now)
+    len = Object.keys(data).length-1
+    pg = new Promise((resolve, reject) =>{
+      for(var i=len; i>=0; i--){
+        caculate_lct(data[i].lat, data[i].lng, i)
+        ptimes.push(data[i].timestamp)
+      }
+      resolve(ptimes)
+    })
+    pg.then((ptimes) => {
+      $.post('/load_time', {
+        }, (time_now) => {
+          for(var i=len;  i>=0; i--) {
+            time_txt = caculate_time(ptimes[i], time_now)
+            $(`#l_time_${len-i}`).html(time_txt)
+          }
+      })
     })
   })
-
 }
 
 
@@ -176,23 +192,51 @@ function load_img(photos) {
     $('.pic-grid').html(p_txt);
 };
 
-function load_location(data, time_now) {
+function load_location(data) {
   len = Object.keys(data).length-1
-  txt = ""
   for(var i=len; i>=0; i--){
-    lct = data[i]
-    txt += `<div class="l-border">`
-    txt += `  <div class="l-grid">`
-    txt += `    <img width=90% src="./image/dog/${lct.dog_id}.png">`
-    txt += `    <div class="l-name">${dog_name[lct.dog_id]}</div>`
-    txt += `    <div class="location">校區</div>`
-    ltime = lct.timestamp
-    time_display = caculate_time(ltime, time_now)
-    txt += `    <div class="l-time">${time_display}</div>`
-    txt += `  </div>`
-    txt += `</div>`
+      txt = `<div class="l-border">`
+      txt += `  <div class="l-grid">`
+      txt += `    <img width=90% src="./image/dog/${data[i].dog_id}.png">`
+      txt += `    <div class="l-name">${dog_name[data[i].dog_id]}</div>`
+      txt += `    <div class="location" id="loc_${i}"></div>`
+      txt += `    <div class="l-time" id="l_time_${i}"></div>`
+      txt += `  </div>`
+      txt += `</div>`
+      $('.locate-grid').append(txt)
     }
-  $('.locate-grid').html(txt)
+  }
+
+function caculate_lct(lat, lng, id){
+  lat = parseFloat(lat)
+  lng = parseFloat(lng)
+  console.log(lat,lng)
+  n = ""
+  for(i=0; i<3; i++){
+    if(lat>lat_bn[i] && lat<lat_bn[i+1]){
+      n += i.toString()
+      break
+    }
+  }
+  for(i=0; i<3; i++){
+    if(lng>lng_bn[i] && lng<lng_bn[i+1]){
+      n += i.toString()
+      break
+    }
+  }
+  switch(n){
+    case '10': n_txt = "光復校區"; break;
+    case '20': n_txt = "力行校區"; break;
+    case '01': n_txt = "勝利校區"; break;
+    case '11': n_txt = "成功校區"; break;
+    case '21': n_txt = "成杏校區"; break;
+    case '02': n_txt = "東寧校區"; break;
+    case '12': n_txt = "自強校區"; break;
+    case '22': n_txt = "敬業校區"; break;
+    default: n_txt = "成大校園";
+  }
+
+  $(`#loc_${id}`).html(n_txt)
 }
 
 function preprocess_time(time) {
@@ -206,7 +250,6 @@ function caculate_time(time, time_now) {
   t = new Date(time)
   t1 = time
   t2 = Date.parse(time_now)
-
   
   second_dif = parseInt((t2-t1)/1000);
   if(second_dif >=60){
@@ -235,7 +278,6 @@ function caculate_time(time, time_now) {
   }
   else
     time_txt = `${second_dif}秒前`
-
 
   return time_txt
 }
