@@ -464,14 +464,6 @@ function load_comment() {
 	});
 }
 
-function reload_comment() {
-	var x = document.getElementsByClassName("user-comment");
-	for(var i = x.length - 1; i >= 0; i--) {
-		x[i].parentNode.removeChild(x[i]);
-	}
-	load_comment();
-}
-
 function load_time(index, time) {
   $.post('/load_time', {
     }, (time_now) => {
@@ -672,21 +664,17 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 }
 
 function __generate_comment_buttons(comment_id, user_id, comment, photo) {
-	let content_id = "content_" + comment_id;
-	let btn_dlt_id = "btn_dlt_" + comment_id;
-	let btn_edit_id = "btn_edit_id" + comment_id;
-	let user = user_data[user_id];
+	const cmt_id = "comment_" + comment_id;
+	const content_id = "content_" + comment_id;
+	const btn_dlt_id = "btn_dlt_" + comment_id;
+	const btn_edit_id = "btn_edit_id" + comment_id;
 
 	/* Add delete button function */
 	$(`#${btn_dlt_id}`).click(function () {
-		const promise = new Promise((resolve, reject) => {
-			$.post("./delete_comment", {comment_id: comment_id}, (resp) => {
-				resolve(resp);
-			});
-		});
-		promise.then((value) => {
-			reload_comment();
-		});
+		$.post("./delete_comment", {comment_id: comment_id});
+
+		const cmt = $(`#${cmt_id}`)[0];
+		cmt.parentNode.removeChild(cmt);
 	});
 
 	/* Add edit button function */

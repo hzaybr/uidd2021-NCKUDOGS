@@ -212,7 +212,6 @@ app.post("/edit_comment", async (req, resp) => {
 
 app.post("/delete_comment", async (req, resp) => {
     sqlDelete('comments', req.body.comment_id);
-    resp.send(JSON.stringify(await sql2JSON('comments')));
 });
 /**********************************************************/
 
@@ -243,20 +242,16 @@ app.post("/query_image", async (req, resp) => {
 });
 
 app.post("/upload_image", async (req, resp) => { 
-    db.serialize(function() {
-
-        db.get("SELECT datetime('now','localtime')" , (err, row) => {
-            sqlUpdate('images', {
-                "user_id":      req.body.user_id,
-                "dog_id":       req.body.dog_id,
-                "photo":        req.body.photo,
-                "timestamp":    Object.values(row)[0]
+    db.get("SELECT datetime('now','localtime')" , (err, row) => {
+        sqlUpdate('images', {
+            "user_id":      req.body.user_id,
+            "dog_id":       req.body.dog_id,
+            "photo":        req.body.photo,
+            "timestamp":    Object.values(row)[0]
+        }, function() {
+            db.get("SELECT MAX(id) FROM images", (err, row) => {
+                resp.send(row["MAX(id)"].toString());
             });
-        });
-
-        db.get("SELECT id FROM images ORDER BY id DESC LIMIT 1", (err, row) => {
-            var id = row?.id ?? 0;
-            resp.send(id.toString());
         });
     });
 });
