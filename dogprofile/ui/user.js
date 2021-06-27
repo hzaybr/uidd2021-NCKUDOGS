@@ -90,9 +90,9 @@ function reload_user(){
 			}, (value) => {});  
     }
     */
-    console.log(`Database id: ${USER.id}`);
-    console.log(`Database name: ${USER.name}`);
-	console.log(`Database PIC: ${USER.profile}`);
+  //   console.log(`Database id: ${USER.id}`);
+  //   console.log(`Database name: ${USER.name}`);
+	// console.log(`Database PIC: ${USER.profile}`);
     	
     $('.pg .username').attr('id',USER.name);
     $('.pg .username').html(USER.name).show();

@@ -313,8 +313,8 @@ $(function() {
 		});
 	});
 
+	load_score();
 	promise.then((value) => {
-		load_user();
 		Promise.all([load_image(), load_comment()]).then(values => {
 			PAGE_LOAD_COMPLETE = true;
 		});
@@ -550,44 +550,47 @@ function load_image() {
 	});	
 }
 
-function load_user() {
-	/* Sum of score */
-	let sum = 0;
-	let scores = [0,0,0,0,0,0];
-	$.each(user_data, function(index, val) {
-		sum += val.score;
-		++scores[val.score];
-	});
+function load_score() {
 
-	/* Score bars */
-	let obj = document.getElementsByClassName("score-bar-count");
-	let max = Math.max(...scores.slice(1));
-	if(max) {
-		for (let i = 1; i <= obj.length; ++i) {
-			obj[obj.length-i].style.width = `${scores[i] * 100 / max}%`;
+	$.post('./get_scores', {dog_id: dog_page_id}, scores => {
+
+		/* Sum of score */
+		let sum = 0;
+		for (var i = 1; i <= 5; ++i) {
+			sum += scores[i] * i;
 		}
-	}
-	
-	/* Total users */
-	let user_len = Object.keys(user_data).length - scores[0]; // Exclude user with no score
-	document.getElementById("review-count").innerHTML = `(${user_len})`;
 
-	/* Average score */
-	let avg_score = 0;
-	if (user_len) {
-		avg_score = Math.round(10 * sum / user_len) / 10;
-	}
-	obj = document.getElementsByClassName("average-score");
-	for (let i = 0; i < obj.length; ++i) {
-		obj[i].innerHTML = avg_score.toFixed(1);
-	}
-	localStorage.setItem("avg_score", avg_score);
+		/* Score bars */
+		let obj = document.getElementsByClassName("score-bar-count");
+		let max = Math.max(...scores.slice(1));
+		if(max) {
+			for (let i = 1; i <= obj.length; ++i) {
+				obj[obj.length-i].style.width = `${scores[i] * 100 / max}%`;
+			}
+		}
+		
+		/* Total users */
+		let user_len = scores.reduce((a,b) => a+b);
+		document.getElementById("review-count").innerHTML = `(${user_len})`;
 
-	/* Hearts */
-	for (let i = 0; i <= avg_score; ++i) {
-		heart = `.info-heart:nth-child(${i+1}), .review-heart:nth-child(${i})`;
-		$(heart).attr('src','./image/red_heart.png');
-	}
+		/* Average score */
+		let avg_score = 0;
+		if (user_len) {
+			avg_score = Math.round(10 * sum / user_len) / 10;
+		}
+		obj = document.getElementsByClassName("average-score");
+		for (let i = 0; i < obj.length; ++i) {
+			obj[i].innerHTML = avg_score.toFixed(1);
+		}
+		localStorage.setItem("avg_score", avg_score);
+
+		/* Hearts */
+		for (let i = 0; i <= avg_score; ++i) {
+			heart = `.info-heart:nth-child(${i+1}), .review-heart:nth-child(${i})`;
+			$(heart).attr('src','./image/red_heart.png');
+		}
+
+	});
 }
 
 function attach_image_event(id) {
@@ -630,6 +633,8 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 
 	/* Comment button */
 	if (user_id == USER.id) {
+		SCORE = user.score;
+
 		txt += 	`<div class="cmt-btn" onclick='(function(){document.getElementById("${option_id}").classList.toggle("show");})();'>AA`;
 		txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
 		txt += 			`<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
@@ -642,8 +647,6 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt += 	"</div>";
 
 	/* User score */
-	SCORE = user.score;
-
 	txt += 	"<div class=\"comment-score\">"
 	let i;
 	for (i = 0; i < user.score; ++i) {

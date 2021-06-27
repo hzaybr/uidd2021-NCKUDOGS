@@ -91,6 +91,18 @@ app.post("/update_score", async (req, resp) => {
     +   `WHERE id = "${req.body.user_id}"`
     );
 });
+
+app.post("/get_scores", async (req, resp) => {
+    const dog_id = `dog_${req.body.dog_id}`;
+    const command = `SELECT ${dog_id} FROM users WHERE ${dog_id} <> 0`;
+    var scores = [0,0,0,0,0,0];
+
+    db.each(command, (err, row) => {
+        scores[row[dog_id]]++;
+    }, (err) => {
+        resp.send(scores);
+    });
+});
 /**********************************************************/
 
 
@@ -118,6 +130,13 @@ app.post("/get_unique_user", async (req, resp) => {
     let command = "SELECT name,profile FROM users WHERE id = \"" + req.body.id + "\"";
     db.get(command, (err, row) => {
       resp.send(JSON.stringify(row));
+    });
+});
+
+app.post("/query_user", async (req, resp) => {
+    let command = `SELECT * FROM users WHERE id = "${req.body.id}"`;
+    db.get(command, (err, row) => {
+        resp.send(row);
     });
 });
 
