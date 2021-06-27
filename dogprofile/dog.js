@@ -5,8 +5,6 @@ const scrollbar_position = ['10vw', '32.5vw', '55vw', '77.5vw']
 let SCORE = 0;
 let PAGE_LOAD_COMPLETE = false;
 let user_data = {};
-let is_editing = false;
-let editing_comment_id = 0;
 const BLANK_PIC = "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png";
 const LOADING_PIC = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsSAAALEgHS3X78AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAADUlEQVQI12M8d+7cfwAIRwNrXorEqAAAAABJRU5ErkJggg=="
 const LIKED = "./image/like.png";
@@ -133,24 +131,24 @@ $('#cancel-btn').click(function() {
 });
 
 $('.write-com').click(function() {
-  $('.comment-container').hide();
-  $('.writing-container').show();
-  for (i=1; i<=5; i++){
-    hid = `.w-heart:nth-child(${i})`;
-    if(i<=SCORE){
-      // console.log($(hid).attr('id'));
-      $(hid).attr('src','./image/red_heart.png');
-    }
-    else {
-      $(hid).attr('src','./image/heart.png');
-    }
-  }
+
+	$('#writing-post-btn').off();
+	$('#writing-post-btn').click(function(){post_comment()});
+
+	$('.comment-container').hide();
+	$('.writing-container').show();
+	for (i = 1; i <= 5; i++) {
+		hid = $(`.w-heart:nth-child(${i})`);
+		(i <= SCORE)
+		? hid.attr('src','./image/red_heart.png')
+		: hid.attr('src','./image/heart.png');
+	}
 });
 
 $('#writing-cancel-btn').click(hide_commentBox);
 
 function hide_commentBox() {
-	is_editing = false;
+	$('#writing-post-btn').off();
 	$('.preview-pic')[0].src = BLANK_PIC;
 	$('.commentBox').val('');
 	$('.comment-container').fadeIn();
@@ -314,9 +312,9 @@ $(function() {
 			resolve(user_data);
 		});
 	});
+
 	promise.then((value) => {
 		load_user();
-
 		Promise.all([load_image(), load_comment()]).then(values => {
 			PAGE_LOAD_COMPLETE = true;
 		});
@@ -324,60 +322,43 @@ $(function() {
 
 });
 
-$('#post-btn, #writing-post-btn').click(function() {
+$('#post-btn').click(post_comment);
 
+function post_comment() {
 	user_data[USER_ID].score = SCORE;
 
-	$.post('./update_score', {
-		user_id: 	USER_ID,
+	$.post('./post_comment', {
+		score:		SCORE,
+		user_id:	USER_ID,
 		dog_id:		dog_page_id,
+		comment:	$('.commentBox').val(),
+		photo:		$('.preview-pic')[0].src
+	}, (comment_id) => {
+		concat_comment(comment_id, USER_ID, $('.commentBox').val(), $('.preview-pic')[0].src);
+		hide_commentBox();
+	});
+}
+
+function edit_comment(id) {
+
+	$.post('./edit_comment', {
+		comment_id: id,
+		comment:	$('.commentBox').val(),
+		photo:		$('.preview-pic')[0].src,
 		score:		SCORE
 	});
 
-	if (is_editing) {
-		const promise = new Promise((resolve, reject) => {
-			$.post('./edit_comment', {
-				comment_id: editing_comment_id,
-				comment:	$('.commentBox').val(),
-				photo:		$('.preview-pic')[0].src
-			}, (finished) => {
-				resolve(finished);
-			});
-		});
-
-		promise.then((finished) => {
-			reload_comment();
-		});
-	}
-	else {
-		const promise = new Promise((resolve, reject) => {
-			$.post('./post_comment', {
-				user_id:	USER_ID,
-				dog_id:		dog_page_id,
-				comment:	$('.commentBox').val(),
-				photo:		$('.preview-pic')[0].src
-			}, (comment_id) => {
-				resolve(comment_id);
-			});
-		});
-
-		promise.then((comment_id) => {
-			concat_comment(comment_id, USER_ID, $('.commentBox').val(), $('.preview-pic')[0].src);
-			reload_comment();
-		});
+	$(`#content_${id}`)[0].innerHTML = $('.commentBox').val();
+	
+	for (i = 1; i <= 5; i++) {
+		hid = $(`#comment_${id} .comment-score`)[0].childNodes[i-1];
+		(i <= SCORE)
+		? hid.src = "./image/red_heart.png"
+		: hid.src = "./image/gray_heart.png";
 	}
 
-	const promise = new Promise((resolve, reject) => {
-		$.post('./load_users', {dog_id: dog_page_id}, (user_json) => {
-			user_data = JSON.parse(user_json);
-			resolve(user_data);
-		});
-	});
-	promise.then((value) => {
-		load_user();
-	});
 	hide_commentBox();
-});
+}
 
 const FR = new FileReader();
 FR.addEventListener("load", async function(e) {
@@ -392,10 +373,6 @@ FR.addEventListener("load", async function(e) {
 		attach_image_event(image_id);
 	});
 });
-
-function uploading_image(id) {
-
-}
 
 function post_image() {
 
@@ -593,11 +570,11 @@ function load_user() {
 	/* Score bars */
 	let obj = document.getElementsByClassName("score-bar-count");
 	let max = Math.max(...scores.slice(1));
-  if(max!=0) {
-    for (let i = 1; i <= obj.length; ++i) {
-      obj[obj.length-i].style.width = `${scores[i] * 100 / max}%`;
-    }
-  }
+	if(max) {
+		for (let i = 1; i <= obj.length; ++i) {
+			obj[obj.length-i].style.width = `${scores[i] * 100 / max}%`;
+		}
+	}
 	
 	/* Total users */
 	let user_len = Object.keys(user_data).length - scores[0]; // Exclude user with no score
@@ -673,6 +650,8 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt += 	"</div>";
 
 	/* User score */
+	SCORE = user.score;
+
 	txt += 	"<div class=\"comment-score\">"
 	let i;
 	for (i = 0; i < user.score; ++i) {
@@ -704,29 +683,32 @@ function __generate_comment_buttons(comment_id, user_id, comment, photo) {
 			$.post("./delete_comment", {comment_id: comment_id}, (resp) => {
 				resolve(resp);
 			});
-		});				
+		});
 		promise.then((value) => {
 			reload_comment();
-		});			
+		});
 	});
 
 	/* Add edit button function */
 	$(`#${btn_edit_id}`).click(function () {
-		editing_comment_id = comment_id;
-		is_editing = true;
-		SCORE = user.score;
 
+		/* Attach post comment function */
+		$('#writing-post-btn').off();
+		$('#writing-post-btn').click(function() {
+			edit_comment(comment_id);
+		});
+
+		/* Switch page to writing-container */
 		$('.comment-container').hide();
 		$('.writing-container').show();
-		for (i = 1; i <= 5; i++) {
-			hid = `.w-heart:nth-child(${i})`;
-			(i <= SCORE)
-			? $(hid).attr('src','./image/red_heart.png')
-			: $(hid).attr('src','./image/heart.png')
-		}
-
 		$('.commentBox').val($(`#${content_id}`)[0].innerHTML);
 		$('.preview-pic')[0].src = photo;
+		for (i = 1; i <= 5; i++) {
+			var hid = $(`.w-heart:nth-child(${i})`);
+			(i <= SCORE)
+			? hid.attr('src','./image/red_heart.png')
+			: hid.attr('src','./image/heart.png')
+		}
 	});
 }
 

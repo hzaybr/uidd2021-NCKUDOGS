@@ -86,9 +86,10 @@ app.post("/idtoken", (req, res)=>{
 /* Score */
 
 app.post("/update_score", async (req, resp) => {
-    let command = "UPDATE users SET dog_" + req.body.dog_id + " = " + req.body.score
-                    + " WHERE id = \"" + req.body.user_id + "\"";
-    db.run(command);
+    db.run(
+        `UPDATE users SET dog_${req.body.dog_id} = ${req.body.score}\n`
+    +   `WHERE id = "${req.body.user_id}"`
+    );
 });
 /**********************************************************/
 
@@ -173,30 +174,40 @@ app.post("/load_comments", async (req, resp) => {
 });
 
 app.post("/post_comment", async (req, resp) => {
-    db.serialize(function() {
-        db.get("SELECT datetime('now','localtime')", (err, row) => {
-            let cmt = {
-                "user_id":      req.body.user_id,
-                "dog_id":       req.body.dog_id,
-                "comment":      req.body.comment,
-                "photo":        req.body.photo,
-                "timestamp":    Object.values(row)[0]
-            };
-            sqlUpdate('comments', cmt);
-        });
-    
-        db.get("SELECT MAX(id) FROM comments", (err, row) => {
-            resp.send(row["MAX(id)"].toString());
+    db.run(
+        `UPDATE users SET dog_${req.body.dog_id} = ${req.body.score}\n`
+    +   `WHERE id = "${req.body.user_id}"`
+    );
+
+    db.get("SELECT datetime('now','localtime')", (err, row) => {
+        sqlInsert('comments', {
+            "user_id":      req.body.user_id,
+            "dog_id":       req.body.dog_id,
+            "comment":      req.body.comment,
+            "photo":        req.body.photo,
+            "timestamp":    Object.values(row)[0]
+        }, function() {
+            db.get("SELECT MAX(id) FROM comments", (err, row) => {
+                resp.send(row["MAX(id)"].toString());
+            });
         });
     });
 });
 
 app.post("/edit_comment", async (req, resp) => {
-    let command = "";
-    command += "UPDATE comments\n";
-    command += `SET comment = \"${req.body.comment}\", photo = \"${req.body.photo}\"\n`;
-    command += "WHERE id = " + req.body.comment_id;
-    db.run(command, function(){ resp.send('success') });
+    var command = `SELECT * FROM comments WHERE id = ${req.body.comment_id}`;
+    db.get(command, (err, row) => {
+        db.run(
+            `UPDATE users SET dog_${row.dog_id} = ${req.body.score}\n`
+        +   `WHERE id = "${row.user_id}"`
+        );
+    });
+
+    db.run(
+        `UPDATE comments\n`
+    +   `SET comment = "${req.body.comment}", photo = "${req.body.photo}"\n`
+    +   `WHERE id = ${req.body.comment_id}`
+    );
 });
 
 app.post("/delete_comment", async (req, resp) => {
@@ -483,7 +494,7 @@ app.post("/load_time", async (req, res) =>{
 /**********************************************************/
 /* Database functions */
 
-function sqlInsert(table, params) {
+function sqlInsert(table, params, callback = function(){}) {
     let keys = Object.keys(params);
     let command = "INSERT INTO " + table + '(' + keys.join(',') + ") VALUES(";
 
@@ -494,9 +505,10 @@ function sqlInsert(table, params) {
     command += q.join(',') + ')';
 
     db.run(command, Object.values(params));
+    callback();
 }
 
-function sqlUpdate(table, params) {
+function sqlUpdate(table, params, callback = function(){}) {
     let keys = Object.keys(params);
     let command = "REPLACE INTO " + table + '(' + keys.join(',') + ") VALUES(";
 
@@ -507,11 +519,13 @@ function sqlUpdate(table, params) {
     command += q.join(',') + ');';
 
     db.run(command, Object.values(params));
+    callback();
 }
 
-function sqlDelete(table, index) {
+function sqlDelete(table, index, callback = function(){}) {
     let command = "delete from " + table + " where id=?";
     db.run(command, index);
+    callback();
 }
 
 function sqlPrint(table) {
