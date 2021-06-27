@@ -232,6 +232,18 @@ app.post("/edit_comment", async (req, resp) => {
 app.post("/delete_comment", async (req, resp) => {
     sqlDelete('comments', req.body.comment_id);
 });
+
+app.post("/get_user_comment_ids", async (req, resp) => {
+    var command = `SELECT id as id FROM comments\n`
+    command += `WHERE dog_id = ${req.body.dog_id} AND user_id = "${req.body.user_id}"`;
+    let arr = [];
+
+    db.each(command, (err, row) => {
+        arr.push(row.id);
+    }, (err) => {
+        resp.send(arr);
+    });
+});
 /**********************************************************/
 
 
@@ -328,7 +340,7 @@ app.post("/get_user_photo_ids", async (req, resp) => {
     db.each(command, (err, row) => {
         arr.push(row.id);
     }, (err) => {
-        resp.send(arr.toLocaleString());
+        resp.send(arr);
     });
 });
 /**********************************************************/
