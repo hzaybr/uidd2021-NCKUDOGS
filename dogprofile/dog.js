@@ -530,18 +530,24 @@ async function concat_image(image_id, user_pic, photo) {
 
 	/* add like button function */
 	$(`#${img_btn_id}`).click(function () {
-		$.post('./like_image', {
-			user_id:	USER_ID,
-			image_id:	image_id
-		});
+    if(login_status){
+      $.post('./like_image', {
+        user_id:	USER_ID,
+        image_id:	image_id
+      });
 
-		var src = document.getElementById(img_btn_id).getAttribute('src');
-		(src === LIKED)
-		? $(`#${img_btn_id}`)[0].src = UNLIKED
-		: $(`#${img_btn_id}`)[0].src = LIKED;
+      var src = document.getElementById(img_btn_id).getAttribute('src');
+      (src === LIKED)
+      ? $(`#${img_btn_id}`)[0].src = UNLIKED
+      : $(`#${img_btn_id}`)[0].src = LIKED;
 
-		return false;
-	})
+      return false;
+    }
+    else {
+     $('.unlogin').fadeIn(500);
+      return false;
+    }
+  });
 }
 
 function load_image() {
