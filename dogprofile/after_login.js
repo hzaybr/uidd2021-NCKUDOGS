@@ -10,7 +10,7 @@ function logged_in() {
     clearInterval(refreshIntervalId);
 
     const promise = new Promise((resolve, reject) => {
-        $.post('./get_liked_images', {user_id: USER_ID}, (liked) => {
+        $.post('./get_liked_images', {user_id: USER.id}, (liked) => {
             var arr = [];
             if (liked) {
                 arr = liked.split(',').map(function(num) {
@@ -29,7 +29,7 @@ function logged_in() {
         });
     })
 
-    $.post('./get_user_photo_ids', {dog_id: dog_page_id, user_id: USER_ID}, (ids) => {
+    $.post('./get_user_photo_ids', {dog_id: dog_page_id, user_id: USER.id}, (ids) => {
         ids.split(',').forEach(id => {
             attach_image_event(id);
         })

@@ -325,16 +325,16 @@ $(function() {
 $('#post-btn').click(post_comment);
 
 function post_comment() {
-	user_data[USER_ID].score = SCORE;
+	user_data[USER.id].score = SCORE;
 
 	$.post('./post_comment', {
 		score:		SCORE,
-		user_id:	USER_ID,
+		user_id:	USER.id,
 		dog_id:		dog_page_id,
 		comment:	$('.commentBox').val(),
 		photo:		$('.preview-pic')[0].src
 	}, (comment_id) => {
-		concat_comment(comment_id, USER_ID, $('.commentBox').val(), $('.preview-pic')[0].src);
+		concat_comment(comment_id, USER.id, $('.commentBox').val(), $('.preview-pic')[0].src);
 		hide_commentBox();
 	});
 }
@@ -365,11 +365,11 @@ FR.addEventListener("load", async function(e) {
 	let photo = await downscaleImage(e.target.result);
 
 	$.post("./upload_image", {
-		user_id: 	USER_ID,
+		user_id: 	USER.id,
 		dog_id:		dog_page_id,
 		photo: 		photo
 	}, (image_id) => {
-		concat_image(image_id, PROFILE_PIC, photo);
+		concat_image(image_id, USER.profile, photo);
 		attach_image_event(image_id);
 	});
 });
@@ -445,7 +445,7 @@ function add_pic_to_comment() {
 
 function concat_comment(comment_id, user_id, comment, photo) {
 	__generate_comment_section_html(comment_id, user_id, comment, photo);
-	if (user_id == USER_ID) { // User can edit this comment
+	if (user_id == USER.id) { // User can edit this comment
     __generate_comment_buttons(comment_id, user_id, comment, photo);
 	}
 }
@@ -502,7 +502,7 @@ async function concat_image(image_id, user_pic, photo) {
 	$(`#${img_btn_id}`).click(function () {
     if(login_status){
       $.post('./like_image', {
-        user_id:	USER_ID,
+        user_id:	USER.id,
         image_id:	image_id
       });
 
@@ -629,7 +629,7 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt +=  `</div>`;
 
 	/* Comment button */
-	if (user_id == USER_ID) {
+	if (user_id == USER.id) {
 		txt += 	`<div class="cmt-btn" onclick='(function(){document.getElementById("${option_id}").classList.toggle("show");})();'>AA`;
 		txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
 		txt += 			`<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;

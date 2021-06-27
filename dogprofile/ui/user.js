@@ -1,12 +1,10 @@
 let login_status = false
-let USER_ID;
-let USER_NAME;
-let PROFILE_PIC;
+const USER = {};
 
 function onSignIn(googleUser) {
   login_status = true;
   // Useful data for your client-side scripts:
-  var profile = googleUser.getBasicProfile()
+  const profile = googleUser.getBasicProfile()
   console.log('Success Login');
   console.log(`GOOGLE ID: ${profile.getId()}`) // Don't send this directly to your server!
   console.log(`GOOGLE Name: ${profile.getName()}`)
@@ -19,11 +17,20 @@ function onSignIn(googleUser) {
         $.post('/idtoken', {
           idToken: id_token
           },(data)=>{
-            var userid = data.sub
-           	USER_ID = userid;
-						USER_NAME = profile.getName();
-						PROFILE_PIC = profile.getImageUrl();
-            $('#username').html(USER_NAME)
+
+			Object.defineProperties(USER, {
+				'id': { value: profile.getId() },
+				'name': {
+					value: profile.getName(),
+					writable: true
+				},
+				'profile': {
+					value: profile.getImageUrl(),
+					writable: true
+				}
+			});
+
+            $('#username').html(USER.name)
 
             $.getScript('../after_login.js');
 					  
@@ -54,14 +61,14 @@ function onSignIn(googleUser) {
 
 function reload_user(){
   $.post('./update_users', {
-		id:	USER_ID,
-		name:	USER_NAME,
-		profile:	PROFILE_PIC
+		id:	USER.id,
+		name:	USER.name,
+		profile:	USER.profile
   }, () => {});  
  
   const promise = new Promise((resolve, reject) => {
    		$.post('./get_unique_user', {
-				  id:	USER_ID
+				  id:	USER.id
         }, (user_info) => {resolve(JSON.parse(user_info))});  
     /*
     $.post('./load_users', {dog_id: dog_page_id}, (user_json) => {
@@ -71,29 +78,29 @@ function reload_user(){
       */
 	});
   promise.then((user_info) => {
-    USER_NAME = user_info.name;
-    PROFILE_PIC = user_info.profile;
+    USER.name = user_info.name;
+    USER.profile = user_info.profile;
     /*
     else{
       console.log('first_login')
    		$.post('./update_users', {
-				id:	USER_ID,
-				name:	USER_NAME,
-				profile:	PROFILE_PIC
+				id:	USER.id,
+				name:	USER.name,
+				profile:	USER.profile
 			}, (value) => {});  
     }
     */
-    console.log(`Database id: ${USER_ID}`);
-    console.log(`Database name: ${USER_NAME}`);
-	  console.log(`Database PIC: ${PROFILE_PIC}`);
+    console.log(`Database id: ${USER.id}`);
+    console.log(`Database name: ${USER.name}`);
+	console.log(`Database PIC: ${USER.profile}`);
     	
-    $('.pg .username').attr('id',USER_NAME);
-    $('.pg .username').html(USER_NAME).show();
-    $('.pg .profile-avatar, .heart-grid .profile-avatar,.writing-container .profile-avatar').attr('src',PROFILE_PIC); 
+    $('.pg .username').attr('id',USER.name);
+    $('.pg .username').html(USER.name).show();
+    $('.pg .profile-avatar, .heart-grid .profile-avatar,.writing-container .profile-avatar').attr('src',USER.profile); 
     /*
     let avatars = document.getElementsByClassName('profile-avatar');
     for (let i = 0; i < avatars.length; ++i) {
-      avatars[i].src = PROFILE_PIC;
+      avatars[i].src = USER.profile;
     }
     */ 
 
