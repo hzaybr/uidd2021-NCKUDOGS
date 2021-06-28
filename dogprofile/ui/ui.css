@@ -620,12 +620,16 @@ img.avatar-choose {
   margin-top: 30vw;
 }
 
+.label{
+  position: relative;
+  background:  cornflowerblue;
+}
 .labels img{
-  width: 14vw;
-  height: 14vw;
+  position: absolute;
+  background: yellow;
+  width: 50px;
   border-radius:50%;
-  object-fit: cover;
-  object-position: 50% 50%;
+  transform: translate(-50%,-71.5px);
 }
 
 .dog_markerinfo {

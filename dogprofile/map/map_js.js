@@ -78,11 +78,11 @@ function initMap() {
         scaledSize: new google.maps.Size(62, 77)
       },
 			zIndex:1,
-      labelContent: userimg, 
-      labelAnchor: new google.maps.Point(-25.5, -71.5),
+      labelContent: userimg,
       labelClass: "labels", 
       labelStyle: { opacity: 1.0 }
     });
+    
     findposition(ownermarker);
     //dog's mark
    	$(document).ready(function() {
