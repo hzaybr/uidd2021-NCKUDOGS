@@ -620,13 +620,8 @@ img.avatar-choose {
   margin-top: 30vw;
 }
 
-.label{
-  position: relative;
-  background:  cornflowerblue;
-}
 .labels img{
   position: absolute;
-  background: yellow;
   width: 50px;
   border-radius:50%;
   transform: translate(-50%,-71.5px);
