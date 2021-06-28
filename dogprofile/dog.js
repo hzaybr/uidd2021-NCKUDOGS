@@ -430,70 +430,7 @@ function load_score() {
 	});
 }
 
-function attach_image_event(id) {
-	$(`#image_${id}`).click(function() {
-		const img = this;
-		$('.pic-del-btn').show();
 
-		$('.real-pic-del-btn').off();
-		$('.real-pic-del-btn').click(function() {
-			__delete_image(id);
-			img.parentNode.removeChild(img);
-			hide_blur_white();
-		});
-  	});
-}
-
-function attach_comment_button(id) {
-	const comment_id = "comment_" + id;
-	const btn_dlt_id = "btn_dlt_" + id;
-	const btn_edit_id = "btn_edit_id" + id;
-	const cmtpic_id = "cmtpic_" + id;
-	const option_id = "cmt_option_" + id;
-	const content_id = "content_" + id;
-	const cmt_id = "comment_" + id;
-
-	/* Generate elements */
-	var txt = "";
-	txt += 	`<div class="cmt-btn" onclick='(function(){document.getElementById("${option_id}").classList.toggle("show");})();'>AA`;
-	txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
-	txt += 			`<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
-	txt += 			"<hr class=\"cmt-btn-ln\">";
-	txt += 			`<button class=\"cmt-edit-btn\" id=${btn_edit_id}>編輯</button>`;
-	txt += 		"</span>";
-	txt += 	"</div>";
-	$(txt).appendTo(`#${comment_id} .w-user-bar`);
-
-	/* Add delete button function */
-	$(`#${btn_dlt_id}`).click(function () {
-		$.post("./delete_comment", {comment_id: id});
-
-		const cmt = $(`#${cmt_id}`)[0];
-		cmt.parentNode.removeChild(cmt);
-	});
-
-	/* Add edit button function */
-	$(`#${btn_edit_id}`).click(function () {
-
-		/* Attach post comment function */
-		$('#writing-post-btn').off();
-		$('#writing-post-btn').click(function() {
-			edit_comment(id);
-		});
-
-		/* Switch page to writing-container */
-		$('.comment-container').hide();
-		$('.writing-container').show();
-		$('.commentBox').val($(`#${content_id}`)[0].innerHTML);
-		$('.preview-pic')[0].src = $(`#${cmtpic_id}`)[0].src;
-		for (i = 1; i <= 5; i++) {
-			var hid = $(`.w-heart:nth-child(${i})`);
-			(i <= SCORE)
-			? hid.attr('src','./image/red_heart.png')
-			: hid.attr('src','./image/heart.png')
-		}
-	});
-}
 
 /******************************************************************/
 /* Raw function */
@@ -538,10 +475,6 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt +=  `<img class=\"comment-pic\" id=${cmtpic_id} src=${photo}></img>`;
 
 	$(`#${cmt_id}`).html(txt);
-}
-
-function __delete_image(id) {
-	$.post("./delete_image", {image_id: id});
 }
 
 function reload_comment() {

@@ -65,6 +65,19 @@ $('.heart').click(function() {
 
 document.getElementById("post-pic-in-comment").addEventListener("change", add_pic_to_comment);
 
+async function add_pic_to_comment() {
+	if (this.files && this.files[0]) {
+        var FR = new FileReader();     
+        FR.addEventListener("load", async function(e) {
+			var photo = await downscaleImage(e.target.result);
+			$('.preview-pic')[0].src = photo;
+        });
+
+        var blob = await get_image_blob(this.files[0]);
+		FR.readAsDataURL(blob);
+    }
+}
+
 $('.write-com').click(function() {
 
 	$('#writing-post-btn').off();
@@ -120,6 +133,57 @@ function edit_comment(id) {
 	hide_commentBox();
 }
 
+function attach_comment_button(id) {
+	const comment_id = "comment_" + id;
+	const btn_dlt_id = "btn_dlt_" + id;
+	const btn_edit_id = "btn_edit_id" + id;
+	const cmtpic_id = "cmtpic_" + id;
+	const option_id = "cmt_option_" + id;
+	const content_id = "content_" + id;
+	const cmt_id = "comment_" + id;
+
+	/* Generate elements */
+	var txt = "";
+	txt += 	`<div class="cmt-btn" onclick='(function(){document.getElementById("${option_id}").classList.toggle("show");})();'>AA`;
+	txt += 		`<span class=\"cmt-option\" id=${option_id}>`;
+	txt += 			`<button class=\"cmt-dlt-btn\" id=${btn_dlt_id}>刪除</button>`;
+	txt += 			"<hr class=\"cmt-btn-ln\">";
+	txt += 			`<button class=\"cmt-edit-btn\" id=${btn_edit_id}>編輯</button>`;
+	txt += 		"</span>";
+	txt += 	"</div>";
+	$(txt).appendTo(`#${comment_id} .w-user-bar`);
+
+	/* Add delete button function */
+	$(`#${btn_dlt_id}`).click(function () {
+		$.post("./delete_comment", {comment_id: id});
+
+		const cmt = $(`#${cmt_id}`)[0];
+		cmt.parentNode.removeChild(cmt);
+	});
+
+	/* Add edit button function */
+	$(`#${btn_edit_id}`).click(function () {
+
+		/* Attach post comment function */
+		$('#writing-post-btn').off();
+		$('#writing-post-btn').click(function() {
+			edit_comment(id);
+		});
+
+		/* Switch page to writing-container */
+		$('.comment-container').hide();
+		$('.writing-container').show();
+		$('.commentBox').val($(`#${content_id}`)[0].innerHTML);
+		$('.preview-pic')[0].src = $(`#${cmtpic_id}`)[0].src;
+		for (i = 1; i <= 5; i++) {
+			var hid = $(`.w-heart:nth-child(${i})`);
+			(i <= SCORE)
+			? hid.attr('src','./image/red_heart.png')
+			: hid.attr('src','./image/heart.png')
+		}
+	});
+}
+
 
 
 /************************************************************************************************/
@@ -128,40 +192,39 @@ function edit_comment(id) {
 document.getElementById("fl_file").addEventListener("change", upload_image);
 document.getElementById("fl_file2").addEventListener("change", upload_image);
 
-const FR = new FileReader();
-FR.addEventListener("load", async function(e) {
-	let photo = await downscaleImage(e.target.result);
+async function upload_image() {
+    if (this.files && this.files[0]) {
+		var FR = new FileReader();     
+		FR.addEventListener("load", async function(e) {
+			var photo = await downscaleImage(e.target.result);
+		
+			$.post("./upload_image", {
+				user_id: 	USER.id,
+				dog_id:		dog_page_id,
+				photo: 		photo
+			}, (image_id) => {
+				concat_image(image_id, USER.profile, photo);
+				attach_image_event(image_id);
+			});
+		});
+        
+		var blob = await get_image_blob(this.files[0]);
+		FR.readAsDataURL(blob);
+	}
+}
 
-	$.post("./upload_image", {
-		user_id: 	USER.id,
-		dog_id:		dog_page_id,
-		photo: 		photo
-	}, (image_id) => {
-		concat_image(image_id, USER.profile, photo);
-		attach_image_event(image_id);
-	});
-});
+function attach_image_event(id) {
+	$(`#image_${id}`).click(function() {
+		const img = this;
+		$('.pic-del-btn').show();
 
-function upload_image() {
-
-    if (!(this.files && this.files[0]))
-		return;
-
-	const file = this.files[0];
-
-	heic2any({
-		blob: file,
-		toType: "image/jpeg",
-		quality: 0.1
-	})
-	.then((result) => { // result is a BLOB of the JPG formatted image
-		FR.readAsDataURL(result);
-	})
-	.catch((errorObject) => {
-		(errorObject.code === 1)
-		? FR.readAsDataURL(file)		// file is not HEIC
-		: console.error(errorObject);	// other errors
-	});
+		$('.real-pic-del-btn').off();
+		$('.real-pic-del-btn').click(function() {
+			$.post("./delete_image", {image_id: id});
+			img.parentNode.removeChild(img);
+			hide_blur_white();
+		});
+  	});
 }
 
 function downscaleImage(dataUrl) {
@@ -201,12 +264,23 @@ function downscaleImage(dataUrl) {
 	});
 }
 
-function add_pic_to_comment() {
-	if (this.files && this.files[0]) {
-        var FR = new FileReader();     
-        FR.addEventListener("load", function(e) {
-			$('.preview-pic')[0].src = e.target.result;
-        });
-        FR.readAsDataURL( this.files[0] );
-    }
+function get_image_blob(file) {
+
+	return new Promise((res, rej) => {
+		heic2any({
+			blob: file,
+			toType: "image/jpeg",
+			quality: 0.1
+		})
+		.then((result) => { // result is a BLOB of the JPG formatted image
+			res(result);
+		})
+		.catch((errorObject) => {
+			if (errorObject.code === 1) { // file is not HEIC 
+				res(file);
+			} else { // other errors
+				rej(errorObject);
+			}
+		});
+	})
 }
