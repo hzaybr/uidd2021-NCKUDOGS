@@ -628,6 +628,9 @@ img.avatar-choose {
   width: 50px;
   border-radius:50%;
   transform: translate(-50%,-71.5px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .dog_markerinfo {
