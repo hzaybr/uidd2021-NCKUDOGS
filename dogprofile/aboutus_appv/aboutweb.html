@@ -4,14 +4,46 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="./about.css" rel="stylesheet" type="text/css"> 
-    <title>about web</title>
+    <link rel="icon" type="image/png" href="../image/dog_app_icon.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="../image/dog_app_icon_r.png"/>
+    <link rel="manifest" href="../manifest.json">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>關於汪汪</title>
+    <style>
+    .link {
+			display: grid;
+			grid-template-columns: 13.1vw 13.1vw;
+			justify-content: center;
+			position: relative;
+			bottom: 26vw;
+			grid-gap: 11.5vw;
+      z-index: 2;
+    }
+  </style>
   </head>
 
   <body>
     <div style="margin: 0; overflow-x: hidden;">
       <img src="./image/XX.png" class="backicon" onclick="history.back()">
       <img style="width: 100%;" src="./image/aboutweb.svg">
+    <div class="link">
+      <img id="fb" style="width: 100%;" src="./image/FB.png">
+      <img id="gmail" style="width: 100%;" src="./image/gmail.png">
     </div>
-  </body>
+    </div>
 
+		<script>
+      $('#fb').click(function() {
+        window.open('https://www.facebook.com/汪汪-100735148874206/')
+      })
+      $('#gmail').click(function() {
+        window.location.assign('mailto: wangwangwoofwoof@gmail.com')
+      })
+
+        
+		</script>
+
+  </body>
 </html>

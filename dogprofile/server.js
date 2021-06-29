@@ -361,13 +361,13 @@ app.post("/update_position", async (req, resp) => {
         "lng":      req.body.lng,
         "timestamp":now.getTime()
     	})
-			console.log('success');
+			//console.log('success');
     });
 		//let command = "UPDATE position_original SET lat = " + req.body.lat + ", lng = " + req.body.lng + " WHERE dog_id = " + req.body.dog_id;
     //db.run(command);
 });
 app.post("/marked_position", async (req, resp) => {
-    console.log(req.body.dog_id);
+    //console.log(req.body.dog_id);
     /*let command = "SELECT position_original.lat, position_record.lat FROM position_original,position_record"
 									 +" ON position_original.dog_id = position_record.dog_id"
 									 +" WHERE position_original.dog_id = '";*/
@@ -440,11 +440,11 @@ app.post("/getheart", async (req, resp) => {
 			}
     }, (err) => {
       if(count==0){
-        console.log(score);
+       // console.log(score);
       }else{
         score = Math.round(10 * total / count) / 10;
         //resp.send(`${score}`);
-        console.log(score);
+        //console.log(score);
       }
       resp.send(`${score}`);
     });
