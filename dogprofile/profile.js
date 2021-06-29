@@ -136,6 +136,7 @@ function load_profile_detail() {
   $.post('/load_profile_img', {
     userID: USER_ID
   }, (data) =>{
+        console.log(data)
     load_img(data)
   })
 
@@ -197,9 +198,9 @@ function load_cmt(scores, num){
 function load_img(photos) {
     p_txt = ""
     pic_len = Object.keys(photos).length
-    var row = pic_len%3 + 1
+    var row = parseInt(pic_len/3) + 1
     console.log(`pic row: ${row}`)
-    $('.pic-grid').css("grid-template-rows", `repeat(${row}, 33.1vw)`)
+    $('.pic-grid').css("grid-template-rows", `repeat(${row}, 33vw)`)
     for(var i=pic_len-1; i>=0; i--){
       p_txt += `<div class="grid-photo" id="image_${photos[i].id}" style="background-image: url(${photos[i].photo});"></div>`
     }

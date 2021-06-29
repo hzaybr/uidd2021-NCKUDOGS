@@ -286,7 +286,7 @@ $('#view-pg .profile-avatar, .username').click(function() {
   window.location.assign('userprofile.html')
 })
 
-$('.uscore-container p, #user-title').click(function() {
+$('.uscore-f').click(function() {
   $('.title-container').fadeIn(300)
 })
 $('#title-cancel').click(function() {
