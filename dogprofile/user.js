@@ -26,16 +26,18 @@ function onSignIn(googleUser) {
 
 					  
             reload_user();
-            if(window.location.href.split('/').filter(e => e).slice(-1) == "dog.html"){
+            let url = new URL(window.location.href)
+            let path = url.pathname.slice(1)
+            if(path == "dog.html"){
               if(load_complete){
                 reload_comment();
               }
             }
-            else if(window.location.href.split('/').filter(e => e).slice(-1) == "index.html"){
-              load_profile_num();
-						}
-            else if(window.location.href.split('/').filter(e => e).slice(-1) == "userprofile.html"){
+            else if(path == "userprofile.html"){
               load_profile_detail();
+						}
+            else{// if(path == "index.html"){
+              load_profile_num();
 						}
             //localStorage.setItem("user", JSON.stringify({id: userid, name: `${profile.getName()}`, image_url: `${profile.getImageUrl()}`}));
 				})

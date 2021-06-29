@@ -298,6 +298,7 @@ p {
   font-size: 3.4vw;
   color: #00000099; 
 }
+.com-username { display: inline-block;}
 .name-title p {margin: 0;}
 .heart-grid {
   display: grid;

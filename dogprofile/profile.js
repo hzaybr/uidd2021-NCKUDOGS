@@ -90,6 +90,7 @@ function load_profile_detail() {
   var len
   var times = []
   var ptimes = []
+
   document.title = `${USER_NAME}｜汪汪`;
   $('.top-name').html(USER_NAME);
 
@@ -293,4 +294,33 @@ function caculate_time(time, time_now) {
     time_txt = `${second_dif}秒前`
 
   return time_txt
+}
+
+/*************************************************************************************/
+function checkuser() {
+  url = new URL(window.location.href)
+  if(url.search == ""){
+    const userdata = {
+      user_id: USER_ID,
+      user_name: USER_NAME
+      }
+      return userdata
+  }
+  else{
+    let id=url.search.slice(5)
+    id = atob(id)
+    console.log(id)
+    p = new Promise((resolve, reject) =>{
+    $.post('/get_comment', {comment_id: id},
+      (data) => {
+        const userdata = {
+          user_id: data.id,
+          user_name: data.name
+          }
+        resolve(userdata)})
+    })
+    p.then((data) =>{
+      return data
+    })
+  }
 }

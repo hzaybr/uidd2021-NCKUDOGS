@@ -261,7 +261,13 @@ function caculate_time(time, time_now) {
   return time_txt
 }
 
-
+/*
+$('#comment_box').on('click', '.profile-avatar, .com-username', function() {
+  let id = $(this).attr('id').slice(4)
+  id = btoa(id)
+  window.location.assign(`userprofile.html?com=${id}`)
+})
+*/
 
 /************************************************************************************************/
 
@@ -284,8 +290,9 @@ $(function() {
 
 });
 
-function concat_comment(comment_id, user_id, comment, photo) {
+function concat_comment(comment_id, user_id, comment, photo, timestamp) {
 	__generate_comment_section_html(comment_id, user_id, comment, photo);
+	load_time(comment_id, timestamp)
 }
 
 let load_complete = false;
@@ -293,8 +300,7 @@ function load_comment() {
 	return new Promise((res, rej) => {
 		$.post('./load_comments', {dog_id: dog_page_id}, (cmt_json) => {
 			$.each(JSON.parse(cmt_json), function(index, val) {
-				concat_comment(index, val.user_id, val.comment, val.photo);
-				load_time(index, val.timestamp)
+				concat_comment(index, val.user_id, val.comment, val.photo, val.timestamp);
 			});
 			load_complete = true;
 			res('comment_loaded');
@@ -448,9 +454,9 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 
 	/* User name and profile pic */
 	txt += 	`<div class="w-user-bar">`;
-	txt += 		`<img class=\"profile-avatar b-profile\" src=${user.profile}>`;
+	txt += 		`<img class=\"profile-avatar b-profile\" id="ava_${comment_id}" src=${user.profile}>`;
 	txt += 		`<div class=\"name-title\" style="display: block;">`
-	txt +=      	`<p class="com-username">${user.name}</p>`
+	txt +=      	`<p class="com-username" id="nam_${comment_id}">${user.name}</p>`
 	txt +=      	`<p class="title">${user.title}</p>`
 	txt +=  	`</div>`;
 	txt += 	`</div>`;

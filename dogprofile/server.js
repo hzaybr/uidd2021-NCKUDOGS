@@ -47,7 +47,7 @@ const sslOptions = {
 }
 
 /* Any number from the IANA ephemeral port range (49152-65535) */
-const port = 15037;
+const port = 15038;
 
 const server = https.createServer(sslOptions, app)
 server.listen(port, () => {
@@ -206,8 +206,8 @@ app.post("/post_comment", async (req, resp) => {
             "photo":        req.body.photo,
             "timestamp":    Object.values(row)[0]
         }, function() {
-            db.get("SELECT MAX(id) FROM comments", (err, row) => {
-                resp.send(row["MAX(id)"].toString());
+            db.get("SELECT MAX(id), timestamp FROM comments", (err, row) => {
+                resp.send(row);
             });
         });
     });
@@ -475,13 +475,20 @@ app.post("/load_profile_img", async (req, res) => {
 });
 
 app.post("/get_image", async (req, res) => {
-  let command = `SELECT * FROM images INNER JOIN  users ON images.user_id = users.id AND images.id='${req.body.image_id}'`
+  let command = `SELECT * FROM images INNER JOIN users ON images.user_id = users.id AND images.id='${req.body.image_id}'`
   var data ={} 
   db.get(command, (err, row) =>{
     res.send(row)
   })
 });
 
+app.post("/get_comment", async (req, res) => {
+  let command = `SELECT * FROM comments INNER JOIN users ON comments.user_id = users.id AND comments.id='${req.body.comment_id}'`
+  var data ={} 
+  db.get(command, (err, row) =>{
+    res.send(row)
+  })
+});
 app.post("/load_profile_position", async (req, res) => {
   let command = `SELECT dog_id, lat, lng, timestamp FROM position_record WHERE user_id = '${req.body.userID}'`
   var data ={} 

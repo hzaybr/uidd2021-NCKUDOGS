@@ -104,8 +104,10 @@ function post_comment() {
 		dog_id:		dog_page_id,
 		comment:	$('.commentBox').val(),
 		photo:		$('.preview-pic')[0].src
-	}, (comment_id) => {
-		concat_comment(comment_id, USER.id, $('.commentBox').val(), $('.preview-pic')[0].src);
+	}, (data) => {
+    console.log(data)
+    let comment_id = data["MAX(id)"]
+		concat_comment(comment_id, USER.id, $('.commentBox').val(), $('.preview-pic')[0].src, data.timestamp);
 		attach_comment_button(comment_id);
 		hide_commentBox();
     load_score();
