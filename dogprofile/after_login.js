@@ -108,6 +108,7 @@ function post_comment() {
 		concat_comment(comment_id, USER.id, $('.commentBox').val(), $('.preview-pic')[0].src);
 		attach_comment_button(comment_id);
 		hide_commentBox();
+    load_score();
 	});
 }
 

@@ -185,7 +185,7 @@ $('.pic-grid').on('click', '.image-image', function(){
     $.post('/get_image', {
       image_id: id
       }, (data)=>{
-        $('.click-avatar').html(`<img width="80%" style="border-radius:50%;" src="${data.profile}">`)
+        $('.click-avatar').html(`<img class="profile-avatar" style="width: 11vw; height:11vw" src="${data.profile}">`)
         $('.click-name').html(`<p>${data.name}</p>`)
         $('.pictitle').html(`<p>${data.title}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
