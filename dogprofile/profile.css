@@ -3,6 +3,7 @@ body {
   overflow: hidden;
 }
 p {
+  display: inline-block;
   margin: 2vw;
   font-family: "Segoe UI","微軟正黑體",sans-serif;
 }
@@ -22,6 +23,7 @@ p {
   right: 0;
 }
 .top-name, .topbar {
+  display: block;
   font-weight: 900;
   font-size: 5vw;	
   padding: 3vw;
@@ -83,8 +85,8 @@ p {
 }
 .l-grid {
 	display: grid;
-  grid-gap: 3%;
-	grid-template-columns: 20% 16% auto auto;
+  grid-gap: 2%;
+	grid-template-columns: 16% 16% auto auto;
 	align-items: center;
   height: auto;
   padding: 3vw;
@@ -103,11 +105,6 @@ p {
 	grid-gap: 0.7vw;
   padding-top: 2vw;
 }
-.name-time {
-	display: grid;
-	grid-template-columns: 50% 50%;
-	padding-right: 1vw;
-}
 .dogname {
   margin: 1vw;
   font-size: 4.5vw;
@@ -119,6 +116,7 @@ p {
   font-size: 4vw;
   color: #00000099;
 }
+.dtime {float: right;}
 .heart-grid {margin: 1vw; padding-top:1.5vw;}
 .heart {width: 4%;}
 .grid-photo { background-size: cover;}

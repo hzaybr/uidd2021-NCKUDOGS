@@ -287,7 +287,7 @@ $('#view-pg .profile-avatar, .username').click(function() {
 })
 
 $('.uscore-container p, #user-title').click(function() {
-  $('.title-container').show()
+  $('.title-container').fadeIn(300)
 })
 $('#title-cancel').click(function() {
   $('.title-container').hide()

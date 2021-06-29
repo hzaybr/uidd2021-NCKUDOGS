@@ -34,8 +34,10 @@ $('.pic-grid').on('click', '.grid-photo', function(){
     $.post('./get_image', {
       image_id: id,
       }, (data)=>{
+        $('.dog-pic').attr('id', `dog_${data.dog_id}`)
         $('.dog-pic').html(`<img width="88%" src="./image/dog/${data.dog_id}.png">`)
         $('.dog-name').html(`<p>${dog_name[data.dog_id]}</p>`)
+        $('.dog-name p').attr('id', `dog_${data.dog_id}`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
         $('#click-heart').show();
         (data.likes === 0)
@@ -59,6 +61,17 @@ $('.pic-grid').on('click', '.grid-photo', function(){
   })
 })
 
+$('.comment-grid').on('click', '.dogname, .dogavatar', directToDogpage);
+$('.locate-grid').on('click', '.l-name, .dogavatar', directToDogpage);
+$('.dog-name-pic').on('click', '.dog-pic, .dog-name p', directToDogpage);
+
+
+function directToDogpage() {
+  let id = $(this).attr('id').slice(4)
+  console.log(id)
+  localStorage.setItem('dog page id', id)
+  window.location.assign('dog.html')
+}
 $('.arrow').click(function() {
   $('.blur-white').hide()
   $('.photo img').remove()
@@ -158,10 +171,10 @@ function load_profile_detail() {
 function load_cmt(scores, num){
   cmt_txt += `<div class="c-border">`
   cmt_txt += `<div class="c-grid">`
-  cmt_txt +=   `<img width="90%" src="./image/dog/${dog_id}.png">`
+  cmt_txt +=   `<img class="dogavatar" id="dog_${dog_id}" width="90%" src="./image/dog/${dog_id}.png">`
   cmt_txt +=   `<div class="cmt-sub-grid">`
-  cmt_txt +=     `<div class="name-time">`
-  cmt_txt +=       `<p class="dogname">${dog_name[dog_id]}</p>`
+  cmt_txt +=     `<div>`
+  cmt_txt +=       `<p class="dogname" id="dog_${dog_id}">${dog_name[dog_id]}</p>`
   cmt_txt +=       `<p class="dtime" id="time${num}"></p>`
   cmt_txt +=     `</div>`
   cmt_txt +=     `<div class="heart-grid" id=${dog_id}>`
@@ -195,17 +208,17 @@ function load_img(photos) {
 function load_location(data) {
   len = Object.keys(data).length-1
   for(var i=len; i>=0; i--){
-      txt = `<div class="l-border">`
-      txt += `  <div class="l-grid">`
-      txt += `    <img width=90% src="./image/dog/${data[i].dog_id}.png">`
-      txt += `    <div class="l-name">${dog_name[data[i].dog_id]}</div>`
-      txt += `    <div class="location" id="loc_${i}"></div>`
-      txt += `    <div class="l-time" id="l_time_${i}"></div>`
-      txt += `  </div>`
-      txt += `</div>`
-      $('.locate-grid').append(txt)
-    }
+    txt = `<div class="l-border">`
+    txt += `  <div class="l-grid">`
+    txt += `    <img class="dogavatar" id="dog_${data[i].dog_id}" width=100% src="./image/dog/${data[i].dog_id}.png">`
+    txt += `    <p class="l-name" id="dog_${data[i].dog_id}">${dog_name[data[i].dog_id]}</p>`
+    txt += `    <div class="location" id="loc_${i}"></div>`
+    txt += `    <div class="l-time" id="l_time_${i}"></div>`
+    txt += `  </div>`
+    txt += `</div>`
+    $('.locate-grid').append(txt)
   }
+}
 
 function caculate_lct(lat, lng, id){
   lat = parseFloat(lat)

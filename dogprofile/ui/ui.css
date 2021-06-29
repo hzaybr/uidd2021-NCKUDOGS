@@ -382,7 +382,7 @@ img.avatar-choose {
 #save-btn{ left: 2.66vw;}
 
 .title-container {
-  background-color: rgba(134, 134, 134, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   display: none;
 	width: 100%;
 	height: 100%;
@@ -729,7 +729,7 @@ img.avatar-choose {
   width: 100vw;
   height: 100vh;
   top: 0;
-  background-color: rgba(134, 134, 134, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 10;
 }
 
