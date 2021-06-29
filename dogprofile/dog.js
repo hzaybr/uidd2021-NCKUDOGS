@@ -187,8 +187,13 @@ $('.pic-grid').on('click', '.image-image', function(){
       image_id: id
       }, (data)=>{
         $('.click-avatar').html(`<img class="profile-avatar" style="width: 11vw; height:11vw" src="${data.profile}">`)
-        $('.click-name').html(`<p>${data.name}</p>`)
-        $('.pictitle').html(`<p>${data.title}</p>`)
+        $('.click-name').html(`<p>${data.name}</p>`);
+
+        (data.title == null)
+        ? pctitle = ""
+        : pctitle = data.title;
+
+        $('.pictitle').html(`<p>${title}</p>`)
         $('.photo').html(`<img class="click_photo" src="${data.photo}">`)
         $('#heart-count').html(`<p>${data.likes}個愛心</p>`)
         $('.click-heart').show()
@@ -456,8 +461,13 @@ function __generate_comment_section_html(comment_id, user_id, comment, photo) {
 	txt += 	`<div class="w-user-bar">`;
 	txt += 		`<img class=\"profile-avatar b-profile\" id="ava_${comment_id}" src=${user.profile}>`;
 	txt += 		`<div class=\"name-title\" style="display: block;">`
-	txt +=      	`<p class="com-username" id="nam_${comment_id}">${user.name}</p>`
-	txt +=      	`<p class="title">${user.title}</p>`
+	txt +=      	`<p class="com-username" id="nam_${comment_id}">${user.name}</p>`;
+
+  (user.title==null)
+  ? title = ""
+  : title = user.title;
+
+	txt +=      	`<p class="title">${title}</p>`
 	txt +=  	`</div>`;
 	txt += 	`</div>`;
 
