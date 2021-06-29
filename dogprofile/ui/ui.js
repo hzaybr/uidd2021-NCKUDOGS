@@ -57,7 +57,7 @@ function profileClick(){
     markerUnclick();
   }
   if(document.getElementById('edit-pg').style.display != 'none'){
-    $('.profile').css({height:'auto',top:'21.6vw'})
+    $('.profile').css({height:'auto',top:'24.6vw'})
     $('#view-pg').css('display','block')
     $('#edit-pg').css('display','none')
   }
@@ -68,7 +68,7 @@ function profileClick(){
   else{
     displayCheck();
     $('.profile').css('display','block');
-    $('.profile').animate({'left':'3.73vw'},500);
+    $('.profile').animate({'left':'5vw'},500);
   }
   profileDisplay = !profileDisplay;
 
@@ -341,7 +341,7 @@ function uploadAvatar(evt) {
 }
 
 $('#cancel-btn').click(function(){
-  $('.profile').css({height:'auto',top:'21.6vw'})
+  $('.profile').css({height:'auto',top:'24.6vw'})
   $('#view-pg').css('display','block')
   $('#edit-pg').css('display','none')
 })
@@ -387,7 +387,7 @@ $('#save-btn').click(function(){
     $('#view-pg .profile-avatar').attr('src', editedAvatarSrc) 
     $('#map-profile-avatar').attr('src', editedAvatarSrc) 
     
-    $('.profile').css({height:'auto',top:'21.6vw'})
+    $('.profile').css({height:'auto',top:'24.6vw'})
     $('#view-pg').css('display','block')
     $('#edit-pg').css('display','none')
 

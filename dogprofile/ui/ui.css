@@ -85,7 +85,7 @@ body {
 .profile {
   position: relative;
   display: none;
-  width: 92.53vw;
+  width: 90vw;
   left: 105vw;
   top: 21.6vw;
   background: #FFFFFF;
@@ -99,8 +99,16 @@ body {
   padding-bottom: 10vw;
 }
 .pg2 {
-  height: 100%;
-  display: none;
+	width: 90vw;
+	height: 100%;
+	position: relative;
+	background: white;
+	top: 50vh;
+	display: none;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9;
+	border-radius: 27px;
 }
 
 #edit-btn {
@@ -374,6 +382,7 @@ img.avatar-choose {
 #save-btn{ left: 2.66vw;}
 
 .title-container {
+  background-color: rgba(134, 134, 134, 0.5);
   display: none;
 	width: 100%;
 	height: 100%;
@@ -384,13 +393,15 @@ img.avatar-choose {
 .titleinfo {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  top: 8vw;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
 }
 #title-cancel {
   position: absolute;
-  right: 7vw;
-  top: 15vw;
+  right: 8vw;
+  top: 50%;
+  transform: translate(0, -777%);
   width: 9vw;
 }
 #signout-blur, #checkedit-blur, #markcheck-blur, #markmode-blur {
@@ -407,16 +418,15 @@ img.avatar-choose {
   position: relative;
   display: block;
   width: 84.8%;
-  height: 123px;
-  top: calc(calc(100vh - 123px) / 2);
+  height: 126px;
+  top: calc(calc(100vh - 126px) / 2);
   margin-left: auto;
   margin-right: auto;
-
   border-radius: 36px;
   background-color: #FFFFFF;
 }
 
-#signout-container p, #checkedit-ask, #checkedit-btn, #markcheck-container p, #markmode-container p{
+#signout-container p, #checkedit-ask, #checkedit-btn, #markcheck-container p, #markmode-hint, #markmode-confirm-btn{
   margin: 0;
   padding: 0;
   position: relative;
@@ -441,27 +451,17 @@ img.avatar-choose {
   display: grid;
   height: 33px;
   width: 100%;
-  top: 69px;
+  top: 72px;
   grid-template-columns: 1fr 1fr;
 }
 
-#signout-btn-grid p, #checkedit-btn, #markcheck-btn-grid p {
+#signout-btn-grid p, #checkedit-btn, #markmode-confirm-btn,  #markcheck-btn-grid p {
   height: 31px;
   line-height: 31px;
   font-size: 12px;
 }
-#checkedit-btn {
-	position: absolute;
-	top: 69px;
-	width: 40%;
-	margin-left: 30%;
-    color: #000000DD;
-    border: 1px solid #B8B8B8;
-    border-radius: 18px;
-    background-color: #FFFFFF;
-}
 
-#signout-confirm-btn, #markcheck-confirm-btn, #markmode-confirm-btn {
+#signout-confirm-btn, #markcheck-confirm-btn {
   color: #000000DD;
   border: 1px solid #B8B8B8;
   border-radius: 18px;
@@ -475,26 +475,28 @@ img.avatar-choose {
   background-color: #FF8B2C; 
 }
 
-#markmode-hint {
-	font-size: 16px;
+#checkedit-btn, #markmode-confirm-btn{
+	position: absolute;
+	top: 72px;
+	width: 40%;
+	margin-left: 30%;
+	color: #000000DD;
+	border: 1px solid #B8B8B8;
+	border-radius: 18px;
+	background-color: #FFFFFF;
 }
-
-#markmode-container #markmode-confirm-btn {
-	display: block;
-	width: 50%;
-	top: 60px;
-}
-
+#markmode-confirm-btn {top: 75px;}
 .search {
   position: absolute;
   display: block;
   width: 92vw;
-  height: 90vw;
+  height: 89vw;
   left: -92vw;
   bottom: 27vw;
   background-image: url('./image/dog_div_research.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  border-radius: 30px;
 }
 
 .mark {
@@ -531,8 +533,9 @@ img.avatar-choose {
 .search-grid {
   position: absolute;
   width: 100%;
-  height: 60vw;
+  height: 56vw;
   top: 20vw;
+  padding-top: 5vw;
   display: grid;
   grid-template-columns: 20vw 20vw 20vw 20vw;
   grid-row-gap: 2vw;
@@ -736,7 +739,8 @@ img.avatar-choose {
   position: relative;
   width: 92.8vw;
   height: 87.1vw;
-  top: 25.61vh;
+  top: 50%;
+  transform: translate(0, -50%);
   margin: auto;
 }
 
