@@ -469,7 +469,7 @@ function load_profile_num() {
     for(i=0; i<4; i++){
       if(user_score >= user_scores[i]){
         user_title = user_titles[i]
-        $(".profile-avatar").css("border-color", bgcolor[i])
+        $(".profile-avatar").css("border", `5.8px solid ${bgcolor[i]}`)
         $(".profile-container").css("border",bgcolor[i])
         $("#edit-btn").attr('src',`./image/editpen/${i+2}.svg`)
         $("#user-title").html(`<img width=100% src="image/usertitle/${i}.svg">`)

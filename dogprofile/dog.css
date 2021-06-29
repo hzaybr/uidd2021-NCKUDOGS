@@ -571,7 +571,7 @@ label {
   width: 100vw;
   height: 100vh;
   top: 0;
-  background-color: rgba(134, 134, 134, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 10;
 }
 

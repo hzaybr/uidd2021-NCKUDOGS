@@ -113,21 +113,22 @@ body {
 
 #edit-btn {
   position: absolute;
-  width: 7.3%;
-  top: 34vw;
-  left: 59.07%;
+  width: 7.8%;
+  top: 33.3vw;
+  left: 59.3%;
   z-index: 3;
 }
 
 .profile-container {
   position: relative;
 	display: block;
-  width: 34.3%;
+  width: 34.5%;
   aspect-ratio: 1 / 1;
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
-	border: 0.7px solid;
+	border: 0.8px solid;
+  border-color: black;
   object-fit: cover;
   object-position: 50% 50%;
 
@@ -135,13 +136,12 @@ body {
 .profile-avatar {
   position: relative;
 	display: block;
-  width: 92%;
+  width: 90%;
   aspect-ratio: 1 / 1;
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
-	border: 5px solid;
-  border-color: white;
+	border: 5px solid white;
   object-fit: cover;
   object-position: 50% 50%;
 }
