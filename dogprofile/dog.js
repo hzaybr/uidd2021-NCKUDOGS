@@ -138,6 +138,7 @@ $('.w-heart').click(function() {
 
 /*** link buttons ***/
 $('.navig').click(function() {
+  localStorage.setItem("navig id", dog_page_id);
   window.location.assign("index.html");
 });
 $('.XXicon').click(function() {
